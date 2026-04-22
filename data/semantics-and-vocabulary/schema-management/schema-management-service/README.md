@@ -9,7 +9,7 @@ Provenance: built by Simpl. Source repositories: `gaia-x-edc/simpl-schema-manage
 ## Contents
 
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
-- [api/](api/) — API specifications.
+- [api/](api/README.md) — API specifications.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
 ## Source code
