@@ -1,0 +1,146 @@
+# Non-Functional Requirements
+
+Simpl-Open non-functional requirements, documented from the public requirements catalogue at https://simpl-programme.ec.europa.eu/book-page/simpl-requirements.
+
+Each file contains a summary in the author's own words, a canonical source link, a "Measurable thresholds" section (quoting verbatim where available), and auto-inferred cross-references to the capability map (verify before relying on them).
+
+---
+
+## Non-Functional Requirements
+
+<table>
+<tr>
+<td align="center" valign="top" width="200">
+<a href="./NFR01-accessibility/">
+<img src="./media/accessibility-tile.png" width="180" /><br>
+<b>NFR01</b><br>
+<sub>Accessibility</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR02-availability/">
+<img src="./media/availability-tile.png" width="180" /><br>
+<b>NFR02</b><br>
+<sub>Availability</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR03-composability-extensibility/">
+<img src="./media/composability-extensibility-tile.png" width="180" /><br>
+<b>NFR03</b><br>
+<sub>Composability &amp; extensibility</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR04-discoverability/">
+<img src="./media/discoverability-tile.png" width="180" /><br>
+<b>NFR04</b><br>
+<sub>Discoverability</sub>
+</a>
+</td>
+</tr>
+<tr>
+<td align="center" valign="top" width="200">
+<a href="./NFR05-federation/">
+<img src="./media/federation-tile.png" width="180" /><br>
+<b>NFR05</b><br>
+<sub>Federation</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR06-interoperability/">
+<img src="./media/interoperability-tile.png" width="180" /><br>
+<b>NFR06</b><br>
+<sub>Interoperability</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR07-loose-coupling/">
+<img src="./media/loose-coupling-tile.png" width="180" /><br>
+<b>NFR07</b><br>
+<sub>Loose coupling</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR08-maintainability/">
+<img src="./media/maintainability-tile.png" width="180" /><br>
+<b>NFR08</b><br>
+<sub>Maintainability</sub>
+</a>
+</td>
+</tr>
+<tr>
+<td align="center" valign="top" width="200">
+<a href="./NFR09-modularity/">
+<img src="./media/modularity-tile.png" width="180" /><br>
+<b>NFR09</b><br>
+<sub>Modularity</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR10-openness-agnosticism/">
+<img src="./media/openness-agnosticism-tile.png" width="180" /><br>
+<b>NFR10</b><br>
+<sub>Openness &amp; agnosticism</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR11-reliability/">
+<img src="./media/reliability-tile.png" width="180" /><br>
+<b>NFR11</b><br>
+<sub>Reliability</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR12-resilience/">
+<img src="./media/resilience-tile.png" width="180" /><br>
+<b>NFR12</b><br>
+<sub>Resilience</sub>
+</a>
+</td>
+</tr>
+<tr>
+<td align="center" valign="top" width="200">
+<a href="./NFR13-scalability-elasticity/">
+<img src="./media/scalability-elasticity-tile.png" width="180" /><br>
+<b>NFR13</b><br>
+<sub>Scalability &amp; elasticity</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR14-security-privacy-trust/">
+<img src="./media/security-privacy-trust-tile.png" width="180" /><br>
+<b>NFR14</b><br>
+<sub>Security, privacy &amp; trust</sub>
+</a>
+</td>
+<td align="center" valign="top" width="200">
+<a href="./NFR15-usability/">
+<img src="./media/usability-tile.png" width="180" /><br>
+<b>NFR15</b><br>
+<sub>Usability</sub>
+</a>
+</td>
+<td></td>
+</tr>
+</table>
+
+---
+
+## Full list
+
+- [NFR01](./NFR01-accessibility/) — Accessibility
+- [NFR02](./NFR02-availability/) — Availability
+- [NFR03](./NFR03-composability-extensibility/) — Composability and extensibility
+- [NFR04](./NFR04-discoverability/) — Discoverability
+- [NFR05](./NFR05-federation/) — Federation
+- [NFR06](./NFR06-interoperability/) — Interoperability
+- [NFR07](./NFR07-loose-coupling/) — Loose coupling
+- [NFR08](./NFR08-maintainability/) — Maintainability
+- [NFR09](./NFR09-modularity/) — Modularity
+- [NFR10](./NFR10-openness-agnosticism/) — Openness and agnosticism
+- [NFR11](./NFR11-reliability/) — Reliability
+- [NFR12](./NFR12-resilience/) — Resilience
+- [NFR13](./NFR13-scalability-elasticity/) — Scalability and elasticity
+- [NFR14](./NFR14-security-privacy-trust/) — Security, privacy and trust
+- [NFR15](./NFR15-usability/) — Usability

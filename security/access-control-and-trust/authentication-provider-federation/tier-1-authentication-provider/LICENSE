@@ -1,0 +1,12 @@
+Apache License, Version 2.0
+
+This solution is built on Keycloak, which is licensed under the Apache License, Version 2.0.
+
+Copyright (C) Red Hat, Inc. and Keycloak contributors.
+
+The full Apache License, Version 2.0 text is available at:
+https://www.apache.org/licenses/LICENSE-2.0
+
+The Simpl-Open custom Authenticator Plugin (`iaa/keycloak-authenticator`) is built by the European Union and licensed under the EUPL 1.2. As the deployed solution consists primarily of Keycloak, the Apache 2.0 licence governs the overall artefact. The Authenticator Plugin is a separate component and its EUPL licence applies to that source code independently.
+
+Provenance: [TO VERIFY] — confirm definitive licence for the deployed artefact with the Simpl legal team before redistribution.

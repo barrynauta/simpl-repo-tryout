@@ -1,0 +1,11 @@
+openapi: "3.0.3"
+info:
+  title: Schema Management Service — Resolver Interface
+  version: "0.0.0-stub"
+  description: |
+    Public, read-only interface for retrieving the raw RDF content of schemas
+    and vocabularies at stable, dereferenceable URIs. No authentication required.
+    Example: GET /schemas/{schemaName}/{version} returns the SHACL file for a
+    specific immutable version of a schema.
+    This is a stub file. Full specification is maintained in the source repository.
+paths: {}

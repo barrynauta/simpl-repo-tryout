@@ -1,0 +1,4 @@
+# Tier 1 Gateway OpenAPI Specification
+# Status: not yet documented.
+# Source: iaa/tier1-gateway repository.
+# Description: Spring Cloud Gateway routing and RBAC enforcement for Tier 1 (human user) inbound traffic.

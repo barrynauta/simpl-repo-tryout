@@ -1,0 +1,13 @@
+Apache License, Version 2.0
+
+This solution is a Simpl-Open fork of the Eclipse Dataspace Connector (EDC), an Eclipse Foundation project.
+
+Copyright (C) Eclipse Foundation and EDC contributors.
+
+The full Apache License, Version 2.0 text is available at:
+https://www.apache.org/licenses/LICENSE-2.0
+
+The upstream Eclipse EDC project licence is Apache 2.0. The Simpl fork lives at:
+code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-edc
+
+Simpl-Open extensions (Triggering Extension, S3 Object Storage Extension, Asset Orchestrator) are built by the European Union. Provenance: [TO VERIFY] — confirm licence for Simpl-specific extensions before redistribution.

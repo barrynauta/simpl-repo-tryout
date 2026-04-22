@@ -1,0 +1,4 @@
+# Tier 2 Gateway OpenAPI Specification
+# Status: not yet documented.
+# Source: iaa/tier2-gateway and iaa/tier2-proxy repositories.
+# Description: Spring Cloud Gateway routing and ABAC enforcement for Tier 2 (agent-to-agent) inbound traffic.

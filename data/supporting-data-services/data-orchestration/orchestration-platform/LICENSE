@@ -1,0 +1,12 @@
+Apache License, Version 2.0
+
+This solution is built on Dagster, which is licensed under the Apache License, Version 2.0.
+
+Copyright (C) Dagster Labs and contributors.
+
+The full Apache License, Version 2.0 text is available at:
+https://www.apache.org/licenses/LICENSE-2.0
+
+The upstream Dagster project: https://github.com/dagster-io/dagster
+
+The Simpl-Open specific components (Asset Orchestrator, Auth Proxy) are built by the European Union. Provenance: [TO VERIFY] — confirm licence for Simpl-specific components before redistribution.

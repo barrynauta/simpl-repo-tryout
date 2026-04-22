@@ -1,0 +1,11 @@
+openapi: "3.0.3"
+info:
+  title: Schema Management Service — Management API
+  version: "0.0.0-stub"
+  description: |
+    Private, authenticated RESTful interface for Governance Authority administrators
+    to manage the full lifecycle of schemas and vocabularies in the Simpl-Open SMS.
+    Provides endpoints for creating schema versions, changing lifecycle status
+    (PUBLISHED/REVOKED), and managing vocabularies.
+    This is a stub file. Full specification is maintained in the source repository.
+paths: {}
