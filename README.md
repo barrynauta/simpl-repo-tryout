@@ -115,7 +115,7 @@ Business processes describe the operational flows through the Simpl system — t
 
 ---
 
-## Solution Architectures
+## Supporting activities
 
 No card images exist on the public index page for the SA entries. Text-only links:
 
