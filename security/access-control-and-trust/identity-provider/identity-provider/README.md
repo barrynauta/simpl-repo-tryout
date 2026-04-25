@@ -11,6 +11,11 @@ Provenance: built by Simpl. Source repositories: `iaa/identity-provider` (backen
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP03A Onboarding of a new data space Participant](../../../../foundations/business-processes/BP03A-onboarding-participant-providers/dynamic-view.md)
+- [SA03 Credentials actions by the Governance Authority](../../../../foundations/business-processes/SA03-credentials-actions-governance-authority/dynamic-view.md)
+
 ## Source code
 
 - Backend: `code.europa.eu/simpl/simpl-open/development/iaa/identity-provider`

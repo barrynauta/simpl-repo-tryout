@@ -13,6 +13,10 @@ Note: the architecture spec describes a planned split into Contract Manager Orch
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP07 Consumer and Provider establish a usage contract](../../../../foundations/business-processes/BP07-establish-usage-contract/dynamic-view.md)
+
 ## Source code
 
 - `code.europa.eu/simpl/simpl-open/development/contract-billing/contract`

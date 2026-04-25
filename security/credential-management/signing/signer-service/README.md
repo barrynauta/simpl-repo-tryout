@@ -11,6 +11,11 @@ Provenance: built by Simpl on XFSC Organisation Credential Manager. Source repos
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — Apache 2.0.
 
+## Participates in
+
+- [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/dynamic-view.md)
+- [BP07 Consumer and Provider establish a usage contract](../../../../foundations/business-processes/BP07-establish-usage-contract/dynamic-view.md)
+
 ## Source code
 
 - `code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer`

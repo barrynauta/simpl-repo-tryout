@@ -11,6 +11,11 @@ Provenance: built by Simpl. Source repositories: `infrastructure/infrastructure-
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP08 Consumer consumes an infrastructure resource](../../../../foundations/business-processes/BP08-consume-infrastructure-resource/dynamic-view.md)
+- [BP09B Consumer receives a data processing service](../../../../foundations/business-processes/BP09B-consume-data-via-application/dynamic-view.md)
+
 ## Source code
 
 - `code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-crossplane`

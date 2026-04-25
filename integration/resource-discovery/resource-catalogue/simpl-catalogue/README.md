@@ -12,6 +12,13 @@ Provenance: forked from the upstream **XFSC Federated Catalogue** (Eclipse proje
 - [doc/api.md](doc/api.md) — GAIA-X Federated Catalogue REST API endpoints, callers, and upstream OpenAPI link.
 - [LICENSE](LICENSE) — Apache 2.0 (upstream XFSC licence).
 
+## Participates in
+
+- [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/dynamic-view.md)
+- [BP06 Consumer searches resources](../../../../foundations/business-processes/BP06-consumer-searches-resources/dynamic-view.md)
+- [BP09A Consumer consumes a data resource](../../../../foundations/business-processes/BP09A-consume-data-resource/dynamic-view.md)
+- [BP09B Consumer receives a data processing service](../../../../foundations/business-processes/BP09B-consume-data-via-application/dynamic-view.md)
+
 ## Source code
 
 - Simpl fork: <https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-fc-service>

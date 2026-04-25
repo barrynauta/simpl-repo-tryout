@@ -12,6 +12,12 @@ Provenance: built by Simpl. Source repositories: `gaia-x-edc/simpl-schema-manage
 - [api/](api/README.md) — API specifications.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP02 Manage Resource Description Schemas](../../../../foundations/business-processes/BP02-configuration-governance-authority/dynamic-view.md)
+- [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/dynamic-view.md)
+- [BP06 Consumer searches resources](../../../../foundations/business-processes/BP06-consumer-searches-resources/dynamic-view.md)
+
 ## Source code
 
 - `code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-schema-manager`

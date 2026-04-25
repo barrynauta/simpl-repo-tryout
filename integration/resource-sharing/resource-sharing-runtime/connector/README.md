@@ -15,6 +15,14 @@ Provenance: forked from the upstream **Eclipse Dataspace Connector (EDC)** (Apac
 - [api/data-plane.openapi.yaml](api/data-plane.openapi.yaml) — Data Plane API specification (stub).
 - [LICENSE](LICENSE) — Apache 2.0 (Eclipse EDC upstream).
 
+## Participates in
+
+- [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/dynamic-view.md)
+- [BP07 Consumer and Provider establish a usage contract](../../../../foundations/business-processes/BP07-establish-usage-contract/dynamic-view.md)
+- [BP08 Consumer consumes an infrastructure resource](../../../../foundations/business-processes/BP08-consume-infrastructure-resource/dynamic-view.md)
+- [BP09A Consumer consumes a data resource](../../../../foundations/business-processes/BP09A-consume-data-resource/dynamic-view.md)
+- [BP09B Consumer receives a data processing service](../../../../foundations/business-processes/BP09B-consume-data-via-application/dynamic-view.md)
+
 ## Source code
 
 - Simpl fork: `code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-edc`

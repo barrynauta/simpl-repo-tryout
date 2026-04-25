@@ -11,6 +11,12 @@ Provenance: built by Simpl. Source repositories: `iaa/users-roles` (backend) and
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP03A Onboarding of a new data space Participant](../../../../foundations/business-processes/BP03A-onboarding-participant-providers/dynamic-view.md)
+- [BP03B Participant User and Roles Configuration](../../../../foundations/business-processes/BP03B-onboarding-participant-end-user/dynamic-view.md)
+- [BP03C End User Role Request](../../../../foundations/business-processes/BP03C-end-user-role-request/dynamic-view.md)
+
 ## Source code
 
 - Backend: `code.europa.eu/simpl/simpl-open/development/iaa/users-roles`
