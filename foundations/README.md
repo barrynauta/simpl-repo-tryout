@@ -7,3 +7,7 @@ This folder contains foundational artefacts describing what Simpl is and should 
 - [capability-map.md](capability-map.md) — Level 1 and Level 2 capability map: the six dimensions, all capabilities and business services, deployment model, and Release 3.0 scope
 - [business-processes/README.md](business-processes/README.md) — functional requirements catalogue: 13 business processes and 4 scenario architectures, each with a summary, diagrams, and auto-inferred cross-references to the capability map
 - [non-functional-requirements/README.md](non-functional-requirements/README.md) — non-functional requirements catalogue: 15 NFRs covering availability, security, modularity, and more, each with measurable thresholds (where published) and cross-references
+- [architectural-pattens.md](architectural-patterns.md) - the architectural patterns used in Simpl-open
+- [interoperability.md](interoperability.md) - a minimal mapping of standards used in Simpl in the context of interoperability, mostly Semantic and Technical
+- [principles.md](principles.md) - the foundational architectural princinples of Simpl-open.
+- [glossary.md](glossary.md) - the glossary, what is in a name?
