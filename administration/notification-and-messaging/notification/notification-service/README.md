@@ -12,6 +12,10 @@ Provenance: built by Simpl. Source repository: `contract-billing/notification-se
 - [doc/api.md](doc/api.md) — Notification Service API overview.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP03C End User Role Request](../../../../foundations/business-processes/BP03C-end-user-role-request/dynamic-view.md)
+
 ## Source code
 
 - `code.europa.eu/simpl/simpl-open/development/contract-billing/notification-service`

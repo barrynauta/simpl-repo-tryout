@@ -11,6 +11,10 @@ Provenance: built by Simpl. Source repositories: `data1/sdtooling-api-be` (backe
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/dynamic-view.md)
+
 ## Source code
 
 - `code.europa.eu/simpl/simpl-open/development/data1/sdtooling-api-be`

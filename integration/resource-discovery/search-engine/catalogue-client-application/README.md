@@ -14,6 +14,12 @@ Provenance: built by Simpl. Source repositories: `data1/xfsc-advsearch-be` (adva
 - [api/contract-consumption.openapi.yaml](api/contract-consumption.openapi.yaml) — Contract Consumption Adapter API specification (stub).
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP06 Consumer searches resources](../../../../foundations/business-processes/BP06-consumer-searches-resources/dynamic-view.md)
+- [BP09A Consumer consumes a data resource](../../../../foundations/business-processes/BP09A-consume-data-resource/dynamic-view.md)
+- [BP09B Consumer receives a data processing service](../../../../foundations/business-processes/BP09B-consume-data-via-application/dynamic-view.md)
+
 ## Source code
 
 - Advanced search backend: `code.europa.eu/simpl/simpl-open/development/data1/xfsc-advsearch-be`

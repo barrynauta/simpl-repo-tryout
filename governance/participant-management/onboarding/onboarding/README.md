@@ -11,6 +11,10 @@ Provenance: built by Simpl. Source repositories: `iaa/onboarding` (backend) and 
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP03A Onboarding of a new data space Participant](../../../../foundations/business-processes/BP03A-onboarding-participant-providers/dynamic-view.md)
+
 ## Source code
 
 - Backend: `code.europa.eu/simpl/simpl-open/development/iaa/onboarding`

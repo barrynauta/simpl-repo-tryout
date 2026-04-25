@@ -11,6 +11,11 @@ Provenance: built on top of upstream **Keycloak** (Apache 2.0) with a Simpl-buil
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — Apache 2.0 (Keycloak upstream).
 
+## Participates in
+
+- [BP03A Onboarding of a new data space Participant](../../../../foundations/business-processes/BP03A-onboarding-participant-providers/dynamic-view.md)
+- [BP03B Participant User and Roles Configuration](../../../../foundations/business-processes/BP03B-onboarding-participant-end-user/dynamic-view.md)
+
 ## Source code
 
 - Custom authenticator plugin: `code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator`

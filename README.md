@@ -294,7 +294,7 @@ Supporting documents that establish the design vocabulary and governing commitme
 ## Other Contents
 
 - [cross-cutting/](./cross-cutting/README.md) — components that don't map to a single capability
-- [interoperability/](./interoperability/README.md) — technical and semantic interoperability index
+- [foundations/interoperability.md](./foundations/interoperability.md) — technical and semantic interoperability index
 
 ---
 

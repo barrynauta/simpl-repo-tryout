@@ -11,6 +11,10 @@ Provenance: planned — Contract / Catalogue team (no current source repository)
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+## Participates in
+
+- [BP07 Consumer and Provider establish a usage contract](../../../../foundations/business-processes/BP07-establish-usage-contract/dynamic-view.md)
+
 ## Source code
 
 No current source repository. Planned for the Contract / Catalogue team.
