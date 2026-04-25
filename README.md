@@ -1,26 +1,16 @@
 # Simpl Documentation Catalogue
 
-This repository is the Simpl documentation catalogue. It mirrors the Simpl capability map and extracts content from the architecture specification and the public Simpl Requirements site into a navigable structure. Use the sections below as the primary entry points.
+## What is Simpl
 
----
+With the ongoing exponential growth of data, there is a pressing need within the European Union to provide access to resilient and competitive data storage and processing capacities for both the private and public sectors. The European Commission aims to address this need through greater data sharing, decentralised data processing, and the establishment of sector-specific Data Spaces — federated ecosystems where organisations pool resources, reduce duplication of effort, and create new cross-sector business value. Simpl is the European Commission's middleware programme delivering the technical foundation on which these data spaces can be built and operated.
 
-## Capability Map
+The programme's primary technical output is Simpl-Open: an open-source, multi-vendor, modular, and interoperable middleware that powers secure and sovereign data sharing across Europe. Rather than requiring each data space initiative to build interoperability from scratch, Simpl-Open provides a modular, open, and reusable foundation that integrates existing solutions, reducing the time and resources needed to select, develop, and deploy data space components. Simpl-Open stays agnostic to the specifics of any particular data space — it provides common services on which data spaces are built, while leaving domain-specific concerns (data representation standards, quality certifications, peer review rules) to the data space governance authority. Alongside Simpl-Open, the programme includes Simpl-Labs (a testing and validation environment for components and interoperability) and Simpl-Live (production implementations applied to selected European data spaces).
 
-Simpl-Open organises its functionality into six dimensions: Administration, Data, Governance, Infrastructure, Integration, and Security. Each dimension contains one or more capabilities, each capability contains one or more business services, and each business service is realised by one or more solutions. This four-level hierarchy — dimension → capability → business service → solution — is the organising principle of the entire repository tree. The map was defined in the Simpl-Open functional and technical architecture specification and governs how documentation folders are named, nested, and cross-referenced. Every solution folder in this catalogue sits at a path of the form `dimension/capability/business-service/solution/` that corresponds directly to a node in the map.
+Participants join a data space by deploying a Simpl-Open Agent — a set of integrated software components that acts as a local gateway for data and service interactions. The Agent spans across actor types (Governance Authorities, Providers, Consumers, and their end-users), enabling asset sharing between them. Each actor requiring a distinct role in the data space deploys their own agent instance. Agents are deployment compositions of Simpl-Open modules and are separate from the modular solutions described in this catalogue's capability map.
 
-![L1 Capability Map](./foundations/media/image16.png)
-*Figure: The six dimensions of Simpl and their capabilities.*
+Simpl-Open not only enables operation within a single data space but creates interoperability between data spaces. As multiple data spaces incorporate Simpl-Open, they become more connected, allowing services and assets to cross data space boundaries. This cross-space interoperability is one of Simpl-Open's distinguishing architectural goals: it is not a standalone platform but a shared backbone for the emerging European data economy. Simpl-Open aligns with and builds upon adjacent EU and international initiatives including Gaia-X (trust model and self-description standards) and the Data Spaces Support Centre (DSSC) interoperability definitions.
 
-### Dimensions
-
-- [administration/](./administration/README.md) — platform management and operational services for a Simpl-Open agent node, covering observability and notification and messaging
-- [data/](./data/README.md) — data-related platform services covering schema and vocabulary governance, data workflow orchestration, and supporting data services
-- [governance/](./governance/README.md) — governance services covering participant lifecycle management, contract management, policy administration, and resource description management
-- [infrastructure/](./infrastructure/README.md) — infrastructure provisioning services enabling consumers to request and access compute, storage, and network resources
-- [integration/](./integration/README.md) — integration services connecting data space participants for resource discovery, catalogue publication, and resource sharing
-- [security/](./security/README.md) — identity, authentication, authorisation, and credential management services implementing a two-tier IAA architecture
-
-See [foundations/capability-map.md](./foundations/capability-map.md) for the full L1 + L2 map with all business services.
+[VERIFY]
 
 ---
 
@@ -265,9 +255,39 @@ See [foundations/non-functional-requirements/README.md](./foundations/non-functi
 
 ---
 
+## Capability Map
+
+Simpl-Open organises its functionality into six dimensions: Administration, Data, Governance, Infrastructure, Integration, and Security. Each dimension contains one or more capabilities, each capability contains one or more business services, and each business service is realised by one or more solutions. This four-level hierarchy — dimension → capability → business service → solution — is the organising principle of the entire repository tree. The map was defined in the Simpl-Open functional and technical architecture specification and governs how documentation folders are named, nested, and cross-referenced. Every solution folder in this catalogue sits at a path of the form `dimension/capability/business-service/solution/` that corresponds directly to a node in the map.
+
+![L1 Capability Map](./foundations/media/image16.png)
+*Figure: The six dimensions of Simpl and their capabilities.*
+
+### Dimensions
+
+- [administration/](./administration/README.md) — platform management and operational services for a Simpl-Open agent node, covering observability and notification and messaging
+- [data/](./data/README.md) — data-related platform services covering schema and vocabulary governance, data workflow orchestration, and supporting data services
+- [governance/](./governance/README.md) — governance services covering participant lifecycle management, contract management, policy administration, and resource description management
+- [infrastructure/](./infrastructure/README.md) — infrastructure provisioning services enabling consumers to request and access compute, storage, and network resources
+- [integration/](./integration/README.md) — integration services connecting data space participants for resource discovery, catalogue publication, and resource sharing
+- [security/](./security/README.md) — identity, authentication, authorisation, and credential management services implementing a two-tier IAA architecture
+
+See [foundations/capability-map.md](./foundations/capability-map.md) for the full L1 + L2 map with all business services.
+
+---
+
 ## How Business Processes, Architecture, and NFRs Relate
 
 *This section is intentionally left as a placeholder. The narrative explaining how business processes, the implementation architecture, and non-functional requirements relate to each other will be authored separately and inserted here. Do not auto-generate this content.*
+
+---
+
+## Foundational Reference
+
+Supporting documents that establish the design vocabulary and governing commitments of Simpl-Open:
+
+- [Architectural principles](./foundations/principles.md) — high-level design commitments informing every architecture decision across Simpl-Open, sourced from the functional and technical architecture document.
+- [Architectural patterns](./foundations/architectural-patterns.md) — recurring structural and behavioural design patterns applied across solutions, sourced from the functional and technical architecture document.
+- [Glossary](./foundations/glossary.md) — definitional anchor for Simpl terminology, sourced from the official Simpl programme glossary.
 
 ---
 
@@ -275,8 +295,6 @@ See [foundations/non-functional-requirements/README.md](./foundations/non-functi
 
 - [cross-cutting/](./cross-cutting/README.md) — components that don't map to a single capability
 - [interoperability/](./interoperability/README.md) — technical and semantic interoperability index
-- [api-catalogue/](./api-catalogue/README.md) — all APIs grouped by service
-- [testing/](./testing/README.md) — aggregate testing status across services
 
 ---
 
