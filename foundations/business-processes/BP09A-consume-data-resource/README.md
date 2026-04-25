@@ -1,5 +1,9 @@
 # BP09A – Consumer consumes a data resource from a Provider
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This business process covers the situation where a  Consumer  has a usage contract for a certain data resource, and seeks to consume that data resource from a Data Provider . The aim of the process is to facilitate secure, transparent, and contractually governed access to a data resource within a data space, ensuring that both Data Providers and Consumers have clearly defined rights and obligations. It involves the most basic and traditional type of access to a data resource: Data Providers  are able to grant  Consumers access to a data resource. The Data Provider can provide access to the data resource using various methods (e.g., direct download link, file transfer via various existing technologies, etc.).  It includes the following main step: Request data resource: The Consumer initiates the process by requesting a specific data resource from the Data Provider . This request is based on the information found in the data space catalogue, which was previously searched and identified by the Consumer . Provide access to the data resource:   The  Data Provider  a pplies the access control rules and provides the  Consumer  with the right access credentials .

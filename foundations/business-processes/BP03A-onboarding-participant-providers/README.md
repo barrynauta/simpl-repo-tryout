@@ -1,5 +1,9 @@
 # BP03A – Onboarding of a new data space Participant - Providers (data - application - infrastructure) & Consumers
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This business process covers the onboarding process for a new Applicant . Both Providers and Consumers can apply to a data space and will be referred to as (data space) Applicants from here on.  It includes the following main steps: Prepare & submit onboarding request : The Applicant submits the onboarding requests to the Governance Authority for review. Review onboarding request: The Governance Authority verifies the Applicant ’s onboarding request against a predefined set of criteria and the alignment with the data space objectives. Generate public/private keypair: The Applicant deploys and configures the Simpl-Open agent and uses the agent to generate a public/private key pair to enable encrypted communications and data integrity within the data space. Create & sign security credentials: The Governance Authority creates and signs digital security credentials (e.g., x.509 certificates) that incorporate the Applicant’s public key. These credentials serve as proof of identity and are validated through the issuance of certifications by the Governance Authority . The certifications ensure that the credentials are securely linked to the correct entity. Store & install security credentials: The Applicant  stores and installs the signed identity security credentials in its Simpl-Open Agent.

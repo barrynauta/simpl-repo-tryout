@@ -1,5 +1,9 @@
 # BP03C - End-User Role Request
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This Business Process (BP) covers the procedure for requesting roles by End-Users of Simpl-Open.  This BP applies in the following situations: When a federated user logs in for the first time without any assigned roles, the only permitted action will be to request one or more roles When a local user identifies the need to request additional roles If a user is created with pre-assigned roles, or if federation is configured to automatically map organisational roles to Simpl roles, the user will be fully operational without the need to request a role through this BP. It includes the following main steps: Request role:  End-User creates and submits the role request to the Participant's Tier 1 User and Roles Manager Review role request:  Participant's Tier 1 User and Roles Manager reviews the submitted role request

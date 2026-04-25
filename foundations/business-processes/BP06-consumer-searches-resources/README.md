@@ -1,5 +1,9 @@
 # BP06 – Consumer searches resources in data space catalogues
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This business process covers the situation where a data space Consumer can search resources in the catalogue of one or multiple data spaces. Within the process the Consumer can search for resource descriptions, which can refer to data, application, or infrastructure resources. There are three types of ‘search’ available: quick search, federated search, and advanced search. Quick search: Use one or multiple search terms that are matched against any field in the resource description. Federated search: Perform searches across multiple data spaces simultaneously. Advanced search: Specify values for one or more attributes of the resource description to refine the search results. It includes the following main steps: Search in data space catalogues: The Consumer initiates a search in the data space catalogue using either a quick search, advanced search, or a federated search (searching multiple data space catalogues at once) within the same or another data space. To achieve this, the Consumer inputs the search terms relevant to their intended search. Execute query: The Governance Authority finds resource description matching the provided search terms within the data space's own catalogue or, in case of the federated search, within data space catalogues shared by other data spaces. Access the filtered search results and select one or more resources: The  Governance Authority provides the filtered search results to the participant’s system, showing only the resource description   they are permitted to access. The results of the  search are available to the Consumer , who can access and display the details of selected resource descriptions.

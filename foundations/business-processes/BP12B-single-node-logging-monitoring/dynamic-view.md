@@ -2,6 +2,10 @@
 
 ## Source
 
+> **See also: [Business process overview](./README.md)** — narrative
+> description of this business process, including actors, prerequisites,
+> outcomes, and the full hierarchy of sub-processes.
+
 Extracted from functional-and-technical-architecture-specifications.md, section 4.4.2 (titled "ACV Dynamic - WF 12B - Local Node Logging and Monitoring").
 
 ---

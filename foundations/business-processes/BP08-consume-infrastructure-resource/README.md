@@ -1,5 +1,9 @@
 # BP08 – Consumer consumes an infrastructure resource from a Provider
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This business process covers the situation where a  Consumer  has a usage contract for a certain infrastructure resource, and   seeks to consume that infrastructure resource from an  Infrastructure Provider. The aim of the process is to facilitate secure, transparent, and contractually governed access to an infrastructure resource within a data space, ensuring that both the Infrastructure Provider  and  Consumer have clearly defined rights and obligations.  The Consumer can consume the infrastructure resource until it is decommissioned. It includes the following main steps: Request infrastructure resource: The Consumer requests the infrastructure resource from the Infrastructure Provider . Provision infrastructure resource: The Infrastructure Provider provisions and configures the infrastructure resource on a dedicated environment specific for the Consumer . Provide access to infrastructure resource: The Infrastructure Provider applies the access control rules and provides the Consumer with the right access credentials.

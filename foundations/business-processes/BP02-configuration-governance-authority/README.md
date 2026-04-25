@@ -1,5 +1,9 @@
 # BP02 - Configuration of data space Governance Authority
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This business process involves the overall configuration of a data space, essential to ensure that a data space is fully functional, operates adequately and secure. The configuration of the data space Governance Authority entails the configuration of identity and trust solutions, as well as schema management and vocabulary definitions of the data space catalogue. These aspects are necessary to initialise and operate data space processes and activities such as onboarding and securing communications between data space Participants, as well as enabling the publication and discovery of Resource Descriptions by Providers  and  Consumers . Note: This business process will be revisited and extended when topics such as the Simpl-Open helpdesk, ticketing system, auditing tools, CSIRT and security tools are covered.
