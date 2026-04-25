@@ -1,5 +1,9 @@
 # BP03B – Onboarding of a new data space - Participant End-User
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This Business Process covers the configuration of User and Roles module of Simpl-Open. It includes the following main steps: Configure roles:  the Participant's User and Roles Manager manages the roles that should be available in the Participant's Simpl-Open Agent; Configure Identity Provider Federation:  if needed, the Participant's User and Roles Manager configures the federation between an external Identity Provider (an Identity Provider not belonging to Simpl-Open Agent, such as the organisation's private IDP or third-party IDP like eIDAS, EU Login, etc.) and the Simpl-Open Identity Provider; Manage end users:  the Participant's User and Roles Manager manages the users that should be available in Participant's Simpl-Open Agent

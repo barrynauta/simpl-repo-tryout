@@ -1,5 +1,9 @@
 # BP05B - Provider manages resource descriptions
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This business process covers the management of resource descriptions in the data space catalogue by both a Provider and the  Governance Authority . It includes the following main steps: Create a new resource description: The  Provider  creates a new resource description with the required and optional contents, signs and submits it to the  Governance Authority for publication in the data space catalogue. Create a new version of a resource description: The Provider  creates a new version of a resource description based on an already existing resource description, updates the contents, signs and submits it to the  Governance Authority for publication in the data space catalogue. This corresponds to an update, as resource descriptions are immutable and cannot be changed. Request resource description revocation: The  Provider sends a request to revoke a resource description from the data space catalogue to the  Governance Authority Publish a resource description: Having received a request to create a new resource description, or a new version of a resource description, the Governance Authority validates the received resource description and publishes it in the data space catalogue, if valid. Consumers of an existing resource description are informed about the new version. The old version of the resource description is revoked by the  Governance Authority. Revoke a resource description: Having received a request to revoke a resource description, the  Governance Authority  revokes the resource description from the data space catalogue. Consumers of the resource description are informed about the revocation.

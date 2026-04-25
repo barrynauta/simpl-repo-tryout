@@ -1,5 +1,9 @@
 # BP12B – Single node logging & monitoring
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
 This business process covers the collection, standardisation, and persistence of logs and metrics, the monitoring of the Simpl-Agent, and the visualisation and reporting of data. The logs include gathering metrics like performance data, error logs, and usage statistics. Furthermore, visualisations and reports provide insights into system performance and user activities. This workflow is applicable to all the Participants , namely the Consumers , Providers and the Governance Authority . It includes the following main steps: Log consumption of a resource (infra/data/app): During the consumption of a (infrastructure/data/application) resource, Simpl-Open agent generates technical logs that will be used for various reasons (billing, audit, policy enforcement, regulation compliance, etc.). Log usage of Simpl-Open agent components: While they are running, the components of Simpl-Open agent generate both technical logs and business logs that will be used for the purposes of audit and troubleshooting. Generate alerts : Alerts get generated when health checks fail or predefined thresholds are exceeded. Generate reports: Compile the logged data into reports to provide insights (e.g., system performance, user activities, and issues encountered).
