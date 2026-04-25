@@ -105,7 +105,7 @@ Each file contains a summary in the author's own words, a canonical source link,
 
 ---
 
-## Solution Architectures
+## Supporting activities
 
 No card images exist on the public index page for the SA entries. Text-only links:
 
