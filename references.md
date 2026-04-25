@@ -71,8 +71,3 @@ All external links from Simpl-Open documentation, grouped by topic. Internal rel
 
 - OpenAPI Specification — https://swagger.io/specification/
 
-## Simpl Jira (internal)
-
-- SIMPL-2949 — https://jira.simplprogramme.eu/browse/SIMPL-2949
-- SIMPL-4114 — https://jira.simplprogramme.eu/browse/SIMPL-4114
-- SIMPL-18664 — https://jira.simplprogramme.eu/browse/SIMPL-18664
