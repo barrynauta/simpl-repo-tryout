@@ -1,5 +1,18 @@
 # Simpl Documentation Catalogue
 
+## Table of Contents
+
+- [What is Simpl](#what-is-simpl)
+- [Business Processes](#business-processes)
+- [Supporting Activities](#supporting-activities)
+- [Non-Functional Requirements](#non-functional-requirements)
+- [Capability Map](#capability-map)
+- [How Business Processes, Architecture, and NFRs Relate](#how-business-processes-architecture-and-nfrs-relate)
+- [Foundational Reference](#foundational-reference)
+- [Other Contents](#other-contents)
+
+---
+
 ## What is Simpl
 
 With the ongoing exponential growth of data, there is a pressing need within the European Union to provide access to resilient and competitive data storage and processing capacities for both the private and public sectors. The European Commission aims to address this need through greater data sharing, decentralised data processing, and the establishment of sector-specific Data Spaces — federated ecosystems where organisations pool resources, reduce duplication of effort, and create new cross-sector business value. Simpl is the European Commission's middleware programme delivering the technical foundation on which these data spaces can be built and operated.
