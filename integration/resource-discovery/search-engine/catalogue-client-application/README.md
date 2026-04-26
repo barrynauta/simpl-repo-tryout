@@ -1,3 +1,36 @@
+---
+id: simpl:catalogue-client-application
+type: solution
+name: Catalogue Client Application
+owner:
+  team: team:data1
+dimension: dim:integration
+capability: cap:resource-discovery
+business-service: svc:search-engine
+status: built
+release: r3.0
+since: r3.0
+deprecated-in: null
+replaced-by: null
+aliases: []
+participates-in:
+  - bp:BP06
+  - bp:BP09A
+  - bp:BP09B
+realises:
+  - cap:resource-discovery
+covers-nfrs: []
+provenance:
+  source: built
+  upstream: null
+  repos:
+    - code.europa.eu/simpl/simpl-open/development/data1/xfsc-advsearch-be
+    - code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-catalogue-client
+    - code.europa.eu/simpl/simpl-open/development/data1/contract-consumption-be
+    - code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be
+  licence: EUPL-1.2
+---
+
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

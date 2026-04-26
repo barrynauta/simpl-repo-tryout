@@ -1,3 +1,10 @@
+---
+id: doc:architectural-patterns
+type: foundation
+name: Architectural patterns
+since: r3.0
+---
+
 # Architectural Patterns
 
 Architectural patterns are recurring design approaches applied consistently across Simpl-Open components. Where principles state what properties the system must have, patterns describe the concrete structural and behavioural techniques used to achieve them.

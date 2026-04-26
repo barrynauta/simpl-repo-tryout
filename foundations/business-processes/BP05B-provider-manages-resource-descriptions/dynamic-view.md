@@ -1,3 +1,11 @@
+---
+id: bp:BP05B:dynamic-view
+type: dynamic-view
+name: BP05B - Provider manages resource descriptions – Dynamic view
+of: bp:BP05B
+since: r3.0
+---
+
 # BP05B Dynamic View
 
 ## Source

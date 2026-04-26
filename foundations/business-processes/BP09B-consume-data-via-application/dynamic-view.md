@@ -1,3 +1,11 @@
+---
+id: bp:BP09B:dynamic-view
+type: dynamic-view
+name: BP09B – Consumer receives a data processing service on a data resource via an application – Dynamic view
+of: bp:BP09B
+since: r3.0
+---
+
 # BP09B Dynamic View
 
 ## Source

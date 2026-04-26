@@ -1,3 +1,10 @@
+---
+id: doc:references
+type: foundation
+name: References
+since: r3.0
+---
+
 # References
 
 All external links from Simpl-Open documentation, grouped by topic. Internal relative links are not listed here; see individual `doc/architecture.md` files for those.

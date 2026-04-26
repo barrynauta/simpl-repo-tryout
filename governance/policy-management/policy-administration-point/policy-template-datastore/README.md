@@ -1,3 +1,29 @@
+---
+id: simpl:policy-template-datastore
+type: solution
+name: Policy Template Datastore
+owner:
+  team: team:unassigned
+dimension: dim:governance
+capability: cap:policy-management
+business-service: svc:policy-administration-point
+status: planned
+release: null
+since: r3.0
+deprecated-in: null
+replaced-by: null
+aliases: []
+participates-in: []
+realises:
+  - cap:policy-management
+covers-nfrs: []
+provenance:
+  source: placeholder
+  upstream: XFSC OCM
+  repos: []
+  licence: Apache-2.0
+---
+
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

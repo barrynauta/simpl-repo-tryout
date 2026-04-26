@@ -1,3 +1,10 @@
+---
+id: doc:glossary
+type: foundation
+name: Glossary
+since: r3.0
+---
+
 # Glossary
 
 This glossary defines the key terms used across the Simpl programme and this documentation catalogue. Definitions are sourced from the official Simpl programme glossary and represent the authoritative vocabulary for Simpl-Open and its data space ecosystem.

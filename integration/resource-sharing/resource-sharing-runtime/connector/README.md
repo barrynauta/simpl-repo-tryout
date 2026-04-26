@@ -1,3 +1,35 @@
+---
+id: simpl:connector
+type: solution
+name: Connector
+owner:
+  team: team:edc
+dimension: dim:integration
+capability: cap:resource-sharing
+business-service: svc:resource-sharing-runtime
+status: built
+release: r3.0
+since: r3.0
+deprecated-in: null
+replaced-by: null
+aliases: []
+participates-in:
+  - bp:BP05B
+  - bp:BP07
+  - bp:BP08
+  - bp:BP09A
+  - bp:BP09B
+realises:
+  - cap:resource-sharing
+covers-nfrs: []
+provenance:
+  source: fork
+  upstream: https://github.com/eclipse-edc/Connector
+  repos:
+    - code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-edc
+  licence: Apache-2.0
+---
+
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

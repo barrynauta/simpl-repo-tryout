@@ -1,3 +1,10 @@
+---
+id: doc:principles
+type: foundation
+name: Architectural principles
+since: r3.0
+---
+
 # Architectural Principles
 
 Architectural principles are the foundational design commitments that govern every decision made across Simpl-Open. Each principle is applied throughout the architecture and all are considered equally important — no single principle takes precedence over another.

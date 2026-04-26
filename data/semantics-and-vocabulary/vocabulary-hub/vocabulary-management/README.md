@@ -1,3 +1,29 @@
+---
+id: simpl:vocabulary-management
+type: solution
+name: Vocabulary Management
+owner:
+  team: team:data1
+dimension: dim:data
+capability: cap:semantics-and-vocabulary
+business-service: svc:vocabulary-hub
+status: planned
+release: null
+since: r3.0
+deprecated-in: null
+replaced-by: null
+aliases: []
+participates-in: []
+realises:
+  - cap:semantics-and-vocabulary
+covers-nfrs: []
+provenance:
+  source: placeholder
+  upstream: null
+  repos: []
+  licence: EUPL-1.2
+---
+
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

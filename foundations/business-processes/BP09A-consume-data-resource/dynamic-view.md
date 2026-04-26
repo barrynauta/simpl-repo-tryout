@@ -1,3 +1,11 @@
+---
+id: bp:BP09A:dynamic-view
+type: dynamic-view
+name: BP09A – Consumer consumes a data resource from a Provider – Dynamic view
+of: bp:BP09A
+since: r3.0
+---
+
 # BP09A Dynamic View
 
 ## Source

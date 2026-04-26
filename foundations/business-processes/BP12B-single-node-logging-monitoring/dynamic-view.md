@@ -1,3 +1,11 @@
+---
+id: bp:BP12B:dynamic-view
+type: dynamic-view
+name: BP12B – Single node logging & monitoring – Dynamic view
+of: bp:BP12B
+since: r3.0
+---
+
 # BP12B Dynamic View
 
 ## Source

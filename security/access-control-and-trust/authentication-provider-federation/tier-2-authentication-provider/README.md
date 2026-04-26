@@ -1,3 +1,31 @@
+---
+id: simpl:tier-2-authentication-provider
+type: solution
+name: Tier 2 Authentication Provider
+owner:
+  team: team:iaa
+dimension: dim:security
+capability: cap:access-control-and-trust
+business-service: svc:authentication-provider-federation
+status: built
+release: r3.0
+since: r3.0
+deprecated-in: null
+replaced-by: null
+aliases: []
+participates-in: []
+realises:
+  - cap:access-control-and-trust
+covers-nfrs: []
+provenance:
+  source: built
+  upstream: null
+  repos:
+    - code.europa.eu/simpl/simpl-open/development/iaa/authentication_provider
+    - code.europa.eu/simpl/simpl-open/development/iaa/fe-authentication-provider
+  licence: EUPL-1.2
+---
+
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

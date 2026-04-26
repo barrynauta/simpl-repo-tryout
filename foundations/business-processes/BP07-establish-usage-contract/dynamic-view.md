@@ -1,3 +1,11 @@
+---
+id: bp:BP07:dynamic-view
+type: dynamic-view
+name: BP07 - Consumer and Provider establish a usage contract – Dynamic view
+of: bp:BP07
+since: r3.0
+---
+
 # BP07 Dynamic View
 
 ## Source

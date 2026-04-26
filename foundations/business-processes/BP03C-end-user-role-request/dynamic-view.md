@@ -1,3 +1,11 @@
+---
+id: bp:BP03C:dynamic-view
+type: dynamic-view
+name: BP03C - End-User Role Request – Dynamic view
+of: bp:BP03C
+since: r3.0
+---
+
 # BP03C Dynamic View
 
 ## Source
