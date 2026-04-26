@@ -4,8 +4,8 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../README.md">🏠 Home</a><br/>
-    <a href="../README.md">Dimension: Foundations</a><br/>
-        <strong>Capability: Non Functional Requirements</strong><br/>
+    <a href="../README.md">Foundations</a><br/>
+        <strong>Non Functional Requirements</strong><br/>
 </p>
 </div>
 

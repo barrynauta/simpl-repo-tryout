@@ -4,8 +4,8 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../README.md">🏠 Home</a><br/>
-    <a href="../README.md">Dimension: Foundations</a><br/>
-        <strong>Capability: Business Processes</strong><br/>
+    <a href="../README.md">Foundations</a><br/>
+        <strong>Business Processes</strong><br/>
 </p>
 </div>
 

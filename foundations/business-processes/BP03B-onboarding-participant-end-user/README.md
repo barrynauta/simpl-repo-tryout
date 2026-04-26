@@ -4,9 +4,9 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Dimension: Foundations</a><br/>
-        <a href="../README.md">Capability: Business Processes</a><br/>
-            <strong>Service: BP03B — Onboarding Participant End User</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP03B — Onboarding Participant End User</strong><br/>
 </p>
 </div>
 

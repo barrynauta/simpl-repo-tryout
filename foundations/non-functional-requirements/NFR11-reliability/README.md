@@ -4,9 +4,9 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Dimension: Foundations</a><br/>
-        <a href="../README.md">Capability: Non Functional Requirements</a><br/>
-            <strong>Service: NFR11 — Reliability</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Non Functional Requirements</a><br/>
+            <strong>NFR11 — Reliability</strong><br/>
 </p>
 </div>
 
