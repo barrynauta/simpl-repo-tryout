@@ -1,0 +1,52 @@
+# GitLab CI for the Simpl manifest tooling.
+#
+# Two stages:
+#   - validate: schema-checks every .simpl/manifest.yaml. Fails the
+#     pipeline if any manifest is invalid.
+#   - aggregate: runs every aggregator and uploads the Markdown output
+#     as build artefacts. Aggregator output is *not* committed back to
+#     the catalogue repo — see `tooling/manifest/SPEC.md` (Open
+#     questions §1) for rationale. Switch to a commit-back model later
+#     if a stable URL for downstream consumers is needed.
+#
+# Triggered on every merge to default branch and on every MR. Adapt
+# `rules:` blocks to programme-wide conventions when adopted.
+
+stages:
+  - validate
+  - aggregate
+
+default:
+  image: python:3.11-slim
+  before_script:
+    - pip install --quiet pyyaml jsonschema
+
+variables:
+  MANIFEST_ROOT: "."
+  GENERATED_DIR: "generated"
+
+validate-manifests:
+  stage: validate
+  script:
+    - python3 tooling/manifest/aggregators/validate.py --root "$MANIFEST_ROOT"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+aggregate-indexes:
+  stage: aggregate
+  needs: ["validate-manifests"]
+  script:
+    - mkdir -p "$GENERATED_DIR"
+    - python3 tooling/manifest/aggregators/capability-index.py --root "$MANIFEST_ROOT" --out "$GENERATED_DIR/capability-index.md"
+    - python3 tooling/manifest/aggregators/bp-traceability.py    --root "$MANIFEST_ROOT" --out "$GENERATED_DIR/bp-traceability.md"
+    - python3 tooling/manifest/aggregators/agent-composition.py  --root "$MANIFEST_ROOT" --out "$GENERATED_DIR/agent-composition.md"
+    - python3 tooling/manifest/aggregators/contract-matrix.py    --root "$MANIFEST_ROOT" --out "$GENERATED_DIR/contract-matrix.md"
+    - python3 tooling/manifest/aggregators/api-catalogue.py      --root "$MANIFEST_ROOT" --out "$GENERATED_DIR/api-catalogue.md"
+  artifacts:
+    name: "manifest-aggregates-${CI_COMMIT_SHORT_SHA}"
+    paths:
+      - generated/
+    expire_in: 30 days
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

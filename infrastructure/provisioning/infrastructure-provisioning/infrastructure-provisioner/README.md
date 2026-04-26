@@ -1,32 +1,3 @@
----
-id: simpl:infrastructure-provisioner
-type: solution
-name: Infrastructure Provisioner
-owner:
-  team: team:infrastructure
-dimension: dim:infrastructure
-capability: cap:provisioning
-business-service: svc:infrastructure-provisioning
-status: built
-release: r3.0
-since: r3.0
-deprecated-in: null
-replaced-by: null
-aliases: []
-participates-in:
-  - bp:BP08
-  - bp:BP09B
-realises:
-  - cap:provisioning
-covers-nfrs: []
-provenance:
-  source: built
-  upstream: null
-  repos:
-    - code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-crossplane
-  licence: EUPL-1.2
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

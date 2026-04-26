@@ -1,32 +1,3 @@
----
-id: simpl:authorisation
-type: solution
-name: Authorisation
-owner:
-  team: team:iaa
-dimension: dim:security
-capability: cap:access-control-and-trust
-business-service: svc:authorisation
-status: built
-release: r3.0
-since: r3.0
-deprecated-in: null
-replaced-by: null
-aliases: []
-participates-in: []
-realises:
-  - cap:access-control-and-trust
-covers-nfrs: []
-provenance:
-  source: built
-  upstream: null
-  repos:
-    - code.europa.eu/simpl/simpl-open/development/iaa/tier1-gateway
-    - code.europa.eu/simpl/simpl-open/development/iaa/tier2-gateway
-    - code.europa.eu/simpl/simpl-open/development/iaa/tier2-proxy
-  licence: EUPL-1.2
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

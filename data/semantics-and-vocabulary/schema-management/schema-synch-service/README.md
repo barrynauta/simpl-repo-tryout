@@ -1,30 +1,3 @@
----
-id: simpl:schema-synch-service
-type: solution
-name: Schema Synch Service
-owner:
-  team: team:edc
-dimension: dim:data
-capability: cap:semantics-and-vocabulary
-business-service: svc:schema-management
-status: built
-release: r3.0
-since: r3.0
-deprecated-in: null
-replaced-by: null
-aliases: []
-participates-in:
-  - bp:BP05B
-realises:
-  - cap:semantics-and-vocabulary
-covers-nfrs: []
-provenance:
-  source: built
-  upstream: null
-  repos: []
-  licence: EUPL-1.2
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

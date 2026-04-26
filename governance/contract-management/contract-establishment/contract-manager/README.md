@@ -1,31 +1,3 @@
----
-id: simpl:contract-manager
-type: solution
-name: Contract Manager
-owner:
-  team: team:contract-billing
-dimension: dim:governance
-capability: cap:contract-management
-business-service: svc:contract-establishment
-status: built
-release: r3.0
-since: r3.0
-deprecated-in: null
-replaced-by: null
-aliases: []
-participates-in:
-  - bp:BP07
-realises:
-  - cap:contract-management
-covers-nfrs: []
-provenance:
-  source: built
-  upstream: null
-  repos:
-    - code.europa.eu/simpl/simpl-open/development/contract-billing/contract
-  licence: EUPL-1.2
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>
