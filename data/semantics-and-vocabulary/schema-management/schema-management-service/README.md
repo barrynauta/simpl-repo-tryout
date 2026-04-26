@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Data</a><br/>
+        <a href="../../README.md">Capability: Semantics And Vocabulary</a><br/>
+            <a href="../README.md">Service: Schema Management</a><br/>
+                <strong>Solution: Schema Management Service</strong><br/>
+</p>
+</div>
+
 # Schema Management Service
 
 The authoritative source of truth and lifecycle manager for all schemas and vocabularies within the Simpl-Open data space. Enables the Governance Authority to define, version, publish, and revoke the structure of self-descriptions for datasets, applications, and infrastructure resources. Exposes a Management API, a public Resolver Interface, and an event publisher that notifies downstream services of schema lifecycle changes.

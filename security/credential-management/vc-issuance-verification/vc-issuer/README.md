@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Security</a><br/>
+        <a href="../../README.md">Capability: Credential Management</a><br/>
+            <a href="../README.md">Service: Vc Issuance Verification</a><br/>
+                <strong>Solution: Vc Issuer</strong><br/>
+</p>
+</div>
+
 # VC Issuer
 
 Issues and manages verifiable credentials (VCs) for usage contracts within the Simpl-Open data space. Relies on the Signer component for cryptographic signatures and stores signed contracts in the Wallet component, providing transparent and reliable validation of usage contracts.

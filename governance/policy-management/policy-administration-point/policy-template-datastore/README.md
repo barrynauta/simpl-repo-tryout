@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Governance</a><br/>
+        <a href="../../README.md">Capability: Policy Management</a><br/>
+            <a href="../README.md">Service: Policy Administration Point</a><br/>
+                <strong>Solution: Policy Template Datastore</strong><br/>
+</p>
+</div>
+
 # Policy Template Datastore
 
 Stores contract and access policy templates that serve as blueprints when providers define usage policies for their resources. Templates held in this datastore are made accessible to consumers during resource negotiation and access stages.

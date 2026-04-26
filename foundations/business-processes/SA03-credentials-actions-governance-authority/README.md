@@ -1,3 +1,15 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../README.md">🏠 Home</a><br/>
+    <a href="../../README.md">Dimension: Foundations</a><br/>
+        <a href="../README.md">Capability: Business Processes</a><br/>
+            <strong>Service: SA03 — Credentials Actions Governance Authority</strong><br/>
+</p>
+</div>
+
 # SA03 - Credentials actions by the Governance Authority
 
 > **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
