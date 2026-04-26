@@ -1,3 +1,13 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../README.md">🏠 Home</a><br/>
+    <strong>Dimension: Foundations</strong><br/>
+</p>
+</div>
+
 # Reference
 
 This folder contains foundational artefacts describing what Simpl is and should do — separate from the implementation tree (dimension folders). Use this as the canonical entry point for understanding the system.

@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Infrastructure</a><br/>
+        <a href="../../README.md">Capability: Provisioning</a><br/>
+            <a href="../README.md">Service: Infrastructure Provisioning</a><br/>
+                <strong>Solution: Infrastructure Provisioner</strong><br/>
+</p>
+</div>
+
 # Infrastructure Provisioner
 
 Manages, validates, and executes Crossplane/OpenTofu deployment scripts to provision compute, storage, and network resources for data space consumers. Comprises a Triggering Module (script management, execution, access sharing) and an Infrastructure Provisioner (ArgoCD + Crossplane). Interactions are asynchronous via Kafka.

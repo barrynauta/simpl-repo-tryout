@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Data</a><br/>
+        <a href="../../README.md">Capability: Supporting Data Services</a><br/>
+            <a href="../README.md">Service: Data Orchestration</a><br/>
+                <strong>Solution: Orchestration Platform</strong><br/>
+</p>
+</div>
+
 # Orchestration Platform
 
 Executes data workflows for data processing and pre-processing using custom or built-in data services (such as data anonymisation). Acts as a data plane bridge between data sources and consumer destinations. Based on Dagster with a custom Asset Orchestrator component developed for Simpl-Open.

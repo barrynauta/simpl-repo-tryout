@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Governance</a><br/>
+        <a href="../../README.md">Capability: Resource Management</a><br/>
+            <a href="../README.md">Service: Metadata Description</a><br/>
+                <strong>Solution: Sd Tooling</strong><br/>
+</p>
+</div>
+
 # SD Tooling
 
 Enables providers to define self-descriptions for their resources by leveraging schemas from the Schema Registry. Supports both UI and API methods for creating, managing, and publishing self-descriptions, policies, and contract templates. Sub-components include SD Manager, SD Creation Tool, Policy Creator, Contract Template Editor, and a Validation Backend.

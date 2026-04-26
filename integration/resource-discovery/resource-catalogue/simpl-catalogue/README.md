@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Integration</a><br/>
+        <a href="../../README.md">Capability: Resource Discovery</a><br/>
+            <a href="../README.md">Service: Resource Catalogue</a><br/>
+                <strong>Solution: Simpl Catalogue</strong><br/>
+</p>
+</div>
+
 # Simpl Catalogue
 
 Central publication point on the Governance Authority for signed self-descriptions of data, application and infrastructure offerings. The Catalogue supports both quick and advanced (schema-driven) search, enforces policy-aware filtering at query time, and validates self-descriptions for syntax, semantics and quality before storage.

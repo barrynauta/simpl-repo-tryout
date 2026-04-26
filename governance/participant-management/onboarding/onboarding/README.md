@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Governance</a><br/>
+        <a href="../../README.md">Capability: Participant Management</a><br/>
+            <a href="../README.md">Service: Onboarding</a><br/>
+                <strong>Solution: Onboarding</strong><br/>
+</p>
+</div>
+
 # Onboarding
 
 Core Governance Authority component that manages participant onboarding requests. Applicants (providers and consumers) request new Tier 1 credentials, submit their onboarding request with required documents, and the Governance Authority approves, requests revision, or rejects. On approval, the Onboarding component triggers Tier 2 credential creation via the Identity Provider.

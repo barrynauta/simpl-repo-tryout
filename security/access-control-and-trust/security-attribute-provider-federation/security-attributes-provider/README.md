@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Security</a><br/>
+        <a href="../../README.md">Capability: Access Control And Trust</a><br/>
+            <a href="../README.md">Service: Security Attribute Provider Federation</a><br/>
+                <strong>Solution: Security Attributes Provider</strong><br/>
+</p>
+</div>
+
 # Security Attributes Provider
 
 Deployed in the Governance Authority Agent. Registers and manages participant security identity attributes; invoked by Onboarding on participant approval to associate security identity attributes to the participant; supports ABAC enforcement across agents.

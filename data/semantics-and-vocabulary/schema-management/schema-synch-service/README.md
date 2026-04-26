@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Data</a><br/>
+        <a href="../../README.md">Capability: Semantics And Vocabulary</a><br/>
+            <a href="../README.md">Service: Schema Management</a><br/>
+                <strong>Solution: Schema Synch Service</strong><br/>
+</p>
+</div>
+
 # Schema Synch Service
 
 Distributes schema and vocabulary updates from the Schema Management Service to Provider and Consumer Nodes, ensuring that dependent components (SD Tooling, Catalogue Client Application) always have access to the most current schema standards. Implements the Schema Synch Adapter API and the Schema Synch Adapter.

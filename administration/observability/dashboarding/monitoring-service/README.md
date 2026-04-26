@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Administration</a><br/>
+        <a href="../../README.md">Capability: Observability</a><br/>
+            <a href="../README.md">Service: Dashboarding</a><br/>
+                <strong>Solution: Monitoring Service</strong><br/>
+</p>
+</div>
+
 # Monitoring Service
 
 Provides observability for all Simpl-Open application components on a node, covering log collection, log ingestion, infrastructure metrics, dashboarding, alerting, health checking, application tracing, and reporting. Implemented on the Elastic Cloud on Kubernetes (ECK) stack with a custom infrastructure consumption monitoring service and a shared logging library.

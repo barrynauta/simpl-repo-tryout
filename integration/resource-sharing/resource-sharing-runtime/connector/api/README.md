@@ -1,3 +1,17 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../../README.md">Dimension: Integration</a><br/>
+        <a href="../../../README.md">Capability: Resource Sharing</a><br/>
+            <a href="../../README.md">Service: Resource Sharing Runtime</a><br/>
+                <a href="../README.md">Solution: Connector</a><br/>
+                    <strong>API: API Documentation</strong><br/>
+</p>
+</div>
+
 # Connector — API index
 
 | API | File | Description |

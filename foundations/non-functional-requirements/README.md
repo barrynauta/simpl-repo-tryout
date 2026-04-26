@@ -1,3 +1,14 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../README.md">🏠 Home</a><br/>
+    <a href="../README.md">Dimension: Foundations</a><br/>
+        <strong>Capability: Non Functional Requirements</strong><br/>
+</p>
+</div>
+
 # Non-Functional Requirements
 
 Simpl-Open non-functional requirements, documented from the public requirements catalogue at https://simpl-programme.ec.europa.eu/book-page/simpl-requirements.

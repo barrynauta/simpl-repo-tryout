@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Administration</a><br/>
+        <a href="../../README.md">Capability: Notification And Messaging</a><br/>
+            <a href="../README.md">Service: Notification</a><br/>
+                <strong>Solution: Notification Service</strong><br/>
+</p>
+</div>
+
 # Notification Service
 
 Sends notifications (email and other channels) to data space participants in response to significant events in the Simpl-Open platform, such as new schema publications or contract events. Implements an asynchronous Kafka-based API using AsyncAPI v3.0.0; other services publish EmailNotification messages to the `notifications` Kafka topic, which this service consumes and delivers.

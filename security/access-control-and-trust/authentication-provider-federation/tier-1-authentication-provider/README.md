@@ -1,3 +1,16 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Security</a><br/>
+        <a href="../../README.md">Capability: Access Control And Trust</a><br/>
+            <a href="../README.md">Service: Authentication Provider Federation</a><br/>
+                <strong>Solution: Tier 1 Authentication Provider</strong><br/>
+</p>
+</div>
+
 # Tier 1 Authentication Provider
 
 Keycloak-based OpenID Connect identity provider for Tier 1 (human user) authentication. Manages users, roles, and IdP federation. Extended with a custom Keycloak SPI that adds custom claims (client-roles, participant_id, credential_id, identity_attributes) to Tier 1 JWT tokens.
