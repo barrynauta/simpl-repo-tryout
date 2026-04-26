@@ -15,7 +15,7 @@
 
 Core Governance Authority component that manages participant onboarding requests. Applicants (providers and consumers) request new Tier 1 credentials, submit their onboarding request with required documents, and the Governance Authority approves, requests revision, or rejects. On approval, the Onboarding component triggers Tier 2 credential creation via the Identity Provider.
 
-Capability-map placement: `governance / participant-management / onboarding / onboarding`. This solution implements the **Onboarding** business service.
+Capability-map placement: `governance / participant-management / onboarding / onboarding-service`. This solution implements the **Onboarding** business service.
 
 Provenance: built by Simpl. Source repositories: `iaa/onboarding` (backend) and `iaa/fe-onboarding` (frontend). Licence: EUPL 1.2.
 
