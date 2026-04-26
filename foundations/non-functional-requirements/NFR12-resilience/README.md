@@ -4,9 +4,9 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Dimension: Foundations</a><br/>
-        <a href="../README.md">Capability: Non Functional Requirements</a><br/>
-            <strong>Service: NFR12 — Resilience</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Non Functional Requirements</a><br/>
+            <strong>NFR12 — Resilience</strong><br/>
 </p>
 </div>
 

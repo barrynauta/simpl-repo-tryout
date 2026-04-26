@@ -4,9 +4,9 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Dimension: Foundations</a><br/>
-        <a href="../README.md">Capability: Business Processes</a><br/>
-            <strong>Service: BP13 — It Administration</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP13 — It Administration</strong><br/>
 </p>
 </div>
 

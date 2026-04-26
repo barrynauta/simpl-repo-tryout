@@ -4,7 +4,7 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../README.md">🏠 Home</a><br/>
-    <strong>Dimension: Foundations</strong><br/>
+    <strong>Foundations</strong><br/>
 </p>
 </div>
 

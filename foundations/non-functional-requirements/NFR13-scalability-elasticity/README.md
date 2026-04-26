@@ -4,9 +4,9 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Dimension: Foundations</a><br/>
-        <a href="../README.md">Capability: Non Functional Requirements</a><br/>
-            <strong>Service: NFR13 — Scalability Elasticity</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Non Functional Requirements</a><br/>
+            <strong>NFR13 — Scalability Elasticity</strong><br/>
 </p>
 </div>
 
