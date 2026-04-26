@@ -1,12 +1,3 @@
----
-id: svc:metadata-description
-type: business-service
-name: Metadata description
-dimension: dim:governance
-capability: cap:resource-management
-since: r3.0
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

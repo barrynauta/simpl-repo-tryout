@@ -1,0 +1,15 @@
+simpl_solution: monitoring-service
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: monitoring
+capability_map:
+  primary:
+    dimension: administration
+    capability: observability
+    business_service: dashboarding
+supports_business_processes:
+- BP12B
+licence: EUPL-1.2
+repository_url: https://code.europa.eu/simpl/simpl-open/development/monitoring/eck-monitoring
+provenance: built

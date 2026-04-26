@@ -29,14 +29,14 @@ def main() -> int:
 
     manifests = load_validated_manifests(args.root, args.manifest_glob)
 
-    rows: list[tuple[str, str, str, str]] = []
+    rows: list[tuple[str, str | None, str | None, str]] = []
     for _, m in manifests:
         sol = m["simpl_solution"]
-        repo = m["repository_url"]
+        repo = m.get("repository_url")
         provenance = m["provenance"]
-        # Best-effort URL to the conventional OpenAPI location. We keep
-        # this as a string hint; the aggregator does not verify it exists.
-        openapi_hint = f"{repo.rstrip('/')}/-/blob/main/{OPENAPI_CONVENTION}"
+        openapi_hint = (
+            f"{repo.rstrip('/')}/-/blob/main/{OPENAPI_CONVENTION}" if repo else None
+        )
         rows.append((sol, repo, openapi_hint, provenance))
 
     lines: list[str] = ["# API catalogue", ""]
@@ -49,9 +49,9 @@ def main() -> int:
     lines.append("| Solution | Repository | OpenAPI (conventional) | Provenance |")
     lines.append("|---|---|---|---|")
     for sol, repo, openapi_hint, provenance in sorted(rows):
-        lines.append(
-            f"| **{sol}** | [{repo}]({repo}) | [`{OPENAPI_CONVENTION}`]({openapi_hint}) | {provenance} |"
-        )
+        repo_cell = f"[{repo}]({repo})" if repo else "_no repository declared_"
+        api_cell = f"[`{OPENAPI_CONVENTION}`]({openapi_hint})" if openapi_hint else "_n/a_"
+        lines.append(f"| **{sol}** | {repo_cell} | {api_cell} | {provenance} |")
     lines.append("")
 
     output = "\n".join(lines).rstrip() + "\n"

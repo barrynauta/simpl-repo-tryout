@@ -1,0 +1,16 @@
+simpl_solution: infrastructure-provisioner
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: infrastructure
+capability_map:
+  primary:
+    dimension: infrastructure
+    capability: provisioning
+    business_service: infrastructure-provisioning
+supports_business_processes:
+- BP08
+- BP09B
+licence: EUPL-1.2
+repository_url: https://code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-crossplane
+provenance: built

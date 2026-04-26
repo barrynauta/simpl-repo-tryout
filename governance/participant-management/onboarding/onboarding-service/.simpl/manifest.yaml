@@ -1,0 +1,15 @@
+simpl_solution: onboarding-service
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: iaa
+capability_map:
+  primary:
+    dimension: governance
+    capability: participant-management
+    business_service: onboarding
+supports_business_processes:
+- BP03A
+licence: EUPL-1.2
+repository_url: https://code.europa.eu/simpl/simpl-open/development/iaa/onboarding
+provenance: built

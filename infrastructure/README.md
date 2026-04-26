@@ -1,10 +1,3 @@
----
-id: dim:infrastructure
-type: dimension
-name: Infrastructure
-since: r3.0
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

@@ -1,0 +1,17 @@
+simpl_solution: users-roles
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: iaa
+capability_map:
+  primary:
+    dimension: governance
+    capability: participant-management
+    business_service: user-roles
+supports_business_processes:
+- BP03A
+- BP03B
+- BP03C
+licence: EUPL-1.2
+repository_url: https://code.europa.eu/simpl/simpl-open/development/iaa/users-roles
+provenance: built

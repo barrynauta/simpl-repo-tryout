@@ -1,0 +1,17 @@
+simpl_solution: catalogue-client-application
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: data1
+capability_map:
+  primary:
+    dimension: integration
+    capability: resource-discovery
+    business_service: search-engine
+supports_business_processes:
+- BP06
+- BP09A
+- BP09B
+licence: EUPL-1.2
+repository_url: https://code.europa.eu/simpl/simpl-open/development/data1/xfsc-advsearch-be
+provenance: built

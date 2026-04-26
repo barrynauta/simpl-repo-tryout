@@ -1,0 +1,15 @@
+simpl_solution: contract-manager
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: contract-billing
+capability_map:
+  primary:
+    dimension: governance
+    capability: contract-management
+    business_service: contract-establishment
+supports_business_processes:
+- BP07
+licence: EUPL-1.2
+repository_url: https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract
+provenance: built

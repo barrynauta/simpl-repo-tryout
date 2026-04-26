@@ -1,0 +1,16 @@
+simpl_solution: identity-provider
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: iaa
+capability_map:
+  primary:
+    dimension: security
+    capability: access-control-and-trust
+    business_service: identity-provider
+supports_business_processes:
+- BP03A
+- SA03
+licence: EUPL-1.2
+repository_url: https://code.europa.eu/simpl/simpl-open/development/iaa/identity-provider
+provenance: built
