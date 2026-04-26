@@ -16,4 +16,4 @@ Manages the end-to-end participant onboarding process — application submission
 
 ## Solutions
 
-- [Onboarding](onboarding/README.md) — full onboarding workflow including frontend (Angular), backend (Java), and integrations with the IAA stack.
+- [Onboarding](onboarding-service/README.md) — full onboarding workflow including frontend (Angular), backend (Java), and integrations with the IAA stack.

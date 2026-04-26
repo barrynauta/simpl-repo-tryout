@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LLM Council — Simpl-Open directory structure (2026-04-26)</title>
+<style>
+  :root {
+    --ink: #1a1f2c;
+    --muted: #5a6478;
+    --line: #e2e6ee;
+    --bg: #ffffff;
+    --soft: #f6f8fb;
+    --accent: #2b59c3;
+    --warn: #b95c00;
+    --good: #1f7a3a;
+    --c-contrarian: #c0392b;
+    --c-fp: #2b59c3;
+    --c-expansionist: #1f7a3a;
+    --c-outsider: #8e44ad;
+    --c-executor: #b95c00;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 28px 80px; }
+  header.hero {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+  .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 28px;
+    margin: 8px 0 4px;
+    line-height: 1.2;
+  }
+  .meta { color: var(--muted); font-size: 14px; }
+  .question {
+    background: var(--soft);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 6px 6px 0;
+    margin: 0 0 36px;
+    font-size: 15px;
+  }
+  .question strong { display: block; margin-bottom: 6px; }
+  h2 {
+    font-size: 19px;
+    margin: 36px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 { font-size: 16px; margin: 22px 0 8px; }
+  p { margin: 8px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 4px 0; }
+  code { background: var(--soft); padding: 1px 6px; border-radius: 4px; font-size: 0.92em; }
+  .verdict {
+    background: linear-gradient(180deg, #fffbf2 0%, #fff 100%);
+    border: 1px solid #f0d9a8;
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 12px 0 32px;
+  }
+  .verdict h2 { border: none; padding: 0; margin-top: 0; }
+  .verdict .recommendation {
+    background: #fff;
+    border-left: 3px solid var(--warn);
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .one-thing {
+    background: #1a1f2c;
+    color: #fff;
+    padding: 18px 22px;
+    border-radius: 8px;
+    margin: 24px 0;
+  }
+  .one-thing .label {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 11px;
+    color: #c2cdd6;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .one-thing .body { font-size: 16px; }
+
+  /* Position grid */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0 8px;
+  }
+  .pos {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+  .pos .who {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .pos.contrarian { border-color: var(--c-contrarian); }
+  .pos.contrarian .who { color: var(--c-contrarian); }
+  .pos.fp { border-color: var(--c-fp); }
+  .pos.fp .who { color: var(--c-fp); }
+  .pos.expansionist { border-color: var(--c-expansionist); }
+  .pos.expansionist .who { color: var(--c-expansionist); }
+  .pos.outsider { border-color: var(--c-outsider); }
+  .pos.outsider .who { color: var(--c-outsider); }
+  .pos.executor { border-color: var(--c-executor); }
+  .pos.executor .who { color: var(--c-executor); }
+
+  /* Alignment chart */
+  .chart { margin: 18px 0 28px; }
+  .chart h3 { margin-bottom: 10px; }
+  .row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .topic { font-weight: 600; }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .badge {
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .b-contrarian { background: var(--c-contrarian); }
+  .b-fp { background: var(--c-fp); }
+  .b-expansionist { background: var(--c-expansionist); }
+  .b-outsider { background: var(--c-outsider); }
+  .b-executor { background: var(--c-executor); }
+  .b-pale { background: #c2cdd6; color: #1a1f2c; }
+
+  details {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin: 8px 0;
+    background: var(--bg);
+  }
+  details[open] { background: var(--soft); }
+  summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14.5px;
+    user-select: none;
+  }
+  details > div { padding: 4px 18px 16px; font-size: 14px; white-space: pre-wrap; line-height: 1.6; }
+  .adv-contrarian summary { color: var(--c-contrarian); }
+  .adv-fp summary { color: var(--c-fp); }
+  .adv-expansionist summary { color: var(--c-expansionist); }
+  .adv-outsider summary { color: var(--c-outsider); }
+  .adv-executor summary { color: var(--c-executor); }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">LLM Council Verdict</div>
+  <h1>Should the Simpl-Open documentation tree mirror the capability map?</h1>
+  <div class="meta">2026-04-26 · 5 advisors · 5 peer reviews · 1 chairman</div>
+</header>
+
+<div class="question">
+  <strong>The question</strong>
+  Does the current dimension-first directory structure of the Simpl-Open documentation catalogue faithfully and usefully represent the capability map for vendor architects and integrators? Where does it diverge, what should be done about each divergence, and is dimension-first even the right organising principle?
+</div>
+
+<div class="verdict">
+  <h2>Council verdict</h2>
+  <p><strong>The diagnosis:</strong> The repo conflates a governance ontology (the capability map) with a filesystem. Every listed pain point — sparse dimensions, <code>foundations/</code>, <code>cross-cutting/</code>, the duplicate <code>interoperability/</code>, root-file leakage, parent-name duplications — is a symptom of that conflation, not separate bugs.</p>
+
+  <p><strong>The split:</strong> The First Principles Thinker (B) is right about the diagnosis. The Executor (D) is right about Monday. They are <em>not</em> in conflict. The framing-as-opposed is the actual error.</p>
+
+  <div class="recommendation">
+    <strong>Target architecture (B's reframe, accepted):</strong>
+    <code>solutions/&lt;solution-name&gt;/</code> as the canonical home for every artefact a vendor owns. Capability map, business processes, NFRs, audience-roles all become <em>generated views</em> that link into <code>solutions/</code>. One source of truth, many lenses.
+  </div>
+  <div class="recommendation">
+    <strong>Execute the Executor's week immediately</strong> as cleanup, not as the answer. These are no-regret moves and prerequisites for any later reorg. (See "Five fixes" below.)
+  </div>
+  <div class="recommendation">
+    <strong>Before any structural reorg, answer the three blind-spot questions:</strong> who owns the structure decision, whether the EU programme office contractually requires capmap-shaped artefacts, and what the release/versioning lifecycle is. Reorg without these is guessing.
+  </div>
+  <div class="recommendation">
+    <strong>Reject The Expansionist's scope (MCP server, multi-axis graph)</strong> until the spine is stable.
+  </div>
+</div>
+
+<div class="one-thing">
+  <div class="label">The one thing to do first</div>
+  <div class="body">Write a one-page memo, today, that answers: <strong>(1)</strong> who owns the structure decision for this repo, <strong>(2)</strong> whether the EU programme office contractually requires the capmap-shaped tree, and <strong>(3)</strong> what the release/versioning model is. Every other choice — B's reframe, D's fixes, E's ambitions — is downstream of these answers.</div>
+</div>
+
+<h2>Where the council agrees</h2>
+<ul>
+  <li><strong>Delete the duplicate top-level <code>interoperability/</code> today.</strong> Migration debris. No defenders.</li>
+  <li><strong>Fix <code>onboarding/onboarding</code> and parent-name duplications.</strong> One naming rule: solution dir name == capmap solution name, verbatim.</li>
+  <li><strong>Dimension-first is the wrong landing experience</strong> regardless of whether it's right as storage. Vendor engineers arrive knowing their solution name, BP, or interface — never their dimension.</li>
+  <li><strong><code>cross-cutting/</code> is a smell.</strong> Either dies by enumeration (D) or gets promoted to a real concept (E). Status quo not defended.</li>
+  <li><strong>The capability map is a governance artefact, not a filesystem.</strong> Strongest signal in the council; endorsed by 4 of 5 advisors and unanimously by reviewers.</li>
+</ul>
+
+<h2>Where the council clashes</h2>
+
+<h3>Structural redesign vs. tactical fixes</h3>
+<div class="grid">
+  <div class="pos fp">
+    <div class="who">First Principles + Contrarian + Outsider</div>
+    The spine is wrong. Symptoms compound. Collapse to <code>solutions/&lt;name&gt;/</code> with capmap/BP/NFR as generated views.
+  </div>
+  <div class="pos executor">
+    <div class="who">Executor</div>
+    The spine is fine. Reorg burns three sprints, breaks external links, alienates partners. Ship five fixes Monday; don't relitigate.
+  </div>
+</div>
+<p style="font-size: 13.5px; color: var(--muted);">Both are right at different time horizons. D wins this week. B wins next year. Treating them as either/or is the error.</p>
+
+<h3>How ambitious to get with the views</h3>
+<div class="grid">
+  <div class="pos expansionist">
+    <div class="who">Expansionist</div>
+    Multi-axis catalogue, MCP server, chunked F&amp;T spec. Turn the repo into a platform asset and reference index for adjacent EU dataspaces.
+  </div>
+  <div class="pos fp">
+    <div class="who">First Principles</div>
+    Same architectural shape (one source, many views) but disciplined scope. Stabilise the spine before adding ambition.
+  </div>
+</div>
+
+<div class="chart">
+<h3>Advisor positions on the major calls</h3>
+
+<div class="row">
+  <div class="topic">Delete duplicate <code>interoperability/</code></div>
+  <div class="badges">
+    <span class="badge b-contrarian">Contrarian</span>
+    <span class="badge b-fp">First Principles</span>
+    <span class="badge b-outsider">Outsider</span>
+    <span class="badge b-executor">Executor</span>
+    <span class="badge b-expansionist">Expansionist</span>
+  </div>
+</div>
+<div class="row">
+  <div class="topic">Keep dimension tree as storage</div>
+  <div class="badges">
+    <span class="badge b-executor">Executor: yes</span>
+    <span class="badge b-expansionist">Expansionist: yes-with-views</span>
+    <span class="badge b-fp">First Principles: no, flatten</span>
+    <span class="badge b-contrarian">Contrarian: no, flatten</span>
+    <span class="badge b-outsider">Outsider: ok as filing cabinet</span>
+  </div>
+</div>
+<div class="row">
+  <div class="topic">README needs role-based router</div>
+  <div class="badges">
+    <span class="badge b-outsider">Outsider</span>
+    <span class="badge b-contrarian">Contrarian</span>
+    <span class="badge b-pale">others: silent</span>
+  </div>
+</div>
+<div class="row">
+  <div class="topic">BP-first as headline navigation</div>
+  <div class="badges">
+    <span class="badge b-expansionist">Expansionist: yes</span>
+    <span class="badge b-fp">First Principles: as a view</span>
+    <span class="badge b-executor">Executor: no</span>
+    <span class="badge b-pale">Contrarian/Outsider: solution-first</span>
+  </div>
+</div>
+<div class="row">
+  <div class="topic">Promote vs. kill <code>cross-cutting/</code></div>
+  <div class="badges">
+    <span class="badge b-expansionist">Expansionist: rename to platform-fabric</span>
+    <span class="badge b-executor">Executor: enumerate &amp; rename</span>
+    <span class="badge b-contrarian">Contrarian: kill</span>
+    <span class="badge b-fp">First Principles: dissolve into solutions/</span>
+  </div>
+</div>
+<div class="row">
+  <div class="topic">Move root files into <code>foundations/</code></div>
+  <div class="badges">
+    <span class="badge b-executor">Executor: yes</span>
+    <span class="badge b-outsider">Outsider: rename "foundations" first</span>
+    <span class="badge b-pale">others: silent</span>
+  </div>
+</div>
+</div>
+
+<h2>Blind spots the council caught</h2>
+<p style="color: var(--muted); font-size: 13.5px;">These only emerged through peer review — no individual advisor raised them.</p>
+<ul>
+  <li><strong>Ownership and the write path.</strong> Who maintains this repo? Without CODEOWNERS, a contribution guide, and a single editor, any structure drifts back to the current state within two releases. Structure follows authorship. <em>(Most important missing question — flagged by 4 of 5 reviewers.)</em></li>
+  <li><strong>Versioning and lifecycle.</strong> R3.0 is "partial." How does a partner pin to R3.0 docs while R4.0 lands? A structure that churns per release breaks every external link regardless of taxonomy.</li>
+  <li><strong>Governance contractual constraints.</strong> Does the EU programme office contractually require capmap-shaped deliverables? If yes, the capmap view is non-negotiable; if no, the constraint is cultural and weaker than assumed.</li>
+  <li><strong>Link stability as a hard constraint.</strong> The 716kB F&amp;T spec, vendor PRs, external bookmarks all reference current paths. Migration cost is denominated in broken links — D over-weights this, B under-weights it.</li>
+</ul>
+
+<h2>The five fixes (Executor's week — do regardless)</h2>
+<ol>
+  <li><strong>Day 1 (2h):</strong> Delete top-level <code>interoperability/</code>; <code>foundations/interoperability.md</code> wins.</li>
+  <li><strong>Day 2 (3h):</strong> Rename <code>onboarding/onboarding</code> → <code>onboarding/onboarding-service</code>. Audit all solution dirs for parent-name duplication. One rule: solution dir name == capmap name, verbatim.</li>
+  <li><strong>Day 3 (1h):</strong> Move <code>capmap.md</code>, <code>MAPPING.md</code>, <code>definition-of-done.md</code>, <code>references.md</code>, F&amp;T spec into <code>foundations/</code>. README stays at root. (Outsider's caveat: consider renaming <code>foundations/</code> to something honest like <code>reference/</code> or <code>_spec/</code>.)</li>
+  <li><strong>Day 4:</strong> Add <code>STATUS.md</code> per dimension listing implemented vs. stub vs. not-yet R3.0 services. Sparseness is a discoverability problem, not a structure problem.</li>
+  <li><strong>Day 5:</strong> Rename <code>cross-cutting/</code> by enumeration of what's actually in it. "Catch-all" dies on contact with content.</li>
+</ol>
+
+<h2>Full advisor responses</h2>
+
+<details class="adv-contrarian">
+  <summary>The Contrarian — "the capability map is a fiction the repo can't sustain"</summary>
+  <div>The capability map is a fiction the repo is quietly admitting it can't sustain. Stop pretending otherwise.
+
+The fatal flaw: dimension-first taxonomy assumes the map is stable, complete, and the primary navigation key. None of those hold. Release 3.0 is "partial," Observability has 1 of 8 services on disk, and you've already grown three escape hatches (foundations/, cross-cutting/, root-level files). When 30% of your top-level dirs are exceptions to your organising principle, the principle has lost.
+
+Cross-cutting is where architectures go to die. Today it's a catch-all. In 12 months it will be the largest directory and nobody will know what belongs there. Same fate as every utils/, common/, misc/ in software history.
+
+The duplicate interoperability isn't a remnant — it's a tell. Someone tried to fix it, didn't finish, and now readers can't trust either location is canonical. How many other "relocations" are half-done? Audit before adding more.
+
+The audience question you're dodging: vendor teams navigate by the solution they own. They do not wake up thinking "I work in the Data dimension's Semantics capability." A flat solutions index plus tag-based views (by dimension, by BP, by NFR) would serve them better than forcing a 4-level path that's mostly empty.
+
+What I'd actually challenge: are you maintaining this hierarchy because it serves readers, or because the capability map is a governance artefact you're contractually obliged to mirror? Be honest. If it's the latter, the repo structure should optimise for readers and generate a capability-map view, not be one.
+
+Concrete: kill cross-cutting/, resolve interoperability today, and prototype a solution-first layout before sinking more sparse dimension dirs.</div>
+</details>
+
+<details class="adv-fp" open>
+  <summary>The First Principles Thinker — "you made the index the storage" (council's strongest)</summary>
+  <div>You're asking the wrong question.
+
+"Does the directory structure faithfully represent the capability map?" assumes the capability map should be the organising principle. Strip that assumption away and ask: what is this repository for?
+
+It's a documentation catalogue. Catalogues exist so someone can find a thing. Your audience is a vendor engineer who owns or consumes a specific solution. They arrive knowing one of three things: (a) the name of their solution, (b) the business process they're implementing, or (c) the contract/interface they need to integrate against. None of those three entry points is "dimension."
+
+The capability map is a governance artifact — it's how the EU programme office reasons about scope, coverage, and gaps. It is not a navigation structure. You have conflated a planning ontology with a filesystem.
+
+Every "tension" listed is a symptom of this conflation:
+- foundations/ exists because BPs and NFRs don't fit the map — because the map isn't the right spine.
+- cross-cutting/ is the same admission, more honestly named.
+- Sparse dimensions look like failure only because you expected the tree to mirror the map. It mirrors reality: what's been built.
+- The duplicate interoperability is just migration debris, irrelevant to the real question.
+
+Rebuild from first principles: flatten to solutions/&lt;solution-name&gt;/ as the canonical home for every artifact a vendor owns. Keep capmap.md, BPs, NFRs, and the F&amp;T spec as indexes that link into solutions/. The capability map becomes a view, not a directory. So does BP-first. So does NFR-traceability. One source of truth, many lenses.
+
+You don't have a taxonomy problem. You have a "we made the index the storage" problem.</div>
+</details>
+
+<details class="adv-expansionist">
+  <summary>The Expansionist — "this is the only navigable index of an EU sovereign data-space middleware in existence"</summary>
+  <div>The capability map isn't a constraint, it's a launchpad. Stop asking "does the directory faithfully represent capmap?" and start asking "what does this repo become if it works?"
+
+The latent asset nobody's naming: this is the only navigable index of an EU sovereign data-space middleware in existence. Vendors, regulators, academics, and downstream dataspaces (Gaia-X, IDSA, EHDS, ENTSO-E energy spaces) will land here. Optimize for that.
+
+Three asymmetric upsides hiding in plain sight:
+
+1. Make BP-first the headline navigation, keep dimension as a facet. Business processes (BP01–BP13) are how partners actually consume this — "I'm onboarding a participant," not "I'm browsing Administration." A multi-axis catalogue (BP × dimension × NFR × audience-role) generated from one source of truth turns capmap.md from a directory-shape constraint into a graph index. The sparse dimension folders stop looking embarrassing and start looking like a coverage heatmap — instantly valuable telemetry for the program office.
+
+2. Treat cross-cutting/ as a feature, not a bug. Rename it platform-fabric/ and promote it. Every successful platform (Kubernetes, AWS, SAP BTP) has a fabric layer. The "anti-pattern" framing is wrong here — these are the integration primitives others build on.
+
+3. The 716kB F&amp;T spec is a goldmine. Chunk it, cross-link it into every solution README, embed it as the authoritative anchor for AI-assisted partner onboarding. Combined with the capability map as a knowledge graph, you have the substrate for an MCP server / agent that answers "which Simpl-Open service do I need?" That's the real product.
+
+Don't refactor toward purity. Refactor toward discoverability and machine-readability. Capmap stays canonical; everything else becomes a generated view.</div>
+</details>
+
+<details class="adv-outsider">
+  <summary>The Outsider — "I just landed in this repo. Here's what confused me in sixty seconds."</summary>
+  <div>I just landed in this repo. Here's what confused me in the first sixty seconds.
+
+The name "foundations" lies. I'd expect foundational concepts — instead I get business processes, NFRs, glossary, AND the capability map itself. If capability-map.md is the organising principle of the whole repo, why is it buried three levels of mental indirection deep? Put it at root, or put it in something honestly named like _spec/ or reference/.
+
+Nine top-level dirs when you advertise six. A newcomer reads your pitch ("6 dimensions") and then sees foundations/, cross-cutting/, interoperability/, _planning/ and immediately distrusts the map. Are those dimensions too? Pseudo-dimensions? I have to read prose to find out. That's a failure.
+
+cross-cutting/ and interoperability/ (top-level) and foundations/interoperability.md — pick one. From outside, this looks like three people made three decisions and nobody reconciled. Just delete the duplicate. Today.
+
+onboarding/onboarding reads like a bug. So does notification-service sitting inside notification/. As a stranger I cannot tell whether the inner directory is the solution or a solution among many that haven't shipped yet. If Release 3.0 has one solution per service, collapse the redundant level until there's a second sibling.
+
+On the bigger question: dimension-first is fine as a filing cabinet but useless as a landing experience. I came here to find "the docs for the thing I own." I don't know which dimension my thing lives in. The README needs a flat A–Z solution index and a "I am a [vendor/architect/integrator], start here" router. The taxonomy can stay; the front door has to change.
+
+Stop apologising for sparse dirs in prose. Just don't create the empty branches yet.</div>
+</details>
+
+<details class="adv-executor">
+  <summary>The Executor — "Monday morning, do these five things"</summary>
+  <div>Monday morning, here's what you do. You don't refactor the taxonomy. You fix the five things that actively break navigation, and you do them in this order this week.
+
+Day 1 (2 hours): Delete top-level interoperability/. It's a remnant. foundations/interoperability.md wins. One git mv of any survivors, one git rm -rf, done. Stop debating it.
+
+Day 2 (3 hours): Rename onboarding/onboarding → onboarding/onboarding-service (or whatever the capmap actually says). Grep the repo for inbound links, fix them. Same pass: audit every solution dir for the parent-name duplication smell. Make one rule: solution dir name == solution name from capmap, verbatim.
+
+Day 3 (1 hour): Move capmap.md, MAPPING.md, definition-of-done.md, references.md, and the F&amp;T spec into foundations/. Leave README.md at root. Add redirect stubs at old paths for 30 days if partners have bookmarks.
+
+Day 4: Add a STATUS.md to every dimension dir listing which capmap services are implemented in R3.0 vs. stub vs. not-yet. This is your sparseness problem — it's not a structure problem, it's a discoverability problem. A table fixes it.
+
+Day 5: Rename cross-cutting/ to something concrete based on what's actually in it. If it's three things, make three dirs. "Catch-all" dies by enumeration.
+
+Don't do: BP-first or role-first reorg. You'll burn three sprints, break every external link, and partners who already know "my solution lives under my dimension" will revolt. The dimension-first tree is fine. Foundations as a sibling is fine — BPs and NFRs are cross-cutting context, not capmap nodes, and pretending otherwise is the bigger lie.
+
+Ship the five fixes. Move on.</div>
+</details>
+
+<h2>Peer review highlights</h2>
+
+<details>
+  <summary>Strongest response — unanimous: First Principles (B)</summary>
+  <div>All 5 reviewers picked First Principles as strongest. Reason: it is the only response that names the actual category error — conflating a governance ontology with a filesystem. "You made the index the storage" is the diagnosis the others circle around. Solutions/ as canonical, capmap/BP/NFR as generated views, dissolves every listed tension instead of patching them.</div>
+</details>
+
+<details>
+  <summary>Biggest blind spot — 4 of 5 reviewers: Executor (D)</summary>
+  <div>Executor optimises for shipping this week and dismisses structural reorg as sprint-burn — but Day 4's STATUS.md per dimension is itself an admission that the dimension tree doesn't carry the information readers need. The five fixes are correct; the "don't reorg" conclusion is wrong because the reorg is what makes the fixes durable. D and B are not mutually exclusive — D pretends they are.
+
+One reviewer instead picked Expansionist (E) as biggest blind spot: hand-waves migration cost and partner disruption while proposing the most ambitious reframe. Aspirational without a delivery path.</div>
+</details>
+
+<details>
+  <summary>What ALL advisors missed (consensus across reviewers)</summary>
+  <div>1. Ownership and the write path. None of the five advisors asked who writes into this repo. Without CODEOWNERS, a contribution guide, and a single editor, any structure drifts back to the current state within two releases. Structure follows authorship.
+
+2. Versioning and lifecycle. R3.0 is "partial." How does a partner pin to R3.0 docs while R4.0 lands? A structure that churns per release destroys external links regardless of taxonomy.
+
+3. Governance contractual constraints. Is the EU programme office contractually requiring capmap-shaped artifacts as deliverables? If yes, "make capmap a generated view" must produce capmap-shaped output, not just a different storage layout.
+
+4. Link stability as a hard constraint. The 716kB F&amp;T spec, vendor PRs, external bookmarks all reference current paths. Migration cost is denominated in broken links.</div>
+</details>
+
+<footer>
+  Counciled: Simpl-Open documentation directory structure vs. capability map · 2026-04-26 · 5 advisors (Contrarian, First Principles Thinker, Expansionist, Outsider, Executor) · 5 anonymous peer reviewers · Chairman synthesis · Methodology adapted from Karpathy's LLM Council
+</footer>
+
+</div>
+</body>
+</html>
