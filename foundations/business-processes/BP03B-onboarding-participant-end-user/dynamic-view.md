@@ -1,3 +1,11 @@
+---
+id: bp:BP03B:dynamic-view
+type: dynamic-view
+name: BP03B – Onboarding of a new data space - Participant End-User – Dynamic view
+of: bp:BP03B
+since: r3.0
+---
+
 # BP03B Dynamic View
 
 ## Source

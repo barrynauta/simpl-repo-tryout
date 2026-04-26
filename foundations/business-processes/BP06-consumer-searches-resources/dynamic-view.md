@@ -1,3 +1,11 @@
+---
+id: bp:BP06:dynamic-view
+type: dynamic-view
+name: BP06 – Consumer searches resources in data space catalogues – Dynamic view
+of: bp:BP06
+since: r3.0
+---
+
 # BP06 Dynamic View
 
 ## Source

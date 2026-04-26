@@ -1,3 +1,33 @@
+---
+id: simpl:onboarding-service
+type: solution
+name: Onboarding
+owner:
+  team: team:iaa
+dimension: dim:governance
+capability: cap:participant-management
+business-service: svc:onboarding
+status: built
+release: r3.0
+since: r3.0
+deprecated-in: null
+replaced-by: null
+aliases:
+  - simpl:onboarding
+participates-in:
+  - bp:BP03A
+realises:
+  - cap:participant-management
+covers-nfrs: []
+provenance:
+  source: built
+  upstream: null
+  repos:
+    - code.europa.eu/simpl/simpl-open/development/iaa/onboarding
+    - code.europa.eu/simpl/simpl-open/development/iaa/fe-onboarding
+  licence: EUPL-1.2
+---
+
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

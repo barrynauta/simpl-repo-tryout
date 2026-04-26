@@ -1,3 +1,11 @@
+---
+id: sa:SA03:dynamic-view
+type: dynamic-view
+name: SA03 - Credentials actions by the Governance Authority – Dynamic view
+of: sa:SA03
+since: r3.0
+---
+
 # SA03 Dynamic View
 
 ## Source

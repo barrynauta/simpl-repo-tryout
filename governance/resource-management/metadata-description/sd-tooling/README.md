@@ -1,3 +1,32 @@
+---
+id: simpl:sd-tooling
+type: solution
+name: SD Tooling
+owner:
+  team: team:data1
+dimension: dim:governance
+capability: cap:resource-management
+business-service: svc:metadata-description
+status: built
+release: r3.0
+since: r3.0
+deprecated-in: null
+replaced-by: null
+aliases: []
+participates-in:
+  - bp:BP05B
+realises:
+  - cap:resource-management
+covers-nfrs: []
+provenance:
+  source: built
+  upstream: null
+  repos:
+    - code.europa.eu/simpl/simpl-open/development/data1/sdtooling-api-be
+    - code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-sd-ui
+  licence: EUPL-1.2
+---
+
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

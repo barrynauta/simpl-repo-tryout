@@ -1,3 +1,10 @@
+---
+id: doc:definition-of-done
+type: foundation
+name: Definition of Done
+since: r3.0
+---
+
 # Definition of done — solution documentation
 
 A solution folder is considered **documentation-complete** when all of the following are true:

@@ -1,3 +1,30 @@
+---
+id: simpl:orchestration-platform
+type: solution
+name: Orchestration Platform
+owner:
+  team: team:orchestration
+dimension: dim:data
+capability: cap:supporting-data-services
+business-service: svc:data-orchestration
+status: built
+release: r3.0
+since: r3.0
+deprecated-in: null
+replaced-by: null
+aliases: []
+participates-in: []
+realises:
+  - cap:supporting-data-services
+covers-nfrs: []
+provenance:
+  source: fork
+  upstream: https://github.com/dagster-io/dagster
+  repos:
+    - code.europa.eu/simpl/simpl-open/development/orchestration-platform/dagster
+  licence: Apache-2.0
+---
+
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

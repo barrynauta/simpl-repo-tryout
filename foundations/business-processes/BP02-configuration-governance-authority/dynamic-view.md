@@ -1,3 +1,11 @@
+---
+id: bp:BP02:dynamic-view
+type: dynamic-view
+name: BP02 - Configuration of data space Governance Authority – Dynamic view
+of: bp:BP02
+since: r3.0
+---
+
 # BP02 Dynamic View
 
 ## Source

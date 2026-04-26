@@ -1,3 +1,11 @@
+---
+id: bp:BP08:dynamic-view
+type: dynamic-view
+name: BP08 – Consumer consumes an infrastructure resource from a Provider – Dynamic view
+of: bp:BP08
+since: r3.0
+---
+
 # BP08 Dynamic View
 
 ## Source
