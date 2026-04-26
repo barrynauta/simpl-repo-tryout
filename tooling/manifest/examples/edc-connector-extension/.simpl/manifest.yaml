@@ -1,0 +1,45 @@
+simpl_solution: edc-connector-extension
+schema_version: 1
+version: 1.2.0
+product: simpl-open
+team: edc
+
+capability_map:
+  primary:
+    dimension: integration
+    capability: resource-sharing
+    business_service: resource-sharing-runtime
+  touches:
+    - dimension: integration
+      capability: policy-enforcement
+      business_service: policy-enforcement-point
+    - dimension: integration
+      capability: contract-enforcement
+      business_service: contract-enforcement-service
+
+contract:
+  owner: SC1
+  deliverable: D3.5
+  framework_contract: DIGIT/A3/PR/2023/SIMPL-OPEN
+
+supports_business_processes:
+  - BP07
+  - BP08
+  - BP09A
+  - BP09B
+
+deployed_in_agents:
+  - provider
+  - consumer
+
+licence: Apache-2.0
+repository_url: https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/edc-connector-extension
+
+codeowners:
+  - "* @simpl/edc"
+
+provenance: forked
+upstream_repository: https://github.com/eclipse-edc/Connector
+
+testing:
+  unit_coverage_target: 70

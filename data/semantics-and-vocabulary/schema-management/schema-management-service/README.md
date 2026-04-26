@@ -1,34 +1,3 @@
----
-id: simpl:schema-management-service
-type: solution
-name: Schema Management Service
-owner:
-  team: team:edc
-dimension: dim:data
-capability: cap:semantics-and-vocabulary
-business-service: svc:schema-management
-status: built
-release: r3.0
-since: r3.0
-deprecated-in: null
-replaced-by: null
-aliases: []
-participates-in:
-  - bp:BP02
-  - bp:BP05B
-  - bp:BP06
-realises:
-  - cap:semantics-and-vocabulary
-covers-nfrs: []
-provenance:
-  source: built
-  upstream: null
-  repos:
-    - code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-schema-manager
-    - code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-schema-manager-ui
-  licence: EUPL-1.2
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

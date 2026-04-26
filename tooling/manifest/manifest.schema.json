@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://simpl-programme.ec.europa.eu/schemas/manifest/v1.json",
+  "title": "Simpl solution manifest",
+  "description": "Per-solution manifest declared at .simpl/manifest.yaml. Replaces hand-maintained MAPPING.md with a CI-validated source of truth.",
+  "type": "object",
+  "required": [
+    "simpl_solution",
+    "schema_version",
+    "version",
+    "product",
+    "capability_map",
+    "licence",
+    "repository_url",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "simpl_solution": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+      "description": "Stable kebab-case solution identifier. Matches the documentation-catalogue folder name."
+    },
+    "schema_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Manifest schema version. Lock at 1 for the initial schema."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+      "description": "SemVer 2.0 string."
+    },
+    "product": {
+      "type": "string",
+      "enum": ["simpl-open", "simpl-labs", "simpl-live"],
+      "description": "Simpl product line."
+    },
+    "team": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+      "description": "Observational owner team (kebab-case slug). Authoritative routing lives in codeowners."
+    },
+    "capability_map": {
+      "type": "object",
+      "required": ["primary"],
+      "additionalProperties": false,
+      "properties": {
+        "primary": {
+          "$ref": "#/$defs/capabilityNode"
+        },
+        "touches": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/capabilityNode" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "owner": {
+          "type": "string",
+          "enum": ["PSO", "SC1", "SC2", "SC3", "SC4", "SC5"]
+        },
+        "deliverable": {
+          "type": "string",
+          "pattern": "^D[0-9]+(\\.[0-9]+)*[A-Za-z]?$",
+          "description": "Deliverable identifier, e.g. D3.4 or D5.2a."
+        },
+        "framework_contract": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "supports_business_processes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(BP|SA)[0-9]{2}[A-Z]?$"
+      },
+      "uniqueItems": true,
+      "description": "BPxx and SAxx identifiers (uppercase prefix preserved)."
+    },
+    "deployed_in_agents": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "governance-authority",
+          "provider",
+          "consumer",
+          "application-provider"
+        ]
+      },
+      "uniqueItems": true,
+      "description": "Agent roles into which this solution is deployed. Canonical list owned by the agent-composition design."
+    },
+    "licence": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9.+-]+$",
+      "description": "SPDX licence identifier. EUPL-1.2 default for built solutions; upstream licence preserved for forks."
+    },
+    "repository_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "codeowners": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "GitLab/GitHub-style codeowner specs or team slugs."
+    },
+    "provenance": {
+      "type": "string",
+      "enum": ["built", "forked", "reused"],
+      "description": "Origin of the codebase."
+    },
+    "upstream_repository": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "testing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "unit_coverage_target": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "provenance": { "enum": ["forked", "reused"] }
+        },
+        "required": ["provenance"]
+      },
+      "then": {
+        "required": ["upstream_repository"],
+        "properties": {
+          "upstream_repository": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https?://"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "capabilityNode": {
+      "type": "object",
+      "required": ["dimension", "capability", "business_service"],
+      "additionalProperties": false,
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+          "minLength": 1
+        },
+        "capability": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+          "minLength": 1
+        },
+        "business_service": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

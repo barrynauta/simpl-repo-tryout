@@ -1,34 +1,3 @@
----
-id: simpl:monitoring-service
-type: solution
-name: Monitoring Service
-owner:
-  team: team:monitoring
-dimension: dim:administration
-capability: cap:observability
-business-service: svc:dashboarding
-status: built
-release: r3.0
-since: r3.0
-deprecated-in: null
-replaced-by: null
-aliases: []
-participates-in:
-  - bp:BP12B
-realises:
-  - cap:observability
-covers-nfrs: []
-provenance:
-  source: built
-  upstream: null
-  repos:
-    - code.europa.eu/simpl/simpl-open/development/monitoring/eck-monitoring
-    - code.europa.eu/simpl/simpl-open/development/monitoring/eck-monitoring-operator
-    - code.europa.eu/simpl/simpl-open/development/monitoring/infrastructure-consumption-monitoring-service
-    - code.europa.eu/simpl/simpl-open/development/contract-billing/common_logging
-  licence: EUPL-1.2
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>

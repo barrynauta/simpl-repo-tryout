@@ -1,32 +1,3 @@
----
-id: simpl:wallet
-type: solution
-name: Wallet
-owner:
-  team: team:unassigned
-dimension: dim:security
-capability: cap:credential-management
-business-service: svc:wallet
-status: planned
-release: null
-since: r3.0
-deprecated-in: null
-replaced-by: null
-aliases: []
-participates-in:
-  - bp:BP05B
-  - bp:BP07
-  - bp:BP08
-realises:
-  - cap:credential-management
-covers-nfrs: []
-provenance:
-  source: placeholder
-  upstream: XFSC OCM
-  repos: []
-  licence: Apache-2.0
----
-
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
 <p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>
