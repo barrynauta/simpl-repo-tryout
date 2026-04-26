@@ -1,0 +1,14 @@
+simpl_solution: orchestration-platform
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: orchestration
+capability_map:
+  primary:
+    dimension: data
+    capability: supporting-data-services
+    business_service: data-orchestration
+licence: Apache-2.0
+repository_url: https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/dagster
+upstream_repository: https://github.com/dagster-io/dagster
+provenance: forked

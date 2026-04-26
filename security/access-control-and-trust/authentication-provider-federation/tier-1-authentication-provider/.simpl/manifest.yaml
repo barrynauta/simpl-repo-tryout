@@ -1,0 +1,17 @@
+simpl_solution: tier-1-authentication-provider
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: iaa
+capability_map:
+  primary:
+    dimension: security
+    capability: access-control-and-trust
+    business_service: authentication-provider-federation
+supports_business_processes:
+- BP03A
+- BP03B
+licence: Apache-2.0
+repository_url: https://code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator
+upstream_repository: https://github.com/keycloak/keycloak
+provenance: forked

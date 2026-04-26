@@ -1,0 +1,15 @@
+simpl_solution: notification-service
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: contract-billing
+capability_map:
+  primary:
+    dimension: administration
+    capability: notification-and-messaging
+    business_service: notification
+supports_business_processes:
+- BP03C
+licence: EUPL-1.2
+repository_url: https://code.europa.eu/simpl/simpl-open/development/contract-billing/notification-service
+provenance: built

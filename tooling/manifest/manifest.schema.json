@@ -11,7 +11,6 @@
     "product",
     "capability_map",
     "licence",
-    "repository_url",
     "provenance"
   ],
   "additionalProperties": false,

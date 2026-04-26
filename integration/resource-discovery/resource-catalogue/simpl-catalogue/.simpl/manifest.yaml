@@ -1,0 +1,19 @@
+simpl_solution: simpl-catalogue
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: edc
+capability_map:
+  primary:
+    dimension: integration
+    capability: resource-discovery
+    business_service: resource-catalogue
+supports_business_processes:
+- BP05B
+- BP06
+- BP09A
+- BP09B
+licence: Apache-2.0
+repository_url: https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-fc-service
+upstream_repository: https://gitlab.eclipse.org/eclipse/xfsc/cat
+provenance: forked

@@ -1,0 +1,14 @@
+simpl_solution: schema-synch-service
+schema_version: 1
+version: 0.3.0
+product: simpl-open
+team: edc
+capability_map:
+  primary:
+    dimension: data
+    capability: semantics-and-vocabulary
+    business_service: schema-management
+supports_business_processes:
+- BP05B
+licence: EUPL-1.2
+provenance: built
