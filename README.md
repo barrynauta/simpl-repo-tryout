@@ -6,6 +6,7 @@
 
 ## Table of Contents
 
+- [How to use this documentation](#how-to-use-this-documentation)
 - [What is Simpl](#what-is-simpl)
 - [Business Processes](#business-processes)
 - [Supporting Activities](#supporting-activities)
@@ -14,6 +15,26 @@
 - [How Business Processes, Architecture, and NFRs Relate](#how-business-processes-architecture-and-nfrs-relate)
 - [Foundational Reference](#foundational-reference)
 - [Other Contents](#other-contents)
+
+---
+
+## How to use this documentation
+
+This catalogue is structured to be browsed in three ways depending on what you're looking for. The descriptions below assume the eventual end state where each solution folder contains both its documentation and its code; some links resolve to documentation only today, but the navigation pattern is the same.
+
+### If you are looking for a capability
+
+The catalogue is organised around the Simpl capability map: six dimensions, each containing capabilities, each containing business services, each containing solutions. Start at the [Capability Map](#capability-map) section below or open [foundations/capability-map.md](./foundations/capability-map.md), pick the dimension that matches what you're looking for, and drill down through capability → business service → solution. Each level has its own README explaining what sits at that level and what's underneath.
+
+### If you are following a business process
+
+Business processes describe how Simpl is actually used: who does what, in what order, with what outcome. Start at the [Business Processes](#business-processes) section below or open [foundations/business-processes/README.md](./foundations/business-processes/README.md), pick the BP or SA that matches the operational scenario you care about, read its README for the full overview, and follow the `## Touches` cross-references at the bottom into the solutions that participate in that process.
+
+### If you are working on a specific solution
+
+Each solution has its own folder containing everything related to that solution: documentation, architecture, APIs, and the source code itself once the migration completes. Navigate to the solution's folder via the capability map — or by direct path if you already know it — for example, [simpl-catalogue/](./integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md). Read the solution README for the entry point, then follow its links to the architecture document, the API documentation, the source code repository, and the Notion roadmap entry. The `Provenance:` line in the solution README tells you whether the solution is built by Simpl or reused from an upstream project — useful when working out which licence applies and where to file issues.
+
+Source code is reached *through* the solution folder, not directly; the same is true for APIs, deployment artefacts, and test reports. Everything related to a solution lives under that solution.
 
 ---
 
