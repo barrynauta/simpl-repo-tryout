@@ -7,7 +7,7 @@
 Main sources:
  - [Simpl website](https://simpl-programme.ec.europa.eu/)
  - [https://code.europa.eu/simpl](https://code.europa.eu/simpl)
- - [Functional and Technical Architecture Specifications](https://code.europa.eu/simpl/simpl-open/architecture/-/blob/master/functional_and_technical_architecture_specifications/Functional-and-Technical-Architecture-Specifications.md?ref_type=heads}
+ - [Functional and Technical Architecture Specifications](https://code.europa.eu/simpl/simpl-open/architecture/-/blob/master/functional_and_technical_architecture_specifications/Functional-and-Technical-Architecture-Specifications.md?ref_type=heads)
 
 ## Table of Contents
 
