@@ -282,11 +282,38 @@ Simpl-Open organises its functionality into six dimensions: Administration, Data
 ### Dimensions
 
 - [administration/](./administration/README.md) — platform management and operational services for a Simpl-Open agent node, covering observability and notification and messaging
+  - [observability/](./administration/observability/README.md)
+  - [support/](./administration/support/README.md)
+  - [notification-and-messaging/](./administration/notification-and-messaging/README.md)
 - [data/](./data/README.md) — data-related platform services covering schema and vocabulary governance, data workflow orchestration, and supporting data services
+  - [data-governance/](./data/data-governance/README.md)
+  - [data-processing/](./data/data-processing/README.md)
+  - [supporting-data-services/](./data/supporting-data-services/README.md)
+  - [semantics-and-vocabulary/](./data/semantics-and-vocabulary/README.md)
 - [governance/](./governance/README.md) — governance services covering participant lifecycle management, contract management, policy administration, and resource description management
+  - [consent-management/](./governance/consent-management/README.md)
+  - [contract-management/](./governance/contract-management/README.md)
+  - [policy-management/](./governance/policy-management/README.md)
+  - [audit/](./governance/audit/README.md)
+  - [resource-management/](./governance/resource-management/README.md)
+  - [participant-management/](./governance/participant-management/README.md)
 - [infrastructure/](./infrastructure/README.md) — infrastructure provisioning services enabling consumers to request and access compute, storage, and network resources
+  - [provisioning/](./infrastructure/provisioning/README.md)
+  - [supporting-infrastructure-services/](./infrastructure/supporting-infrastructure-services/README.md)
+  - [hpc/](./infrastructure/hpc/README.md)
 - [integration/](./integration/README.md) — integration services connecting data space participants for resource discovery, catalogue publication, and resource sharing
+  - [data-sharing/](./integration/data-sharing/README.md)
+  - [application-sharing/](./integration/application-sharing/README.md)
+  - [federated-management/](./integration/federated-management/README.md)
+  - [resource-discovery/](./integration/resource-discovery/README.md)
+  - [policy-enforcement/](./integration/policy-enforcement/README.md)
+  - [contract-enforcement/](./integration/contract-enforcement/README.md)
+  - [supporting-integration-services/](./integration/supporting-integration-services/README.md)
+  - [resource-sharing/](./integration/resource-sharing/README.md)
 - [security/](./security/README.md) — identity, authentication, authorisation, and credential management services implementing a two-tier IAA architecture
+  - [credential-management/](./security/credential-management/README.md)
+  - [csirt/](./security/csirt/README.md)
+  - [access-control-and-trust/](./security/access-control-and-trust/README.md)
 
 See [foundations/capability-map.md](./foundations/capability-map.md) for the full L1 + L2 map with all business services.
 
