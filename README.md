@@ -9,6 +9,12 @@ Main sources:
  - [https://code.europa.eu/simpl](https://code.europa.eu/simpl)
  - [Functional and Technical Architecture Specifications](https://code.europa.eu/simpl/simpl-open/architecture/-/blob/master/functional_and_technical_architecture_specifications/Functional-and-Technical-Architecture-Specifications.md?ref_type=heads)
 
+```
+Method:
+- Main document: the functional and technical architecture specification document. 
+- Used the capability map as base, setup a structure <dimension>/<capability>/<service>/<solution>
+- Worked heavily with Claude code to analyse the architecture document and distribute the documentation to the correct location
+```
 ## Table of Contents
 
 - [How to use this documentation](#how-to-use-this-documentation)
