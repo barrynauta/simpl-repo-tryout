@@ -1,10 +1,3 @@
----
-id: doc:capability-map
-type: foundation
-name: Capability map
-since: r3.0
----
-
 Source: `functional-and-technical-architecture-specifications.md`, §2.7 (Capabilities — Level 1), §2.8 (Services — Level 2) including §2.8.1 Deployment model and §2.8.2 Scope covered by Release 3.0.
 
 # Simpl-Open capability map
