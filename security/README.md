@@ -16,3 +16,4 @@ Identity, authentication, authorisation, and credential management services for 
 
 - [Access control and trust](access-control-and-trust/README.md) — identity provider, authentication (Tier 1 and Tier 2), security attribute federation, and authorisation gateways.
 - [Credential management](credential-management/README.md) — cryptographic signing, VC issuance and verification, and secure credential storage (wallet).
+- [CSIRT](csirt/README.md) — coordinated incident detection, response, and threat monitoring. _(Not yet implemented)_

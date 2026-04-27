@@ -14,6 +14,8 @@ Governance services for the Simpl-Open data space, covering participant lifecycl
 
 ## Capabilities
 
+- [Audit](audit/README.md) — immutable evidence and trails supporting compliance and assurance. _(Not yet implemented)_
+- [Consent management](consent-management/README.md) — capture, storage, and enforcement of data subjects' consent preferences. _(Not yet implemented)_
 - [Contract management](contract-management/README.md) — contract establishment, templates, and billing.
 - [Participant management](participant-management/README.md) — onboarding, user and role management, offboarding.
 - [Policy management](policy-management/README.md) — policy administration point; policy templates.

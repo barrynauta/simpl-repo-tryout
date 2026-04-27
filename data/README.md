@@ -14,5 +14,7 @@ Data-related platform services for Simpl-Open, covering schema and vocabulary go
 
 ## Capabilities
 
+- [Data governance](data-governance/README.md) — data lineage, profiling, and quality rules. _(Not yet implemented)_
+- [Data processing](data-processing/README.md) — analytics, visualisation, and anonymisation/pseudonymisation. _(Not yet implemented)_
 - [Semantics and vocabulary](semantics-and-vocabulary/README.md) — schema lifecycle management, vocabulary management, and schema synchronisation across nodes.
 - [Supporting data services](supporting-data-services/README.md) — data workflow orchestration for processing and transforming data assets.

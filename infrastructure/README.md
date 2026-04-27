@@ -14,4 +14,6 @@ Infrastructure provisioning services for the Simpl-Open data space, enabling con
 
 ## Capabilities
 
+- [HPC](hpc/README.md) — execution of high-performance computing workloads for demanding analytical or AI-driven computations. _(Not yet implemented)_
 - [Provisioning](provisioning/README.md) — deployment script management, script execution, and access data sharing for infrastructure resources.
+- [Supporting infrastructure services](supporting-infrastructure-services/README.md) — infrastructure orchestration and distributed management. _(Not yet implemented)_
