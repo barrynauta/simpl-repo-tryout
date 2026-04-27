@@ -16,3 +16,4 @@ Platform management and operational services for a Simpl-Open agent node. Covers
 
 - [Notification and messaging](notification-and-messaging/README.md) — asynchronous notification delivery to data space participants.
 - [Observability](observability/README.md) — logging, dashboarding, alerting, health checking, tracing, and reporting for all node components.
+- [Support](support/README.md) — service desk, support page, and ticketing for participants and operators. _(Not yet implemented)_
