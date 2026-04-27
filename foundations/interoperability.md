@@ -1,10 +1,3 @@
----
-id: doc:interoperability
-type: foundation
-name: Interoperability
-since: r3.0
----
-
 # Interoperability
 
 Technical and semantic interoperability of Simpl-Open with external systems and data space standards.
