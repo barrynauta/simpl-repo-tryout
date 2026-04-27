@@ -13,7 +13,8 @@ Main sources:
 Method:
 - Main document: the functional and technical architecture specification document. 
 - Used the capability map as base, setup a structure <dimension>/<capability>/<service>/<solution>
-- Worked heavily with Claude code to analyse the architecture document and distribute the documentation to the correct location
+- Worked heavily with Claude code to analyse the architecture document
+- Approximately 9 distinct steps to distribute the documentation to the correct location (iterative)
 ```
 ## Table of Contents
 
@@ -31,19 +32,21 @@ Method:
 
 ## How to use this documentation
 
-This catalogue is structured to be browsed in three ways depending on what you're looking for. The descriptions below assume the eventual end state where each solution folder contains both its documentation and its code; some links resolve to documentation only today, but the navigation pattern is the same.
+This repository is structured to be browsed in three ways depending on what you're looking for. The descriptions below assume the eventual end state where each solution folder contains both its documentation and its code; some links resolve to documentation only today, but the navigation pattern is the same.
 
-### If you are looking for a capability
 
-The catalogue is organised around the Simpl capability map: six dimensions, each containing capabilities, each containing business services, each containing solutions. Start at the [Capability Map](#capability-map) section below or open [foundations/capability-map.md](./foundations/capability-map.md), pick the dimension that matches what you're looking for, and drill down through capability → business service → solution. Each level has its own README explaining what sits at that level and what's underneath.
 
 ### If you are following a business process
 
 Business processes describe how Simpl is actually used: who does what, in what order, with what outcome. Start at the [Business Processes](#business-processes) section below or open [foundations/business-processes/README.md](./foundations/business-processes/README.md), pick the BP or SA that matches the operational scenario you care about, read its README for the full overview, and follow the `## Touches` cross-references at the bottom into the solutions that participate in that process.
 
+### If you are looking for a capability
+
+The catalogue is organised around the Simpl capability map: six dimensions, each containing capabilities, each containing business services, each containing solutions. Start at the [Capability Map](#capability-map) section below or open [foundations/capability-map.md](./foundations/capability-map.md), pick the dimension that matches what you're looking for, and drill down through capability → business service → solution. Each level has its own README explaining what sits at that level and what's underneath.
+
 ### If you are working on a specific solution
 
-Each solution has its own folder containing everything related to that solution: documentation, architecture, APIs, and the source code itself once the migration completes. Navigate to the solution's folder via the capability map — or by direct path if you already know it — for example, [simpl-catalogue/](./integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md). Read the solution README for the entry point, then follow its links to the architecture document, the API documentation, the source code repository, and the Notion roadmap entry. The `Provenance:` line in the solution README tells you whether the solution is built by Simpl or reused from an upstream project — useful when working out which licence applies and where to file issues.
+Each solution has its own folder containing everything related to that solution: documentation, architecture, APIs, and the source code itself once the migration completes. Navigate to the solution's folder via the capability map — or by direct path if you already know it — for example, [simpl-catalogue/](./integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md). Read the solution README for the entry point, then follow its links to the architecture document, the API documentation and the source code repository. 
 
 Source code is reached *through* the solution folder, not directly; the same is true for APIs, deployment artefacts, and test reports. Everything related to a solution lives under that solution.
 
@@ -59,13 +62,11 @@ Participants join a data space by deploying a Simpl-Open Agent — a set of inte
 
 Simpl-Open not only enables operation within a single data space but creates interoperability between data spaces. As multiple data spaces incorporate Simpl-Open, they become more connected, allowing services and assets to cross data space boundaries. This cross-space interoperability is one of Simpl-Open's distinguishing architectural goals: it is not a standalone platform but a shared backbone for the emerging European data economy. Simpl-Open aligns with and builds upon adjacent EU and international initiatives including Gaia-X (trust model and self-description standards) and the Data Spaces Support Centre (DSSC) interoperability definitions.
 
-[VERIFY]
-
 ---
 
 ## Business Processes
 
-Business processes describe the operational flows through the Simpl system — the end-to-end sequences of actions that participants, providers, consumers, and governance authorities perform to achieve outcomes such as onboarding, resource sharing, or contract establishment. They are sourced from the public Simpl Requirements site and represent the authoritative behavioural specification of the platform. Each BP and SA folder in this catalogue captures the full hierarchy from the public source, including diagrams and step-level details. The scenario architectures (SA entries) complement the BPs by describing specific deployment or integration patterns that cut across multiple process flows.
+Business processes describe the operational flows through the Simpl system — the end-to-end sequences of actions that participants, providers, consumers, and governance authorities perform to achieve outcomes such as onboarding, resource sharing, or contract establishment. They are sourced from the public Simpl Requirements site and represent the authoritative behavioural specification of the platform. Each BP and SA folder in this catalogue captures the full hierarchy from the public source, including diagrams and step-level details. The supporting activities (SA entries) complement the BPs by describing specific deployment or integration patterns that cut across multiple process flows.
 
 <table>
 <tr>
@@ -373,5 +374,3 @@ Supporting documents that establish the design vocabulary and governing commitme
 - [foundations/interoperability.md](./foundations/interoperability.md) — technical and semantic interoperability index
 
 ---
-
-*The `_planning/` folder contains internal generation state and is not part of the documentation product.*
