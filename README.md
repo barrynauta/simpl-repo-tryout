@@ -336,7 +336,7 @@ Simpl-Open organises its functionality into six dimensions: Administration, Data
   - [supporting-infrastructure-services/](./infrastructure/supporting-infrastructure-services/README.md) (Not yet implemented)
   - [hpc/](./infrastructure/hpc/README.md) (Not yet implemented)
 - [integration/](./integration/README.md) — integration services connecting data space participants for resource discovery, catalogue publication, and resource sharing
-  - [data-sharing/](./integration/data-sharing/README.md) (Not yet implemented)
+  - [data-sharing/](./integration/data-sharing/README.md) (bulk transfer implemented inside the Connector; simple transfer and streaming are roadmap)
   - [application-sharing/](./integration/application-sharing/README.md) (Not yet implemented)
   - [federated-management/](./integration/federated-management/README.md) (Not yet implemented)
   - [resource-discovery/](./integration/resource-discovery/README.md)
