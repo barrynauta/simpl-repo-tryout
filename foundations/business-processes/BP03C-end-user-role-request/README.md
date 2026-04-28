@@ -1,51 +1,68 @@
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
-<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
-<hr/>
-<p>
-📍 <strong>You are here</strong><br/>
+<p>📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP03C — End User Role Request</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP03C — Role Request</strong><br/>
 </p>
 </div>
 
 # BP03C - End-User Role Request
 
-> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
-> showing how this business process executes at runtime, with links
-> to each participating solution.
-
 ## Overview
 
-This Business Process (BP) covers the procedure for requesting roles by End-Users of Simpl-Open.  This BP applies in the following situations: When a federated user logs in for the first time without any assigned roles, the only permitted action will be to request one or more roles When a local user identifies the need to request additional roles If a user is created with pre-assigned roles, or if federation is configured to automatically map organisational roles to Simpl roles, the user will be fully operational without the need to request a role through this BP. It includes the following main steps: Request role:  End-User creates and submits the role request to the Participant's Tier 1 User and Roles Manager Review role request:  Participant's Tier 1 User and Roles Manager reviews the submitted role request
+This business process covers the procedure for requesting roles by End-Users of Simpl-Open. It applies when a federated user logs in for the first time without assigned roles, or when a local user needs additional roles.
+
+## Main Steps
+
+1.  **Request role:** End-User submits a request to the Participant's Tier 1 User and Roles Manager.
+2.  **Review role request:** The Manager reviews and either approves or rejects the request.
 
 ## Actors
 
-The actor involved in this business process is referred to as the Participant, and can correspond to an  End-User  or  Representative  of the: Consumer Provider Governance Authority
+The process involves the **Participant**, which can be an *End-User* or *Representative* of:
+-   **Consumer**
+-   **Provider**
+-   **Governance Authority**
 
-## Assumptions
+## Prerequisites & Assumptions
 
-The following assumptions are made: The  Participant  has installed the Simpl-Open agent, and default users and roles are available for usage.
+### Assumptions
 
-## Prerequisites
+-   The Participant has installed the Simpl-Open agent.
+-   Default users and roles are available.
 
-The following prerequisites must be fulfilled: Governance Authority Agent configured and ready for operations:  The  Governance Authority  has defined the onboarding procedure and identity attributes relevant for the data space (Business Process 2). Participant's User and Roles configured:  The  Participant's Agent  has been configured, Participant's Agent User and Roles module is configured, and Tier 1 users can start logging in to perform operations within the Agent (Business Process 3B)
+### Prerequisites
 
-![BP03C figure 1](./media/BP03C-figure-1.png)
-*BP03C figure 1*
+-   **Governance Authority Agent:** Configured and ready (BP02).
+-   **Participant's User and Roles:** Module configured; Tier 1 users can log in (BP03B).
 
-![BP03C figure 2](./media/BP03C-figure-2.png)
-*BP03C figure 2*
+## Detailed Process Steps
 
-## Sub-processes
+### 1. Trigger Onboarding
 
-- [3C.1 - Access Control - End-Users Role Request](./3C1-access-control-end-users-role-request.md)
+The Participant's End-User logs into Simpl-Open and initiates the individual onboarding request.
+
+### 2. BP03C.01 - Request Role
+
+The End-User fills out a form specifying the requested roles and submits it for review.
+
+### 3. BP03C.02 - Review Role Request
+
+The **Participant's Tier 1 User Roles Manager** reviews the request to ensure:
+-   The role matches declared responsibilities.
+-   The request follows the **principle of least privilege**.
+
+### 4. BP03C.03/04 - Notification
+
+-   **Rejected:** User is notified of the rejection.
+-   **Accepted:** User is notified of approval and the assigned role.
+
+## Outcomes
+
+-   **Success:** Requested roles are assigned to the End-User.
+-   **Failure:** Roles are not assigned due to rejection.
 
 ## Canonical source
 
 [https://simpl-programme.ec.europa.eu/book-page/bp03c-end-user-role-request](https://simpl-programme.ec.europa.eu/book-page/bp03c-end-user-role-request)
-
-## Touches
-
-- (auto-inferred — verify) [`../../../governance/`](../../../governance/README.md)

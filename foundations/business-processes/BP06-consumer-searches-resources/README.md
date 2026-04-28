@@ -1,51 +1,65 @@
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
-<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
-<hr/>
-<p>
-📍 <strong>You are here</strong><br/>
+<p>📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP06 — Consumer Searches Resources</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP06 — Consumer searches resources</strong><br/>
 </p>
 </div>
 
 # BP06 – Consumer searches resources in data space catalogues
 
-> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
-> showing how this business process executes at runtime, with links
-> to each participating solution.
-
-## Overview
-
-This business process covers the situation where a data space Consumer can search resources in the catalogue of one or multiple data spaces. Within the process the Consumer can search for resource descriptions, which can refer to data, application, or infrastructure resources. There are three types of ‘search’ available: quick search, federated search, and advanced search. Quick search: Use one or multiple search terms that are matched against any field in the resource description. Federated search: Perform searches across multiple data spaces simultaneously. Advanced search: Specify values for one or more attributes of the resource description to refine the search results. It includes the following main steps: Search in data space catalogues: The Consumer initiates a search in the data space catalogue using either a quick search, advanced search, or a federated search (searching multiple data space catalogues at once) within the same or another data space. To achieve this, the Consumer inputs the search terms relevant to their intended search. Execute query: The Governance Authority finds resource description matching the provided search terms within the data space's own catalogue or, in case of the federated search, within data space catalogues shared by other data spaces. Access the filtered search results and select one or more resources: The  Governance Authority provides the filtered search results to the participant’s system, showing only the resource description   they are permitted to access. The results of the  search are available to the Consumer , who can access and display the details of selected resource descriptions.
+This business process describes how a data space **Consumer** searches for resources (data, applications, or infrastructure) within the catalogues of one or multiple data spaces.
 
 ## Actors
 
-The following actors are involved: Governance Authority Consumer
-
-## Assumptions
-
-The following assumptions are made: There is a mechanism in place to perform a quality rating of the resources based on its predefined quality rules.
+-   **Consumer:** The participant seeking resources.
+-   **Governance Authority:** The entity managing the catalogue and executing queries.
+-   **End-User:** The specific individual acting on behalf of the Consumer.
 
 ## Prerequisites
 
-The following prerequisites must be met to enable the process to occur: Dataspace is configured:   The  Governance Authority   has configured the catalogue with the corresponding vocabulary and schemas to have the general structure of a resource description, contract clauses, and other vital components (Business Process 2). Consumer onboarded: Before the Consumer can consume any resources to a data space they should have successfully completed the onboarding business process (Business Process 3A). End-User authenticated & authorised: The  End-User is authenticated and has the appropriate role and permissions to perform the steps in the process (Business Process 3B).
+-   **Dataspace Configured:** The Governance Authority has set up the catalogue with appropriate vocabularies and schemas (BP02).
+-   **Consumer Onboarded:** The Consumer has successfully completed the onboarding process (BP03A).
+-   **End-User Authenticated & Authorised:** The End-User has the necessary roles and permissions (BP03B).
 
-![BP06 figure 2](./media/BP06-figure-2.png)
-*BP06 figure 2*
+## Assumptions
 
-## Sub-processes
+-   A mechanism exists to perform quality ratings of resources based on predefined rules.
 
-- [6.1 - A Consumer consults the returned resources of a search request](./61-consumer-consults-returned-resources-search-request.md)
-- [6.2 - Search in data/application/infrastructure catalogue in another federated data space](./62-search-dataapplicationinfrastructure-catalogue-another-federated-data-space.md)
-- [6.3 - A Consumer searches resources in the catalogues of a data space](./63-consumer-searches-resources-catalogues-data-space.md)
-- [6.4 - The Governance Authority provides resource descriptions matching a search request](./64-governance-authority-provides-resource-descriptions-matching-search-request.md)
+## Detailed Steps
+
+### 1. Trigger resource search
+
+The **Consumer** initiates the search process in the data space catalogues.
+
+### 2. BP06.01: Search in data space catalogues
+
+The **Consumer** inputs search terms. Three types of searches are supported:
+-   **Quick search:** Matches terms against any field in the resource description.
+-   **Advanced search:** Refines results using specific attribute values.
+-   **Federated search:** Searches across multiple data space catalogues simultaneously.
+
+### 3. BP06.02: Add access policy filter parameters
+
+The query is automatically decorated with filters based on access policies. This ensures the **Consumer** (and the specific **End-User**) only sees resource descriptions they are permitted to access.
+
+### 4. BP06.03: Execute query
+
+The **Governance Authority** executes the query against its own catalogue or shared catalogues (in the case of federated search) to find matching resource descriptions.
+
+### 5. BP06.04: Conduct a quality rating
+
+The **Governance Authority** performs a quality rating of the matching resources based on predefined quality rules.
+
+### 6. BP06.05: Access filtered search results
+
+The **Governance Authority** provides the filtered results (including quality ratings) to the **Consumer's** system. The **Consumer** can then display and select specific resource descriptions for further review.
+
+## Outcome
+
+-   **Resources selected for review:** The **Consumer** can consult usage contract templates and decide whether to proceed with consuming the resource (BP08, BP09A, BP09B). If a contract is needed but not yet in place, the Consumer and Provider establish one (BP07).
 
 ## Canonical source
 
 [https://simpl-programme.ec.europa.eu/book-page/bp06-consumer-searches-resources-data-space-catalogues](https://simpl-programme.ec.europa.eu/book-page/bp06-consumer-searches-resources-data-space-catalogues)
-
-## Touches
-
-- (auto-inferred — verify) [`../../../governance/`](../../../governance/README.md)

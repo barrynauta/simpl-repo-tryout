@@ -1,54 +1,69 @@
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
-<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
-<hr/>
-<p>
-📍 <strong>You are here</strong><br/>
+<p>📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP03B — Onboarding Participant End User</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP03B — End-User Onboarding</strong><br/>
 </p>
 </div>
 
 # BP03B – Onboarding of a new data space - Participant End-User
 
-> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
-> showing how this business process executes at runtime, with links
-> to each participating solution.
-
 ## Overview
 
-This Business Process covers the configuration of User and Roles module of Simpl-Open. It includes the following main steps: Configure roles:  the Participant's User and Roles Manager manages the roles that should be available in the Participant's Simpl-Open Agent; Configure Identity Provider Federation:  if needed, the Participant's User and Roles Manager configures the federation between an external Identity Provider (an Identity Provider not belonging to Simpl-Open Agent, such as the organisation's private IDP or third-party IDP like eIDAS, EU Login, etc.) and the Simpl-Open Identity Provider; Manage end users:  the Participant's User and Roles Manager manages the users that should be available in Participant's Simpl-Open Agent
+This business process covers the configuration of the **User and Roles** module within **Simpl-Open**. It details how a Participant (Consumer, Provider, or Governance Authority) manages end-users and their access permissions within their Simpl-Open Agent.
+
+## Main Steps
+
+1.  **Configure Roles:** Managing roles available in the Participant's Simpl-Open Agent.
+2.  **Configure Identity Provider Federation:** (Optional) Linking external IDPs (e.g., EU Login, eIDAS, or private corporate IDPs).
+3.  **Manage End Users:** Creating and managing users and assigning them roles.
 
 ## Actors
 
-The actor involved in this business process is referred to as the Participant, and can correspond to a  End-User  or  Representative  of the: Consumer Provider Governance Authority
+-   **Participant:** End-User or Representative of a Consumer, Provider, or Governance Authority.
+-   **Tier 1 User Roles Manager:** The specific role responsible for performing these configurations.
 
-## Assumptions
+## Prerequisites & Assumptions
 
-The following assumptions are made: The Participant has installed the Simpl-Open agent, and default users and roles are available for usage.
+-   **Assumption:** The Simpl-Open agent is installed with default users and roles available.
+-   **Prerequisite 1:** Governance Authority must be configured (BP02).
+-   **Prerequisite 2:** Participant onboarding must be completed (BP03A).
 
-## Prerequisites
+## Detailed Process Steps
 
-The following prerequisites must be fulfilled: Governance Authority configured and ready for operations:  The  Governance Authority has defined the onboarding procedure and identity attributes relevant for the data space (Business Process 2). Participant onboarded:  The Participant  onboarding has been completed, and the Participant  is fully onboarded (Business Process 3A).
+### BP03B.01: Configure Roles
 
-![BP03B figure 1](./media/BP03B-figure-1.png)
-*BP03B figure 1*
+The Tier 1 User Roles Manager configures roles by mapping Identity Attributes to specific user roles.
+-   **Role Creation:** Define new roles.
+-   **Role Update:** Modify attributes of existing roles.
+-   **Role Cancellation:** Delete roles.
 
-![BP03B figure 2](./media/BP03B-figure-2.png)
-*BP03B figure 2*
+### BP03B.02: Configure Identity Provider Federation
 
-## Sub-processes
+Allows users to log in using existing organizational credentials.
+-   **Scope:** Supports external IDPs like eIDAS, EU Login, or private IDPs.
 
-- [3B.1 - Access control - end users to agent](./3B1-access-control-end-users-agent.md)
-- [3B.2 - Access control - roles management](./3B2-access-control-roles-management.md)
-- [3B.3 - Manage users and permissions](./3B3-manage-users-and-permissions.md)
-- [3B.4 - Federated authentication](./3B4-federated-authentication.md)
+### BP03B.03: Manage End User
+
+Management of the actual user accounts within the Agent.
+-   **Account Creation:** New user registration and initial role assignment.
+-   **Account Update:** Modifying user attributes or roles.
+-   **Account Cancellation:** Deleting users.
+
+## High-Level Requirements
+
+| ID | Requirement | Description |
+| :--- | :--- | :--- |
+| **3B.1** | **Access Control - End Users to Agent** | Simpl shall support Role-based Access Control (RBAC). |
+| **3B.2** | **Access Control - Roles Management** | Simpl shall support the management of end users and their associated roles. |
+| **3B.3** | **Manage Users and Permissions** | Simpl shall provide support for the registration and permission management of new participants. |
+| **3B.4** | **Federated Authentication** | Simpl shall support authentication systems from trusted service providers. |
+
+## Outcomes
+
+-   **Configured User and Roles Module:** The Participant's Agent is ready for Tier 1 users to log in and perform operations.
 
 ## Canonical source
 
 [https://simpl-programme.ec.europa.eu/book-page/bp03b-onboarding-new-data-space-participant-end-user](https://simpl-programme.ec.europa.eu/book-page/bp03b-onboarding-new-data-space-participant-end-user)
-
-## Touches
-
-- (auto-inferred — verify) [`../../../governance/`](../../../governance/README.md)

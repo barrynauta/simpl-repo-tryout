@@ -1,102 +1,56 @@
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
-<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
-<hr/>
-<p>
-📍 <strong>You are here</strong><br/>
+<p>📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP03A — Onboarding Participant Providers</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP03A — Participant Onboarding</strong><br/>
 </p>
 </div>
 
-# BP03A – Onboarding of a new data space Participant - Providers (data - application - infrastructure) & Consumers
-
-> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
-> showing how this business process executes at runtime, with links
-> to each participating solution.
+# BP03A – Onboarding of a new data space Participant
 
 ## Overview
 
-This business process covers the onboarding process for a new Applicant . Both Providers and Consumers can apply to a data space and will be referred to as (data space) Applicants from here on.  It includes the following main steps: Prepare & submit onboarding request : The Applicant submits the onboarding requests to the Governance Authority for review. Review onboarding request: The Governance Authority verifies the Applicant ’s onboarding request against a predefined set of criteria and the alignment with the data space objectives. Generate public/private keypair: The Applicant deploys and configures the Simpl-Open agent and uses the agent to generate a public/private key pair to enable encrypted communications and data integrity within the data space. Create & sign security credentials: The Governance Authority creates and signs digital security credentials (e.g., x.509 certificates) that incorporate the Applicant’s public key. These credentials serve as proof of identity and are validated through the issuance of certifications by the Governance Authority . The certifications ensure that the credentials are securely linked to the correct entity. Store & install security credentials: The Applicant  stores and installs the signed identity security credentials in its Simpl-Open Agent.
+This business process defines the requirements and steps for transitioning an "Applicant" (an organization) into a "Participant" within a data space. It covers Data, Application, and Infrastructure Providers as well as Consumers.
+
+## Main Steps
+
+1.  **Prepare & Submit Onboarding Request:**
+    -   The Applicant submits a request to the Governance Authority, including documentation and identity attributes.
+    -   The request specifies roles (Consumer, Provider, or both).
+2.  **Review & Validation:**
+    -   The Governance Authority verifies the request against predefined criteria.
+    -   Automated validation supports document checks and eIDAS attribute verification.
+    -   Manual approval or rejection by the Governance Authority.
+3.  **Agent Deployment & Key Generation:**
+    -   Approved Applicant deploys the **Simpl-Open agent**.
+    -   The Applicant generates a public/private key pair.
+4.  **Security Credentials (X.509):**
+    -   The Governance Authority signs digital security credentials (X.509 certificates) incorporating the Applicant's public key.
+5.  **Finalization:**
+    -   The Applicant installs the signed credentials into their Simpl-Open Agent.
 
 ## Actors
 
-The following actors are involved: Governance Authority Applicant
-
-## Assumptions
-
-The following assumptions are made: Data space Applicants are assumed to be an organisation and not an individual person. The person/people acting on behalf of the Applicant , applying to the data space are assumed to be a member of the Applicant organisation's directory. Data space specifications: The document(s) describing the data space’s objectives, candidature criteria and requirements applicable to an organisation for onboarding are developed and available to a potential A pplicant (e.g., website publication).
+-   **Applicant:** The organization seeking to join the data space.
+-   **Governance Authority (GA):** The entity responsible for overseeing the onboarding process.
 
 ## Prerequisites
 
-The following prerequisites must be fulfilled: Data space is configured:   The   Governance Authority   has defined the onboarding procedure and identity attributes relevant for the data space (Business Process 2).
+-   **Data Space Configuration (BP02):** The GA must have defined onboarding rules, required attributes, and templates.
+-   **Organizational Identity:** Applicants must be recognized organizations.
 
-![BP03A figure 1](./media/BP03A-figure-1.png)
-*BP03A figure 1*
+## High-Level Requirements
 
-![BP03A figure 2](./media/BP03A-figure-2.png)
-*BP03A figure 2*
-
-## Details
-
-### Trigger onboarding of a new data space Participant
-
-The  Participant initiates the preparation and submission of the onboarding request.
-
-### BP03A.01 Prepare & submit onboarding request
-
-The Applicant prepares a comprehensive application to participate to the data space, by gathering the required information based on the documentation made available by the Governance Authority (see prerequisite  1). After the preparation of the onboarding request, the  Applicant   fills in the forms and provides any other documents that may be mandatory (following the rules that are defined by the Governance Authority ) to the Governance Authority  for review.
-
-### BP03A.02 Review onboarding request
-
-After receiving the onboarding request, the Governance Authority starts the review process. It verifies the Applicant ’s onboarding request against a predefined set of criteria and the alignment with the data space objectives (see prerequisite 1). T he review process of the onboarding request can be either manually or automatically done by the Governance Authority . As an outcome of this step: The Governance Authority can approve the onboarding request. If the request is approved, the process continues to the identification of identity attributes in  step BP03A.03 . The Governance Authority reject the onboarding request. If the request is rejected, the process notifies the Applicant  about the rejection in step BP03A.11 . In case deficiencies are found, the Applicant  shall also have the possibility to address them and start over the process from  Step BP3A.01 .
-
-### BP03A.03 Identify identity attributes
-
-As part of the approval process the Governance Authority  identifies the relevant identity attributes of the Applicant  that will be used for authentication of the  Applicant .
-
-### BP03A.04 Agent deployment
-
-If the application is approved, the Applicant   downloads the minimal set of modules from Simpl-Open that are required to have an operative Simpl - Open . The Applicant  then deploys and configures the Simpl-Open modules on the Applicant 's infrastructure to establish the necessary environment for participating within the data space.
-
-### BP03A.05 Generate public/private keypair
-
-The Applicant 's agent generates a public/private key pair to enable encrypted communications and data integrity within the data space. The private key is securely stored in the Simpl-Open agent. The Applicant  shares the public key with the Governance Authority to request signed security credentials.
-
-### BP03A.06 Create & sign security credentials
-
-The Governance Authority creates and signs digital security credentials ( e.g., x.509 certificates) that incorporate the Applicant’s public key. These credentials serve as proof of identity and are validated through the issuance of certifications by the Governance Authority . The certifications ensure that the credentials are securely linked to the correct entity.
-
-### BP03A.07 Provide the security credentials
-
-The Governance Authority provides the signed security credentials to the Applicant . The security credentials are essential to ensure secure operations within the data space.
-
-### BP03A.08 Store & install security credentials
-
-The Applicant  stores and installs the signed identity security credentials in its Simpl-Open Agent.
-
-### BP03A.09 Notification of successful onboarding
-
-The  Applicant is notified that they are now fully onboarded to the data space and from now on are a  Participant.
-
-### BP03A.10 Notify onboarding request rejected
-
-The  Applicant is notified that their onboarding request has been rejected.
-
-## Sub-processes
-
-- [3A.1 - Onboarding of a new data space participant - registration of onboarding request](./3A1-onboarding-new-data-space-participant-registration-onboarding-request.md)
-- [3A.2 - Onboarding of a new data space participant - review of the onboarding request](./3A2-onboarding-new-data-space-participant-review-onboarding-request.md)
-- [3A.3 - Onboarding of a new data space participant - attribute placement during onboarding](./3A3-onboarding-new-data-space-participant-attribute-placement-during-onboarding.md)
-- [3A.4 - Onboarding of a new data space participant - finalizing onboarding](./3A4-onboarding-new-data-space-participant-finalizing-onboarding.md)
+-   **3A.1:** System must support role-based requests and store verification documents.
+-   **3A.2.4:** Support for automated validation (eIDAS, document consistency).
+-   **3A.2.2:** Manual override/review capability for the Governance Authority.
 
 ## Outcomes
 
-Participant onboarded:  The Participant onboarding has been completed and the Participant is fully onboarded. Participant onboarding rejected:  The Participant onboarding has been rejected and cannot join the data space.## Canonical source
+-   **Success:** Applicant becomes a Participant with active credentials.
+-   **Failure:** Request rejected; Applicant notified.
 
-[https://simpl-programme.ec.europa.eu/book-page/3a-onboarding-new-dataspace-participant-providers-data-application-infrastructure](https://simpl-programme.ec.europa.eu/book-page/3a-onboarding-new-dataspace-participant-providers-data-application-infrastructure)
+## Canonical source
 
-## Touches
-
-- (auto-inferred — verify) [`../../../governance/`](../../../governance/README.md)
+[https://simpl-programme.ec.europa.eu/book-page/bp03a-onboarding-new-data-space-participant-providers-data-application-infrastructure-consumers](https://simpl-programme.ec.europa.eu/book-page/bp03a-onboarding-new-data-space-participant-providers-data-application-infrastructure-consumers)
