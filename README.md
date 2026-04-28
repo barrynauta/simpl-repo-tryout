@@ -367,6 +367,7 @@ Supporting documents that establish the design vocabulary and governing commitme
 - [Architectural principles](./foundations/principles.md) — high-level design commitments informing every architecture decision across Simpl-Open, sourced from the functional and technical architecture document.
 - [Architectural patterns](./foundations/architectural-patterns.md) — recurring structural and behavioural design patterns applied across solutions, sourced from the functional and technical architecture document.
 - [Glossary](./foundations/glossary.md) — definitional anchor for Simpl terminology, sourced from the official Simpl programme glossary.
+- [API catalogue](./foundations/api-catalogue.md) — single index of all 42 OpenAPI/AsyncAPI specifications imported from the implementation source, browsable by dimension, by kind, and by tier.
 
 ---
 

@@ -21,3 +21,4 @@ This folder contains foundational artefacts describing what Simpl is and should 
 - [interoperability.md](interoperability.md) - a minimal mapping of standards used in Simpl in the context of interoperability, mostly Semantic and Technical
 - [principles.md](principles.md) - the foundational architectural princinples of Simpl-open.
 - [glossary.md](glossary.md) - the glossary, what is in a name?
+- [api-catalogue.md](api-catalogue.md) — index of all 42 OpenAPI/AsyncAPI specifications imported from the implementation source, organised by dimension, by kind, and by tier
