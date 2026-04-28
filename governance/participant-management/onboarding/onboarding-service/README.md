@@ -17,7 +17,15 @@ Core Governance Authority component that manages participant onboarding requests
 
 Capability-map placement: `governance / participant-management / onboarding / onboarding-service`. This solution implements the **Onboarding** business service.
 
-Provenance: built by Simpl. Source repositories: `iaa/onboarding` (backend) and `iaa/fe-onboarding` (frontend). Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repositories: `iaa/onboarding` (backend, Java 21 / Maven 3.9+) and `iaa/fe-onboarding` (frontend). Licence: EUPL 1.2.
+
+## Key features
+
+- **Onboard new dataspace participants**: applicant fills an onboarding template; the participant's onboarding manager generates a key pair and requests a Certificate Signing Request (CSR) from the Governance Authority; the applicant attaches the CSR to the form and submits.
+- **Approve / reject onboarding requests**: the Governance Authority reviews the request and decides — approval, revision, or rejection. On approval the GA acts as Certification Authority, signs the certificate, and the agent installs it.
+- **Logging and auditing**: every onboarding action is logged for audit purposes.
+- **Notifications**: status-change emails to applicants, agents, and stakeholders (submitted, approved, rejected, ready).
+- Backed by Postgres for state, Helm 3.19 for deployment.
 
 ## Contents
 

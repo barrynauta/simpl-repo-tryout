@@ -13,13 +13,20 @@
 
 # Security Attributes Provider
 
-Deployed in the Governance Authority Agent. Registers and manages participant security identity attributes; invoked by Onboarding on participant approval to associate security identity attributes to the participant; supports ABAC enforcement across agents.
+Source of truth for **identity attributes** in the data space — roles, permissions, and security metadata used for access control and participant classification. Deployed in the Governance Authority Agent. Invoked by [Onboarding](../../../../governance/participant-management/onboarding/onboarding-service/README.md) on participant approval to associate the right attributes with the participant; consumed by other IAA components to drive ABAC enforcement across agents.
 
 Capability-map placement: `security / access-control-and-trust / security-attribute-provider-federation / security-attributes-provider`. This solution implements the **Security attribute provider federation** business service.
 
-Provenance: built by Simpl. Source repositories: `iaa/security-attributes-provider` (backend) and `iaa/fe-security-attribute-provider` (frontend). Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repositories: `iaa/security-attributes-provider` (backend, Java 21 / Maven 3.9+) and `iaa/fe-security-attribute-provider` (frontend). Licence: EUPL 1.2.
 
 Note on naming: the capability in the capmap uses the singular `security-attribute-provider-federation`; the architecture spec and this solution folder use the plural "Security Attributes Provider" (flag d-1 in step 3 checkpoint).
+
+## Key features
+
+- **Manage dataspace-level identity attributes** — roles, permissions, security metadata.
+- **Provide identity attributes** to other IAA components (Tier 2 Authentication Provider, Authorisation gateways) for access-control decisions.
+- **Participant classification** based on assigned identity attributes.
+- Authoritative, consistent identity-attribute data across the Simpl ecosystem.
 
 ## Contents
 

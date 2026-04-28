@@ -17,7 +17,14 @@ Manages the digital signing of self-descriptions and contracts, ensuring their a
 
 Capability-map placement: `security / credential-management / signing / signer-service`. This solution implements the **Signing** business service.
 
-Provenance: built by Simpl on XFSC Organisation Credential Manager. Source repository: `gaia-x-edc/simpl-signer`. Licence: Apache 2.0 (XFSC OCM upstream).
+Provenance: deployment wrapper (Helm + ArgoCD) over the upstream **Eclipse XFSC TSA Signer** (`gitlab.eclipse.org/eclipse/xfsc/tsa/signer`). The Simpl repository (`gaia-x-edc/simpl-signer`) does not fork the source code — it consumes the upstream container images and adds environment-specific deployment configuration. Licence: Apache 2.0 (TSA Signer upstream).
+
+## Key features
+
+- Pre-built container images consumed from the upstream Eclipse XFSC TSA Signer project; no Simpl-side fork of the signing code itself.
+- Helm charts and ArgoCD application manifests for GitOps deployment across SIMPL environments.
+- Integration with **HashiCorp Vault** (via Vault Agent Injector) for secrets management; uses the **ed25519 transit engine** for cryptographic operations.
+- Support for autoscaling, ingress, Istio service mesh, and Prometheus metrics.
 
 ## Contents
 
@@ -31,7 +38,9 @@ Provenance: built by Simpl on XFSC Organisation Credential Manager. Source repos
 
 ## Source code
 
-- `code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer`
+- Simpl deployment wrapper: <https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer>
+- Upstream signer code: <https://gitlab.eclipse.org/eclipse/xfsc/tsa/signer>
+- Container registry: `code.europa.eu:4567/simpl/simpl-open/development/gaia-x-edc/poc-gaia-edc`
 
 ## Roadmap
 

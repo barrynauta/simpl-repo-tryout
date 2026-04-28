@@ -17,3 +17,4 @@ Real-time monitoring dashboards and visualisation for Simpl-Open node components
 ## Solutions
 
 - [Monitoring Service](monitoring-service/README.md) — ECK-based observability stack (log collection, metrics, dashboards, alerting, tracing, reporting).
+- [Infrastructure Consumption Monitoring Service](infrastructure-consumption-monitoring-service/README.md) — scheduled cloud-provider consumption-data extraction (default OVH) published to Kafka for downstream monitoring and billing.

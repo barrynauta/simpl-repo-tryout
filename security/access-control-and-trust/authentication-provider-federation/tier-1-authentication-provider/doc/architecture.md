@@ -42,10 +42,14 @@ Data classification: user identity data; access restricted to Simpl-Open adminis
 
 ## Technical view
 
-- **Users Management** is implemented with Keycloak (open-source identity and access management).
-- **Tier 1 Authentication Provider UI** is implemented as an Angular frontend application.
-- **User Database** is implemented in PostgreSQL.
-- **Authenticator Plugin** is a custom Keycloak SPI (Java) that adds Simpl-specific claims to JWT tokens.
+- **Users Management** — upstream **Keycloak 26.4** (Apache 2.0).
+- **Tier 1 Authentication Provider UI** — Angular frontend (Keycloak admin / user-management UI).
+- **User Database** — PostgreSQL (Keycloak's backing store).
+- **Authenticator Plugin** — custom Keycloak SPI packaged as a JAR (Simpl-built, source `iaa/keycloak-authenticator`, EUPL 1.2). The plugin:
+  - Calls the **Authentication Provider** (Tier 2 backend, API v1) and the **Users & Roles** service (API v1) at authentication time to resolve participant context.
+  - Injects `client-roles`, `participant_id`, `credential_id`, and `identity_attributes` claims into the issued JWT — these claims are the input to RBAC and ABAC enforcement at the gateway layer.
+  - Supports **multi-realm** configuration.
+  - Local development: Docker Compose stack + **Microcks** for mocking the upstream IAA APIs.
 
 Deployment: deployed in both the Governance Authority Agent (for GA user management and applicant onboarding) and in Participant Agents (for participant end-user authentication and role management). Each agent has its own Keycloak instance.
 

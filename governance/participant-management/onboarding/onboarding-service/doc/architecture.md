@@ -11,11 +11,11 @@ Capability-map placement: Governance dimension → Participant management capabi
 **Business process — BP 03A (Onboard a Participant):**
 
 1. **Applicant creates an onboarding request**: requests Tier 1 credentials in the Governance Authority, providing organisation information and data-space role. Credentials are created via Users & Roles / Keycloak. The onboarding component creates the onboarding request with status IN PROGRESS.
-2. **Applicant submits the request**: logs in with temporary credentials, fills the onboarding form, uploads required documents, and submits for review. *(Notification Service integration not yet included in the latest release.)*
+2. **Applicant submits the request**: logs in with temporary credentials, fills the onboarding form, uploads required documents, and submits for review. **Notification Service integration is wired** (per source README): status-change emails fire on `submitted`, `approved`, `rejected`, and `ready` transitions.
 3. **Governance Authority reviews**: the GA representative approves, requests revision (temporary rejection), or rejects permanently. On approval, the onboarding component creates the participant and saves identity attributes in the Security Attributes Provider.
 4. **Applicant creates a keypair**: the applicant representative generates a keypair and stores it in the participant agent.
 5. **Applicant triggers credential creation**: the public key (as a Certificate Signing Request) is sent to the GA; the onboarding component triggers Tier 2 credential creation via the Identity Provider; the applicant downloads the credential.
-6. **Applicant installs credentials**: the generated credential is installed inside the participant agent along with the keypair. The Tier 1 public key is sent to the GA via Tier 2 communication; the GA notifies that onboarding is complete. *(Notification Service integration not yet included.)*
+6. **Applicant installs credentials**: the generated credential is installed inside the participant agent along with the keypair. The Tier 1 public key is sent to the GA via Tier 2 communication; the GA notifies that onboarding is complete (Notification Service email).
 
 **SA 03 — Credential actions by the Governance Authority:**
 Post-onboarding, the Governance Authority manages the credential lifecycle: revoke (permanent), suspend (temporary), reactivate, renew (manual or automatic), and edit identity attributes. These actions are performed via the Identity Provider.
@@ -70,16 +70,17 @@ Data classification: onboarding data contains personal and organisational identi
 - [Identity Provider](../../../../../security/access-control-and-trust/identity-provider/identity-provider/doc/architecture.md) — triggers Tier 2 credential creation after request approval.
 - [Security Attributes Provider](../../../../../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/doc/architecture.md) — fetches available identity attributes and saves approved participant attribute assignments.
 - [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — Tier 1 Gateway routes all inbound traffic to the Onboarding component.
-- [Notification Service](../../../../../administration/notification-and-messaging/notification/notification-service/doc/architecture.md) — intended integration for request submission and credential installation events; not yet included in the latest release.
+- [Notification Service](../../../../../administration/notification-and-messaging/notification/notification-service/doc/architecture.md) — emits status-change emails on the four onboarding transitions (`submitted`, `approved`, `rejected`, `ready`).
 
 ## Technical view
 
-- **Onboarding Manager** is implemented as a Java backend application.
-- **Onboarding UI** is implemented as an Angular frontend application.
-- **Onboarding Database** is implemented in PostgreSQL.
-- **Document Validation Service** is provided by the governance authority and can be implemented in any language; its exposed API must conform to the Document Validation OpenAPI contract.
+- **Onboarding Manager** — Java 21 / Maven 3.9+ Spring Boot application (`iaa/onboarding`).
+- **Onboarding UI** — Angular frontend (`iaa/fe-onboarding`).
+- **Onboarding Database** — PostgreSQL.
+- **Document Validation Service** — provided by the governance authority and may be implemented in any language; its exposed API must conform to the Document Validation OpenAPI contract.
+- **Helm 3.19** for deployment.
 
-Deployment: the Onboarding component is deployed exclusively in the Governance Authority Agent. Participants interact with it via the Tier 1 Gateway; the GA representatives interact via the same UI with Tier 2 authorisation.
+Deployment: the Onboarding component is deployed exclusively in the Governance Authority Agent (see [Governance Authority Agent deployment guide](../../../../../cross-cutting/agents/governance-authority-agent/deployment-guide.md)). Participants interact with it via the Tier 1 Gateway; the GA representatives interact via the same UI with Tier 2 authorisation.
 
 ![TCV Static view — Onboarding Service](./media/image121.jpeg)
 

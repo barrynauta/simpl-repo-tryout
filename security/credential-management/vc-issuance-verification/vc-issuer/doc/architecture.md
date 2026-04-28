@@ -1,4 +1,6 @@
-Source: functional-and-technical-architecture-specifications.md, sections 4.3.1 (ACV Static — Issuer Service), 6.1.2 (TCV Static — Issuer Service).
+Source: FTA spec, §4.3.1 (ACV Static — Issuer Service), §6.1.2 (TCV Static — Issuer Service). PSO mapping spreadsheet: `vc-issuer` is **planned** — no source repository assigned yet.
+
+> **Status: planned — no source repository.** Treat content below as the spec snapshot; nothing is currently deployed against this folder.
 
 # VC Issuer — architecture
 

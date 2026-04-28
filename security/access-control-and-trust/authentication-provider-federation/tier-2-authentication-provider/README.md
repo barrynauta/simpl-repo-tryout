@@ -13,11 +13,19 @@
 
 # Tier 2 Authentication Provider
 
-Manages Tier 2 security credentials (x.509 keypairs) within a participant agent. Validates Tier 2 credentials (ephemeral proof and security credentials) in agent-to-agent communication. Keeps a local copy of the dataspace identity attributes and participant organisation details. Exposes internal APIs for Simpl components to fetch participant and identity attribute information.
+Centralises **Tier 2 authentication** for a Simpl-Open Agent. Manages Tier 2 security credentials (**x.509 keypairs**), validates Tier 2 credentials (ephemeral proof + security credentials) on agent-to-agent traffic, and keeps a local copy of the dataspace identity attributes and participant organisation details so other Simpl components can resolve them without round-tripping to the Governance Authority on every call.
 
 Capability-map placement: `security / access-control-and-trust / authentication-provider-federation / tier-2-authentication-provider`. This solution and `tier-1-authentication-provider` together implement the **Authentication provider federation** business service (flag d-2 in step 3 checkpoint).
 
-Provenance: built by Simpl. Source repositories: `iaa/authentication_provider` (backend) and `iaa/fe-authentication-provider` (frontend). Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repositories: `iaa/authentication_provider` (backend, Java 21 / Maven 3.9+) and `iaa/fe-authentication-provider` (frontend). Licence: EUPL 1.2.
+
+## Key features
+
+- **Manages x.509 keypair lifecycle** for the local agent (issuance, rotation, revocation).
+- **Validates incoming Tier 2 credentials** in agent-to-agent communication — ephemeral-proof challenge plus the security credential carried in the request.
+- **Local cache** of dataspace identity attributes and participant organisation metadata, refreshed against the Governance Authority's [Security Attributes Provider](../../security-attribute-provider-federation/security-attributes-provider/README.md).
+- **Internal APIs** exposed to other Simpl components on the same agent so they can fetch participant info and attribute data.
+- Helm 3.19 deployment.
 
 ## Contents
 
@@ -26,8 +34,8 @@ Provenance: built by Simpl. Source repositories: `iaa/authentication_provider` (
 
 ## Source code
 
-- Backend: `code.europa.eu/simpl/simpl-open/development/iaa/authentication_provider`
-- Frontend: `code.europa.eu/simpl/simpl-open/development/iaa/fe-authentication-provider`
+- Backend: <https://code.europa.eu/simpl/simpl-open/development/iaa/authentication_provider>
+- Frontend: <https://code.europa.eu/simpl/simpl-open/development/iaa/fe-authentication-provider>
 
 ## Roadmap
 

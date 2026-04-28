@@ -1,61 +1,70 @@
-Source: functional-and-technical-architecture-specifications.md, sections 4.3.1 (ACV Static — Schema Synch Service), 6.1.2 (TCV Static — Schema Management Service, Schema Synch Service).
+Source: source repo `data1/schema-sync-adapter` (README.md). FTA spec, §4.3.1 (ACV Static — Schema Synch Service), §6.1.2 (TCV Static — Schema Management Service, Schema Synch Service).
 
 # Schema Synch Service — architecture
 
 ## Business view
 
-The Schema Synch Service ensures that Provider Nodes and other dependent components always have access to the most current schema standards produced by the Schema Management Service. It subscribes to schema lifecycle events from the SMS and propagates updated schemas to local node storage (NFS), where they are available to SD Tooling and the Catalogue Client Application for self-description creation and advanced search field generation.
+The Schema Synch Service keeps Provider and Consumer agents aligned with the schemas published by the [Schema Management Service](../../schema-management-service/doc/architecture.md). It subscribes to lifecycle events from the SMS and mirrors the published schema set into a **shared persistent volume** local to each agent, in **Turtle (TTL)** format. Dependent components — SD Tooling, the Catalogue Client Application, and the Validation Backend — read from the local volume rather than calling the SMS API on every operation, which keeps the SMS off the hot path of normal agent operations and lets dependent components keep working briefly even if the SMS is unreachable.
 
 Capability-map placement: Data dimension → Semantics and vocabulary capability → Schema management business service.
+
+**Business processes supported:**
+- [BP05B Provider manages resource descriptions](../../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/README.md) — providers create self-descriptions against locally cached SHACL constraints.
 
 ![ACV Static view — Schema Synch Service](./media/image54.png)
 ![TCV Dynamic — Schema Synchronization flow](./media/image148.png)
 
 ## Data view
 
-The Schema Synch Service receives schema updates from the SMS and stores them in NFS (Network File System) storage on the Provider Node. This local schema cache is consumed by SD Tooling (for self-description creation) and the Catalogue Client Application (for advanced search field generation).
+Local cache on each agent: a **shared persistent volume** holding the published schemas as **TTL** files. Two operations on the cache:
+
+- **Initial full sync** at service startup — the adapter pulls every currently published schema from the SMS Resolver Interface and writes the TTL content into the volume.
+- **Incremental update** on each lifecycle event — `SchemaPublished` adds (or replaces, for new versions) a TTL file; `SchemaRevoked` removes it.
+
+The volume's contents are an exact mirror of the SMS's published set as of the last processed event; downstream components can therefore treat it as an authoritative local source of truth.
 
 ## Application view
 
 ### Internal decomposition
 
-**Schema Synch Adapter API:**
-- Receives notifications from the Schema Management Service when a schema is published, versioned, or revoked.
-- Acts as the entry point for SMS-pushed schema lifecycle events.
+The service is a single Java/Spring component in source — `data1/schema-sync-adapter`. Internally:
 
-**Schema Synch Adapter:**
-- Retrieves schema updates from the Schema Management Service upon notification.
-- Processes and stores the retrieved schemas in NFS storage on the node, making them available for dependent components.
+- **Initial-sync routine** — runs once at startup. Calls the SMS Resolver Interface (`GET /schemas/...`) for each published schema and writes the TTL to the volume.
+- **Event-subscription registration** — registers a webhook endpoint with the SMS so that subsequent `SchemaPublished` and `SchemaRevoked` events are pushed to it in real time.
+- **Webhook receiver (Schema Synch Adapter API)** — receives lifecycle events from the SMS.
+- **Sync engine** — on each event, fetches the schema TTL (publish) or deletes the local file (revoke), with logging and audit on every step.
 
 ### Key integrations
 
-- [Schema Management Service](../../schema-management-service/doc/architecture.md) — source of schema lifecycle events and schema content; the Schema Synch Service subscribes to SchemaPublished and SchemaRevoked events from the SMS.
-- [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — consumes the locally cached schemas (SHACL constraints and ontologies) for self-description creation and validation.
-- [Catalogue Client Application](../../../../../integration/resource-discovery/search-engine/catalogue-client-application/doc/architecture.md) — uses the local schema cache to define and validate search field parameters for advanced search.
+- [Schema Management Service](../../schema-management-service/doc/architecture.md) — source of schema content and lifecycle events; the Synch Service is one of its event subscribers.
+- [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — reads SHACL constraints from the local volume during self-description creation/validation.
+- [Catalogue Client Application](../../../../../integration/resource-discovery/search-engine/catalogue-client-application/doc/architecture.md) — reads the local cache to populate advanced-search fields.
+- [Validation Backend](../../../../../integration/resource-discovery/search-engine/validation-backend/README.md) — reads the local cache to validate self-descriptions against the active SHACL.
 
 ## Technical view
 
-The Schema Synch Service is described in the TCV as part of the Schema Management Service technical section:
-- **Schema Synch Adapter API** — receives schema lifecycle notifications from the SMS.
-- **Schema Synch Adapter** — retrieves and processes schema updates, stores them in NFS.
-
-Deployment: deployed in Provider Nodes and Consumer Nodes as a sidecar or co-deployed service alongside SD Tooling and the Catalogue Client Application.
+- **Source repo**: `data1/schema-sync-adapter` (Java / Spring Boot).
+- **Storage**: shared persistent volume mounted into each consuming pod (NFS or equivalent CSI-backed volume in Kubernetes).
+- **Format**: TTL files, one per schema version, named after the version's dereferenceable URI.
+- **Deployment**: typically a sidecar or co-deployed service on each Provider and Consumer Agent; the volume is mounted into SD Tooling, Catalogue Client, and Validation Backend pods.
 
 ![TCV Static view — Schema Management / Schema Synch Service](./media/image144.png)
 
 ## Security view
 
-- The Schema Synch Adapter API endpoint receives events from the SMS; only the SMS is authorised to push notifications.
-- Schemas stored in NFS are read-only from the perspective of dependent components (SD Tooling, Catalogue Client Application) — modifications are only possible via the SMS Management API.
+- The webhook endpoint authenticates inbound events to ensure only the SMS can push notifications (typically via a shared secret or an mTLS client cert held by the SMS).
+- The persistent volume is **read-only** from the perspective of consumers; only the Synch Service has write access. This prevents a compromised consumer from poisoning the local schema cache.
+- The Synch Service has **no public ingress** — it only consumes events from the SMS and reads from the SMS Resolver Interface. There are no externally-callable endpoints for state mutation.
+- **Audit trail** — every sync operation is logged with the event type, schema URI, timestamp, and outcome.
 
-Threat model: Status: not yet documented.
+Threat model: not yet documented.
 
-Secrets management: Status: not yet documented.
+Secrets management: webhook authentication credentials and SMS Resolver client credentials — stored in the agent's Vault.
 
 ## Testing
 
-Strategy: Status: not yet documented.
+Strategy: integration tests pair a fake SMS (mock Resolver + webhook caller) with the adapter against a tmpfs volume to verify both the initial-sync and event-driven flows. CI/CD runs unit tests, SAST (SonarQube), and security tests (Fortify).
 
-PSO validation status: Status: not yet documented.
+PSO validation status: not yet documented.
 
-Requirements traceability: Status: not yet documented.
+Requirements traceability: not yet documented.

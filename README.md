@@ -308,7 +308,8 @@ Simpl-Open organises its functionality into six dimensions: Administration, Data
   - [notification-and-messaging/](./administration/notification-and-messaging/README.md)
 - [data/](./data/README.md) — data-related platform services covering schema and vocabulary governance, data workflow orchestration, and supporting data services
   - [data-governance/](./data/data-governance/README.md) (Not yet implemented)
-  - [data-processing/](./data/data-processing/README.md) (Not yet implemented)
+  - [data-processing/](./data/data-processing/README.md)
+    - [anonymisation-and-pseudonymisation/](./data/data-processing/anonymisation-and-pseudonymisation/README.md)
   - [supporting-data-services/](./data/supporting-data-services/README.md)
   - [semantics-and-vocabulary/](./data/semantics-and-vocabulary/README.md)
 - [governance/](./governance/README.md) — governance services covering participant lifecycle management, contract management, policy administration, and resource description management
@@ -359,6 +360,11 @@ Supporting documents that establish the design vocabulary and governing commitme
 ## Other Contents
 
 - [cross-cutting/](./cross-cutting/README.md) — components that don't map to a single capability
+  - [agents/](./cross-cutting/agents/README.md) — actor-specific master Helm charts (Consumer, Data Provider, Governance Authority, etc.)
+  - [tests/](./cross-cutting/tests/README.md) — IAA API and UI test suites
+  - [utils/](./cross-cutting/utils/README.md) — operational utilities (EJBCA preconfig, IAA CLI, SD-Schemas generator)
+  - [libs/](./cross-cutting/libs/README.md) — shared Java/Python/Vue libraries
+  - [samples/](./cross-cutting/samples/README.md) — eIDAS demo node, echo service, microfrontend skeleton
 - [foundations/interoperability.md](./foundations/interoperability.md) — technical and semantic interoperability index
 
 ---

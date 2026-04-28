@@ -65,21 +65,30 @@ The SMS uses Apache Jena Fuseki with a TDB2 backend (SPARQL-compliant RDF triple
 
 ## Technical view
 
-- **Schema Management Backend** — implements Schema Management, Schema Subscription API, Schema Management Backend API.
-- **Schema Management UI** — frontend for Governance Authority users.
+- **Schema Management Backend** (`gaia-x-edc/simpl-schema-manager`) — implements Schema Management, Schema Subscription API, Schema Management Backend API. Java service exposing the OpenAPI spec at `openapi/schema_openapi.yaml`. Schemas exchanged in **Turtle (TTL)** format.
+- **Schema Management UI** (`gaia-x-edc/simpl-schema-manager-ui`) — **Vue 3** frontend for Governance Authority users. File-based routing from `src/pages/`.
 - **Data store** — Apache Jena Fuseki with TDB2 backend (standards-compliant RDF triple store with SPARQL support).
+- **Authentication** — UI uses Keycloak with the **OAuth 2.0 PKCE flow** and automatic token refresh. Runtime config injected via `env-config.js` (read into `window._env_`):
 
-Deployment: deployed in Governance Authority Agents.
+  | Variable | Purpose |
+  |----------|---------|
+  | `PUBLIC_AUTH_KEYCLOAK_SERVER_URL` | Keycloak base URL |
+  | `PUBLIC_AUTH_KEYCLOAK_REALM` | Realm (e.g. `participant`) |
+  | `PUBLIC_AUTH_KEYCLOAK_CLIENT_ID` | OAuth client ID (e.g. `frontend-cli`) |
+  | `PUBLIC_SCHEMA_MANAGER_API_URL` | Backend API base URL (no trailing slash) |
+
+Deployment: Helm charts ship in `charts/` for both backend and UI. Deployed inside Governance Authority Agents — see [Governance Authority Agent deployment guide](../../../../../cross-cutting/agents/governance-authority-agent/deployment-guide.md).
 
 ![TCV Static view — Schema Management Service](./media/image53.png)
 
 ## Security view
 
-- The Management API is private and authenticated; only Governance Authority administrators can create schema versions or change lifecycle status.
+- The Management API is private and authenticated (Keycloak Tier-1 token); only Governance Authority administrators can create schema versions or change lifecycle status.
 - The Resolver Interface is public and read-only; no authentication required for schema content retrieval.
 - Data segregation across five datasets provides the highest level of data isolation — the Catalogue Service has no ability to modify schema content or metadata.
 - Schema versioning with immutability guarantees provenance and auditability: each published schema version is traceable to its submitter and timestamp.
 - Lifecycle status (PUBLISHED/REVOKED) ensures that only approved schemas can be used for new resource validation.
+- **SHACL validation** runs server-side and surfaces detailed, human-readable error messages back to the UI, preventing malformed schemas from being persisted.
 
 Threat model: Status: not yet documented.
 

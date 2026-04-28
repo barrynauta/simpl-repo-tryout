@@ -35,22 +35,27 @@ Data model diagrams:
 ### Internal decomposition
 
 - **Contract Manager Orchestrator** — Java backend; orchestrates the contract establishment workflow, coordinates with VC Issuer, Signer, and Wallet via asynchronous messages.
-- **Contract Manager Backend** — Java backend; handles contract persistence, billing record storage, and exposes the contract API.
+- **Contract Manager Backend** — Java backend; handles contract persistence, billing record storage, exposes the contract API, and implements **resource-usage reporting and enforcement** — including the trigger for contract closure and resource decommissioning when usage thresholds or contract end-conditions are met (per source README).
 - **Message Broker** (Kafka) — facilitates asynchronous interactions between the Orchestrator and the Backend.
+
+> **Implementation note (PSO mapping):** the Orchestrator and Backend are listed as separate app-services (`contract-manager-orchestrator`, `contract-manager-backend`) but currently share a single source repo (`contract-billing/contract`). The split is planned; until it lands, the two pieces deploy as a single Helm chart with two main classes.
 
 ### Key integrations
 
-- [Connector](../../../../../integration/resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — the Connector drives DSP contract negotiation; the Contract Manager handles the Simpl-specific contract issuance after DSP negotiation completes.
+- [Connector](../../../../../integration/resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — the Connector drives DSP contract negotiation; the Contract Manager handles the Simpl-specific contract issuance after DSP negotiation completes. Where applicable, communicates over the [EDC Connector Adapter](../../../../../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md).
 - [VC Issuer](../../../../../security/credential-management/vc-issuance-verification/vc-issuer/doc/architecture.md) — issues W3C verifiable credentials for usage contracts.
 - [Signer Service](../../../../../security/credential-management/signing/signer-service/doc/architecture.md) — signs contracts with the provider's private key.
 - [Wallet](../../../../../security/credential-management/wallet/wallet/doc/architecture.md) — stores signed verifiable credentials.
 - [Contract Template Datastore](../../contract-template-datastore/doc/architecture.md) — provides contract templates used as blueprints during negotiation.
+- [Notification Service](../../../../../administration/notification-and-messaging/notification/notification-service/doc/architecture.md) — emits contract-lifecycle notifications (e.g., contract closed, decommissioning triggered).
+- [Monitoring Service](../../../../../administration/observability/dashboarding/monitoring-service/doc/architecture.md) — provides usage-monitoring inputs that feed the Backend's resource-usage enforcement decisions.
 
 ## Technical view
 
-- **Contract Manager Backend** is implemented as a Java backend application. Its API interface is implemented as a Kafka consumer (JSON/Kafka).
-- **Contract Manager Orchestrator** is implemented as a Java backend application. Its API interface is implemented as a Kafka consumer (JSON/Kafka).
-- **Message Broker** is implemented with Kafka.
+- **Contract Manager Backend** — Java 21 / Maven 3.9+, Spring Boot. Kafka consumer/producer (JSON), PostgreSQL for persistence, HashiCorp Vault for secrets.
+- **Contract Manager Orchestrator** — same toolchain; Kafka-driven async coordination with the Backend.
+- **Message Broker** — Apache Kafka.
+- **Connectivity prerequisites** (per source): Kafka cluster, EDC Consumer/Provider Connector, Security Vault, PostgreSQL.
 
 Deployment: deployed in Participant Agents (Data Provider and Consumer agents). Each participant runs its own Contract Manager instance.
 

@@ -17,3 +17,4 @@ Execution and management of data workflows, enabling providers and consumers to 
 ## Solutions
 
 - [Orchestration Platform](orchestration-platform/README.md) — Dagster-based workflow orchestration engine with CI/CD, version control, and Simpl-Open catalogue integration.
+- [Asset Orchestrator](asset-orchestrator/README.md) — bridge service between the Provider Connector and the Workflow Engine; binds catalogue assets to workflow definitions and tracks execution.

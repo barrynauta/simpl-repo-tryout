@@ -17,7 +17,15 @@ Interface component in front of the Tier 1 Authentication Provider for managing 
 
 Capability-map placement: `governance / participant-management / user-roles / users-roles`. This solution implements the **User-roles** business service.
 
-Provenance: built by Simpl. Source repositories: `iaa/users-roles` (backend) and `iaa/fe-users-and-roles` (frontend). Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repositories: `iaa/users-roles` (backend, Java 21 / Maven 3.9+) and `iaa/fe-users-and-roles` (frontend). Licence: EUPL 1.2.
+
+## Key features
+
+- **Lifecycle management** for users, roles, and role-requests: create, update, search/filter/paginate.
+- **Role-request workflow** for end-users to request a new role within a participant.
+- **Identity-attribute mapping**: manage assignable identity attributes associated with each role.
+- **User-role assignment**: track which users carry which roles, and apply attribute-based propagation.
+- Java 21 + Spring stack; Helm 3.19 for deployment; Postgres for persistence.
 
 ## Contents
 

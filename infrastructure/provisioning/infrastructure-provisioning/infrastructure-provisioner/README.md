@@ -13,11 +13,20 @@
 
 # Infrastructure Provisioner
 
-Manages, validates, and executes Crossplane/OpenTofu deployment scripts to provision compute, storage, and network resources for data space consumers. Comprises a Triggering Module (script management, execution, access sharing) and an Infrastructure Provisioner (ArgoCD + Crossplane). Interactions are asynchronous via Kafka.
+Executes Crossplane / OpenTofu / Terraform deployment scripts to provision compute, storage, and network resources for data-space consumers. Receives provisioning jobs over Kafka from the [Triggering Module](../triggering-module/README.md) and applies them through ArgoCD + Crossplane on the target Kubernetes cluster.
 
-Capability-map placement: `infrastructure / provisioning / infrastructure-provisioning / infrastructure-provisioner`. This solution implements the **Infrastructure provisioning** business service.
+Capability-map placement: `infrastructure / provisioning / infrastructure-provisioning / infrastructure-provisioner`. Sits alongside the [Triggering Module](../triggering-module/README.md) and the [Deployment Script & Template Management](../deployment-script-and-template-management/README.md) solutions within the same business service.
 
-Provenance: built by Simpl. Source repositories: `infrastructure/infrastructure-crossplane` (primary) and `infrastructure/infrastructure-be` (planned split per Notion). Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repository: `infrastructure/infrastructure-crossplane`. Licence: EUPL 1.2.
+
+Note: the consolidated `infrastructure/infrastructure-be` repository (referenced in earlier mapping versions) covers the **Triggering Module** and **Deployment Script & Template Management** roles, not the executor — that lives in `infrastructure-crossplane`. The PSO mapping flags `infrastructure-be` as a single Java project to be split into 2.
+
+## Key features
+
+- Consumes provisioning jobs from Kafka (produced by the Triggering Module).
+- Applies Crossplane manifests via ArgoCD on the target cluster, with rollout progress reported back over Kafka.
+- Supports OpenTofu and Terraform script formats alongside Crossplane primitives.
+- Reports provisioning success/failure events back to the Triggering Module for state reconciliation.
 
 ## Contents
 
