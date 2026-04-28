@@ -1,0 +1,1246 @@
+openapi: 3.0.1
+info:
+  title: Onboarding Tier 1
+  description: Tier 1 APIs for managing Onboarding of applicants to Simpl-Open
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: 2.0.1
+servers:
+- url: https://localhost:8082/tier1/v2
+  description: onboarding
+security:
+- oauth2ClientCredentials: []
+tags:
+- name: Onboarding Requests Management
+  description: Manage onboarding requests for applicant who want to join the data
+    space
+- name: Onboarding Users
+  description: Retrieve information about logged in user for application purposes
+paths:
+  /onboardingRequests:
+    post:
+      tags:
+      - Onboarding Requests Management
+      summary: Create Onboarding Request
+      description: |
+        Creates a new onboarding request, only one onboarding request per applicant is allowed. Applicant and organization information are not mandatory as long as they are already part  of the registered user identity (see user/onboardingData).
+      operationId: createOnboardingRequest
+      requestBody:
+        description: The onboarding request to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOnboardingRequest"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  applicant:
+                    firstName: Aliza
+                    lastName: Clay
+                    email: aliza.clay@example.com
+                  participantType:
+                    id: 195473bc-1d9c-427c-8f73-1c5bf3d9777a
+                  organization: Organization Name
+        required: true
+      responses:
+        "201":
+          description: Onboarding request created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OnboardingRequestResponse"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    comments:
+                    - author: Aliza Clay
+                      creationTimestamp: 2024-12-16T17:31:27Z
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      content: Aliza Clay
+                      updateTimestamp: 2024-12-16T17:31:27Z
+                    - author: Aliza Clay
+                      creationTimestamp: 2024-12-16T17:31:27Z
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      content: Aliza Clay
+                      updateTimestamp: 2024-12-16T17:31:27Z
+                    expirationTimeframe: 80
+                    documents:
+                    - filename: driving-license.pdf
+                      hasContent: true
+                      creationTimestamp: 2024-12-16T17:31:27Z
+                      description: Driving license
+                      id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+                      mimeType:
+                        description: PDF document
+                        id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+                        value: application/pdf
+                      filesize: 40211
+                      ruleExecutions:
+                      - executionEnd: 2024-12-16T17:31:27Z
+                        ruleType: DOCUMENT_CONTENT_CHECK
+                        name: Document expiration date
+                        description: Checks the expiration date of the driving license
+                        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        executionStart: 2024-12-16T17:31:27Z
+                        remarks:
+                        - code: REMARK_CODE
+                          ruleName: Document expiration date
+                          message: Remark message
+                        status: IN_PROGRESS
+                      - executionEnd: 2024-12-16T17:31:27Z
+                        ruleType: DOCUMENT_CONTENT_CHECK
+                        name: Document expiration date
+                        description: Checks the expiration date of the driving license
+                        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        executionStart: 2024-12-16T17:31:27Z
+                        remarks:
+                        - code: REMARK_CODE
+                          ruleName: Document expiration date
+                          message: Remark message
+                        status: IN_PROGRESS
+                      documentTemplate:
+                        name: Driving license
+                        creationTimestamp: 2024-12-16T17:31:27Z
+                        description: The applicant user's driving license
+                        id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+                        mimeType:
+                          description: PDF document
+                          id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+                          value: application/pdf
+                        mandatory: true
+                        updateTimestamp: 2024-12-16T17:31:27Z
+                      mandatory: true
+                      content: content
+                      updateTimestamp: 2024-12-16T17:31:27Z
+                    - filename: driving-license.pdf
+                      hasContent: true
+                      creationTimestamp: 2024-12-16T17:31:27Z
+                      description: Driving license
+                      id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+                      mimeType:
+                        description: PDF document
+                        id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+                        value: application/pdf
+                      filesize: 40211
+                      ruleExecutions:
+                      - executionEnd: 2024-12-16T17:31:27Z
+                        ruleType: DOCUMENT_CONTENT_CHECK
+                        name: Document expiration date
+                        description: Checks the expiration date of the driving license
+                        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        executionStart: 2024-12-16T17:31:27Z
+                        remarks:
+                        - code: REMARK_CODE
+                          ruleName: Document expiration date
+                          message: Remark message
+                        status: IN_PROGRESS
+                      - executionEnd: 2024-12-16T17:31:27Z
+                        ruleType: DOCUMENT_CONTENT_CHECK
+                        name: Document expiration date
+                        description: Checks the expiration date of the driving license
+                        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        executionStart: 2024-12-16T17:31:27Z
+                        remarks:
+                        - code: REMARK_CODE
+                          ruleName: Document expiration date
+                          message: Remark message
+                        status: IN_PROGRESS
+                      documentTemplate:
+                        name: Driving license
+                        creationTimestamp: 2024-12-16T17:31:27Z
+                        description: The applicant user's driving license
+                        id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+                        mimeType:
+                          description: PDF document
+                          id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+                          value: application/pdf
+                        mandatory: true
+                        updateTimestamp: 2024-12-16T17:31:27Z
+                      mandatory: true
+                      content: content
+                      updateTimestamp: 2024-12-16T17:31:27Z
+                    expirationTimeframeTimeUnit: HOUR
+                    participantType:
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      label: Consumer
+                      value: CONSUMER
+                    lastStatusUpdateTimestamp: 2024-12-16T17:31:27Z
+                    rejectionCause: rejectionCause
+                    identityAttributes:
+                    - code: DATA_CONSUMER
+                    - code: DATA_CONSUMER
+                    updateTimestamp: 2024-12-16T17:31:27Z
+                    applicant:
+                      firstName: Aliza
+                      lastName: Clay
+                      email: aliza.clay@example.com
+                    participantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    organization: organization
+                    creationTimestamp: 2024-12-16T17:31:27Z
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    status:
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      label: In Progress
+                      value: IN_PROGRESS
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - APPLICANT
+  /user:
+    get:
+      tags:
+      - User Session
+      summary: Fetch user session data for a logged in user
+      description: Retrieves user data. Invoked by a user who wants to know its basic
+        user information
+      operationId: getUserSessionData
+      responses:
+        "200":
+          description: Successfully retrieved user data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSessionData"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    username: aliza.clay
+                    firstName: Aliza
+                    lastName: Clay
+                    email: aliza.clay@example.com
+                    authProvider: SIMPL_AUTH
+                    roles:
+                    - SD_PUBLISHER
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - APPLICANT
+components:
+  schemas:
+    CreateOnboardingRequest:
+      allOf:
+      - type: object
+        properties:
+          participantType:
+            $ref: "#/components/schemas/ParticipantType"
+          applicant:
+            $ref: "#/components/schemas/Applicant"
+      - type: object
+        properties:
+          organization:
+            type: string
+            description: Name of the organization the applicant is representing
+            example: Organization Name
+            maxLength: 255
+        required:
+        - organization
+        - participantType
+      example:
+        applicant:
+          firstName: Aliza
+          lastName: Clay
+          email: aliza.clay@example.com
+        participantType:
+          id: 195473bc-1d9c-427c-8f73-1c5bf3d9777a
+        organization: Organization Name
+    OnboardingRequestResponse:
+      allOf:
+      - $ref: "#/components/schemas/OnboardingRequest"
+      - type: object
+        required:
+        - applicant
+        - comments
+        - documents
+        - expirationTimeframe
+        - expirationTimeframeTimeUnit
+        - id
+        - organization
+        - participantType
+        - status
+      example:
+        comments:
+        - author: Aliza Clay
+          creationTimestamp: 2024-12-16T17:31:27Z
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          content: Aliza Clay
+          updateTimestamp: 2024-12-16T17:31:27Z
+        - author: Aliza Clay
+          creationTimestamp: 2024-12-16T17:31:27Z
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          content: Aliza Clay
+          updateTimestamp: 2024-12-16T17:31:27Z
+        expirationTimeframe: 80
+        documents:
+        - filename: driving-license.pdf
+          hasContent: true
+          creationTimestamp: 2024-12-16T17:31:27Z
+          description: Driving license
+          id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+          mimeType:
+            description: PDF document
+            id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+            value: application/pdf
+          filesize: 40211
+          ruleExecutions:
+          - executionEnd: 2024-12-16T17:31:27Z
+            ruleType: DOCUMENT_CONTENT_CHECK
+            name: Document expiration date
+            description: Checks the expiration date of the driving license
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            executionStart: 2024-12-16T17:31:27Z
+            remarks:
+            - code: REMARK_CODE
+              ruleName: Document expiration date
+              message: Remark message
+            status: IN_PROGRESS
+          - executionEnd: 2024-12-16T17:31:27Z
+            ruleType: DOCUMENT_CONTENT_CHECK
+            name: Document expiration date
+            description: Checks the expiration date of the driving license
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            executionStart: 2024-12-16T17:31:27Z
+            remarks:
+            - code: REMARK_CODE
+              ruleName: Document expiration date
+              message: Remark message
+            status: IN_PROGRESS
+          documentTemplate:
+            name: Driving license
+            creationTimestamp: 2024-12-16T17:31:27Z
+            description: The applicant user's driving license
+            id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+            mimeType:
+              description: PDF document
+              id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+              value: application/pdf
+            mandatory: true
+            updateTimestamp: 2024-12-16T17:31:27Z
+          mandatory: true
+          content: content
+          updateTimestamp: 2024-12-16T17:31:27Z
+        - filename: driving-license.pdf
+          hasContent: true
+          creationTimestamp: 2024-12-16T17:31:27Z
+          description: Driving license
+          id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+          mimeType:
+            description: PDF document
+            id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+            value: application/pdf
+          filesize: 40211
+          ruleExecutions:
+          - executionEnd: 2024-12-16T17:31:27Z
+            ruleType: DOCUMENT_CONTENT_CHECK
+            name: Document expiration date
+            description: Checks the expiration date of the driving license
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            executionStart: 2024-12-16T17:31:27Z
+            remarks:
+            - code: REMARK_CODE
+              ruleName: Document expiration date
+              message: Remark message
+            status: IN_PROGRESS
+          - executionEnd: 2024-12-16T17:31:27Z
+            ruleType: DOCUMENT_CONTENT_CHECK
+            name: Document expiration date
+            description: Checks the expiration date of the driving license
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            executionStart: 2024-12-16T17:31:27Z
+            remarks:
+            - code: REMARK_CODE
+              ruleName: Document expiration date
+              message: Remark message
+            status: IN_PROGRESS
+          documentTemplate:
+            name: Driving license
+            creationTimestamp: 2024-12-16T17:31:27Z
+            description: The applicant user's driving license
+            id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+            mimeType:
+              description: PDF document
+              id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+              value: application/pdf
+            mandatory: true
+            updateTimestamp: 2024-12-16T17:31:27Z
+          mandatory: true
+          content: content
+          updateTimestamp: 2024-12-16T17:31:27Z
+        expirationTimeframeTimeUnit: HOUR
+        participantType:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: Consumer
+          value: CONSUMER
+        lastStatusUpdateTimestamp: 2024-12-16T17:31:27Z
+        rejectionCause: rejectionCause
+        identityAttributes:
+        - code: DATA_CONSUMER
+        - code: DATA_CONSUMER
+        updateTimestamp: 2024-12-16T17:31:27Z
+        applicant:
+          firstName: Aliza
+          lastName: Clay
+          email: aliza.clay@example.com
+        participantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        organization: organization
+        creationTimestamp: 2024-12-16T17:31:27Z
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: In Progress
+          value: IN_PROGRESS
+    UserSessionData:
+      type: object
+      description: User information needed to prefill the onboarding request form
+      example:
+        username: aliza.clay
+        firstName: Aliza
+        lastName: Clay
+        email: aliza.clay@example.com
+        authProvider: SIMPL_AUTH
+        roles:
+        - SD_PUBLISHER
+      properties:
+        username:
+          type: string
+          description: The username of the authenticated user
+          maxLength: 255
+        firstName:
+          type: string
+          description: The first name of the authenticated user
+          maxLength: 255
+        lastName:
+          type: string
+          description: The last name of the authenticated user
+          maxLength: 255
+        email:
+          type: string
+          description: The email address of the authenticated user
+          maxLength: 255
+        authProvider:
+          $ref: "#/components/schemas/AuthProvider"
+        roles:
+          type: array
+          items:
+            type: string
+    Problem:
+      type: object
+      description: |
+        A Problem Details object (RFC 9457).
+
+        Additional properties specific to the problem type may be present.
+      example:
+        type: urn:problem-type:exampleOrganization:exampleProblem
+        href: https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types
+        title: Description of the type of problem that occurred
+        status: 400
+        detail: Description of specific occurrence of the problem
+        instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+          description: |
+            An absolute URI that identifies the problem type.  When dereferenced,
+            it SHOULD provide human-readable documentation for the problem type
+            (e.g., using HTML).
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: |
+            A short, summary of the problem type. Written in english and readable
+            for engineers (usually not suited for non technical stakeholders and
+            not localized); example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status code generated by the origin server for this occurrence
+            of the problem.
+          example: 503
+          maximum: 600
+          minimum: 100
+        detail:
+          type: string
+          description: |
+            A human readable explanation specific to this occurrence of the
+            problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: |-
+            An absolute URI that identifies the specific occurrence of the problem.
+            It may or may not yield further information if dereferenced.
+    ParticipantType:
+      type: object
+      description: Participant type representation
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        label: Consumer
+        value: CONSUMER
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the participant type
+        label:
+          type: string
+          description: Human-readable label for the participant type
+          example: Consumer
+        value:
+          type: string
+          description: Participant type value
+          example: CONSUMER
+    Applicant:
+      type: object
+      description: Document representation
+      example:
+        firstName: Aliza
+        lastName: Clay
+        email: aliza.clay@example.com
+      properties:
+        firstName:
+          type: string
+          description: First name of the applicant user
+          example: Aliza
+          maxLength: 255
+        lastName:
+          type: string
+          description: Last name of the applicant user
+          example: Clay
+          maxLength: 255
+        email:
+          type: string
+          description: E-mail of the applicant user
+          example: aliza.clay@example.com
+          maxLength: 255
+    OnboardingRequest:
+      type: object
+      description: Onboarding request representation
+      example:
+        comments:
+        - author: Aliza Clay
+          creationTimestamp: 2024-12-16T17:31:27Z
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          content: Aliza Clay
+          updateTimestamp: 2024-12-16T17:31:27Z
+        - author: Aliza Clay
+          creationTimestamp: 2024-12-16T17:31:27Z
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          content: Aliza Clay
+          updateTimestamp: 2024-12-16T17:31:27Z
+        expirationTimeframe: 80
+        documents:
+        - filename: driving-license.pdf
+          hasContent: true
+          creationTimestamp: 2024-12-16T17:31:27Z
+          description: Driving license
+          id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+          mimeType:
+            description: PDF document
+            id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+            value: application/pdf
+          filesize: 40211
+          ruleExecutions:
+          - executionEnd: 2024-12-16T17:31:27Z
+            ruleType: DOCUMENT_CONTENT_CHECK
+            name: Document expiration date
+            description: Checks the expiration date of the driving license
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            executionStart: 2024-12-16T17:31:27Z
+            remarks:
+            - code: code
+              ruleName: Document expiration date
+              message: message
+            - code: code
+              ruleName: Document expiration date
+              message: message
+            status: ""
+          - executionEnd: 2024-12-16T17:31:27Z
+            ruleType: DOCUMENT_CONTENT_CHECK
+            name: Document expiration date
+            description: Checks the expiration date of the driving license
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            executionStart: 2024-12-16T17:31:27Z
+            remarks:
+            - code: code
+              ruleName: Document expiration date
+              message: message
+            - code: code
+              ruleName: Document expiration date
+              message: message
+            status: ""
+          documentTemplate:
+            name: Driving license
+            creationTimestamp: 2024-12-16T17:31:27Z
+            description: The applicant user's driving license
+            id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+            mimeType:
+              description: PDF document
+              id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+              value: application/pdf
+            mandatory: true
+            updateTimestamp: 2024-12-16T17:31:27Z
+          mandatory: true
+          content: content
+          updateTimestamp: 2024-12-16T17:31:27Z
+        - filename: driving-license.pdf
+          hasContent: true
+          creationTimestamp: 2024-12-16T17:31:27Z
+          description: Driving license
+          id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+          mimeType:
+            description: PDF document
+            id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+            value: application/pdf
+          filesize: 40211
+          ruleExecutions:
+          - executionEnd: 2024-12-16T17:31:27Z
+            ruleType: DOCUMENT_CONTENT_CHECK
+            name: Document expiration date
+            description: Checks the expiration date of the driving license
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            executionStart: 2024-12-16T17:31:27Z
+            remarks:
+            - code: code
+              ruleName: Document expiration date
+              message: message
+            - code: code
+              ruleName: Document expiration date
+              message: message
+            status: ""
+          - executionEnd: 2024-12-16T17:31:27Z
+            ruleType: DOCUMENT_CONTENT_CHECK
+            name: Document expiration date
+            description: Checks the expiration date of the driving license
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            executionStart: 2024-12-16T17:31:27Z
+            remarks:
+            - code: code
+              ruleName: Document expiration date
+              message: message
+            - code: code
+              ruleName: Document expiration date
+              message: message
+            status: ""
+          documentTemplate:
+            name: Driving license
+            creationTimestamp: 2024-12-16T17:31:27Z
+            description: The applicant user's driving license
+            id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+            mimeType:
+              description: PDF document
+              id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+              value: application/pdf
+            mandatory: true
+            updateTimestamp: 2024-12-16T17:31:27Z
+          mandatory: true
+          content: content
+          updateTimestamp: 2024-12-16T17:31:27Z
+        expirationTimeframeTimeUnit: HOUR
+        participantType:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: Consumer
+          value: CONSUMER
+        lastStatusUpdateTimestamp: 2024-12-16T17:31:27Z
+        rejectionCause: rejectionCause
+        identityAttributes:
+        - code: DATA_CONSUMER
+        - code: DATA_CONSUMER
+        updateTimestamp: 2024-12-16T17:31:27Z
+        applicant:
+          firstName: Aliza
+          lastName: Clay
+          email: aliza.clay@example.com
+        participantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        organization: organization
+        creationTimestamp: 2024-12-16T17:31:27Z
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: label
+          value: ""
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the onboarding request
+        participantId:
+          type: string
+          format: uuid
+          description: "Identifier of the onboarded participant, if the onboarding\
+            \ request is approved"
+          readOnly: true
+        status:
+          $ref: "#/components/schemas/OnboardingRequestStatus"
+        applicant:
+          $ref: "#/components/schemas/Applicant"
+        participantType:
+          $ref: "#/components/schemas/ParticipantType"
+        onboardingTemplate:
+          $ref: "#/components/schemas/OnboardingTemplateData"
+        organization:
+          type: string
+          description: Applicant organization
+          maxLength: 255
+        documents:
+          type: array
+          items:
+            $ref: "#/components/schemas/Document"
+          readOnly: true
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/Comment"
+        identityAttributes:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdentityAttribute"
+          readOnly: true
+        rejectionCause:
+          type: string
+          description: Rejection cause for a reject of the onboarding request
+          maxLength: 255
+          readOnly: true
+        expirationTimeframe:
+          type: integer
+          format: int64
+          description: Time frame for automatic rejection of the onboarding request
+          maximum: 1000
+          minimum: 0
+        expirationTimeframeTimeUnit:
+          allOf:
+          - $ref: "#/components/schemas/ExpirationTimeframeTimeUnit"
+          readOnly: true
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: The creation timestamp
+          example: 2024-12-16T17:31:27Z
+        updateTimestamp:
+          type: string
+          format: date-time
+          description: The last update timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+        lastStatusUpdateTimestamp:
+          type: string
+          format: date-time
+          description: The last status update timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+        credentialId:
+          type: string
+          description: The credential id of the onboarding request
+          example: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+          maxLength: 255
+    AuthProvider:
+      type: string
+      description: the Authentication Provider used by the user to login
+      enum:
+      - SIMPL_AUTH
+      - EIDAS
+    OnboardingRequestStatus:
+      allOf:
+      - $ref: "#/components/schemas/OnboardingStatus"
+      - type: object
+        readOnly: true
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        label: In Progress
+        value: IN_PROGRESS
+    OnboardingTemplateData:
+      type: object
+      example:
+        applicationInstructions: These are the application instructions
+      properties:
+        applicationInstructions:
+          type: string
+          description: The application instructions for the onboarding template.
+          example: These are the application instructions
+          maxLength: 2000
+    Document:
+      type: object
+      description: Document representation
+      example:
+        filename: driving-license.pdf
+        hasContent: true
+        creationTimestamp: 2024-12-16T17:31:27Z
+        description: Driving license
+        id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+        type: UPLOAD
+        mimeType:
+          description: PDF document
+          id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+          value: application/pdf
+        filesize: 40211
+        ruleExecutions:
+        - executionEnd: 2024-12-16T17:31:27Z
+          ruleType: DOCUMENT_CONTENT_CHECK
+          name: Document expiration date
+          description: Checks the expiration date of the driving license
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: UPLOAD
+          executionStart: 2024-12-16T17:31:27Z
+          remarks:
+          - code: REMARK_CODE
+            ruleName: Document expiration date
+            message: Remark message
+          status: IN_PROGRESS
+        - executionEnd: 2024-12-16T17:31:27Z
+          ruleType: DOCUMENT_CONTENT_CHECK
+          name: Document expiration date
+          description: Checks the expiration date of the driving license
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: UPLOAD
+          executionStart: 2024-12-16T17:31:27Z
+          remarks:
+          - code: REMARK_CODE
+            ruleName: Document expiration date
+            message: Remark message
+          status: IN_PROGRESS
+        documentTemplate:
+          name: Driving license
+          creationTimestamp: 2024-12-16T17:31:27Z
+          description: The applicant user's driving license
+          id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+          type: UPLOAD
+          mimeType:
+            description: PDF document
+            id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+            value: application/pdf
+          mandatory: true
+          updateTimestamp: 2024-12-16T17:31:27Z
+        mandatory: true
+        content: content
+        updateTimestamp: 2024-12-16T17:31:27Z
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the document
+          example: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+        documentTemplate:
+          $ref: "#/components/schemas/DocumentTemplate"
+        mimeType:
+          $ref: "#/components/schemas/MimeType"
+        description:
+          type: string
+          description: A description of the document
+          example: Driving license
+          maxLength: 255
+        filename:
+          type: string
+          description: The file name of the uploaded document
+          example: driving-license.pdf
+          maxLength: 255
+        filesize:
+          type: integer
+          format: int64
+          description: The size in bytes of the uploaded document
+          example: 40211
+          readOnly: true
+        hasContent:
+          type: boolean
+          description: True if the document has been uploaded
+          example: true
+          readOnly: true
+          x-derived-property: eu.europa.ec.simpl.util.DocumentHelpers.hasContent(getFilesize())
+        mandatory:
+          type: boolean
+          description: True if the document is required in order to submit the onboarding
+            request
+          example: true
+          readOnly: true
+        content:
+          type: string
+          format: byte
+          description: The base64-encoded content of the uploaded document
+        ruleExecutions:
+          type: array
+          description: The current status of the latest rule executions associated
+            with the document
+          items:
+            $ref: "#/components/schemas/OnboardingValidationRuleExecution"
+          readOnly: true
+        type:
+          $ref: "#/components/schemas/DocumentType"
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: The creation timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+        updateTimestamp:
+          type: string
+          format: date-time
+          description: The last update timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+    Comment:
+      type: object
+      description: Onboarding request comment representation
+      example:
+        author: Aliza Clay
+        creationTimestamp: 2024-12-16T17:31:27Z
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        content: Comment by Aliza Clay
+        updateTimestamp: 2024-12-16T17:31:27Z
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the comment
+        author:
+          type: string
+          description: Author of the comment
+          example: Aliza Clay
+          maxLength: 255
+          readOnly: true
+        content:
+          type: string
+          description: Comment content
+          example: Aliza Clay
+          maxLength: 5000
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: The creation timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+        updateTimestamp:
+          type: string
+          format: date-time
+          description: The last update timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+    IdentityAttribute:
+      type: object
+      example:
+        code: CONSUMER
+      properties:
+        code:
+          type: string
+          description: The unique code identifying the identity attribute. This is
+            the only parameter used during the update
+          example: CONSUMER
+          maxLength: 255
+      required:
+      - code
+    ExpirationTimeframeTimeUnit:
+      type: string
+      description: Timeframe unit of measure.
+      enum:
+      - HOUR
+      - DAY
+      - YEAR
+    OnboardingStatus:
+      type: object
+      description: Onboarding status representation
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        label: In Progress
+        value: IN_PROGRESS
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the onboarding status
+        label:
+          type: string
+          description: Human-readable label of the onboarding status
+          readOnly: true
+        value:
+          allOf:
+          - $ref: "#/components/schemas/OnboardingStatusValue"
+    DocumentTemplate:
+      type: object
+      description: Document template representation
+      example:
+        name: Driving license
+        creationTimestamp: 2024-12-16T17:31:27Z
+        description: The applicant user's driving license
+        id: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+        type: UPLOAD
+        mimeType:
+          description: PDF document
+          id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+          value: application/pdf
+        mandatory: true
+        updateTimestamp: 2024-12-16T17:31:27Z
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the document template
+          example: f89b82b7-6fd5-4256-8aaf-0ea12e9e5547
+        name:
+          type: string
+          description: The name of the document template
+          example: Driving license
+          maxLength: 50
+          pattern: "^[a-zA-Z0-9 _\\-.@+,=]{1,255}$"
+        description:
+          type: string
+          description: A description of the document template
+          example: The applicant user's driving license
+          maxLength: 255
+        mandatory:
+          type: boolean
+          description: True if a matching document is required in order to submit
+            the onboarding request
+          example: true
+        mimeType:
+          $ref: "#/components/schemas/MimeType"
+        type:
+          $ref: "#/components/schemas/DocumentType"
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: The creation timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+        updateTimestamp:
+          type: string
+          format: date-time
+          description: The last update timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+    MimeType:
+      type: object
+      description: MIME type representation
+      example:
+        description: PDF document
+        id: ac0a1143-2835-49da-9fdc-82f04963d2cf
+        value: application/pdf
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the MIME type
+          example: ac0a1143-2835-49da-9fdc-82f04963d2cf
+        value:
+          type: string
+          description: The actual mime type value following the RFC6838
+          example: application/pdf
+          maxLength: 255
+        description:
+          type: string
+          description: A description of the MIME type
+          example: PDF document
+          maxLength: 255
+    OnboardingValidationRuleExecution:
+      type: object
+      description: Onboarding validation rule execution representation.
+      example:
+        executionEnd: 2024-12-16T17:31:27Z
+        ruleType: DOCUMENT_CONTENT_CHECK
+        name: Document expiration date
+        description: Checks the expiration date of the driving license
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        executionStart: 2024-12-16T17:31:27Z
+        remarks:
+          code: REMARK_CODE
+          ruleName: Document expiration date
+          message: Remark message
+        status: IN_PROGRESS
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the rule
+          readOnly: true
+        ruleType:
+          $ref: "#/components/schemas/ValidationRuleType"
+        name:
+          type: string
+          description: A short readable name for the rule
+          example: Document expiration date
+          maxLength: 255
+        description:
+          type: string
+          description: A description of the rule.
+          example: Checks the expiration date of the driving license
+          maxLength: 500
+        status:
+          allOf:
+          - $ref: "#/components/schemas/ValidationRuleExecutionStatus"
+          readOnly: true
+        remarks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Remark"
+          readOnly: true
+        executionStart:
+          type: string
+          format: date-time
+          description: Rule execution start timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+        executionEnd:
+          type: string
+          format: date-time
+          description: Rule execution end timestamp
+          example: 2024-12-16T17:31:27Z
+          readOnly: true
+    DocumentType:
+      type: string
+      description: The document type that must be provided by the user during onboarding
+      enum:
+      - UPLOAD
+      - EIDAS
+    OnboardingStatusValue:
+      type: string
+      description: Onboarding status values
+      enum:
+      - IN_PROGRESS
+      - EVALUATING
+      - IN_REVIEW
+      - REJECTED
+      - APPROVED
+    ValidationRuleType:
+      type: string
+      description: Onboarding validation rule types.
+      enum:
+      - DOCUMENT_CONTENT_CHECK
+      - DOCUMENT_PRESENCE_CHECK
+      - COMPOSITE
+      - EIDAS
+    ValidationRuleExecutionStatus:
+      type: string
+      description: Onboarding validation rule execution status.
+      enum:
+      - NOT_EXECUTED
+      - IN_PROGRESS
+      - SUCCESS
+      - REJECTED
+      - FAULT
+    Remark:
+      type: object
+      example:
+        code: REMARK_CODE
+        ruleName: Document expiration date
+        message: Remark message
+      properties:
+        code:
+          type: string
+          description: Error code related to the failure.
+        message:
+          type: string
+          description: Error message describing the failure.
+        ruleName:
+          type: string
+          description: A short readable name for the rule
+          example: Document expiration date
+      required:
+      - message
+  responses:
+    BadRequest:
+      description: "Bad request, invalid input data"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            badRequest:
+              summary: Bad Request
+              value:
+                type: urn:problem-type:simpl:badRequest
+                title: Bad request
+                detail: Invalid input data
+                status: 400
+    Unauthorized:
+      description: "Unauthorized, the user is not authenticated"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unauthorized:
+              summary: Unauthorized
+              value:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                detail: The user is not authenticated
+                status: 401
+    Forbidden:
+      description: "Forbidden, the user does not have the roles to perform the operation"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            forbidden:
+              summary: Forbidden
+              value:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                detail: The user does not have the roles to perform the operation
+                status: 403
+    Conflict:
+      description: "Conflict, action requested cannot be performed"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            conflict:
+              summary: Conflict
+              value:
+                type: urn:problem-type:simpl:conflict
+                title: Conflict
+                detail: Conflict
+                status: 409
+    InternalServerError:
+      description: "Internal Server Error, an internal server error occurred"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            internalServerError:
+              summary: Internal Server Error
+              value:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                detail: Internal Server Error
+                status: 500
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: SIMPL Tier1 end users authentication process
+      flows:
+        authorizationCode:
+          authorizationUrl: ""
+          tokenUrl: ""
+          scopes: {}
+    oauth2ClientCredentials:
+      type: oauth2
+      description: SIMPL internal APIs authentication process
+      flows:
+        clientCredentials:
+          tokenUrl: ""
+          scopes: {}

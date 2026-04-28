@@ -1,0 +1,63 @@
+asyncapi: 3.0.0
+info:
+  title: Onboarding Async API
+  version: 1.3.0
+  description: "The Onboarding component publishes events related the onboarding requests processed by the authority."
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  tags:
+    - name: Onboarding Requests
+      description: Messages related to the onboarding requests processed by the authority
+servers:
+  kafka:
+    host: "{host}:{port}"
+    protocol: kafka
+defaultContentType: application/json
+channels:
+  onboardingRequestDeletedEvent:
+    address: '{prefix}eu.europa.ec.simpl.onboarding.events.onboarding-request.deleted'
+    messages:
+      onboardingRequestDeletedEvent:
+        $ref: '#/components/messages/onboardingRequestDeletedEvent'
+    description: The channel on which onboarding request delete events will be published.
+    parameters:
+      prefix:
+        $ref: '#/components/parameters/prefix'
+operations:
+  publishOnboardingRequestDeletedEvent:
+    action: send
+    description: Publish onboarding request delete event
+    tags:
+      - name: Onboarding Requests
+    channel:
+      $ref: '#/channels/onboardingRequestDeletedEvent'
+    messages:
+      - $ref: '#/channels/onboardingRequestDeletedEvent/messages/onboardingRequestDeletedEvent'
+components:
+  messages:
+    onboardingRequestDeletedEvent:
+      name: onboardingRequestDeletedEvent
+      title: Onboarding request deleted event
+      summary: Signal that the specified onboarding request has been deleted
+      description: Signal that the specified onboarding request has been deleted, specifying the onboarding request id and the applicant email
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/onboardingRequestDeletedEvent'
+  schemas:
+    onboardingRequestDeletedEvent:
+      x-parser-schema-id: onboardingRequestDeletedEvent
+      properties:
+        onboardingRequestId:
+          type: string
+          format: uuid
+        applicantEmail:
+          type: string
+          format: email
+  parameters:
+    prefix:
+      description: A prefix used to distinguish the channels used by different agents that insist on the same message broker.

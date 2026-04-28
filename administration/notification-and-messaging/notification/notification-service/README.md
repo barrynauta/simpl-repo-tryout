@@ -29,6 +29,11 @@ Provenance: built by Simpl. Source repository: `contract-billing/notification-se
 
 - [BP03C End User Role Request](../../../../foundations/business-processes/BP03C-end-user-role-request/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 2 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - `code.europa.eu/simpl/simpl-open/development/contract-billing/notification-service`

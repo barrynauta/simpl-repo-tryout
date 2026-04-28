@@ -1,0 +1,1342 @@
+openapi: 3.0.1
+info:
+  title: Security Attributes Provider
+  description: OpenAPI definition for the Security Attributes Provider component of
+    the SIMPL project
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: 1.5.0
+servers:
+- url: https://localhost:8082/v1
+  description: securityattributesprovider
+security:
+- mtls: []
+- mtlsWithEphemeralProof: []
+- oauth2AuthCode: []
+- oauth2ClientCredentials: []
+tags:
+- name: Identity Attributes
+  description: API for managing Identity Attributes
+- name: Mtls
+  description: API for managing Mtls
+paths:
+  /participants/{participantId}/identityAttributes/assign:
+    post:
+      tags:
+      - Identity Attributes
+      summary: Assign Identity Attributes
+      description: Assigns a list of identity attributes to a user.
+      operationId: assign
+      parameters:
+      - name: participantId
+        in: path
+        description: UUID of the user to whom the identity attributes will be assigned
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 8f031077-1d65-4f9c-96cf-8a388db51469
+      requestBody:
+        description: List of identity attributes identifiers to be assigned. You can
+          use either one of id or code.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/IdentityAttributeIdentifier"
+            examples:
+              default:
+                summary: Default example
+                value:
+                - code: CONSUMER
+                  id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - code: DATA_CONSUMER
+                  id: dd52a4c4-318a-4cd1-b267-231d4d8c6cac
+        required: true
+      responses:
+        "204":
+          description: Successfully assigned identity attributes
+          x-microcks-refs:
+          - default
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      - NOTARY
+      x-deprecation-info:
+        replacements:
+        - "PUT /tier1/v2/participants/{participantId}/identityAttributes"
+        reason: Resource based API to assign and unassign identity attributes
+  /participants/{participantId}/identityAttributes/unassign:
+    post:
+      tags:
+      - Identity Attributes
+      summary: Unassign Identity Attributes
+      description: Unassigns a list of identity attributes from a user.
+      operationId: unassign
+      parameters:
+      - name: participantId
+        in: path
+        description: UUID of the user from whom the identity attributes will be unassigned
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 91b4ef51-8dc3-451f-a4eb-3ad88826eec9
+      requestBody:
+        description: List of identity attributes identifiers to be assigned. You can
+          use either one of id or code.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/IdentityAttributeIdentifier"
+            examples:
+              default:
+                summary: Default example
+                value:
+                - code: DATA_CONSUMER
+                  id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - code: DATA_PROVIDER
+                  id: dd52a4c4-318a-4cd1-b267-231d4d8c6cac
+        required: true
+      responses:
+        "200":
+          description: Successfully unassigned identity attributes
+          x-microcks-refs:
+          - default
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      - NOTARY
+      x-deprecation-info:
+        replacements:
+        - "PUT /tier1/v2/participants/{participantId}/identityAttributes"
+        reason: Resource based API to assign and unassign identity attributes
+  /identityAttributes/{id}:
+    get:
+      tags:
+      - Identity Attributes
+      summary: Find Identity Attribute by ID
+      description: Retrieves an identity attribute by its unique identifier.
+      operationId: findById
+      parameters:
+      - name: id
+        in: path
+        description: UUID of the identity attribute to be retrieved
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 8f031077-1d65-4f9c-96cf-8a388db51469
+      responses:
+        "200":
+          description: Successfully retrieved identity attribute
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdentityAttributeResponse"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      - NOTARY
+      x-deprecation-info:
+        replacements:
+        - "GET /tier1/v2/identityAttributes/{identityAttributeId}"
+        reason: "No major changes, but grouped Tier 1 API specification"
+    put:
+      tags:
+      - Identity Attributes
+      summary: Update Identity Attribute
+      description: Updates an existing identity attribute by its unique identifier.
+      operationId: updateAttributes
+      parameters:
+      - name: id
+        in: path
+        description: UUID of the identity attribute to be updated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 8f031077-1d65-4f9c-96cf-8a388db51469
+      requestBody:
+        description: Updated identity attribute data
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IdentityAttribute"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  code: CONSUMER
+                  name: Consumer
+                  creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                  description: Identity attribute used for tagging an end user able
+                    to act as a user of a data consumer participant (can start contract
+                    and transfer process)
+                  assignableToRoles: true
+                  id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  enabled: true
+                  updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        required: true
+      responses:
+        "204":
+          description: Successfully updated identity attribute
+          x-microcks-refs:
+          - default
+        "400":
+          description: "Bad request, invalid input data"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                default:
+                  value:
+                    type: urn:problem-type:simpl:badRequest
+                    title: Bad request
+                    detail: Invalid input data
+                    status: 400
+                built-in-read-only:
+                  value:
+                    type: urn:problem-type:simpl:badRequest:builtInIdentityAttributeReadOnly
+                    title: Built-in identity attributes are read only
+                    detail: "Built-in identity attributes cannot be created, updated\
+                      \ or deleted"
+                    status: 400
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - "PUT /tier1/v2/identityAttributes/{identityAttributeId}"
+        reason: "No major changes, but grouped Tier 1 API specification"
+    delete:
+      tags:
+      - Identity Attributes
+      summary: Delete Identity Attribute
+      description: Deletes an identity attribute by its unique identifier.
+      operationId: delete
+      parameters:
+      - name: id
+        in: path
+        description: UUID of the identity attribute to be deleted
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 8f031077-1d65-4f9c-96cf-8a388db51469
+      responses:
+        "204":
+          description: Successfully deleted identity attribute
+          x-microcks-refs:
+          - default
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "400":
+          description: "Bad request, invalid input data"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                default:
+                  value:
+                    type: urn:problem-type:simpl:badRequest
+                    title: Bad request
+                    detail: Invalid input data
+                    status: 400
+                built-in-read-only:
+                  value:
+                    type: urn:problem-type:simpl:badRequest:builtInIdentityAttributeReadOnly
+                    title: Built-in identity attributes are read only
+                    detail: "Built-in identity attributes cannot be created, updated\
+                      \ or deleted"
+                    status: 400
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - "DELETE /tier1/v2/identityAttributes/{identityAttributeId}"
+        reason: "No major changes, but grouped Tier 1 API specification"
+  /identityAttributes/assignable/{value}:
+    put:
+      tags:
+      - Identity Attributes
+      summary: Update Assignable Parameter
+      description: Updates the assignable parameter for a list of identity attributes.
+      operationId: updateAssignableParameter
+      parameters:
+      - name: value
+        in: path
+        description: Boolean value to assign to the 'assignable' parameter
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: boolean
+        examples:
+          default:
+            summary: Default example
+            value: true
+      requestBody:
+        description: List of UUIDs representing identity attributes
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+            examples:
+              default:
+                summary: Default example
+                value:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - dd52a4c4-318a-4cd1-b267-231d4d8c6cac
+        required: true
+      responses:
+        "200":
+          description: Successfully updated assignable parameter
+          x-microcks-refs:
+          - default
+        "400":
+          description: "Bad request, invalid input data"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                default:
+                  value:
+                    type: urn:problem-type:simpl:badRequest
+                    title: Bad request
+                    detail: Invalid input data
+                    status: 400
+                built-in-read-only:
+                  value:
+                    type: urn:problem-type:simpl:badRequest:builtInIdentityAttributeReadOnly
+                    title: Built-in identity attributes are read only
+                    detail: "Built-in identity attributes cannot be created, updated\
+                      \ or deleted"
+                    status: 400
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - "PUT /tier1/v2/identityAttributes/{identityAttributeId}"
+        reason: Use the update API of the identity attribute instead
+  /identityAttributes:
+    get:
+      tags:
+      - Identity Attributes
+      summary: Search Identity Attributes
+      description: Searches for identity attributes based on provided filters and
+        pagination options.
+      operationId: search
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+        examples:
+          default:
+            summary: Default example
+            value: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+        examples:
+          default:
+            summary: Default example
+            value: 10
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          default:
+          - "id,ASC"
+          items:
+            type: string
+        examples:
+          default:
+            summary: Default example
+            value: "id,ASC"
+      - name: unpaged
+        in: query
+        description: "Whether the search should be unpaged, i.e. return all available\
+          \ elements"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
+        examples:
+          default:
+            summary: Default example
+            value: false
+      - name: filter
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: "#/components/schemas/SearchFilterParameter"
+        examples:
+          default:
+            summary: Default example
+            value:
+              code: DATA_PROVIDER
+              participantIdNotIn: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              updateTimestampFrom: 2000-01-23T04:56:07.000+00:00
+              name: Data Provider
+              participantIdIn: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              updateTimestampTo: 2000-01-23T04:56:07.000+00:00
+              enabled: true
+        x-parameter-object: true
+      responses:
+        "200":
+          description: Successfully retrieved search results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageResponseIdentityAttribute"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    page:
+                      number: 6
+                      size: 0
+                      totalPages: 5
+                      totalElements: 1
+                    content:
+                    - code: CONSUMER
+                      name: Consumer
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      builtIn: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      assignedToParticipant: true
+                    - code: DATA_SEARCHER
+                      name: Data searcher
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      builtIn: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      assignedToParticipant: false
+                    empty: false
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - T1UAR_M
+      - NOTARY
+      - IATTR_M
+      - T2IAA_M
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/identityAttributes
+        - "GET /tier2/v2/participants/{participantId}/identityAttributes"
+        - "GET /tier2/v2/credentials/{credentialId}/identityAttributes"
+        reason: assignedToParticipant flag disappears. Use a combination of the above.
+    post:
+      tags:
+      - Identity Attributes
+      summary: Create Identity Attribute
+      description: Creates a new identity attribute.
+      operationId: create
+      requestBody:
+        description: Identity attribute to be created
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IdentityAttribute"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  code: CONSUMER
+                  name: Consumer
+                  creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                  description: Identity attribute used for tagging an end user able
+                    to act as a user of a data consumer participant (can start contract
+                    and transfer process)
+                  assignableToRoles: true
+                  id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  enabled: true
+                  updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        required: true
+      responses:
+        "201":
+          description: Successfully created identity attribute
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdentityAttributeResponse"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        "400":
+          description: "Bad request, invalid input data"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                default:
+                  value:
+                    type: urn:problem-type:simpl:badRequest
+                    title: Bad request
+                    detail: Invalid input data
+                    status: 400
+                built-in-read-only:
+                  value:
+                    type: urn:problem-type:simpl:badRequest:builtInIdentityAttributeReadOnly
+                    title: Built-in identity attributes are read only
+                    detail: "Built-in identity attributes cannot be created, updated\
+                      \ or deleted"
+                    status: 400
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          description: Identity attribute with the same code or name already exists
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              example:
+                summary: Identity attribute already exists
+                value:
+                  type: urn:problem-type:simpl:identityAttributeAlreadyExist
+                  title: Identity attribute already exists
+                  detail: Identity attribute with the same code or name already exists
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - POST /tier1/v2/identityAttributes
+        reason: "No major changes, grouped inside the Tier 1 v2 spec"
+  /identityAttributes/import:
+    post:
+      tags:
+      - Identity Attributes
+      summary: Imports the provided identity attributes into the system
+      description: The provided identity attributes will be imported into the system
+      operationId: importIdentityAttributes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/IdentityAttribute"
+            examples:
+              default:
+                summary: Default example
+                value:
+                - code: CONSUMER
+                  name: Consumer
+                  creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                  description: Identity attribute used for tagging an end user able
+                    to act as a user of a data consumer participant (can start contract
+                    and transfer process)
+                  assignableToRoles: true
+                  id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  enabled: true
+                  updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                - code: CONSUMER
+                  name: Consumer
+                  creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                  description: Identity attribute used for tagging an end user able
+                    to act as a user of a data consumer participant (can start contract
+                    and transfer process)
+                  assignableToRoles: true
+                  id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  enabled: true
+                  updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        required: true
+      responses:
+        "201":
+          description: Created
+          x-microcks-refs:
+          - default
+        "400":
+          description: "Bad request, invalid input data"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                default:
+                  value:
+                    type: urn:problem-type:simpl:badRequest
+                    title: Bad request
+                    detail: Invalid input data
+                    status: 400
+                built-in-read-only:
+                  value:
+                    type: urn:problem-type:simpl:badRequest:builtInIdentityAttributeReadOnly
+                    title: Built-in identity attributes are read only
+                    detail: "Built-in identity attributes cannot be created, updated\
+                      \ or deleted"
+                    status: 400
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - SIMPL_USER
+      x-deprecation-info:
+        replacements:
+        - POST /tier1/v2/identityAttributes/import
+        reason: "No major changes, grouped inside the Tier 1 v2 spec"
+  /mtls/identityAttributes:
+    get:
+      tags:
+      - Mtls
+      summary: Get Identity Attributes with Ownership
+      description: Retrieves a list of identity attributes with ownership information
+        for a given participant ID.
+      operationId: getIdentityAttributesWithOwnership
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: Participant Public Key Hash
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      responses:
+        "200":
+          description: Successfully retrieved identity attributes with ownership
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdentityAttributeWithOwnership"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    assignedToParticipant: true
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    assignedToParticipant: true
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtlsWithEphemeralProof: []
+      x-deprecation-info:
+        replacements:
+        - GET /tier2/v2/identityAttributes
+        reason: "No major changes, but grouped tier 2 API specification."
+  /mtls/identityAttributes/{credentialId}:
+    get:
+      tags:
+      - Mtls
+      summary: Get Identity Attributes by Certificate ID
+      description: Retrieves a list of identity attributes associated with a given
+        certificate ID.
+      operationId: getIdentityAttributesByCertificateIdInUri
+      parameters:
+      - name: credentialId
+        in: path
+        description: Credential ID used to fetch associated identity attributes
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: GWSxr+Iz2Mm5W/6Zn/wumQF6lG6nuPyzKPOnMX+8q9+jRBNvDaPLbb2VLdHEqyA+
+      responses:
+        "200":
+          description: Successfully retrieved identity attributes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdentityAttributeResponse"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - mtlsWithEphemeralProof: []
+      x-deprecation-info:
+        replacements:
+        - "GET /tier2/v2/credential/{credentialId}/identityAttributes"
+        - "GET /tier2/v2/participant/{participantId}/identityAttributes"
+        reason: "No major changes, but grouped tier 2 API specification."
+  /mtls/token:
+    post:
+      tags:
+      - Mtls Ephemeral Proofs
+      summary: Generate ephemeral proof
+      description: Generates an ephemeral proof for the specified participant
+      operationId: getEphemeralProof
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: The credential ID of the participant for whom the ephemeral proof
+          is generated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      requestBody:
+        description: Contains the timestamp of the request along with the timestamp
+          signature
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignatureProof"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  signature: MEYCIQDV6nM1jU2J...==
+                  nonce: 36b8f84d-df4e-4d49-b662-bcde71a8764f
+                  timestamp: 2025-04-04T12:34:56Z
+        required: false
+      responses:
+        "200":
+          description: Ephemeral proof generated successfully
+          content:
+            application/json:
+              schema:
+                type: string
+              example: |
+                IxvaN4ER-PlPgLYzfRhk_JiY4VAow3GNjaK5rYCINFsEPa7VaYnRsaCmQVq8CTgddihEPPXe
+                t2laH8_c3WqxY4AeZO5eljwSCobCHzxYdOoFKbpNXIm7dqHg_5xpQz-YBJMiDM1ILOEsER8A
+                DyF4NC2sN0K_0t6xZLSAQIRrHvpGOrtYr5E-SllTWHWPmqCkX2BUZxoYNK2FWgQZpuUOD55H
+                fsvFXNVQa_5TFRDibi9LsT7Sd_az0iGB0TfAb0v3ZR0qnmgyp5pTeIeU5UqhtbgU9RnUCVmG
+                IK-SZYNvrlXgv9hiKAZGhLgeI8hO40utfT2YTYHgD2Aiufqo3RIbJA
+        "400":
+          description: Invalid ephemeral proof request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                invalid-credential-id:
+                  value:
+                    type: /error/invalid-credential-id
+                    title: Credential ID is invalid
+                invalid-signature-proof:
+                  value:
+                    type: /error/invalid-signature-proof
+                    title: Signature proof is invalid
+                invalid-timestamp-window:
+                  value:
+                    type: /error/invalid-signature-proof
+                    title: Invalid timestamp window
+                    detail: The provided timestamp falls outside the Governance Authority’s
+                      allowed time window of 1 minute.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtls: []
+      x-deprecation-info:
+        replacements:
+        - POST /tier2/v2/token
+        reason: "No major changes, but grouped tier 2 API specification."
+components:
+  schemas:
+    PageMetadata:
+      type: object
+      example:
+        number: 6
+        size: 0
+        totalPages: 5
+        totalElements: 1
+      properties:
+        size:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+    IdentityAttributeWithOwnership:
+      allOf:
+      - $ref: "#/components/schemas/IdentityAttributeResponse"
+      - type: object
+        properties:
+          assignedToParticipant:
+            type: boolean
+        required:
+        - assignedToParticipant
+      example:
+        code: CONSUMER
+        name: Consumer
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        description: Identity attribute used for tagging an end user able to act as
+          a user of a data consumer participant (can start contract and transfer process)
+        assignableToRoles: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        used: true
+        right: true
+        enabled: true
+        builtIn: true
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        assignedToParticipant: true
+    IdentityAttribute:
+      type: object
+      example:
+        code: CONSUMER
+        name: Consumer
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        description: Identity attribute used for tagging an end user able to act as
+          a user of a data consumer participant (can start contract and transfer process)
+        assignableToRoles: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        enabled: true
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          maxLength: 255
+        assignableToRoles:
+          type: boolean
+        enabled:
+          type: boolean
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+      required:
+      - assignableToRoles
+      - code
+      - enabled
+      - name
+    IdentityAttributeIdentifier:
+      type: object
+      example:
+        code: DATA_CONSUMER
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The ID identifying the identity attribute.
+        code:
+          type: string
+          description: The unique code identifying the identity attribute. This is
+            the only parameter used during the update
+          example: DATA_CONSUMER
+          maxLength: 255
+    PageResponseIdentityAttribute:
+      type: object
+      example:
+        page:
+          number: 6
+          size: 0
+          totalPages: 5
+          totalElements: 1
+        content:
+        - code: CONSUMER
+          name: Consumer
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: Identity attribute used for tagging an end user able to act
+            as a user of a data consumer participant (can start contract and transfer
+            process)
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          builtIn: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          assignedToParticipant: true
+        - code: DATA_SEARCHER
+          name: Data searcher
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: "Identity Attributes used for tagging an end user able to act\
+            \ only as a searcher in the catalogue, but he can't start a contract negotiation\
+            \ or transfer process"
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          builtIn: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          assignedToParticipant: false
+        empty: false
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdentityAttributeResponse"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+        empty:
+          type: boolean
+    SearchFilterParameter:
+      type: object
+      example:
+        code: code
+        participantIdNotIn: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updateTimestampFrom: 2000-01-23T04:56:07.000+00:00
+        name: name
+        participantIdIn: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updateTimestampTo: 2000-01-23T04:56:07.000+00:00
+        enabled: true
+        assignableToRoles: true
+      properties:
+        code:
+          type: string
+          maxLength: 255
+        participantIdNotIn:
+          type: string
+          format: uuid
+        updateTimestampFrom:
+          type: string
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        participantIdIn:
+          type: string
+          format: uuid
+        updateTimestampTo:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        builtIn:
+          type: boolean
+        assignableToRoles:
+          type: boolean
+    SignatureProof:
+      type: object
+      example:
+        signature: MEYCIQDV6nM1jU2J...==
+        nonce: 36b8f84d-df4e-4d49-b662-bcde71a8764f
+        timestamp: 2025-04-04T12:34:56Z
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: "the timestamp of the request, in UTC ISO 8601 format"
+          example: 2025-04-04T12:34:56Z
+        nonce:
+          type: string
+          format: uuid
+          description: a randomly generated nonce
+          example: 36b8f84d-df4e-4d49-b662-bcde71a8764f
+        signature:
+          type: string
+          format: byte
+          description: base64-encoded signature of the timestamp and noce ($timestamp
+            + _ + $nonce)
+          example: MEYCIQDV6nM1jU2J...==
+      required:
+      - nonce
+      - signature
+      - timestamp
+    IdentityAttributeResponse:
+      allOf:
+      - $ref: "#/components/schemas/IdentityAttribute"
+      - type: object
+        properties:
+          used:
+            type: boolean
+            readOnly: true
+          right:
+            type: boolean
+            readOnly: true
+          builtIn:
+            type: boolean
+            readOnly: true
+        required:
+        - builtIn
+      example:
+        code: CONSUMER
+        name: Consumer
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        description: Identity attribute used for tagging an end user able to act as
+          a user of a data consumer participant (can start contract and transfer process)
+        assignableToRoles: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        used: true
+        right: true
+        enabled: true
+        builtIn: true
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+    Problem:
+      type: object
+      description: |
+        A Problem Details object (RFC 9457).
+
+        Additional properties specific to the problem type may be present.
+      example:
+        type: urn:problem-type:exampleOrganization:exampleProblem
+        href: https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types
+        title: Description of the type of problem that occurred
+        status: 400
+        detail: Description of specific occurrence of the problem
+        instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+          description: |
+            An absolute URI that identifies the problem type.  When dereferenced,
+            it SHOULD provide human-readable documentation for the problem type
+            (e.g., using HTML).
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: |
+            A short, summary of the problem type. Written in english and readable
+            for engineers (usually not suited for non technical stakeholders and
+            not localized); example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status code generated by the origin server for this occurrence
+            of the problem.
+          example: 503
+          maximum: 600
+          minimum: 100
+        detail:
+          type: string
+          description: |
+            A human readable explanation specific to this occurrence of the
+            problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: |-
+            An absolute URI that identifies the specific occurrence of the problem.
+            It may or may not yield further information if dereferenced.
+  responses:
+    BadRequest:
+      description: "Bad request, invalid input data"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            badRequest:
+              summary: Bad Request
+              value:
+                type: urn:problem-type:simpl:badRequest
+                title: Bad request
+                detail: Invalid input data
+                status: 400
+    Unauthorized:
+      description: "Unauthorized, the user is not authenticated"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unauthorized:
+              summary: Unauthorized
+              value:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                detail: The user is not authenticated
+                status: 401
+    Forbidden:
+      description: "Forbidden, the user does not have the roles to perform the operation"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            forbidden:
+              summary: Forbidden
+              value:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                detail: The user does not have the roles to perform the operation
+                status: 403
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            notFound:
+              summary: Not Found
+              value:
+                type: urn:problem-type:simpl:notFound
+                title: Not Found
+                detail: Resource not found
+                status: 404
+  securitySchemes:
+    mtls:
+      type: http
+      description: SIMPL Tier 2 mTLS authentication process
+      scheme: mutual
+    mtlsWithEphemeralProof:
+      type: http
+      description: SIMPL Tier 2 mTLS authentication process with Ephemeral Proof exchange
+      scheme: mutual
+    oauth2AuthCode:
+      type: oauth2
+      description: SIMPL Tier1 end users authentication process
+      flows:
+        authorizationCode:
+          authorizationUrl: ""
+          tokenUrl: ""
+          scopes: {}
+    oauth2ClientCredentials:
+      type: oauth2
+      description: SIMPL internal APIs authentication process
+      flows:
+        clientCredentials:
+          tokenUrl: ""
+          scopes: {}

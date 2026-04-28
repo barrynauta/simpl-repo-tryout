@@ -32,6 +32,11 @@ Provenance: built by Simpl. Source repositories: `iaa/authentication_provider` (
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+
+## API
+
+[`api/`](api/README.md) — 4 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - Backend: <https://code.europa.eu/simpl/simpl-open/development/iaa/authentication_provider>

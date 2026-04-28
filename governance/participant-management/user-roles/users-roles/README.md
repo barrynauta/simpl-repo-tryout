@@ -38,6 +38,11 @@ Provenance: built by Simpl. Source repositories: `iaa/users-roles` (backend, Jav
 - [BP03B Participant User and Roles Configuration](../../../../foundations/business-processes/BP03B-onboarding-participant-end-user/dynamic-view.md)
 - [BP03C End User Role Request](../../../../foundations/business-processes/BP03C-end-user-role-request/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 3 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - Backend: `code.europa.eu/simpl/simpl-open/development/iaa/users-roles`

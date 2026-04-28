@@ -3,20 +3,29 @@
 <hr/>
 <p>
 📍 <strong>You are here</strong><br/>
-<a href="../../../../../README.md">🏠 Home</a><br/>
-    <a href="../../../../README.md">Dimension: Integration</a><br/>
-        <a href="../../../README.md">Capability: Resource Discovery</a><br/>
-            <a href="../../README.md">Service: Search Engine</a><br/>
-                <a href="../README.md">Solution: Catalogue Client Application</a><br/>
-                    <strong>API: API Documentation</strong><br/>
+<a href="../../../../README.md">🏠 Home</a> &nbsp;»&nbsp;
+<a href="../README.md">catalogue-client-application</a> &nbsp;»&nbsp;
+<strong>API specifications</strong>
 </p>
 </div>
 
-# Catalogue Client Application — API index
+# API specifications — catalogue-client-application
 
-| API | File | Description |
-|-----|------|-------------|
-| Advanced Search Backend API | [advanced-search.openapi.yaml](advanced-search.openapi.yaml) | Query API for quick and advanced search against the Catalogue |
-| Contract Consumption Adapter API | [contract-consumption.openapi.yaml](contract-consumption.openapi.yaml) | API for requesting offerings and initiating contract negotiation |
+Specifications imported verbatim from the source repository. Last imported: 2026-04-28.
 
-Status: OpenAPI specifications not yet available in this documentation catalogue — see source repositories for runtime API documentation.
+| File | Kind | Title | Version | Size |
+|------|------|-------|---------|------|
+| [`openapi-xfscadvsearch-tier1-v1.yaml`](openapi-xfscadvsearch-tier1-v1.yaml) | openapi | Catalog Search API | `1.0` | 19 KB |
+| [`openapi-xfscadvsearch-tier1-v2.yaml`](openapi-xfscadvsearch-tier1-v2.yaml) | openapi | Catalog Search API | `1.0` | 17 KB |
+
+## How to view these specs
+
+- **OpenAPI**: paste the YAML into [editor.swagger.io](https://editor.swagger.io/) for an interactive view.
+- **AsyncAPI**: paste into [studio.asyncapi.com](https://studio.asyncapi.com/) for diagram + message browser.
+- **Locally with Redoc**: `npx redoc-cli serve <file>.yaml`.
+
+## Notes
+
+- These are imported from the implementation repos under `code.europa.eu/simpl/simpl-open/development/...`. The source-of-truth path is recorded in the parent solution's `README.md` under "Source code".
+- Tier 1 vs Tier 2 spec variants reflect the IAA two-tier architecture: Tier 1 specs cover human/end-user APIs reached through the Tier 1 gateway; Tier 2 specs cover agent-to-agent APIs reached through the Tier 2 gateway under mTLS.
+- AsyncAPI specs describe Kafka topic schemas (publishers / subscribers / message payloads) used by event-driven flows.

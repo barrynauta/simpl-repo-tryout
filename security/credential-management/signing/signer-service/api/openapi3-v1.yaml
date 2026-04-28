@@ -1,0 +1,465 @@
+---
+openapi: 3.0.3
+info:
+  title: Signing service
+  description: Signing service HTTP APIs for digitally signing files.
+  version: '1.1'
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  contact:
+    name: Simpl Programme
+    email: cnect-simpl@ec.europa.eu
+    url: https://simpl-programme.ec.europa.eu/
+servers:
+  - url: https://localhost:8085/signingService/v1
+    description: Signing service
+paths:
+  "/health":
+    get:
+      tags:
+        - health
+      summary: health check endpoint
+      description: Health check endpoint
+      operationId: health#Liveness
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                "$ref": "#/components/schemas/HealthResponse"
+              example:
+                status: UP
+                groups:
+                  - liveness
+                  - readiness
+                components:
+                  diskSpace:
+                    status: UP
+                    details:
+                      total: 135024029696
+                      free: 42437074944
+                      threshold: 10485760
+                      path: C:\workspace\CONTRACTS-BILLING\repos\contract\.
+                      exists: true
+                  livenessState:
+                    status: UP
+                  ping:
+                    status: UP
+                  readinessState:
+                    status: UP
+                  ssl:
+                    status: UP
+                    details:
+                      validChains: [ ]
+                      invalidChains: [ ]
+        '503':
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:serviceUnavailable
+                status: 503
+                title: Service Unavailable
+                detail: Service Unavailable
+                instance: "/signingService/v1/health"
+  "/documents/sign":
+    post:
+      tags:
+        - sign
+      summary: Sign document
+      description: Sign attached document
+      operationId: signingService#sign
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SignDocument"
+            example:
+              bytes: U29tZSB0ZerfdgN0cmluZsdfbyBiZSxvccaWduZWQ=
+              keyAlias: orgA-signer
+              signatureFormat: CADES
+              signatureType: DETACHED
+              tsaUrl: https://tsa.qsign.pl/rfc3161
+        required: true
+      responses:
+        '201':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SignResponse"
+              example:
+                signedDocument: U29tZSB0ZerfdgN0cmluZsdfbyBiZSxvccaWduZWQ=
+                timestamp: 2026-01-13T14:30:00Z
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:badRequest
+                status: 400
+                title: Bad Request
+                detail: Invalid body content
+                instance: "/signingService/v1/documents/sign"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                status: 401
+                title: Unauthorized
+                detail: Invalid API Key
+                instance: "/signingService/v1/documents/sign"
+        '405':
+          description: Method Not allowed
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:methodNotAllowed
+                status: 405
+                title: Method Not Allowed
+                detail: Method Not Allowed
+                instance: "/signingService/v1/documents/sign"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                status: 406
+                title: Not Acceptable
+                detail: Only application/json responses are supported.
+                instance: "/signingService/v1/documents/sign"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:unsupportedMediaType
+                status: 415
+                title: Unsupported Media Type
+                detail: Only application/json requests are supported.
+                instance: "/signingService/v1/documents/sign"
+        '500':
+          description: Server Error
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                status: 500
+                title: Server Error
+                detail: Server Error
+  "/documents/verify":
+    post:
+      tags:
+        - verify
+      summary: Validate a signed document
+      description: Validates a signed document
+      operationId: signingService#verify
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/VerifyDocument"
+            example:
+              signedDocument:
+                bytes: U29tZSB0ZerfdgN0cmluZsdfbyBiZSxvccaWduZWQ=
+                name: enveloped.xml
+        required: true
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/VerifyResponse"
+              example:
+                valid: true
+                report: DSS validation report
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:badRequest
+                status: 400
+                title: Bad Request
+                detail: Invalid body content
+                instance: "/signingService/v1/documents/verify"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                status: 401
+                title: Unauthorized
+                detail: Invalid API Key
+                instance: "/signingService/v1/documents/verify"
+        '405':
+          description: Method Not allowed
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:methodNotAllowed
+                status: 405
+                title: Method Not Allowed
+                detail: Method Not Allowed
+                instance: "/signingService/v1/documents/verify"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                status: 406
+                title: Not Acceptable
+                detail: Only application/json responses are supported.
+                instance: "/signingService/v1/documents/verify"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:unsupportedMediaType
+                status: 415
+                title: Unsupported Media Type
+                detail: Only application/json requests are supported.
+                instance: "/signingService/v1/documents/verify"
+        '500':
+          description: Server Error
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Problem"
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                status: 500
+                title: Server Error
+                detail: Server Error
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    SignResponse:
+      type: object
+      required:
+        - signedDocument
+        - timestamp
+      properties:
+        signedDocument:
+          type: string
+          format: byte
+          description: Base64-encoded signed document
+        timestamp:
+          type: string
+          format: date-time
+          description: Signing time
+      example:
+        signedDocument: U29tZSB0ZerfdgN0cmluZsdfbyBiZSxvccaWduZWQ=
+        timestamp: 2026-01-13T14:30:00Z
+    SignDocument:
+      type: object
+      required:
+        - bytes
+        - keyAlias
+        - signatureFormat
+        - signatureType
+      properties:
+        bytes:
+          type: string
+          format: byte
+          description: Base64-encoded document to be signed
+        keyAlias:
+          type: string
+          description: Key identifier in Vault/HSM
+        signatureFormat:
+          type: string
+          description: Signature format
+          example: CADES
+          enum:
+            - CADES
+            - XADES
+            - JADES
+        signatureType:
+          type: string
+          description: Signature type
+          example: DETACHED
+          enum:
+            - DETACHED
+            - ENVELOPED
+        tsaUrl:
+          type: string
+          description: Optional TSA endpoint
+      example:
+        bytes: U29tZSB0ZerfdgN0cmluZsdfbyBiZSxvccaWduZWQ=
+        keyAlias: orgA-signer
+        signatureFormat: CADES
+        signatureType: DETACHED
+        tsaUrl: https://tsa.qsign.pl/rfc3161
+    VerifyDocument:
+      type: object
+      required:
+        - signedDocument
+      properties:
+        signedDocument:
+          type: object
+          description: Object representing signed document to be verified
+          required:
+            - bytes
+          properties:
+            bytes:
+              type: string
+              format: byte
+              description: Base64-encoded document content
+            name:
+              type: string
+              description: Original document filename
+        originalDocument:
+          type: object
+          description: Object representing original document (obligatory for detached signature verification)
+          required:
+            - bytes
+          properties:
+            bytes:
+              type: string
+              format: byte
+              description: Base64-encoded document content
+            name:
+              type: string
+              description: Original document filename
+      example:
+        signedDocument:
+          bytes: U29tZSB0ZerfdgN0cmluZsdfbyBiZSxvccaWduZWQ=
+          name: xades-detached.xml
+    VerifyResponse:
+      type: object
+      required:
+        - valid
+      properties:
+        valid:
+          type: boolean
+          description: Confirmation if a document signature is valid or not
+        report:
+          type: string
+          description: DSS validation report
+      example:
+        valid: true
+        report: DSS validation report
+    HealthResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          description: Overall health status
+          enum: [ UP, DOWN ]
+          example: UP
+        groups:
+          type: array
+          description: Groups of probes aggregated in this health response
+          items:
+            type: string
+          example: [ "liveness", "readiness" ]
+        components:
+          type: object
+          description: Detailed component health information. Keys are component names, values are health objects.
+          additionalProperties:
+            type: object
+            required:
+              - status
+            properties:
+              status:
+                type: string
+                enum: [ UP, DOWN ]
+                description: Component status
+                example: UP
+              details:
+                type: object
+                description: Component-specific details
+                additionalProperties: true
+          example:
+            diskSpace:
+              status: UP
+              details:
+                total: 207929917440
+                free: 40679194624
+                threshold: 10485760
+                path: "/."
+                exists: true
+    Problem:
+      description: A Problem Details object (RFC 9457). Additional properties specific
+        to the problem type may be present.
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the problem type
+          default: about:blank
+        title:
+          type: string
+          description: A short summary of the problem type. Written in English and
+            readable for engineers (usually not suited for non technical stakeholders
+            and not localized).
+          example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this
+            occurrence of the problem.
+          minimum: 400
+          maximum: 600
+          exclusiveMaximum: true
+          example: 503
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of
+            the problem
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of
+            the problem. It may or may not yield further information if dereferenced.
+tags:
+  - name: health
+    description: Health service provides health check endpoints.
+  - name: sign
+    description: Operations with signing document.
+  - name: verify
+    description: Operations with validating signed document.
+security:
+  - ApiKeyAuth: []

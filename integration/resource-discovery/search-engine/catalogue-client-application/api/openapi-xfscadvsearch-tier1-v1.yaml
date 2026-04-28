@@ -1,0 +1,513 @@
+info:
+  title: Catalog Search API
+  description: |-
+    These APIs enable the discovery of self-descriptions within a federated catalog, supporting two search modes: simple keyword-based search and advanced metadata-based search. They are designed to facilitate standardized, secure, and efficient access to data offering metadata in federated data ecosystems.
+
+    ## Business Context
+
+    The Catalog Search API enables consumers to discover and retrieve metadata about data offerings published by providers in a federated catalog. It supports both simple keyword-based and advanced structured search mechanisms, allowing for flexible and precise discovery of self-descriptions. It enables:
+
+    1. Keyword-based and advanced metadata-based search of offerings.
+
+    2. Retrieval of detailed self-descriptions in the form of Verifiable Credentials.
+
+    3. Access to schema definitions for self-description creation and validation.
+
+    ### Key Actors
+
+    - **Consumer**: Searches the catalog, filters results, and retrieves detailed descriptions of data offerings.
+
+    ### Typical Flow
+
+    1. Perform a simple keyword search across the catalog.
+
+    2. Execute an advanced search using structured metadata filters based on schema offer
+
+    3. Retrieve a detailed self-description using its unique identifier.
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: "1.0"
+servers:
+- url: https://xfsc-advsearch-be.dev.simpl-europe.eu/v1
+security:
+- bearerAuth: []
+openapi: 3.0.1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: IAA cloud gateway JWT token
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    UnauthorizedProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    InternalServerErrorProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    NotFoundProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    InputObject:
+      type: object
+      properties:
+        in:
+          type: string
+          enum:
+          - body
+          - path
+          - query
+          - header
+        name:
+          type: string
+        value:
+          type: object
+    BadRequestProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputValidationIssue'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    InputValidationIssue:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+        in:
+          type: string
+          enum:
+          - body
+          - path
+          - query
+          - header
+        name:
+          type: string
+        value:
+          type: object
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputObject'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+paths:
+  /selfDescriptions:
+    get:
+      tags:
+      - Self Description
+      summary: Returns the result of a simple search on the catalog
+      description: Performs a keyword-based search across the catalog of self-descriptions. This endpoint allows clients to retrieve a filtered list of self-descriptions by providing a search term via the `q` query parameter.
+      operationId: getSimpleSearch
+      parameters:
+      - name: q
+        in: query
+        description: A keyword used to filter self-descriptions in the federated catalog
+        required: true
+        schema:
+          type: string
+          description: A keyword used to filter self-descriptions in the federated catalog
+          example: Health Data
+        example: Health Data
+      - name: page
+        in: query
+        description: Page number (1-based). Must be greater than 0
+        required: false
+        schema:
+          type: integer
+          description: Page number (1-based). Must be greater than 0
+          format: int32
+          example: 1
+          default: 1
+        example: 1
+      - name: pageSize
+        in: query
+        description: Number of items per page. Must be greater than 0
+        required: false
+        schema:
+          type: integer
+          description: Number of items per page. Must be greater than 0
+          format: int32
+          example: 20
+          default: 20
+        example: 20
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Invalid payload
+                status: 400
+                detail: missing required arguments
+                instance: /selfDescriptions
+                issues:
+                - detail: Field 'q' must not be empty
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorProblem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                instance: /selfDescriptions
+                detail: Unexpected internal error
+        "200":
+          description: Returns search results
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                totalCount: 4
+                items:
+                - i:
+                    claimsGraphUri:
+                    - did:web:registry.gaia-x.eu:DataOffering:fMw2UtNCDW-ydI83YKscqCKa-n75jJ0qY7v7====
+                    name: aefaf
+                    description: afafa
+                    inLanguage: en
+                    serviceAccessPoint: https://creation.com
+                - i:
+                    claimsGraphUri:
+                    - did:web:registry.gaia-x.eu:DataOffering:fMw2UtNCDW-ydI83YKscqCKa-n75jJ0qY7v1
+                    name: aefaf
+                    description: afafa
+                    inLanguage: en
+                    serviceAccessPoint: https://creation.com
+                - i:
+                    claimsGraphUri:
+                    - did:web:registry.gaia-x.eu:DataOffering:fMw2UtNCDW-ydI83YKscqCKa-n75jJ0qY7v0
+                    name: aefaf
+                    description: afafa
+                    inLanguage: en
+                    serviceAccessPoint: https://creation.com
+                - i:
+                    claimsGraphUri:
+                    - did:web:registry.gaia-x.eu:DataOffering:fMw2UtNCDW-ydI83YKscqCKa-n75jJ0qY7v8====
+                    name: aefaf
+                    description: afafa
+                    inLanguage: en
+                    serviceAccessPoint: https://creation.com
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedProblem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                instance: /selfDescriptions
+                detail: Missing or invalid Authorization header
+  /selfDescriptions/advanced:
+    post:
+      tags:
+      - Self Description
+      summary: Returns the result of an advanced search on the catalog
+      description: Executes an advanced search query on the federated catalog using structured criteria. This endpoint allows consumers to filter and retrieve self-descriptions based on specific metadata attributes. Each JSON root key needs to correspond to a resource description node name. As a value for that key an JSON object need to be provided with the searched property names and values. In case of numerical values we can provide a range of searched values by providing op1 and op2 properties as described in the example.
+      operationId: postAdvancedSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              description: Object containing advanced search criteria
+              example: '{"simpl:GeneralServiceProperties":{"@type":"simpl:GeneralServiceProperties","name":"Health"},"simpl:OfferingPrice":{"price":{"op1":">=","value1":15,"op2":"<","value2":150}}}'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Invalid payload
+                status: 400
+                detail: missing required arguments
+                instance: /selfDescriptions/advanced
+                issues:
+                - detail: Request body must not be empty
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorProblem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                instance: /selfDescriptions/advanced
+                detail: Unexpected internal error
+        "200":
+          description: Returns search results
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                totalCount: 4
+                items:
+                - i:
+                    claimsGraphUri:
+                    - did:web:registry.gaia-x.eu:DataOffering:fMw2UtNCDW-ydI83YKscqCKa-n75jJ0qY7v7====
+                    name: aefaf
+                    description: afafa
+                    inLanguage: en
+                    serviceAccessPoint: https://creation.com
+                - i:
+                    claimsGraphUri:
+                    - did:web:registry.gaia-x.eu:DataOffering:fMw2UtNCDW-ydI83YKscqCKa-n75jJ0qY7v1
+                    name: aefaf
+                    description: afafa
+                    inLanguage: en
+                    serviceAccessPoint: https://creation.com
+                - i:
+                    claimsGraphUri:
+                    - did:web:registry.gaia-x.eu:DataOffering:fMw2UtNCDW-ydI83YKscqCKa-n75jJ0qY7v0
+                    name: aefaf
+                    description: afafa
+                    inLanguage: en
+                    serviceAccessPoint: https://creation.com
+                - i:
+                    claimsGraphUri:
+                    - did:web:registry.gaia-x.eu:DataOffering:fMw2UtNCDW-ydI83YKscqCKa-n75jJ0qY7v8====
+                    name: aefaf
+                    description: afafa
+                    inLanguage: en
+                    serviceAccessPoint: https://creation.com
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedProblem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                instance: /selfDescriptions/advanced
+                detail: Missing or invalid Authorization header
+  /selfDescriptions/{selfDescriptionId}:
+    get:
+      tags:
+      - Self Description
+      summary: Returns self description based on selfDescriptionID
+      description: Fetches a detailed self-description document identified by the provided selfDescriptionId. This endpoint returns a Verifiable Credential that describes a data/infra/app offering in compliance with SIMPL standards. The response includes metadata such as service properties, contract templates, data formats, and access endpoints.
+      operationId: getSelfDescription
+      parameters:
+      - name: selfDescriptionId
+        in: path
+        description: The unique identifier of the self-description to retrieve.
+        required: true
+        schema:
+          type: string
+          description: The unique identifier of the self-description to retrieve.
+          example: did:web:registry.gaia-x.eu:DataOffering:4727baa4-8c7b-4e7f-90ba-eebe460c0408
+        example: did:web:registry.gaia-x.eu:DataOffering:4727baa4-8c7b-4e7f-90ba-eebe460c0408
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Invalid payload
+                status: 400
+                detail: missing required arguments
+                instance: /selfDescriptions/{selfDescriptionId}
+                issues:
+                - detail: Field 'selfDescriptionId' must not be empty
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorProblem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                instance: /selfDescriptions/{selfDescriptionId}
+                detail: Unexpected internal error
+        "200":
+          description: Returns self description
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                '@context':
+                - https://www.w3.org/2018/credentials/v1
+                - https://w3id.org/security/suites/jws-2020/v1
+                credentialSubject:
+                  '@context':
+                    gax-validation: http://w3id.org/gaia-x/validation#
+                    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+                    sh: http://www.w3.org/ns/shacl#
+                    simpl: http://w3id.org/gaia-x/simpl#
+                    skos: http://www.w3.org/2004/02/skos/core#
+                    xsd: http://www.w3.org/2001/XMLSchema#
+                  '@id': did:web:registry.gaia-x.eu:DataOffering:4727baa4-8c7b-4e7f-90ba-eebe460c0408
+                  rdf:type:
+                    '@id': simpl:DataOffering
+                  simpl:contractTemplate:
+                    rdf:type:
+                      '@id': simpl:ContractTemplate
+                    simpl:contractTemplateDocument: Contract Template 1
+                    simpl:contractTemplateHashAlg: SHA256
+                    simpl:contractTemplateHashValue: 22275fe551e7a16f5f2c1cc10d39a534f547323d877109d98b8e8730047bc5ed
+                    simpl:contractTemplateURL: https://files.dev.simpl-europe.eu/static/contract/ContractTemplate1.json
+                  simpl:dataProperties:
+                    rdf:type:
+                      '@id': simpl:DataProperties
+                    simpl:format: xml
+                  simpl:edcConnector:
+                    simpl:providerEndpointURL: https://edc-provider.dev.simpl-europe.eu
+                  simpl:generalServiceProperties:
+                    rdf:type:
+                      '@id': simpl:GeneralServiceProperties
+                    simpl:name: Test Data Offering
+                    simpl:description: A comprehensive data offering for testing purposes
+                    simpl:inLanguage: en
+                issuanceDate: 2024-12-03T13:52:45.111955862Z
+                issuer: did:web:did.dev.simpl-europa.eu
+                proof:
+                  created: 2024-12-03T13:52:45.122614972Z
+                  jws: eyJhbGciOiJVbmRlZmluZWQiLCJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdfQ..pfkY4hJ3kDMSmUUHaUq6c-Y_wHCKbp7J09MpByLJ9C433Th8EfgM69snZEMYzJISwjtowdq0BXiuDoPIPFcRBw
+                  proofPurpose: assertionMethod
+                  type: JsonWebSignature2020
+                  verificationMethod: did:web:did.dev.simpl-europa.eu#gaia-x-key1
+                type: VerifiableCredential
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedProblem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                instance: /selfDescriptions/{selfDescriptionId}
+                detail: Missing or invalid Authorization header
+        "404":
+          description: Schema not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/NotFoundProblem'
+              example:
+                type: urn:problem-type:simpl:notFound
+                title: SelfDescription not found
+                status: 404
+                detail: SelfDescription with identifier 'did:web:registry.gaia-x.eu:DataOffering:123' was not found
+                instance: /selfDescriptions/{selfDescriptionId}

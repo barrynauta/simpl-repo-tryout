@@ -1,0 +1,141 @@
+asyncapi: 3.0.0
+info:
+  title: Authentication Provider Async API
+  version: 1.3.0
+  description: "The Authentication Provided component publishes events related to the Tier 2 status of the agent, such as credential update or deletion and changes to the assigned identity attributes."
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  tags:
+    - name: Credentials
+      description: Messages related to the credentials of the agent
+    - name: Identity Attributes
+      description: Messages related to the identity attributes of the agent
+servers:
+  kafka:
+    host: "{host}:{port}"
+    protocol: kafka
+defaultContentType: application/json
+channels:
+  credentialUpdatedEvent:
+    address: '{prefix}eu.europa.ec.simpl.authenticationprovider.events.credential.updated'
+    messages:
+      credentialUpdatedEvent:
+        $ref: '#/components/messages/credentialUpdatedEvent'
+    description: The channel on which credential update events will be published.
+    parameters:
+      prefix:
+        $ref: '#/components/parameters/prefix'
+  assignedIdentityAttributesUpdatedEvent:
+    address: '{prefix}eu.europa.ec.simpl.authenticationprovider.events.identity-attributes.updated'
+    messages:
+      assignedIdentityAttributesUpdatedEvent:
+        $ref: '#/components/messages/assignedIdentityAttributesUpdatedEvent'
+    description: The channel on which identity attribute update events will be published.
+    parameters:
+      prefix:
+        $ref: '#/components/parameters/prefix'
+operations:
+  publishCredentialUpdatedEvent:
+    action: send
+    description: Publish credential updated event
+    tags:
+      - name: Credentials
+    channel:
+      $ref: '#/channels/credentialUpdatedEvent'
+    messages:
+      - $ref: '#/channels/credentialUpdatedEvent/messages/credentialUpdatedEvent'
+  publishAssignedIdentityAttributesUpdatedEvent:
+    action: send
+    description: Publish assigned identity attributes updated event
+    tags:
+      - name: Identity Attributes
+    channel:
+      $ref: '#/channels/assignedIdentityAttributesUpdatedEvent'
+    messages:
+      - $ref: '#/channels/assignedIdentityAttributesUpdatedEvent/messages/assignedIdentityAttributesUpdatedEvent'
+components:
+  messages:
+    credentialUpdatedEvent:
+      name: credentialUpdatedEvent
+      title: Credential updated event
+      summary: Signal that the agent's credential has been updated or removed
+      description: A new credential has been uploaded to the authentication provider component of the agent, or the existing credential has been deleted.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/credentialUpdatedEvent'
+    assignedIdentityAttributesUpdatedEvent:
+      name: assignedIdentityAttributesUpdatedEvent
+      title: Assigned dentity attributes updated event
+      summary: Signals that the identity attributes assigned to the participant have changed.
+      description: A new ephemeral proof has been received from the governance authority, containing a different set of identity attributes assigned to the participant.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/assignedIdentityAttributesUpdatedEvent'
+  schemas:
+    credentialUpdatedEvent:
+      x-parser-schema-id: credentialUpdatedEvent
+      properties:
+        deleted:
+          $ref: '#/components/schemas/credentialDeleted'
+    assignedIdentityAttributesUpdatedEvent:
+      x-parser-schema-id: assignedIdentityAttributesUpdatedEvent
+      required:
+        - identityAttributes
+        - assignedIdentityAttributesCodes
+      properties:
+        assignedIdentityAttributes:
+          description: The list of identity attributes which are now assigned to the participant.
+          schema:
+            $ref: '#/components/schemas/identityAttributes'
+        assignedIdentityAttributesCodes:
+          description: The list of identity attributes codes which are now assigned to the participant.
+          deprecated: true
+          schema:
+            $ref: '#/components/schemas/identityAttributeCodes'
+    identityAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/identityAttribute'
+    identityAttributeCodes:
+      type: array
+      items:
+        type: string
+    identityAttribute:
+      x-parser-schema-id: identityAttribute
+      description: The representation of an identity attribute.
+      type: object
+      required:
+        - id
+        - code
+        - name
+        - description
+        - assignableToRoles
+        - enabled
+        - right
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        assignableToRoles:
+          type: boolean
+        enabled:
+          type: boolean
+        right:
+          type: boolean
+    credentialDeleted:
+      description: Whether the credential has been deleted or only updated.
+      type: boolean
+  parameters:
+    prefix:
+      description: A prefix used to distinguish the channels used by different agents that insist on the same message broker.

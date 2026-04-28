@@ -1,0 +1,1542 @@
+openapi: 3.0.1
+info:
+  title: Identity Provider
+  description: OpenAPI definition for the Identity Provider component of the SIMPL
+    project
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: 1.5.0
+servers:
+- url: https://localhost:8083/v1
+  description: identityprovider
+security:
+- mtls: []
+- mtlsWithEphemeralProof: []
+- oauth2AuthCode: []
+- oauth2ClientCredentials: []
+tags:
+- name: Certificate Sign Requests
+  description: API for managing Certificate Sign Requests
+- name: Credentials
+  description: API for managing Participant's credentials
+- name: Mtls
+  description: API for managing Mtls
+- name: Mtls Ephemeral Proofs
+  description: API for managing Mtls Ephemeral Proofs
+- name: Participants
+  description: API for managing Participants
+paths:
+  /credentials/{id}:
+    get:
+      tags:
+      - Credentials
+      summary: Retrieve information about the credential of the given participant
+      description: Retrieve information about the credential of the given participant
+      operationId: getCredential
+      parameters:
+      - name: id
+        in: path
+        description: ID of the participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 1dce13a3-ba1c-44f1-87ec-fca980da71bf
+      responses:
+        "200":
+          description: Credential information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Certificate"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    publicKey: I3F3ILirR0NN+TsTwivWMo+jx0eJxrCJeRgV2M5gU1s=
+                    lastStatusChangeDate: 2000-01-23T04:56:07.000+00:00
+                    status: VALID
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - "GET /tier1/v2/participants/{participantId}/credentials"
+        reason: Changes in response data due to credentials handling revise
+    put:
+      tags:
+      - Credentials
+      summary: Create credential
+      description: Creates the credential
+      operationId: createCertificate
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 1dce13a3-ba1c-44f1-87ec-fca980da71bf
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Certificate"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    publicKey: I3F3ILirR0NN+TsTwivWMo+jx0eJxrCJeRgV2M5gU1s=
+                    lastStatusChangeDate: 2000-01-23T04:56:07.000+00:00
+                    status: VALID
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - SIMPL_USER
+      x-deprecation-info:
+        replacements:
+        - "POST /tier1/v2/participants/{participantId}/credentials"
+        reason: Changes in response data due to credentials handling revise
+    delete:
+      tags:
+      - Credentials
+      summary: Revoke credential
+      description: Revokes the certificate with the specified ID
+      operationId: revoke
+      parameters:
+      - name: id
+        in: path
+        description: ID of the certificate to be revoked
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 8f031077-1d65-4f9c-96cf-8a388db51469
+      responses:
+        "204":
+          description: Certificate revoked successfully
+          x-microcks-refs:
+          - default
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements: []
+        reason: Changes in response data due to credentials handling revise
+    patch:
+      tags:
+      - Credentials
+      summary: Change the status of a participant credential
+      description: Modify the status of a participant's credential
+      operationId: updateCredentialStatus
+      parameters:
+      - name: id
+        in: path
+        description: ID of the participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 1dce13a3-ba1c-44f1-87ec-fca980da71bf
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCredentialStatusRequest"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  status: VALID
+        required: true
+      responses:
+        "200":
+          description: Credential status updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Certificate"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    publicKey: I3F3ILirR0NN+TsTwivWMo+jx0eJxrCJeRgV2M5gU1s=
+                    lastStatusChangeDate: 2000-01-23T04:56:07.000+00:00
+                    status: VALID
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - "PATCH /tier1/v2/credentials/{credentialId}"
+        reason: Changes in response data due to credentials handling revise
+  /credentials/{id}/download:
+    get:
+      tags:
+      - Credentials
+      summary: Download credential
+      description: Downloads the certificate for the specified participant ID as a
+        file
+      operationId: downloadCertificate
+      parameters:
+      - name: id
+        in: path
+        description: ID of the certificate to be downloaded
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 1dce13a3-ba1c-44f1-87ec-fca980da71bf
+      responses:
+        "200":
+          description: Certificate downloaded successfully
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              example: "[binary data]"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - APPLICANT
+      x-deprecation-info:
+        replacements:
+        - "GET /tier1/v2/participants/{participantId}/credentials/active"
+        reason: Changes in response data due to credentials handling revise
+  /credentials/{id}/renew:
+    post:
+      tags:
+      - Credentials
+      summary: Renew the specified credential
+      description: Renew the specified credential
+      operationId: renewCertificate
+      parameters:
+      - name: id
+        in: path
+        description: ID of the credential to be renewed
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 1dce13a3-ba1c-44f1-87ec-fca980da71bf
+      responses:
+        "200":
+          description: Certificate renewed successfully
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              example: "[binary data]"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - "POST /tier1/v2/participants/{participantId}/credentials"
+        reason: Changes in response data due to credentials handling revise
+  /participants:
+    get:
+      tags:
+      - Participants
+      summary: Search for participants
+      description: Searches for participants based on the provided filter criteria
+      operationId: search
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+        examples:
+          default:
+            summary: Default example
+            value: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+        examples:
+          default:
+            summary: Default example
+            value: 10
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          default:
+          - "id,ASC"
+          items:
+            type: string
+        examples:
+          default:
+            summary: Default example
+            value: "id,asc"
+      - name: filter
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: "#/components/schemas/SearchFilterParameter"
+        examples:
+          default:
+            summary: Default example
+            value:
+              organization: organization
+              isAuthority: true
+              participantType: participantType
+              dateTo: 2000-01-23T04:56:07.000+00:00
+              credentialId: credentialId
+              dateFrom: 2000-01-23T04:56:07.000+00:00
+              hasCredential: true
+        x-parameter-object: true
+      responses:
+        "200":
+          description: Participants retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageResponseParticipant"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    page:
+                      number: 6
+                      size: 0
+                      totalPages: 5
+                      totalElements: 1
+                    content:
+                    - expiryDate: 2000-01-23T04:56:07.000+00:00
+                      organization: Organization 1
+                      participantType: CONSUMER
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      credentialId: w+KEjkFH71jLscODJgIkCCgsDXqToX4RZp0cOdt2vJbOImZZAl3vEyaB7rWqUuQu
+                      id: 3657a28e-93c4-4f50-9f48-4cbe4dcfbe87
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      credentialStatus: VALID
+                    - expiryDate: 2000-01-23T04:56:07.000+00:00
+                      organization: Organization 2
+                      participantType: DATA_PROVIDER
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      credentialId: XVWP7uxTWyWRteYjJf3nmpRuKUADRbEf0+7dke8YM5dHsHBoacEK7Z4MVxu2a2GU
+                      id: c3a45a29-cda0-429c-9e1c-995ebc178e59
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      credentialStatus: VALID
+                    empty: false
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/participants
+        reason: Changes in response data due to credentials handling revise
+    post:
+      tags:
+      - Participants
+      summary: Create a new participant
+      description: Creates a new participant with the provided details
+      operationId: create
+      requestBody:
+        description: Details of the participant to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Participant"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  organization: Organization Name
+                  participantType: CONSUMER
+        required: true
+      responses:
+        "201":
+          description: Participant created successfully
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uuid
+              example: 87ecf023-2b81-40c1-a0e6-1ee3129cca09
+        "400":
+          $ref: "#/components/responses/BadRequest"
+      deprecated: true
+      security:
+      - oauth2ClientCredentials: []
+      x-deprecation-info:
+        replacements:
+        - POST /tier1/v2/participants
+        reason: Changes in response data due to credentials handling revise
+  /participants/{participantId}:
+    get:
+      tags:
+      - Participants
+      summary: Get participant by ID
+      description: Get participant by ID
+      operationId: get
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 91b4ef51-8dc3-451f-a4eb-3ad88826eec9
+      responses:
+        "200":
+          description: Participant retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    organization: Organization Name
+                    participantType: CONSUMER
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialId: ymojkQMALL75C+2s4Rv9MGPBS1bIAHyH54//XBI+gjG9zwD20E/k8xb20JHKJ5KD
+                    id: 4ff8e666-522e-4796-ac8d-e5c707d675f0
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialStatus: VALID
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - "GET /tier1/v2/participants/{participantId}"
+        reason: Changes in response data due to credentials handling revise
+  /participants/{participantId}/csr:
+    post:
+      tags:
+      - Certificate Sign Requests
+      summary: Validate and store a CSR for a participant
+      description: "Validate and store a CSR for a participant, then create a certificate"
+      operationId: storeCSRAndCreateCertificate
+      parameters:
+      - name: participantId
+        in: path
+        description: ID of the participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 91b4ef51-8dc3-451f-a4eb-3ad88826eec9
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/StoreCsrAndCreateCertificateRequest"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  csr: "[binary data]"
+        required: true
+      responses:
+        "200":
+          description: CSR uploaded successfully
+          x-microcks-refs:
+          - default
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - APPLICANT
+      x-deprecation-info:
+        replacements:
+        - "PUT /tier1/v2/participants/{participantId}/csr"
+        reason: Changes in response data due to credentials handling revise
+  /mtls/whoami:
+    get:
+      tags:
+      - Mtls
+      summary: Get participant information
+      description: Retrieves the information of the caller participant
+      operationId: whoami
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: Public Key Hash of participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      responses:
+        "200":
+          description: Participant and identity attributes retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    organization: Organization Name
+                    participantType: CONSUMER
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialId: ymojkQMALL75C+2s4Rv9MGPBS1bIAHyH54//XBI+gjG9zwD20E/k8xb20JHKJ5KD
+                    id: 4ff8e666-522e-4796-ac8d-e5c707d675f0
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialStatus: VALID
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtls: []
+      x-deprecation-info:
+        replacements:
+        - GET /tier2/v2/participant
+        reason: Changes in response data due to credentials handling revise
+  /mtls/token:
+    post:
+      tags:
+      - Mtls Ephemeral Proofs
+      summary: |
+        Generate ephemeral proof
+      description: |
+        This api will call POST /v1/mtls/token of SAP component to generate
+        an ephemeral proof for the specified participant
+      operationId: getEphemeralProof
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: The credential ID of the participant for whom the ephemeral proof
+          is generated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      requestBody:
+        description: Contains the timestamp of the request along with the timestamp
+          signature
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignatureProof"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  signature: MEYCIQDV6nM1jU2J...==
+                  nonce: 36b8f84d-df4e-4d49-b662-bcde71a8764f
+                  timestamp: 2025-04-04T12:34:56Z
+        required: false
+      responses:
+        "200":
+          description: Ephemeral proof generated successfully
+          content:
+            application/json:
+              schema:
+                type: string
+              example: |
+                IxvaN4ER-PlPgLYzfRhk_JiY4VAow3GNjaK5rYCINFsEPa7VaYnRsaCmQVq8CTgddihEPPXe
+                t2laH8_c3WqxY4AeZO5eljwSCobCHzxYdOoFKbpNXIm7dqHg_5xpQz-YBJMiDM1ILOEsER8A
+                DyF4NC2sN0K_0t6xZLSAQIRrHvpGOrtYr5E-SllTWHWPmqCkX2BUZxoYNK2FWgQZpuUOD55H
+                fsvFXNVQa_5TFRDibi9LsT7Sd_az0iGB0TfAb0v3ZR0qnmgyp5pTeIeU5UqhtbgU9RnUCVmG
+                IK-SZYNvrlXgv9hiKAZGhLgeI8hO40utfT2YTYHgD2Aiufqo3RIbJA
+        "400":
+          description: Invalid ephemeral proof request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                invalid-participant-id:
+                  value:
+                    type: /error/invalid-participant-id
+                    title: Participant ID is invalid
+                invalid-signature-proof:
+                  value:
+                    type: /error/invalid-signature-proof
+                    title: Signature proof is invalid
+                invalid-timestamp-window:
+                  value:
+                    type: /error/invalid-signature-proof
+                    title: Invalid timestamp window
+                    detail: The provided timestamp falls outside the Governance Authority’s
+                      allowed time window of 1 minute.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtls: []
+      x-deprecation-info:
+        replacements:
+        - POST <security_attribute_provider>/tier2/v2/token
+        reason: moved in security attribute provider
+  /mtls/publicKey:
+    patch:
+      tags:
+      - Mtls
+      summary: Store tier-one public key
+      description: Stores the tier-one public key for the specified participant
+      operationId: sendTierOnePublicKey
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: Public Key Hash of participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      requestBody:
+        description: tier-one public key to be stored
+        content:
+          text/plain:
+            schema:
+              type: string
+            examples:
+              default:
+                summary: Default example
+                value: I3F3ILirR0NN+TsTwivWMo+jx0eJxrCJeRgV2M5gU1s=
+        required: true
+      responses:
+        "200":
+          description: Public key stored successfully
+          x-microcks-refs:
+          - default
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtls: []
+      x-deprecation-info:
+        replacements:
+        - PUT /tier2/v2/tierOnePublicKey
+        reason: Changes in response data due to credentials handling revise
+  /mtls/echo:
+    get:
+      tags:
+      - Mtls
+      summary: Get participant with identity attributes
+      description: Retrieves the participant along with their identity attributes
+        using the participant ID
+      operationId: getParticipantWithIdentityAttributesWithEcho
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: Public Key Hash of participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      responses:
+        "200":
+          description: Participant and identity attributes retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantWithIdentityAttributes"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    organization: Organization Name
+                    participantType: CONSUMER
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    identityAttributes:
+                    - code: CONSUMER
+                      name: Consumer
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    - code: DATA_SEARCHER
+                      name: Data searcher
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtlsWithEphemeralProof: []
+      x-deprecation-info:
+        replacements:
+        - POST /tier2/v2/echo
+        reason: Changes in response data due to credentials handling revise
+  /mtls/credentials:
+    get:
+      tags:
+      - Mtls
+      summary: Get participant credentials
+      description: Retrieves the participant credentials stored into the Dataspace
+        Governance Authority
+      operationId: getParticipantCredentials
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: Public Key Hash of participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+        examples:
+          default:
+            summary: Default example
+            value: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+        examples:
+          default:
+            summary: Default example
+            value: 10
+      - name: sort
+        in: query
+        description: |
+          Sorting criteria in the format: property,(asc|desc).<br>
+          Valid properties are: issuanceDate, expiryDate, status.<br>
+          Default sort order is descending by issuanceDate.<br>
+          Multiple sort criteria are not supported.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          default:
+          - "issuanceDate,DESC"
+          items:
+            type: string
+          maxItems: 2
+        examples:
+          default:
+            summary: Default example
+            value: "issuanceDate,asc"
+      - name: filter
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: "#/components/schemas/GetParticipantCredentialsFilterParameter"
+        examples:
+          default:
+            summary: Default example
+            value:
+              issuanceDateFrom: 2000-01-23T04:56:07.000+00:00
+              issuanceDateTo: 2000-01-23T04:56:07.000+00:00
+              expiryDateFrom: 2000-01-23T04:56:07.000+00:00
+              expiryDateTo: 2000-01-23T04:56:07.000+00:00
+              status: VALID
+        x-parameter-object: true
+      responses:
+        "200":
+          description: Participant credentials retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageResponseParticipantCredentialsInformation"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    page:
+                      number: 6
+                      size: 0
+                      totalPages: 5
+                      totalElements: 1
+                    content:
+                    - expiryDate: 2000-01-23T04:56:07.000+00:00
+                      issuanceDate: 2000-01-23T04:56:07.000+00:00
+                      credentialId: sha384-Li9vy3DqF8tnTXuiaAJuML3ky+er10rcgNR/VqsVpcw+ThHmYcwiB1pbOxEbzJr7
+                      content: |
+                        -----BEGIN CERTIFICATE-----
+                        MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+                        -----END CERTIFICATE-----
+                      status: VALID
+                    - expiryDate: 2000-01-23T04:56:07.000+00:00
+                      issuanceDate: 2000-01-23T04:56:07.000+00:00
+                      credentialId: sha384-Li9vy3DqF8tnTXuiaAJuML3ky+er10rcgNR/VqsVpcw+ThHmYcwiB1pbOxEbzJr7
+                      content: |
+                        -----BEGIN CERTIFICATE-----
+                        MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+                        -----END CERTIFICATE-----
+                      status: VALID
+                    empty: true
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtlsWithEphemeralProof: []
+      x-deprecation-info:
+        replacements:
+        - GET /tier2/v2/credentials
+        reason: Changes in response data due to credentials handling revise
+components:
+  schemas:
+    PageMetadata:
+      type: object
+      example:
+        number: 6
+        size: 0
+        totalPages: 5
+        totalElements: 1
+      properties:
+        size:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+    Participant:
+      type: object
+      example:
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        organization: Organization Name
+        participantType: CONSUMER
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        credentialId: ymojkQMALL75C+2s4Rv9MGPBS1bIAHyH54//XBI+gjG9zwD20E/k8xb20JHKJ5KD
+        id: 4ff8e666-522e-4796-ac8d-e5c707d675f0
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        credentialStatus: VALID
+      properties:
+        id:
+          type: string
+          format: uuid
+        participantType:
+          type: string
+          maxLength: 100
+        organization:
+          type: string
+          maxLength: 100
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+          maxLength: 64
+        expiryDate:
+          type: string
+          format: date-time
+        credentialStatus:
+          $ref: "#/components/schemas/CredentialStatus"
+      required:
+      - organization
+      - participantType
+    PageResponseParticipant:
+      type: object
+      example:
+        page:
+          number: 6
+          size: 0
+          totalPages: 5
+          totalElements: 1
+        content:
+        - expiryDate: 2000-01-23T04:56:07.000+00:00
+          organization: Organization 1
+          participantType: CONSUMER
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          credentialId: w+KEjkFH71jLscODJgIkCCgsDXqToX4RZp0cOdt2vJbOImZZAl3vEyaB7rWqUuQu
+          id: 3657a28e-93c4-4f50-9f48-4cbe4dcfbe87
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          credentialStatus: VALID
+        - expiryDate: 2000-01-23T04:56:07.000+00:00
+          organization: Organization 2
+          participantType: DATA_PROVIDER
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          credentialId: XVWP7uxTWyWRteYjJf3nmpRuKUADRbEf0+7dke8YM5dHsHBoacEK7Z4MVxu2a2GU
+          id: c3a45a29-cda0-429c-9e1c-995ebc178e59
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          credentialStatus: VALID
+        empty: false
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/Participant"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+        empty:
+          type: boolean
+    IdentityAttribute:
+      type: object
+      example:
+        code: CONSUMER
+        name: Consumer
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        description: Identity attribute used for tagging an end user able to act as
+          a user of a data consumer participant (can start contract and transfer process)
+        assignableToRoles: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        used: true
+        right: true
+        enabled: true
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          maxLength: 255
+        assignableToRoles:
+          type: boolean
+        enabled:
+          type: boolean
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+        used:
+          type: boolean
+          readOnly: true
+        right:
+          type: boolean
+          readOnly: true
+      required:
+      - assignableToRoles
+      - code
+      - enabled
+      - name
+    ParticipantWithIdentityAttributes:
+      type: object
+      example:
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        organization: Organization Name
+        participantType: CONSUMER
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        identityAttributes:
+        - code: CONSUMER
+          name: Consumer
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: Identity attribute used for tagging an end user able to act
+            as a user of a data consumer participant (can start contract and transfer
+            process)
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        - code: DATA_SEARCHER
+          name: Data searcher
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: "Identity Attributes used for tagging an end user able to act\
+            \ only as a searcher in the catalogue, but he can't start a contract negotiation\
+            \ or transfer process"
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+          format: uuid
+        participantType:
+          type: string
+          maxLength: 100
+        organization:
+          type: string
+          maxLength: 255
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+          maxLength: 64
+        expiryDate:
+          type: string
+          format: date-time
+        identityAttributes:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdentityAttribute"
+      required:
+      - organization
+      - participantType
+    ParticipantCredentialsInformation:
+      type: object
+      example:
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        issuanceDate: 2000-01-23T04:56:07.000+00:00
+        credentialId: sha384-Li9vy3DqF8tnTXuiaAJuML3ky+er10rcgNR/VqsVpcw+ThHmYcwiB1pbOxEbzJr7
+        content: |
+          -----BEGIN CERTIFICATE-----
+          MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+          -----END CERTIFICATE-----
+        status: VALID
+      properties:
+        status:
+          $ref: "#/components/schemas/CredentialStatus"
+        issuanceDate:
+          type: string
+          format: date-time
+          description: Timestamp when the credential is issued.
+        expiryDate:
+          type: string
+          format: date-time
+          description: Timestamp when the credential is expiring.
+        credentialId:
+          type: string
+          description: public key hash (sha384) bound to the credential
+          example: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrQuyBHptA5aepPeQZACm19EyxKFPmBQxzQfMHLxQt6y6YUD8i
+          maxLength: 64
+        content:
+          type: string
+          description: The credential (x.509 certificate in PEM format)
+          example: |
+            -----BEGIN CERTIFICATE-----
+            MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+            -----END CERTIFICATE-----
+    Certificate:
+      type: object
+      example:
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        publicKey: I3F3ILirR0NN+TsTwivWMo+jx0eJxrCJeRgV2M5gU1s=
+        lastStatusChangeDate: 2000-01-23T04:56:07.000+00:00
+        status: VALID
+      properties:
+        publicKey:
+          type: string
+        expiryDate:
+          type: string
+          format: date-time
+        lastStatusChangeDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last change of status for the credential.
+        status:
+          $ref: "#/components/schemas/CredentialStatus"
+    UpdateCredentialStatusRequest:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/CredentialStatus"
+      required:
+      - status
+    Problem:
+      type: object
+      description: |
+        A Problem Details object (RFC 9457).
+
+        Additional properties specific to the problem type may be present.
+      example:
+        type: urn:problem-type:exampleOrganization:exampleProblem
+        href: https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types
+        title: Description of the type of problem that occurred
+        status: 400
+        detail: Description of specific occurrence of the problem
+        instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+          description: |
+            An absolute URI that identifies the problem type.  When dereferenced,
+            it SHOULD provide human-readable documentation for the problem type
+            (e.g., using HTML).
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: |
+            A short, summary of the problem type. Written in english and readable
+            for engineers (usually not suited for non technical stakeholders and
+            not localized); example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status code generated by the origin server for this occurrence
+            of the problem.
+          example: 503
+          maximum: 600
+          minimum: 100
+        detail:
+          type: string
+          description: |
+            A human readable explanation specific to this occurrence of the
+            problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: |-
+            An absolute URI that identifies the specific occurrence of the problem.
+            It may or may not yield further information if dereferenced.
+    SignatureProof:
+      type: object
+      example:
+        signature: MEYCIQDV6nM1jU2J...==
+        nonce: 36b8f84d-df4e-4d49-b662-bcde71a8764f
+        timestamp: 2025-04-04T12:34:56Z
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: "the timestamp of the request, in UTC ISO 8601 format"
+          example: 2025-04-04T12:34:56Z
+        nonce:
+          type: string
+          format: uuid
+          description: a randomly generated nonce
+          example: 36b8f84d-df4e-4d49-b662-bcde71a8764f
+        signature:
+          type: string
+          format: byte
+          description: base64-encoded signature of the timestamp and noce ($timestamp
+            + _ + $nonce)
+          example: MEYCIQDV6nM1jU2J...==
+      required:
+      - nonce
+      - signature
+      - timestamp
+    CredentialStatus:
+      type: string
+      description: |
+        The status of the credential:<br> - **Valid**: The credential is valid and usable.<br> - **Expired**: The credential has expired.<br> - **Revoked**: The credential is permanently revoked and no longer usable.<br> - **Suspended**: The credential is temporarily revoked and may transition back to valid.<br>
+      enum:
+      - VALID
+      - EXPIRED
+      - REVOKED
+      - SUSPENDED
+    PageResponseParticipantCredentialsInformation:
+      type: object
+      example:
+        page:
+          number: 6
+          size: 0
+          totalPages: 5
+          totalElements: 1
+        content:
+        - expiryDate: 2000-01-23T04:56:07.000+00:00
+          issuanceDate: 2000-01-23T04:56:07.000+00:00
+          credentialId: sha384-Li9vy3DqF8tnTXuiaAJuML3ky+er10rcgNR/VqsVpcw+ThHmYcwiB1pbOxEbzJr7
+          content: |
+            -----BEGIN CERTIFICATE-----
+            MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+            -----END CERTIFICATE-----
+          status: VALID
+        - expiryDate: 2000-01-23T04:56:07.000+00:00
+          issuanceDate: 2000-01-23T04:56:07.000+00:00
+          credentialId: sha384-Li9vy3DqF8tnTXuiaAJuML3ky+er10rcgNR/VqsVpcw+ThHmYcwiB1pbOxEbzJr7
+          content: |
+            -----BEGIN CERTIFICATE-----
+            MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+            -----END CERTIFICATE-----
+          status: VALID
+        empty: true
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/ParticipantCredentialsInformation"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+        empty:
+          type: boolean
+    SearchFilterParameter:
+      type: object
+      properties:
+        isAuthority:
+          type: boolean
+        organization:
+          type: string
+          maxLength: 255
+        participantType:
+          type: string
+          maxLength: 255
+        dateTo:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+          maxLength: 255
+        dateFrom:
+          type: string
+          format: date-time
+        hasCredential:
+          type: boolean
+    StoreCsrAndCreateCertificateRequest:
+      type: object
+      example:
+        csr: "[binary data]"
+      properties:
+        csr:
+          type: string
+          format: binary
+      required:
+      - csr
+    GetParticipantCredentialsFilterParameter:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/CredentialStatus"
+        issuanceDateTo:
+          type: string
+          format: date-time
+        issuanceDateFrom:
+          type: string
+          format: date-time
+        expiryDateTo:
+          type: string
+          format: date-time
+        expiryDateFrom:
+          type: string
+          format: date-time
+  responses:
+    "404":
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            summary: Not Found
+            value:
+              type: urn:problem-type:simpl:notFound
+              title: Not Found
+              detail: Resource not found
+    "400":
+      description: "Bad request, invalid input data"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            summary: Bad Request
+            value:
+              type: urn:problem-type:simpl:badRequest
+              title: Bad request
+              detail: Invalid input data
+    "401":
+      description: "Unauthorized, the user is not authenticated"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            summary: Unauthorized
+            value:
+              type: urn:problem-type:simpl:unauthorized
+              title: Unauthorized
+              detail: The user is not authenticated
+    "403":
+      description: "Forbidden, the user does not have the roles to perform the operation"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            summary: Forbidden
+            value:
+              type: urn:problem-type:simpl:forbidden
+              title: Forbidden
+              detail: The user does not have the roles to perform the operation
+    Unauthorized:
+      description: "Unauthorized, the user is not authenticated"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unauthorized:
+              summary: Unauthorized
+              value:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                detail: The user is not authenticated
+                status: 401
+    Forbidden:
+      description: "Forbidden, the user does not have the roles to perform the operation"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            forbidden:
+              summary: Forbidden
+              value:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                detail: The user does not have the roles to perform the operation
+                status: 403
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            notFound:
+              summary: Not Found
+              value:
+                type: urn:problem-type:simpl:notFound
+                title: Not Found
+                detail: Resource not found
+                status: 404
+    BadRequest:
+      description: "Bad request, invalid input data"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            badRequest:
+              summary: Bad Request
+              value:
+                type: urn:problem-type:simpl:badRequest
+                title: Bad request
+                detail: Invalid input data
+                status: 400
+  securitySchemes:
+    mtls:
+      type: http
+      description: SIMPL Tier 2 mTLS authentication process
+      scheme: mutual
+    mtlsWithEphemeralProof:
+      type: http
+      description: SIMPL Tier 2 mTLS authentication process with Ephemeral Proof exchange
+      scheme: mutual
+    oauth2AuthCode:
+      type: oauth2
+      description: SIMPL Tier1 end users authentication process
+      flows:
+        authorizationCode:
+          authorizationUrl: ""
+          tokenUrl: ""
+          scopes: {}
+    oauth2ClientCredentials:
+      type: oauth2
+      description: SIMPL internal APIs authentication process
+      flows:
+        clientCredentials:
+          tokenUrl: ""
+          scopes: {}

@@ -1,0 +1,2382 @@
+openapi: 3.0.1
+info:
+  title: Authentication Provider Tier 1
+  description: Tier 1 OpenAPI definition for the Authentication Provider component
+    of the SIMPL project
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: 2.0.0
+servers:
+- url: https://t1.authentication-provider.dev.simpl.eu/tier1/v2
+  description: Tier1 Authentication Provider
+security:
+- oauth2ClientCredentials: []
+tags:
+- name: Keypairs
+  description: Manage and store participant keypair securely
+- name: Credentials
+  description: API for managing participant's credentials
+- name: Participants
+  description: Retrieve information about the agent participant and other data space
+    participants
+- name: Identity Attributes
+  description: Retrieve information about the dataspace Identity Attributes
+- name: Tier 1 Credentials
+  description: Validates the Tier 1 credentials of an end-user originating from an
+    external participant.
+- name: Automatic Renewals
+  description: Allow setting and retrieving the automatic renewal configuration.
+paths:
+  /keypairs:
+    get:
+      tags:
+      - Keypairs
+      summary: List all keypairs
+      description: "Lists the available keypairs stored in the agent. Each entry includes\
+        \ the identifier, a vanity representation of the public key, if the keypair\
+        \ is active in the agent (bound to the installed credentials) and creation\
+        \ date. Only accessible by users with the ONBOARDER_M role."
+      operationId: listKeypairs
+      parameters:
+      - name: filter
+        in: query
+        description: Keypairs listing filter
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: "#/components/schemas/KeyPairPagedRequest"
+        examples:
+          keyPairPagedRequest:
+            summary: keypair listing filter
+            value: |
+              {
+                "name": "keypair",
+                "creationTimestampFrom": "2025-01-20T17:32:28Z",
+                "creationTimestampTo": "2025-01-25T17:32:28Z",
+                "page": 2,
+                "pageSize": 2,
+                "sort": [
+                  "creationTimestamp"
+                ]
+              }
+      responses:
+        "200":
+          description: List of keypairs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyPairPagedResponse"
+              examples:
+                keypairsDetail:
+                  summary: keypairs list
+                  value: |
+                    {
+                      "self": "/keypairs?name=keypair&creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=2&pageSize=2",
+                      "items": [
+                        {
+                          "name": "my keypair",
+                          "creationTimestamp": "2025-01-23T04:56:07Z",
+                          "active": false,
+                          "id": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                          "publicKey": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31P\nXGMddh8bvMUPFGnUT1ZcRBh+323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==\n-----END PUBLIC KEY-----",
+                          "csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH\nDAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j\nb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy\neWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE\nEgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4\nnZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S\nBlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ\n1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf\nWruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u\nWh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH\ny6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D\ngpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi\nKwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo\n3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM\n9g==\n-----END CERTIFICATE REQUEST-----\n"
+                        },
+                        {
+                          "name": "another keypair",
+                          "creationTimestamp": "2025-01-24T13:00:00Z",
+                          "active": true,
+                          "id": "046b6c7f-0b8a-43b9-b35d-6489e6daee92",
+                          "publicKey": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31P\nXGMddh8bvMUPFGnUT1ZcRBh+323bzbnu4hZsToMYdYLwz6fOM3C07eiMeB==\n-----END PUBLIC KEY-----"
+                        }
+                      ],
+                      "pageSize": 2,
+                      "page": 2,
+                      "total": 7,
+                      "first": "/keypairs?name=keypair&creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=0&pageSize=2",
+                      "last": "/keypairs?name=keypair&creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=4&pageSize=2",
+                      "prev": "/keypairs?name=keypair&creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=1&pageSize=2",
+                      "next": "/keypairs?name=keypair&creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=3&pageSize=2"
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+    post:
+      tags:
+      - Keypairs
+      summary: Create a new keypair
+      description: Generates a new public/private keypair and stores it securely in
+        the agent. The private key is never exposed. Only accessible by users with
+        the ONBOARDER_M role.
+      operationId: createKeypair
+      requestBody:
+        description: The keypair request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KeyPairRequest"
+            examples:
+              keypairCreationRequest:
+                summary: an agent internal keypair representation
+                value: |
+                  {
+                    "name": "my keypair"
+                  }
+        required: true
+      responses:
+        "201":
+          description: Keypair successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyPairResponse"
+              examples:
+                keypairCreationResponse:
+                  summary: keypair creation response
+                  value: |
+                    {
+                      "creationTimestamp": "2025-01-23T04:56:07Z",
+                      "name": "my keypair",
+                      "active": false,
+                      "id": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31P\nXGMddh8bvMUPFGnUT1ZcRBh+323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==\n-----END PUBLIC KEY-----"
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /keypairs/algorithm:
+    get:
+      tags:
+      - Keypairs
+      summary: Returns the current agent encryption algorithm selected for keypairs
+      description: Returns the current agent encryption algorithm selected for keypairs
+      operationId: getAgentEncryptionAlgorithm
+      responses:
+        "200":
+          description: Agent keypairs encryption algorithm
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentKeypairEncryptionAlgorithm"
+              examples:
+                encryptionAlgorithm:
+                  summary: encryption algorithm
+                  value: |
+                    {
+                      "readAlgorithm": "EC",
+                      "keyLength": 256,
+                      "signatureAlgorithm": "SHA256withECDSA",
+                      "algorithm": "ECDSA"
+                    }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /keypairs/active:
+    get:
+      tags:
+      - Keypairs
+      summary: Get active KeyPair
+      description: Retrieve the active keypair (the one related to the installed credentials)
+      operationId: getActiveKeyPair
+      responses:
+        "200":
+          description: A complete keypair used inside the agent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyPairDetailResponse"
+              examples:
+                completeKeypairDetail:
+                  summary: an agent internal keypair representation
+                  value: |
+                    {
+                      "name": "my keypair",
+                      "privateKey": "-----BEGIN PRIVATE KEY-----\nMHcCAQEEIHo9LGqNGEL32AwY6FdN2gluG0O4JqKAnSmDhCtVJCQ7oAoGCCqGSM49\nAwEHoUQDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31PXGMddh8bvMUPFGnUT1ZcRBh+\n323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==\n-----END PRIVATE KEY-----\n",
+                      "creationTimestamp": "2000-01-23T04:56:07.000+00:00",
+                      "id": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31P\nXGMddh8bvMUPFGnUT1ZcRBh+323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==\n-----END PUBLIC KEY-----\n"
+                    }
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+    head:
+      tags:
+      - Keypairs
+      summary: Checks if the participant has an active KeyPair
+      description: Check if the participant has an active keypair (the one related
+        to the installed credentials).  Only accessible by users with the ONBOARDER_M
+        role.
+      operationId: isActiveKeyPairPresent
+      responses:
+        "204":
+          description: An active keypair is installed in the agent
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /keypairs/import:
+    post:
+      tags:
+      - Keypairs
+      summary: Import Key Pair
+      description: ONBOARDER_M user import a public/private Key Pair and store it
+      operationId: importKeyPair
+      requestBody:
+        description: A complete keypair used inside the agent
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KeyPairImportRequest"
+            examples:
+              completeKeypairDetail:
+                summary: an agent internal keypair representation
+                value: |
+                  {
+                    "name": "my keypair",
+                    "publicKey": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31P\nXGMddh8bvMUPFGnUT1ZcRBh+323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==\n-----END PUBLIC KEY-----\n",
+                    "privateKey": "-----BEGIN PRIVATE KEY-----\nMHcCAQEEIHo9LGqNGEL32AwY6FdN2gluG0O4JqKAnSmDhCtVJCQ7oAoGCCqGSM49\nAwEHoUQDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31PXGMddh8bvMUPFGnUT1ZcRBh+\n323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==\n-----END PRIVATE KEY-----\n"
+                  }
+        required: true
+      responses:
+        "201":
+          description: Keypair metadata
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyPairResponse"
+              examples:
+                keypairDetail:
+                  summary: a keypair detail
+                  value: |
+                    {
+                      "name": "my keypair",
+                      "id": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31P\nXGMddh8bvMUPFGnUT1ZcRBh+323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==\n-----END PUBLIC KEY-----",
+                      "creationTimestamp": "2025-01-23T04:56:07.000+00:00",
+                      "active": false
+                    }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /keypairs/{keyPairId}:
+    get:
+      tags:
+      - Keypairs
+      summary: Retrieve keypair data by ID
+      description: Retrieves information about a specific keypair using its identifier.
+        Only accessible by users with the ONBOARDER_M role.
+      operationId: getKeypair
+      parameters:
+      - name: keyPairId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          keypairDetail:
+            summary: a keypair detail
+            value: 10503716-e76f-4ba8-81be-38203c50c6cc
+      responses:
+        "200":
+          description: Keypair data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyPairResponse"
+              examples:
+                keypairDetail:
+                  summary: a keypair detail
+                  value: |
+                    {
+                      "name": "my keypair",
+                      "id": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31P\nXGMddh8bvMUPFGnUT1ZcRBh+323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==\n-----END PUBLIC KEY-----",
+                      "creationTimestamp": "2025-01-23T04:56:07.000+00:00",
+                      "active": false,
+                      "csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH\nDAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j\nb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy\neWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE\nEgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4\nnZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S\nBlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ\n1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf\nWruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u\nWh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH\ny6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D\ngpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi\nKwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo\n3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM\n9g==\n-----END CERTIFICATE REQUEST-----\n"
+                    }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+    delete:
+      tags:
+      - Keypairs
+      summary: Delete a keypair by ID
+      description: Deletes a specific keypair by ID if it is not currently used by
+        an active credential. Only accessible by users with the ONBOARDER_M role.
+      operationId: deleteKeypair
+      parameters:
+      - name: keyPairId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 10503716-e76f-4ba8-81be-38203c50c6cc
+      responses:
+        "204":
+          description: Keypair successfully deleted
+          x-microcks-refs:
+          - default
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          description: Cannot delete keypair in use by an active credential
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                conflict:
+                  summary: Conflict
+                  value: |
+                    {
+                      "type": "urn:problem-type:simpl:conflict",
+                      "status": 409,
+                      "title": "conflict"
+                    }
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /keypairs/{keyPairId}/credentials:
+    get:
+      tags:
+      - Credentials
+      summary: Retrieves the credentials given a KeyPair identifier
+      description: Retrieves the credentials (including their status and expiration
+        timestamp) given a KeyPair identifier. Only accessible by users with the ONBOARDER_M
+        role.
+      operationId: getCredentialsByKeypair
+      parameters:
+      - name: keyPairId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          credentialsByKeyPairPagedRequest:
+            summary: credentials by keypair listing filter
+            value: 10503716-e76f-4ba8-81be-38203c50c6cc
+      - name: filter
+        in: query
+        description: Credentials by keypair listing filter
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: "#/components/schemas/CredentialsByKeyPairPagedRequest"
+        examples:
+          credentialsByKeyPairPagedRequest:
+            summary: credentials by keypair listing filter
+            value: |
+              {
+                "page": 2,
+                "pageSize": 2,
+                "sort": [
+                  "issuanceDate"
+                ],
+                "issuanceDateFrom": "2025-01-20T00:00:00.000Z",
+                "issuanceDateTo": "2025-01-30T00:00:00.000Z",
+              }
+      responses:
+        "200":
+          description: List of credentials by keypair
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CredentialsByKeyPairPagedResponse"
+              examples:
+                credentialsByKeyPairDetail:
+                  summary: credentials by keypair list
+                  value: |
+                    {
+                      "self": "/keypairs/046b6c7f-0b8a-43b9-b35d-6489e6daee92/credentials?issuanceDateFrom=2025-01-20T00:00:00.000Z&issuanceDateTo=2025-01-30T00:00:00.000Z&sort=issuanceDate&page=2&pageSize=2",
+                      "items": [
+                        {
+                          "expiryDate": "2070-01-23T14:00:00.000Z",
+                          "issuanceDate": "2025-01-21T14:00:00.000Z",
+                          "credentialId": "zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM",
+                          "content": "-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV\nBAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP\ncmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw\nMDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV\nBAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8\nN5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk\nJbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g\n3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b\n3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP\nNOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV\nHQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx\niDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ\nc6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT\nu2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW\nTFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv\nJjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo\nM0gC5vj+IEGR+MLKWA==\n-----END CERTIFICATE-----\n",
+                          "status": "SUSPENDED"
+                        },
+                        {
+                          "expiryDate": "2070-01-23T14:00:00.000Z",
+                          "issuanceDate": "2025-01-24T14:00:00.000Z",
+                          "credentialId": "zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrQuyBHptA5aepPeQZACm19EyxKFPmBQxzQfMHLxQt6y6YUD8g",
+                          "content": "-----BEGIN CERTIFICATE-----\nMIIDazCCAlOgAwIBAgIUYeIhzCVv7ReJX8FpsOMvFs4j8L8wDQYJKoZIhvcNAQEL\nBQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQHDAZTYW5Kb3Nl\nMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5jb20wHhcNMjUw\nNTE1MDk0MzI2WhcNMjYwNTE0MDk0MzI2WjBMMQswCQYDVQQGEwJVUzELMAkGA1UE\nCAwCQ0ExDzANBgNVBAcMBlNhbkpvc2UxEDAOBgNVBAoMB015Q29tcGFueTEQMA4G\nA1UEAwwHbXljZXJ0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB\nANhHEZc8sKXy6Kw7lRnCEmD/zlgF7AXwAj3YkBG5Kq5SP4yyr1bXfO9ejZxBmfKwn\nECOkgWvqKSpVzEFGrK+IrxDNB9YeQ15f5uM2SGJ3zPQEUGKlsRZJWGBj5tLLkIcv\nDUwGjUjSvm6rFzHa/3YtrNRZcsfq9p09Rhx4cMGLib0yKeVXhUxzBdn8D3LPvAuF\nuyhNGrLxLTWGb9aRSVPxJHrlXo9Ek2npTkJ1mXp1VRlduKgY4cKBBZfJ2HYzXb8e\n8Ub/qmgSeVm/KoAnT+3vdHZjYzq8rxkUJ9jM8Ty0Ti64bIU6b5SYZXnVdN+pK1mp\n6A71R9xw6kzskErL5FTlFzkCAwEAAaNTMFEwHQYDVR0OBBYEFBx/dnYP5zyI4RQW\nHtXkoyZmbx9CMB8GA1UdIwQYMBaAFBx/dnYP5zyI4RQWHtXkoyZmbx9CMA8GA1Ud\nEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAK0mK7HUEGCZkhV3l8O+NgF3\naHkx5SP6IGyab1L18F5N8OKVK9wlUAXl3UKsmMweQY5Jxctvxt8B15xDr1uQvH6M\n0B8SpT2DPOgWBGhrKCyXY6g7klpbPuRE34/Nx8N1yo5+vY7S5r8A6oEFgx0ZXcdj\nH+AfCnn4JdKquj+dFi67g+IrzRccf9SxjoQ0vK8Op7Z8I28Y3qxUoZ+m+k1ArXGJ\ntMfhl5W/cD7bwpiTOlgBF8F6u7YtZMIU2bKXGyMHPKP8h8UJko6D7Z9EFtHCERQO\nPQvU79G0C1SeakqpB3ls+DrMTqSGUe2ThXTC3duFBAX/2eEeaFVaZmJNdOxWrFA=\n-----END CERTIFICATE-----\n",
+                          "status": "VALID"
+                        }
+                      ],
+                      "pageSize": 2,
+                      "page": 2,
+                      "total": 7,
+                      "first": "/keypairs/046b6c7f-0b8a-43b9-b35d-6489e6daee92/credentials?issuanceDateFrom=2025-01-20T00:00:00.000Z&issuanceDateTo=2025-01-30T00:00:00.000Z&sort=issuanceDate&page=0&pageSize=2",
+                      "last": "/keypairs/046b6c7f-0b8a-43b9-b35d-6489e6daee92/credentials?issuanceDateFrom=2025-01-20T00:00:00.000Z&issuanceDateTo=2025-01-30T00:00:00.000Z&sort=issuanceDate&page=4&pageSize=2",
+                      "prev": "/keypairs/046b6c7f-0b8a-43b9-b35d-6489e6daee92/credentials?issuanceDateFrom=2025-01-20T00:00:00.000Z&issuanceDateTo=2025-01-30T00:00:00.000Z&sort=issuanceDate&page=1&pageSize=2",
+                      "next": "/keypairs/046b6c7f-0b8a-43b9-b35d-6489e6daee92/credentials?issuanceDateFrom=2025-01-20T00:00:00.000Z&issuanceDateTo=2025-01-30T00:00:00.000Z&sort=issuanceDate&page=3&pageSize=2"
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /keypairs/{keyPairId}/renew:
+    post:
+      tags:
+      - Credentials
+      summary: Request to Dataspace Governance Authority a credentials renewal
+      description: "The participant requests a credentials renewal to Dataspace Participant,\
+        \ receiving an acknowledge on the issued request. Only accessible by users\
+        \ with the ONBOARDER_M role."
+      operationId: requestCredentialsRenewal
+      parameters:
+      - name: keyPairId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          distinguishedName:
+            summary: a distinguished name
+            value: 10503716-e76f-4ba8-81be-38203c50c6cc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CsrRequest"
+            examples:
+              distinguishedName:
+                summary: a distinguished name
+                value: |
+                  {
+                    "commonName": "participant1",
+                    "country": "IT",
+                    "organization": "SIMPL",
+                    "organizationalUnit": "IT Dep"
+                  }
+        required: true
+      responses:
+        "204":
+          description: Renewal request issued correctly
+          x-microcks-refs:
+          - distinguishedName
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /keypairs/{keyPairId}/csr:
+    post:
+      tags:
+      - Keypairs
+      summary: Generates the CSR given a KeyPair identifier and the Distinguished
+        Name and store it in the system
+      description: Generates the CSR given a KeyPair identifier and the Distinguished
+        Name. Only accessible by users with the ONBOARDER_M role.
+      operationId: generateCSRByKeyPair
+      parameters:
+      - name: keyPairId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          distinguishedName:
+            summary: a distinguished name
+            value: 10503716-e76f-4ba8-81be-38203c50c6cc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CsrRequest"
+            examples:
+              distinguishedName:
+                summary: a distinguished name
+                value: |
+                  {
+                    "commonName": "participant1",
+                    "country": "IT",
+                    "organization": "SIMPL",
+                    "organizationalUnit": "IT Dep"
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CsrResponse"
+              examples:
+                csrByKeyPairDetail:
+                  summary: csr by keypair
+                  value: |
+                    {
+                      "csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH\nDAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j\nb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy\neWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE\nEgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4\nnZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S\nBlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ\n1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf\nWruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u\nWh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH\ny6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D\ngpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi\nKwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo\n3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM\n9g==\n-----END CERTIFICATE REQUEST-----\n"
+                    }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /keypairs/{keyPairId}/csr/submit:
+    post:
+      tags:
+      - Keypairs
+      summary: Submits the CSR bound to the given KeyPair identifier to the Dataspace
+        Governance Authority
+      description: Submits the CSR bound to the given KeyPair identifier to the Dataspace
+        Governance Authority. Only accessible by users with the ONBOARDER_M role.
+      operationId: submitsCSRByKeyPair
+      parameters:
+      - name: keyPairId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default example
+            value: 10503716-e76f-4ba8-81be-38203c50c6cc
+      responses:
+        "204":
+          description: the CSR is correctly submitted to the Dataspace Governance
+            Authority
+          x-microcks-refs:
+          - default
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /credentials/{credentialId}/participant:
+    get:
+      tags:
+      - Credentials
+      summary: Retrieve participant details by credential ID.
+      description: Retrieves information about the participant of the agent. Only
+        one participant is linked to the agent at any given time.
+      operationId: getParticipantByCredential
+      parameters:
+      - name: credentialId
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      responses:
+        "200":
+          description: Participant data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+              examples:
+                default:
+                  summary: A participant
+                  value:
+                    organization: ACME_1
+                    creationTimestamp: 2025-01-20T17:32:28Z
+                    id: 00000001-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-22T17:32:28Z
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+  /participants/{participantId}:
+    get:
+      tags:
+      - Participants
+      summary: Retrieve participant details by ID
+      description: Retrieves information about a specific participant using its identifier.
+      operationId: getParticipant
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          firstParticipant:
+            summary: First participant
+            value: 00000001-0000-0000-0000-000000000000
+          secondParticipant:
+            summary: Second participant
+            value: 00000002-0000-0000-0000-000000000000
+          thirdParticipant:
+            summary: Third participant
+            value: 00000003-0000-0000-0000-000000000000
+          fourthParticipant:
+            summary: Fourth participant
+            value: 00000004-0000-0000-0000-000000000000
+      responses:
+        "200":
+          description: Participant data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+              examples:
+                firstParticipant:
+                  summary: First participant
+                  value:
+                    organization: ACME_1
+                    creationTimestamp: 2025-01-20T17:32:28Z
+                    id: 00000001-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-22T17:32:28Z
+                secondParticipant:
+                  summary: Second participant
+                  value:
+                    organization: ACME_2
+                    creationTimestamp: 2025-01-20T17:32:28Z
+                    id: 00000002-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-22T17:32:28Z
+                thirdParticipant:
+                  summary: Third participant
+                  value:
+                    organization: ACME_3
+                    creationTimestamp: 2025-01-22T17:32:28Z
+                    id: 00000003-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-24T17:32:28Z
+                fourthParticipant:
+                  summary: Fourth participant
+                  value:
+                    organization: ACME_4
+                    creationTimestamp: 2025-01-23T17:32:28Z
+                    id: 00000004-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-25T17:32:28Z
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+  /participants/{participantId}/identityAttributes:
+    get:
+      tags:
+      - Participants
+      summary: Get Identity Attributes of a participant by participant ID
+      description: Retrieves a list of identity attributes for a given participant.
+      operationId: getParticipantIdentityAttributes
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          default:
+            summary: Default Participant
+            value: 00000001-0000-0000-0000-000000000000
+      responses:
+        "200":
+          description: Successfully retrieved identity attributes with ownership
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdentityAttribute"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    assignedToParticipant: true
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    assignedToParticipant: true
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+  /participant:
+    get:
+      tags:
+      - Participants
+      summary: Retrieve participant details of the current agent.
+      description: "Returns information about the participant linked to the agent\
+        \ where this component is deployed. This endpoint does not require any path\
+        \ or query parameters, as each agent can be linked to only one participant\
+        \ at a time."
+      operationId: getAgentParticipant
+      responses:
+        "200":
+          description: Participant data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+              examples:
+                default:
+                  summary: A participant
+                  value:
+                    id: 00000001-0000-0000-0000-000000000000
+                    organization: ACME_1
+                    authorityCreationTimestamp: 2025-01-20T17:32:28Z
+                    authorityUpdateTimestamp: 2025-01-22T17:32:28Z
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+  /participant/identityAttributes:
+    get:
+      tags:
+      - Participants
+      summary: Retrieve participant identity attributes of the current agent.
+      description: "Returns information about the identity attributes of the participant\
+        \ linked to the agent where this component is deployed. This endpoint does\
+        \ not require any path or query parameters, as each agent can be linked to\
+        \ only one participant at a time."
+      operationId: getAgentParticipantIdentityAttributes
+      responses:
+        "200":
+          description: Successfully retrieved identity attributes with ownership
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdentityAttribute"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    assignedToParticipant: true
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    builtIn: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    assignedToParticipant: true
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - T1UAR_M
+  /identityAttributes:
+    get:
+      tags:
+      - Identity Attributes
+      summary: Retrieve the list of all the defined identity attributes by the dataspace
+        governance authority.
+      description: "Lists all the available identity attributes defined by the dataspace\
+        \ governance authority in the dataspace. Only accessible by users with the\
+        \ T1UAR_M (Tier 1 user and role manager), NOTARY (Tier 2 authorisation operator),\
+        \ IATTR_M (Tier 2 identity attributes manager) role."
+      operationId: getDataspaceIdentityAttributes
+      parameters:
+      - name: page
+        in: query
+        description: the index of page to be retrieved
+        required: false
+        schema:
+          $ref: "#/components/schemas/PageQueryParam"
+        examples:
+          firstPage:
+            summary: First page
+            value: 0
+          secondPageEmpty:
+            summary: Second page empty
+            value: 1
+      - name: pageSize
+        in: query
+        description: maximum number of items per page desired by client
+        required: false
+        schema:
+          $ref: "#/components/schemas/PageSizeQueryParam"
+        examples:
+          firstPage:
+            summary: First page
+            value: 10
+          firstPageFilteredByCode:
+            summary: First page filtered by code
+            value: 10
+          secondPageEmpty:
+            summary: Second page empty
+            value: 10
+      - name: sort
+        in: query
+        description: "Multi-value query param with list of properties to sort on.\
+          \ Direction is ascending by default. To indicate descending, prefix property\
+          \ with -."
+        required: false
+        schema:
+          $ref: "#/components/schemas/SortQueryParam"
+        examples:
+          firstPageSortedByCreationTimestampAsc:
+            summary: First page sorted by creation timestamp asc
+            value: creationTimestamp
+          firstPageSortedByCreationTimestampDesc:
+            summary: First page sorted by creation timestamp desc
+            value: -creationTimestamp
+      - name: code
+        in: query
+        description: the identity attribute code
+        required: false
+        schema:
+          type: string
+          maxLength: 255
+        examples:
+          firstPageFilteredByCode:
+            summary: Default
+            value: ACME_1
+      - name: name
+        in: query
+        description: the identity attribute name
+        required: false
+        schema:
+          type: string
+          maxLength: 255
+        examples:
+          firstPageFilteredByName:
+            summary: Default
+            value: Acme 1
+      - name: assignableToRoles
+        in: query
+        description: flag if the identity attribute is assignable to roles
+        required: false
+        schema:
+          type: boolean
+        examples:
+          firstPageFilteredByAssignableToRoles:
+            summary: Default
+            value: true
+      - name: enabled
+        in: query
+        description: flag if the identity attribute is enabled or not in the Dataspace
+          Governance Authority
+        required: false
+        schema:
+          type: boolean
+        examples:
+          firstPageFilteredByEnabled:
+            summary: Default
+            value: true
+      - name: updateTimestampFrom
+        in: query
+        description: the lower bound (inclusive) of the identity attribute last update
+          timestamp
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          firstPageFilteredByEnabled:
+            summary: Default
+            value: true
+      - name: updateTimestampTo
+        in: query
+        description: the upper bound (inclusive) of the identity attribute last update
+          timestamp
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          firstPageFilteredByEnabled:
+            summary: Default
+            value: true
+      responses:
+        "200":
+          description: List of Identity Attributes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdentityAttributePagedResponse"
+              examples:
+                identityAttributesDetail:
+                  summary: Identity Attributes list
+                  value: |
+                    {
+                      "self": "/identityAttributes?code=CONSUMER&page=0&pageSize=2",
+                      "items": [
+                        {
+                          "id": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                          "code": "CONSUMER",
+                          "name": "Consumer",
+                          "assignableToRoles": false,
+                          "enabled": true,
+                          "creationTimestamp": "2000-01-23T04:56:07.000+00:00"
+                        }
+                      ],
+                      "pageSize": 2,
+                      "page": 0,
+                      "total": 1,
+                      "first": "/identityAttributes?code=CONSUMER&page=0&pageSize=2",
+                      "last": "/identityAttributes?code=CONSUMER&page=0&pageSize=2",
+                      "prev": "/identityAttributes?code=CONSUMER&page=0&pageSize=2",
+                      "next": "/identityAttributes?code=CONSUMER&page=0&pageSize=2"
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - T1UAR_M
+      - NOTARY
+      - IATTR_M
+  /identityAttributes/synchronize:
+    post:
+      tags:
+      - Identity Attributes
+      summary: Synchronize Identity Attributes from Dataspace Governance Authority
+        to local copy
+      description: Triggers the synchronization of Identity Attributes from the Dataspace
+        Governance Authority to the Participant Agent local copy.
+      operationId: synchronizeIdentityAttributes
+      responses:
+        "204":
+          description: Successfully updated identity attributes
+          x-microcks-refs:
+          - default
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - T1UAR_M
+  /credentials:
+    post:
+      tags:
+      - Credentials
+      summary: Upload a credential
+      description: Uploads and installs a credential to the participant. Only accessible
+        by users with the ONBOARDER_M (Tier 2 setup administration role) role.
+      operationId: uploadCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstallCredentialRequest"
+            examples:
+              uploadCredentialRequest:
+                summary: upload credential request
+                value: |
+                  {
+                    "content": "-----BEGIN CERTIFICATE-----\nMIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...\n-----END CERTIFICATE-----"
+                  }
+        required: true
+      responses:
+        "204":
+          description: Credential successfully uploaded
+          x-microcks-refs:
+          - uploadCredentialRequest
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+  /credentials/active:
+    get:
+      tags:
+      - Credentials
+      summary: Retrieve the agent's active credential
+      description: Returns the agent's active credential information
+      operationId: downloadActiveCredential
+      responses:
+        "200":
+          description: active credential data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveCredential"
+              examples:
+                activeCredentialData:
+                  summary: an active credential data
+                  value: |
+                    {
+                      "expiryDate": "2070-01-23T14:00:00.000Z",
+                      "issuanceDate": "2025-01-24T14:00:00.000Z",
+                      "credentialId": "zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrQuyBHptA5aepPeQZACm19EyxKFPmBQxzQfMHLxQt6y6YUD8g",
+                      "content": "-----BEGIN CERTIFICATE-----\nMIIDazCCAlOgAwIBAgIUYeIhzCVv7ReJX8FpsOMvFs4j8L8wDQYJKoZIhvcNAQEL\nBQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQHDAZTYW5Kb3Nl\nMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5jb20wHhcNMjUw\nNTE1MDk0MzI2WhcNMjYwNTE0MDk0MzI2WjBMMQswCQYDVQQGEwJVUzELMAkGA1UE\nCAwCQ0ExDzANBgNVBAcMBlNhbkpvc2UxEDAOBgNVBAoMB015Q29tcGFueTEQMA4G\nA1UEAwwHbXljZXJ0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB\nANhHEZc8sKXy6Kw7lRnCEmD/zlgF7AXwAj3YkBG5Kq5SP4yyr1bXfO9ejZxBmfKwn\nECOkgWvqKSpVzEFGrK+IrxDNB9YeQ15f5uM2SGJ3zPQEUGKlsRZJWGBj5tLLkIcv\nDUwGjUjSvm6rFzHa/3YtrNRZcsfq9p09Rhx4cMGLib0yKeVXhUxzBdn8D3LPvAuF\nuyhNGrLxLTWGb9aRSVPxJHrlXo9Ek2npTkJ1mXp1VRlduKgY4cKBBZfJ2HYzXb8e\n8Ub/qmgSeVm/KoAnT+3vdHZjYzq8rxkUJ9jM8Ty0Ti64bIU6b5SYZXnVdN+pK1mp\n6A71R9xw6kzskErL5FTlFzkCAwEAAaNTMFEwHQYDVR0OBBYEFBx/dnYP5zyI4RQW\nHtXkoyZmbx9CMB8GA1UdIwQYMBaAFBx/dnYP5zyI4RQWHtXkoyZmbx9CMA8GA1Ud\nEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAK0mK7HUEGCZkhV3l8O+NgF3\naHkx5SP6IGyab1L18F5N8OKVK9wlUAXl3UKsmMweQY5Jxctvxt8B15xDr1uQvH6M\n0B8SpT2DPOgWBGhrKCyXY6g7klpbPuRE34/Nx8N1yo5+vY7S5r8A6oEFgx0ZXcdj\nH+AfCnn4JdKquj+dFi67g+IrzRccf9SxjoQ0vK8Op7Z8I28Y3qxUoZ+m+k1ArXGJ\ntMfhl5W/cD7bwpiTOlgBF8F6u7YtZMIU2bKXGyMHPKP8h8UJko6D7Z9EFtHCERQO\nPQvU79G0C1SeakqpB3ls+DrMTqSGUe2ThXTC3duFBAX/2eEeaFVaZmJNdOxWrFA=\n-----END CERTIFICATE-----\n"
+                    }
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security: []
+  /credentials/validate:
+    post:
+      tags:
+      - Credentials
+      summary: Verify a credential
+      description: "Verify if the submitted credential is valid in the dataspace.\
+        \ This is an internal API, not usable by end users"
+      operationId: verifyCredential
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CredentialContent"
+            examples:
+              credentialToVerify:
+                summary: a credential to verify
+                value: |
+                  {
+                    "content": "-----BEGIN CERTIFICATE-----\nMIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...\n-----END CERTIFICATE-----"
+                  }
+        required: true
+      responses:
+        "204":
+          description: credential is valid.
+          x-microcks-refs:
+          - credentialToVerify
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+  /echo:
+    get:
+      tags:
+      - Participants
+      summary: Inquiry the Dataspace Governance Authority
+      description: Utility endpoint to check issues in tier2 communication
+      operationId: echo
+      responses:
+        "200":
+          description: Echo information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EchoResponse"
+              examples:
+                echoResult:
+                  summary: echo result
+                  value:
+                    mtlsStatus: SECURED
+                    userIdentityAttributes:
+                    - DATA_PROVIDER
+                    - DATA_PROVIDER_PUBLISHER
+                    identityAttributes:
+                    - code: CONSUMER
+                      name: Consumer
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    - code: DATA_SEARCHER
+                      name: Data searcher
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    organization: Organization Name
+                    connectionStatus: CONNECTED
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    email: user@email.com
+                    username: user_12345
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - SIMPL_USER
+  /ping:
+    get:
+      tags:
+      - Participants
+      summary: Inquiry another participant agent
+      description: Utility to check connectivity between the participant agent and
+        a destination agent
+      operationId: pingAgent
+      parameters:
+      - name: fqdn
+        in: query
+        description: Fully Qualified Domain Name of the participant
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: t2.participant.dev.simpl-europe.eu
+      responses:
+        "200":
+          description: Successfully pinged the participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PingResponse"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    organization: Organization Name
+                    identityAttributes:
+                    - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      code: CONSUMER
+                      name: Consumer
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      enabled: true
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      used: true
+                      right: true
+                      builtIn: true
+                    - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      code: DATA_SEARCHER
+                      name: Data searcher
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      enabled: true
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      used: true
+                      right: true
+                      builtIn: false
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - SIMPL_USER
+  /ephemeralProof:
+    get:
+      tags:
+      - Participants
+      summary: Request ephemeral proof from the Dataspace Governance Authority
+      description: "Retrieves the agent's ephemeral proof from the Dataspace Governance\
+        \ Authority. This is an internal API, not usable by end users"
+      operationId: getEphemeralProofFromDataspaceGovernanceAuthority
+      responses:
+        "200":
+          description: The Dataspace Governance Authority successfully issued an ephemeral
+            proof for the participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EphemeralProof"
+              examples:
+                issuedEphemeralProof:
+                  summary: an ephemeral proof issued
+                  value: |
+                    {
+                      "proof": "IxvaN4ER-PlPgLYzfRhk_JiY4VAow3GNjaK5rYCINFsEPa7VaYnRsaCmQVq8CTgddihEPPXet2laH8_c3WqxY4AeZO5eljwSCobCHzxYdOoFKbpNXIm7dqHg_5xpQz-YBJMiDM1ILOEsER8ADyF4NC2sN0K_0t6xZLSAQIRrHvpGOrtYr5E-SllTWHWPmqCkX2BUZxoYNK2FWgQZpuUOD55HfsvFXNVQa_5TFRDibi9LsT7Sd_az0iGB0TfAb0v3ZR0qnmgyp5pTeIeU5UqhtbgU9RnUCVmGIK-SZYNvrlXgv9hiKAZGhLgeI8hO40utfT2YTYHgD2Aiufqo3RIbJA"
+                    }
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+  /tierOneCredentials/validate:
+    post:
+      tags:
+      - Tier 1 Credentials
+      summary: Validates Tier 1 credential of an End-User during Tier2 communication
+      description: "During Tier 2 communication, the calling participant invokes the\
+        \ called participant via secure communication. \nThe Tier 1 credential (JWT)\
+        \ of the user logged in in the calling participant can be propagated and sent\n\
+        to the called participant. The called participant validates a received Tier\
+        \ 1 credential upon the following flow:                  \n1. retrieve the\
+        \ mTLS session information associated with the \"participant_id\" claim -\
+        \ if no session is available, validation fails.\n2. verifies JWT signature\
+        \ against the public key contained in the mTLS session information\n3. verify\
+        \ that all the attributes contained in the claim \"identity_attributes\" are\
+        \ coherent with the mTLS session information (contained in the ephemeral proof)\n"
+      operationId: validateTierOneSession
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TierOneCredential"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        required: true
+      responses:
+        "204":
+          description: Tier 1 session validated successfully
+          x-microcks-refs:
+          - default
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+      x-microcks-operation:
+        dispatcher: JSON_BODY
+        dispatcherRules: |
+          {
+            "exp": "/jwt",
+            "operator": "equals",
+            "cases": {
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c": "default",
+              "default": "badRequest"
+            }
+          }
+  /automaticRenewal:
+    get:
+      tags:
+      - Automatic Renewals
+      summary: Retrieves the automatic renewal configuration.
+      description: "Reads, for the current participant, the automatic installation\
+        \ of newer valid credentials. Invokable by users with Tier 2 setup administration\
+        \ role (ONBOARDER_M)"
+      operationId: getAutomaticRenewal
+      responses:
+        "200":
+          description: Automatic renewal configuration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+              examples:
+                automaticRenewal:
+                  summary: automaticRenewal
+                  value:
+                    set: true
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: |
+          return "automaticRenewal"
+      x-simpl-roles:
+      - ONBOARDER_M
+    patch:
+      tags:
+      - Automatic Renewals
+      summary: Set the automatic renewal configuration.
+      description: "Edit, for the current participant, the automatic installation\
+        \ of newer valid credentials, permitting automatic renewal from the participant.\
+        \ Invokable by users with Tier 2 setup administration role (ONBOARDER_M)"
+      operationId: updateAutomaticRenewal
+      requestBody:
+        description: The new automatic renewal configuration
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+            examples:
+              newAutomaticRenewalConfiguration:
+                summary: a new automatic renewal configuration
+                value:
+                  set: true
+        required: true
+      responses:
+        "202":
+          description: The new automatic renewal configuration is set
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+              examples:
+                automaticRenewal:
+                  summary: automaticRenewal
+                  value:
+                    set: "{{request.body/set}}"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-microcks-operation:
+        dispatcher: JSON_BODY
+        dispatcherRules: |
+          {
+            "exp": "/set",
+            "operator": "regexp",
+            "cases": {
+              "true|false": "automaticRenewal",
+              "default": "badRequest"
+            }
+          }
+      x-simpl-roles:
+      - ONBOARDER_M
+components:
+  schemas:
+    KeyPairPagedRequest:
+      allOf:
+      - $ref: "#/components/schemas/PageRequest"
+      - $ref: "#/components/schemas/SortRequest"
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Human readable keypair name
+            example: keypair
+          creationTimestampFrom:
+            type: string
+            format: date-time
+            description: RFC3339 timestamp of creation
+            example: 2025-01-20T17:32:28Z
+          creationTimestampTo:
+            type: string
+            format: date-time
+            description: RFC3339 timestamp of creation
+            example: 2025-01-25T17:32:28Z
+          active:
+            type: boolean
+    KeyPairPagedResponse:
+      allOf:
+      - $ref: "#/components/schemas/PageResponse"
+      - type: object
+        properties:
+          items:
+            type: array
+            description: Elements in sliced search
+            items:
+              $ref: "#/components/schemas/KeyPairResponse"
+    KeyPairRequest:
+      allOf:
+      - $ref: "#/components/schemas/KeyPair"
+      - type: object
+        required:
+        - name
+    KeyPairResponse:
+      allOf:
+      - $ref: "#/components/schemas/CsrResponse"
+      - $ref: "#/components/schemas/KeyPair"
+      - type: object
+        required:
+        - active
+        - creationTimestamp
+        - id
+        - name
+        - publicKey
+    AgentKeypairEncryptionAlgorithm:
+      type: object
+      properties:
+        signatureAlgorithm:
+          type: string
+          description: signature algorithm
+          example: SHA256withECDSA
+          maxLength: 255
+        algorithm:
+          type: string
+          description: cryptographic algorithm
+          example: ECDSA
+          maxLength: 255
+        keyLength:
+          type: integer
+          description: key length
+          example: 256
+        readAlgorithm:
+          type: string
+          description: cryptographic algorithm name for reading keypairs
+          example: EC
+          maxLength: 255
+      required:
+      - algorithm
+      - keyLength
+      - readAlgorithm
+      - signatureAlgorithm
+    KeyPairDetailResponse:
+      allOf:
+      - $ref: "#/components/schemas/KeyPairResponse"
+      - type: object
+        properties:
+          privateKey:
+            type: string
+            description: private key (in PEM format)
+            example: |
+              -----BEGIN PRIVATE KEY-----
+              MHcCAQEEIHo9LGqNGEL32AwY6FdN2gluG0O4JqKAnSmDhCtVJCQ7oAoGCCqGSM49
+              AwEHoUQDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31PXGMddh8bvMUPFGnUT1ZcRBh+
+              323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==
+              -----END PRIVATE KEY-----
+      - type: object
+        required:
+        - privateKey
+    KeyPairImportRequest:
+      allOf:
+      - $ref: "#/components/schemas/KeyPairRequest"
+      - type: object
+        properties:
+          privateKey:
+            type: string
+            description: private key (in PEM format)
+            example: |
+              -----BEGIN PRIVATE KEY-----
+              MHcCAQEEIHo9LGqNGEL32AwY6FdN2gluG0O4JqKAnSmDhCtVJCQ7oAoGCCqGSM49
+              AwEHoUQDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31PXGMddh8bvMUPFGnUT1ZcRBh+
+              323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==
+              -----END PRIVATE KEY-----
+        required:
+        - name
+        - privateKey
+        - publicKey
+    Problem:
+      type: object
+      description: |
+        A Problem Details object (RFC 9457).
+
+        Additional properties specific to the problem type may be present.
+      example:
+        type: urn:problem-type:exampleOrganization:exampleProblem
+        href: https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types
+        title: Description of the type of problem that occurred
+        status: 400
+        detail: Description of specific occurrence of the problem
+        instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+          description: |
+            An absolute URI that identifies the problem type.  When dereferenced,
+            it SHOULD provide human-readable documentation for the problem type
+            (e.g., using HTML).
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: |
+            A short, summary of the problem type. Written in english and readable
+            for engineers (usually not suited for non technical stakeholders and
+            not localized); example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status code generated by the origin server for this occurrence
+            of the problem.
+          example: 503
+          maximum: 600
+          minimum: 100
+        detail:
+          type: string
+          description: |
+            A human readable explanation specific to this occurrence of the
+            problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: |-
+            An absolute URI that identifies the specific occurrence of the problem.
+            It may or may not yield further information if dereferenced.
+    CredentialsByKeyPairPagedRequest:
+      allOf:
+      - $ref: "#/components/schemas/PageRequest"
+      - $ref: "#/components/schemas/SortRequest"
+      - type: object
+        properties:
+          status:
+            $ref: "#/components/schemas/CredentialStatus"
+          issuanceDateFrom:
+            type: string
+            format: date-time
+          issuanceDateTo:
+            type: string
+            format: date-time
+          expiryDateFrom:
+            type: string
+            format: date-time
+          expiryDateTo:
+            type: string
+            format: date-time
+    CredentialsByKeyPairPagedResponse:
+      allOf:
+      - $ref: "#/components/schemas/PageResponse"
+      - type: object
+        properties:
+          items:
+            type: array
+            description: Elements in sliced search
+            items:
+              $ref: "#/components/schemas/CredentialByKeyPairResponse"
+    CsrRequest:
+      type: object
+      properties:
+        commonName:
+          type: string
+          example: participant1
+          maxLength: 255
+        organization:
+          type: string
+          example: SIMPL
+          maxLength: 255
+        organizationalUnit:
+          type: string
+          example: IT Dep
+          maxLength: 255
+        country:
+          type: string
+          example: IT
+          maxLength: 255
+      required:
+      - commonName
+      - country
+      - organization
+      - organizationalUnit
+    CsrResponse:
+      type: object
+      properties:
+        csr:
+          type: string
+          description: Certificate Signing Request (CSR) in PEM format
+          example: |
+            -----BEGIN CERTIFICATE REQUEST-----
+            MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+            DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+            b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+            eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+            EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+            nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+            BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+            1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+            WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+            Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+            y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+            gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+            KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+            3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+            9g==
+            -----END CERTIFICATE REQUEST-----
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: participant unique identifier in the dataspace
+          example: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+        organization:
+          type: string
+          description: the organization represented by the participant
+          example: ACME Corp
+        authorityCreationTimestamp:
+          type: string
+          format: date-time
+          description: participant creation timestamp on the governance authority
+          example: 2025-01-20T17:32:28Z
+        authorityUpdateTimestamp:
+          type: string
+          format: date-time
+          description: participant last update timestamp on the governance authority
+          example: 2025-01-22T17:32:28Z
+    IdentityAttribute:
+      type: object
+      example:
+        code: CONSUMER
+        name: Consumer
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        description: Identity attribute used for tagging an end user able to act as
+          a user of a data consumer participant (can start contract and transfer process)
+        assignableToRoles: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        used: true
+        right: true
+        enabled: true
+        builtIn: true
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: the unique UUID identifier of the identity attribute
+        code:
+          type: string
+          description: the unique code identifying the identity attribute
+          maxLength: 255
+        name:
+          type: string
+          description: the human readable name of the identity attribute
+          maxLength: 255
+        description:
+          type: string
+          description: the human readable description of the identity attribute
+          maxLength: 255
+        assignableToRoles:
+          type: boolean
+          description: boolean stating if the identity attribute can be assigned to
+            a role
+        enabled:
+          type: boolean
+          description: boolean flag stating if the identity attribute is enabled
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: the creation timestamp of the identity attribute in ISO 8601
+            format
+        updateTimestamp:
+          type: string
+          format: date-time
+          description: the update timestamp of the identity attribute in ISO 8601
+            format
+        used:
+          type: boolean
+          description: boolean saying if the identity attribute is assigned to at
+            least a participant
+          readOnly: true
+        right:
+          type: boolean
+          description: boolean stating if the identity attribute represent a legal
+            right
+          readOnly: true
+        builtIn:
+          type: boolean
+          description: boolean stating if the identity attribute is built-in an therefore
+            cannot be created modified or deleted
+          readOnly: true
+      required:
+      - assignableToRoles
+      - code
+      - enabled
+      - name
+    PageQueryParam:
+      type: integer
+      default: 0
+      minimum: 0
+    PageSizeQueryParam:
+      type: integer
+      default: 10
+    SortQueryParam:
+      type: array
+      items:
+        type: string
+        description: a sorting policy
+    IdentityAttributePagedResponse:
+      allOf:
+      - $ref: "#/components/schemas/PageResponse"
+      - type: object
+        properties:
+          items:
+            type: array
+            description: Elements in sliced search
+            items:
+              $ref: "#/components/schemas/IdentityAttributeResponse"
+    InstallCredentialRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The credential (x.509 certificate in PEM format)
+          example: |
+            -----BEGIN CERTIFICATE-----
+            MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+            -----END CERTIFICATE-----
+        reason:
+          type: string
+          description: reason for the credential upload
+          example: This is a reason
+          maxLength: 1024
+      required:
+      - content
+      - reason
+    ActiveCredential:
+      allOf:
+      - $ref: "#/components/schemas/Credential"
+      - type: object
+        required:
+        - content
+        - credentialId
+        - expiryDate
+        - issuanceDate
+    CredentialContent:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The credential (x.509 certificate in PEM format)
+          example: |
+            -----BEGIN CERTIFICATE-----
+            MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+            -----END CERTIFICATE-----
+      required:
+      - content
+    EchoResponse:
+      type: object
+      example:
+        mtlsStatus: SECURED
+        userIdentityAttributes:
+        - DATA_PROVIDER
+        - DATA_PROVIDER_PUBLISHER
+        identityAttributes:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          code: CONSUMER
+          name: Consumer
+          description: Identity attribute used for tagging an end user able to act
+            as a user of a data consumer participant (can start contract and transfer
+            process)
+          assignableToRoles: true
+          enabled: true
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          used: true
+          right: true
+          builtIn: true
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          code: DATA_SEARCHER
+          name: Data searcher
+          description: "Identity Attributes used for tagging an end user able to act\
+            \ only as a searcher in the catalogue, but he can't start a contract negotiation\
+            \ or transfer process"
+          assignableToRoles: true
+          enabled: true
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          used: true
+          right: true
+          builtIn: false
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        organization: Organization Name
+        connectionStatus: CONNECTED
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: user@email.com
+        username: user_12345
+      properties:
+        username:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          maxLength: 255
+        connectionStatus:
+          $ref: "#/components/schemas/ConnectionStatus"
+        mtlsStatus:
+          $ref: "#/components/schemas/MtlsStatus"
+        userIdentityAttributes:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+          format: uuid
+        organization:
+          type: string
+          maxLength: 255
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+          maxLength: 64
+        expiryDate:
+          type: string
+          format: date-time
+        identityAttributes:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdentityAttribute"
+      required:
+      - connectionStatus
+      - credentialId
+      - email
+      - expiryDate
+      - id
+      - mtlsStatus
+      - organization
+      - userIdentityAttributes
+      - username
+    PingResponse:
+      type: object
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        organization: Organization Name
+        identityAttributes:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          code: CONSUMER
+          name: Consumer
+          description: Identity attribute used for tagging an end user able to act
+            as a user of a data consumer participant (can start contract and transfer
+            process)
+          assignableToRoles: true
+          enabled: true
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          used: true
+          right: true
+          builtIn: true
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          code: DATA_SEARCHER
+          name: Data searcher
+          description: "Identity Attributes used for tagging an end user able to act\
+            \ only as a searcher in the catalogue, but he can't start a contract negotiation\
+            \ or transfer process"
+          assignableToRoles: true
+          enabled: true
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          used: true
+          right: true
+          builtIn: false
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The participant unique identifier
+        organization:
+          type: string
+          description: The participant organization name
+          maxLength: 255
+        identityAttributes:
+          type: array
+          description: The participant assigned identity attributes
+          items:
+            $ref: "#/components/schemas/IdentityAttribute"
+      required:
+      - id
+      - identityAttributes
+      - organization
+    EphemeralProof:
+      type: object
+      example:
+        proof: |
+          IxvaN4ER-PlPgLYzfRhk_JiY4VAow3GNjaK5rYCINFsEPa7VaYnRsaCmQVq8CTgddihEPPXe
+          t2laH8_c3WqxY4AeZO5eljwSCobCHzxYdOoFKbpNXIm7dqHg_5xpQz-YBJMiDM1ILOEsER8A
+          DyF4NC2sN0K_0t6xZLSAQIRrHvpGOrtYr5E-SllTWHWPmqCkX2BUZxoYNK2FWgQZpuUOD55H
+          fsvFXNVQa_5TFRDibi9LsT7Sd_az0iGB0TfAb0v3ZR0qnmgyp5pTeIeU5UqhtbgU9RnUCVmG
+          IK-SZYNvrlXgv9hiKAZGhLgeI8hO40utfT2YTYHgD2Aiufqo3RIbJA
+      properties:
+        proof:
+          type: string
+          description: a JWT signed by the Dataspace Governance Authority identifying
+            a dataspace participant
+      required:
+      - proof
+    TierOneCredential:
+      type: object
+      example:
+        jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      properties:
+        jwt:
+          type: string
+      required:
+      - jwt
+    AutomaticRenewalConfiguration:
+      type: object
+      properties:
+        set:
+          type: boolean
+          default: false
+          description: "True if automatic renewal configuration is set, false otherwise."
+          example: true
+    PageRequest:
+      type: object
+      properties:
+        page:
+          type: integer
+          default: 0
+          description: the index of page to be retrieved
+        pageSize:
+          type: integer
+          default: 10
+          description: maximum number of items per page desired by client
+    SortRequest:
+      type: object
+      properties:
+        sort:
+          type: array
+          description: "Multi-value query param with list of properties to sort on.\
+            \ Direction is ascending by default. To indicate descending, prefix property\
+            \ with -."
+          items:
+            type: string
+            description: a sorting policy
+    PageResponse:
+      type: object
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Absolute URI to the resource's own location.
+        pageSize:
+          type: integer
+          description: "Maximum number of items per page. For the last page, its value\
+            \ should be independent of the number of actually returned items."
+        page:
+          type: integer
+          description: "Index of the current page of items, should be 1-based (the\
+            \ default and first page is 1)"
+        total:
+          type: integer
+          description: "Total number of items across all pages. If query parameters\
+            \ are used to filter the result set, this is the total of the collection\
+            \ result set, not of the entire collection."
+        first:
+          type: string
+          format: uri
+          description: Absolute URI to the first page
+        last:
+          type: string
+          format: uri
+          description: Absolute URI to the last page
+        prev:
+          type: string
+          format: uri
+          description: Absolute URI to the previous page
+        next:
+          type: string
+          format: uri
+          description: Absolute URI to the next page
+    KeyPair:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the keypair
+        name:
+          type: string
+          description: Human readable keypair name
+          example: my keypair
+          maxLength: 255
+        active:
+          type: boolean
+          default: false
+          description: the keypair bound to the installed credentials (if any)
+        publicKey:
+          type: string
+          description: public key (in PEM format)
+          example: |
+            -----BEGIN PUBLIC KEY-----
+            MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn6Htd4aaqQ2fmKLhuCz0aLKha31P
+            XGMddh8bvMUPFGnUT1ZcRBh+323bzbnu4hZsToMYdYLwz6fOM3C07eiMeA==
+            -----END PUBLIC KEY-----
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: RFC3339 timestamp of creation
+    CredentialStatus:
+      type: string
+      description: |
+        The status of the credential:<br> - **Valid**: The credential is valid and usable.<br> - **Expired**: The credential has expired.<br> - **Revoked**: The credential is permanently revoked and no longer usable.<br> - **Suspended**: The credential is temporarily revoked and may transition back to valid.<br>
+      enum:
+      - VALID
+      - EXPIRED
+      - REVOKED
+      - SUSPENDED
+    CredentialByKeyPairResponse:
+      allOf:
+      - $ref: "#/components/schemas/Credential"
+      - type: object
+        required:
+        - content
+        - credentialId
+        - expiryDate
+        - issuanceDate
+        - status
+    IdentityAttributeResponse:
+      allOf:
+      - $ref: "#/components/schemas/IdentityAttribute"
+      - type: object
+        required:
+        - active
+        - creationTimestamp
+        - id
+        - name
+        - publicKey
+    Credential:
+      allOf:
+      - $ref: "#/components/schemas/CredentialContent"
+      - type: object
+        properties:
+          status:
+            $ref: "#/components/schemas/CredentialStatus"
+          issuanceDate:
+            type: string
+            format: date-time
+            description: Timestamp when the credential is issued.
+          expiryDate:
+            type: string
+            format: date-time
+            description: Timestamp when the credential is expiring.
+          credentialId:
+            type: string
+            description: public key hash (sha384) bound to the credential
+            example: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+            maxLength: 64
+    ConnectionStatus:
+      type: string
+      enum:
+      - CONNECTED
+      - NOT_CONNECTED
+    MtlsStatus:
+      type: string
+      enum:
+      - SECURED
+      - NOT_SECURED
+  responses:
+    BadRequest:
+      description: "Bad request, invalid input data"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            badRequest:
+              summary: Bad Request
+              value:
+                type: urn:problem-type:simpl:badRequest
+                title: Bad request
+                detail: Invalid input data
+                status: 400
+    Unauthorized:
+      description: "Unauthorized, the user is not authenticated"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unauthorized:
+              summary: Unauthorized
+              value:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                detail: The user is not authenticated
+                status: 401
+    Forbidden:
+      description: "Forbidden, the user does not have the roles to perform the operation"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            forbidden:
+              summary: Forbidden
+              value:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                detail: The user does not have the roles to perform the operation
+                status: 403
+    InternalServerError:
+      description: "Internal Server Error, an internal server error occurred"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            internalServerError:
+              summary: Internal Server Error
+              value:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                detail: Internal Server Error
+                status: 500
+    Conflict:
+      description: "Conflict, action requested cannot be performed"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            conflict:
+              summary: Conflict
+              value:
+                type: urn:problem-type:simpl:conflict
+                title: Conflict
+                detail: Conflict
+                status: 409
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            notFound:
+              summary: Not Found
+              value:
+                type: urn:problem-type:simpl:notFound
+                title: Not Found
+                detail: Resource not found
+                status: 404
+    UnprocessableEntity:
+      description: Unprocessable. Needed entity for continue not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unprocessableEntity:
+              summary: Unprocessable Entity
+              value:
+                type: urn:problem-type:simpl:unprocessableEntity
+                title: Unprocessable Entity
+                detail: Unprocessable Entity
+                status: 422
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: SIMPL Tier1 end users authentication process
+      flows:
+        authorizationCode:
+          authorizationUrl: ""
+          tokenUrl: ""
+          scopes: {}
+    oauth2ClientCredentials:
+      type: oauth2
+      description: SIMPL internal APIs authentication process
+      flows:
+        clientCredentials:
+          tokenUrl: ""
+          scopes: {}

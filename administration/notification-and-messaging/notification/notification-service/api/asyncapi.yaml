@@ -1,0 +1,55 @@
+asyncapi: '3.0.0'
+info:
+  title: Notification Service API
+  version: '1.0.0'
+  description: API documentation for a notification service using Kafka.
+
+defaultContentType: application/json
+servers:
+  production:
+    host: 'kafka://localhost:9094'
+    protocol: kafka-secure
+    description: Kafka server
+
+channels:
+  notifications:
+    address: "notifications"
+    messages:
+      EmailNotification:
+        $ref: "#/components/messages/EmailNotification"
+
+operations:
+  SendNotification:
+    action: send
+    summary: Sending notification message to Kafka topic 'notifications'
+    channel:
+      $ref: '#/channels/notifications'
+
+components:
+  messages:
+    EmailNotification:
+      name: EmailNotification
+      title: Sending email notification
+      payload:
+        type: object
+        properties:
+          channel:
+            type: string
+            enum:
+              - email
+            description: Type of notification channel.
+          message:
+            type: string
+            description: Body of the message.
+          to:
+            type: string
+            description: Email address of the recipient.
+          cc:
+            type: array
+            items:
+              type: string
+            description: List of email addresses in CC.
+          subject:
+            type: string
+            description: Subject of the message.
+      $ref: '#/components/messages/EmailNotification'

@@ -1,0 +1,308 @@
+info:
+  title: Validation Service API
+  description: |-
+    This API enables syntactic validation of Resource Descriptions before publication on the federated catalogue. It ensures that self-descriptions and resource addresses comply with expected structural rules, supporting error prevention and consistency across the data space.
+
+    ## Business Context
+
+    The validation API enables providers to perform syntactic validation of Resource Descriptions before publication on the federated catalogue. It ensures that the self-description and associated Resource Address comply with the expected data model and structural constraints. This pre-validation step reduces publication errors and promotes interoperability across the data space.
+
+
+    ### Key Actors
+
+    - **Provider**: Prepares the Resource Description and initiates the validation request.
+
+    - **Governance Authority**: Defines validation rules and data model conformance criteria
+
+    ### Typical Flow
+
+    1. The Provider composes the Resource Description, including the Resource Address.
+
+    2. The Provider submits the Resource Description to the Validation Service.
+
+    3. The Validation Service performs syntactic checks and returns validation results.
+
+    4. If the validation is successful, the Provider proceeds to submit the Resource Description for publication on the Federated Catalogue.
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: "1.0"
+servers:
+- url: https://tbd.dev.simpl-europe.eu/v1
+security:
+- NoAuth: []
+openapi: 3.0.1
+tags:
+- name: Resource Address
+  description: Endpoint for Resource Address validation
+- name: Self Description
+  description: Endpoint for Self-Description (SD) validation
+components:
+  securitySchemes:
+    NoAuth:
+      type: apiKey
+      description: Placeholder scheme used when security is not required
+      name: X-No-Auth
+      in: header
+  schemas:
+    ResourceAddressResponse:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        errors:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+    InputObject:
+      type: object
+      properties:
+        in:
+          type: string
+          enum:
+          - body
+          - path
+          - query
+          - header
+        name:
+          type: string
+        value:
+          type: object
+    InternalServerErrorProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    BadRequestProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputValidationIssue'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    InputValidationIssue:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+        in:
+          type: string
+          enum:
+          - body
+          - path
+          - query
+          - header
+        name:
+          type: string
+        value:
+          type: object
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputObject'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+paths:
+  /selfDescriptions/validation:
+    post:
+      tags:
+      - Self Description
+      summary: Validates a JSON-LD Self-Description against a provided schema file.
+      description: Receives a JSON-LD file containing a Self-Description, a SHACL file for validation. Returns the validated JSON-LD upon successful validation.
+      operationId: validateSelfDescription
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - jsonldFile
+              - shapeFile
+              type: object
+              properties:
+                jsonldFile:
+                  type: string
+                  format: binary
+                shapeFile:
+                  type: string
+                  format: binary
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorProblem'
+              examples:
+                Internal Server Error Example:
+                  description: Internal Server Error Example
+                  value:
+                    type: urn:problem-type:simpl:internalServerError
+                    title: Internal Server Error
+                    status: 500
+                    detail: Unexpected internal error
+        "400":
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              examples:
+                Bad Request Error Example:
+                  description: Bad Request Error Example
+                  value:
+                    type: urn:problem-type:simpl:validationError
+                    title: Invalid payload
+                    status: 400
+                    detail: missing required arguments
+                    issues:
+                    - detail: Field 'jsonldFile' must not be empty
+        "200":
+          description: Successfully validated SD JSON-LD
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Validated SD JSON-LD:
+                  description: Validated SD JSON-LD
+                  value:
+                    '@context':
+                      gax-validation: http://w3id.org/gaia-x/validation#
+                      rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+                      sh: http://www.w3.org/ns/shacl#
+                      simpl: http://w3id.org/gaia-x/simpl#
+                      skos: http://www.w3.org/2004/02/skos/core#
+                      xsd: http://www.w3.org/2001/XMLSchema#
+                    '@id': did:web:registry.gaia-x.eu:DataOffering:12Ar124fx
+                    rdf:type:
+                      '@id': simpl:DataOffering
+                    '...': '...'
+  /resourceAddresses/validation:
+    post:
+      tags:
+      - Resource Address
+      summary: Validate a resource address JSON against a provided JSON Schema Template.
+      description: Receives as input a JSON containing the values of a resource address and a JSON schema template with constraints, and returns the result of the validation as output.
+      operationId: validateResourceAddresses
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - jsonSchema
+              - jsonValue
+              type: object
+              properties:
+                jsonSchema:
+                  type: string
+                  format: binary
+                jsonValue:
+                  type: string
+                  format: binary
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorProblem'
+              examples:
+                Internal Server Error Example:
+                  description: Internal Server Error Example
+                  value:
+                    type: urn:problem-type:simpl:internalServerError
+                    title: Internal Server Error
+                    status: 500
+                    detail: Unexpected internal error
+        "400":
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              examples:
+                Bad Request Error Example:
+                  description: Bad Request Error Example
+                  value:
+                    type: urn:problem-type:simpl:validationError
+                    title: Invalid payload
+                    status: 400
+                    detail: missing required arguments
+                    issues:
+                    - detail: Required request part 'jsonSchema' is not present
+        "200":
+          description: Validation outcome
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAddressResponse'
+              examples:
+                Validation Success:
+                  description: Validation Success
+                  value:
+                    valid: true
+                Validation Failed:
+                  description: Validation Failed
+                  value:
+                    valid: false
+                    errors:
+                    - message: 'storage: does not match the uri pattern must be a valid RFC 3986 URI'
+                      pointer: storage
+                    - message: 'accessKey: must be at least 20 characters long'
+                      pointer: accessKey
+                    - message: 'secretKey: must be at least 20 characters long'
+                      pointer: secretKey

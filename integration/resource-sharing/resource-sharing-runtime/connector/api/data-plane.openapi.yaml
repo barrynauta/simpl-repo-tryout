@@ -1,4 +1,0 @@
-# Connector Data Plane API OpenAPI Specification
-# Status: not yet documented.
-# Source: gaia-x-edc/simpl-edc repository (Eclipse EDC Data Plane API).
-# Description: Data transfer API; used after successful contract establishment to initiate data exchange.

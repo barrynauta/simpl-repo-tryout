@@ -44,6 +44,11 @@ Provenance: built by Simpl. Source repository: `data1/schema-sync-adapter` — e
 
 - [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 2 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/data1/schema-sync-adapter>

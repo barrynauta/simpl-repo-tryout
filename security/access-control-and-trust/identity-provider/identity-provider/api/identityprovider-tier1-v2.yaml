@@ -1,0 +1,2709 @@
+openapi: 3.0.1
+info:
+  title: Identity Provider Tier 1
+  description: Tier 1 OpenAPI definition for the Identity Provider component of the
+    SIMPL project
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: 2.0.0
+servers:
+- url: https://t1.identity-provider.dev.simpl.eu/tier1/v2
+  description: Tier1 Identity Provider
+security:
+- oauth2ClientCredentials: []
+tags:
+- name: Credentials
+  description: "Manage the digital credentials of participants, enabling secure authentication\
+    \ and verification of their identity and roles within trusted data exchange processes."
+- name: Participants
+  description: "Allow the creation and retrieval of participant, also allowing  to\
+    \ manage the credential requests (CSR)."
+- name: Automatic Renewals
+  description: "Allow the creation, retrieval and editing of the default automatic\
+    \ renewal configuration for the dataspace participants."
+paths:
+  /participants:
+    get:
+      tags:
+      - Participants
+      summary: List all participants
+      description: Lists the available participants in the dataspace. Only accessible
+        by users with the NOTARY and IATTR_M roles.
+      operationId: listParticipants
+      parameters:
+      - name: page
+        in: query
+        description: the index of page to be retrieved
+        required: false
+        schema:
+          $ref: "#/components/schemas/PageQueryParam"
+        examples:
+          firstPage:
+            summary: First page
+            value: 0
+          firstPageSortedByCreationTimestampAsc:
+            summary: First page sorted by creation timestamp asc
+            value: 0
+          firstPageSortedByCreationTimestampDesc:
+            summary: First page sorted by creation timestamp desc
+            value: 0
+          firstPageFilteredByOrganization:
+            summary: First page filtered by organization
+            value: 0
+          secondPageEmpty:
+            summary: Second page empty
+            value: 1
+      - name: pageSize
+        in: query
+        description: maximum number of items per page desired by client
+        required: false
+        schema:
+          $ref: "#/components/schemas/PageSizeQueryParam"
+        examples:
+          firstPage:
+            summary: First page
+            value: 10
+          firstPageSortedByCreationTimestampAsc:
+            summary: First page sorted by creation timestamp asc
+            value: 10
+          firstPageSortedByCreationTimestampDesc:
+            summary: First page sorted by creation timestamp desc
+            value: 10
+          firstPageFilteredByOrganization:
+            summary: First page filtered by organization
+            value: 10
+          secondPageEmpty:
+            summary: Second page empty
+            value: 10
+      - name: sort
+        in: query
+        description: "Multi-value query param with list of properties to sort on.\
+          \ Direction is ascending by default. To indicate descending, prefix property\
+          \ with -."
+        required: false
+        schema:
+          $ref: "#/components/schemas/SortQueryParam"
+        examples:
+          firstPageSortedByCreationTimestampAsc:
+            summary: First page sorted by creation timestamp asc
+            value: creationTimestamp
+          firstPageSortedByCreationTimestampDesc:
+            summary: First page sorted by creation timestamp desc
+            value: -creationTimestamp
+      - name: organization
+        in: query
+        description: the organization represented by the participant
+        required: false
+        schema:
+          type: string
+        examples:
+          firstPageFilteredByOrganization:
+            summary: Default
+            value: ACME_1
+      - name: creationTimestampFrom
+        in: query
+        description: RFC3339 timestamp of onboarding
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          default:
+            summary: Default
+            value: 2025-01-20T17:32:28Z
+      - name: creationTimestampTo
+        in: query
+        description: RFC3339 timestamp of onboarding
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          default:
+            summary: Default
+            value: 2025-01-20T17:32:28Z
+      responses:
+        "200":
+          description: List of participants
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantPagedResponse"
+              examples:
+                default:
+                  summary: Default
+                  value:
+                    self: /participants?creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=2&pageSize=2
+                    items:
+                    - organization: ACME_1
+                      creationTimestamp: 2025-01-20T17:32:28Z
+                      id: 00000001-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-22T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1
+                        -----END PUBLIC KEY-----
+                    - organization: ACME_2
+                      creationTimestamp: 2025-01-21T17:32:28Z
+                      id: 00000002-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-23T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam2
+                        -----END PUBLIC KEY-----
+                    pageSize: 2
+                    page: 2
+                    total: 7
+                    first: /participants?creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=0&pageSize=2
+                    last: /participants?creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=4&pageSize=2
+                    prev: /participants?creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=1&pageSize=2
+                    next: /participants?creationTimestampFrom=2025-01-20T17:32:28Z&creationTimestampTo=2025-01-25T17:32:28Z&sort=creationTimestamp&page=3&pageSize=2
+                firstPage:
+                  summary: First page
+                  value:
+                    self: /participants?page=0&pageSize=10
+                    items:
+                    - organization: ACME_1
+                      creationTimestamp: 2025-01-20T17:32:28Z
+                      id: 00000001-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-22T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1
+                        -----END PUBLIC KEY-----
+                    - organization: ACME_2
+                      creationTimestamp: 2025-01-21T17:32:28Z
+                      id: 00000002-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-23T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam2
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                        status: VALID
+                    - organization: ACME_3
+                      creationTimestamp: 2025-01-22T17:32:28Z
+                      id: 00000003-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-24T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam3
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETREVOKED
+                        status: REVOKED
+                    - organization: ACME_4
+                      creationTimestamp: 2025-01-23T17:32:28Z
+                      id: 00000004-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-25T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam4
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETSUSPENDED
+                        status: SUSPENDED
+                    pageSize: 10
+                    page: 0
+                    total: 4
+                firstPageSortedByCreationTimestampAsc:
+                  summary: First page sorted by creation timestamp asc
+                  value:
+                    self: /participants?page=0&pageSize=10&sort=creationTimestamp
+                    items:
+                    - organization: ACME_1
+                      creationTimestamp: 2025-01-20T17:32:28Z
+                      id: 00000001-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-22T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1
+                        -----END PUBLIC KEY-----
+                    - organization: ACME_2
+                      creationTimestamp: 2025-01-21T17:32:28Z
+                      id: 00000002-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-23T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam2
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                        status: VALID
+                    - organization: ACME_3
+                      creationTimestamp: 2025-01-22T17:32:28Z
+                      id: 00000003-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-24T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam3
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETREVOKED
+                        status: REVOKED
+                    - organization: ACME_4
+                      creationTimestamp: 2025-01-23T17:32:28Z
+                      id: 00000004-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-25T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam4
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETSUSPENDED
+                        status: SUSPENDED
+                    pageSize: 10
+                    page: 0
+                    total: 4
+                firstPageSortedByCreationTimestampDesc:
+                  summary: First page sorted by creation timestamp asc
+                  value:
+                    self: /participants?page=0&pageSize=10&sort=-creationTimestamp
+                    items:
+                    - organization: ACME_4
+                      creationTimestamp: 2025-01-23T17:32:28Z
+                      id: 00000004-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-25T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam4
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETSUSPENDED
+                        status: SUSPENDED
+                    - organization: ACME_3
+                      creationTimestamp: 2025-01-22T17:32:28Z
+                      id: 00000003-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-24T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam3
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETREVOKED
+                        status: REVOKED
+                    - organization: ACME_2
+                      creationTimestamp: 2025-01-21T17:32:28Z
+                      id: 00000002-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-23T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam2
+                        -----END PUBLIC KEY-----
+                      credential:
+                        expiryDate: 2070-01-23T14:00:00.000Z
+                        issuanceDate: 2025-01-21T14:00:00.000Z
+                        lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                        credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                        status: VALID
+                    - organization: ACME_1
+                      creationTimestamp: 2025-01-20T17:32:28Z
+                      id: 00000001-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-22T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1
+                        -----END PUBLIC KEY-----
+                    pageSize: 10
+                    page: 0
+                    total: 4
+                firstPageFilteredByOrganization:
+                  summary: First page filtered by organization
+                  value:
+                    self: /participants?page=0&pageSize=10&organization=ACME_1
+                    items:
+                    - organization: ACME_1
+                      creationTimestamp: 2025-01-20T17:32:28Z
+                      id: 00000001-0000-0000-0000-000000000000
+                      updateTimestamp: 2025-01-22T17:32:28Z
+                      tierOnePublicKey: |-
+                        -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                        GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1
+                        -----END PUBLIC KEY-----
+                    pageSize: 10
+                    page: 0
+                    total: 4
+                secondPageEmpty:
+                  summary: Second page empty
+                  value:
+                    self: /participants?page=1&pageSize=10
+                    items: []
+                    pageSize: 10
+                    page: 1
+                    total: 4
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - NOTARY
+      - IATTR_M
+    post:
+      tags:
+      - Participants
+      summary: Create a new participant
+      description: Creates a new participant with the provided details
+      operationId: createParticipant
+      requestBody:
+        description: Details of the participant to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParticipantRequest"
+            examples:
+              participantRequest:
+                summary: a participant creation request
+                value:
+                  organization: ACME Corp
+        required: true
+      responses:
+        "201":
+          description: Participant created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantDetailResponse"
+              examples:
+                participantCreationResponse:
+                  summary: participant creation response
+                  value:
+                    organization: "{{request.body/organization}}"
+                    creationTimestamp: "{{now(yyyy-MM-dd'T'HH:mm:ss'Z')}}"
+                    updateTimestamp: "{{now(yyyy-MM-dd'T'HH:mm:ss'Z')}}"
+                    id: "{{uuid()}}"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+      x-microcks-operation:
+        dispatcher: JSON_BODY
+        dispatcherRules: |
+          {
+            "exp": "/organization",
+            "operator": "presence",
+            "cases": {
+              "found": "participantCreationResponse",
+              "default": "badRequest"
+            }
+          }
+  /participants/{participantId}:
+    get:
+      tags:
+      - Participants
+      summary: Retrieve participant data by ID
+      description: |
+        Retrieves information about a specific participant using its identifier.<br>
+        Only accessible by users with the NOTARY and IATTR_M roles their full access permissions.<br>
+        An user with APPLICANT role can only access their own participant data.
+      operationId: getParticipant
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          firstParticipant:
+            summary: First participant
+            value: 00000001-0000-0000-0000-000000000000
+          secondParticipant:
+            summary: Second participant
+            value: 00000002-0000-0000-0000-000000000000
+          thirdParticipant:
+            summary: Third participant
+            value: 00000003-0000-0000-0000-000000000000
+          fourthParticipant:
+            summary: Fourth participant
+            value: 00000004-0000-0000-0000-000000000000
+      responses:
+        "200":
+          description: Participant data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantResponse"
+              examples:
+                firstParticipant:
+                  summary: First participant
+                  value:
+                    organization: ACME_1
+                    creationTimestamp: 2025-01-20T17:32:28Z
+                    id: 00000001-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-22T17:32:28Z
+                    tierOnePublicKey: |-
+                      -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                      GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1
+                      -----END PUBLIC KEY-----
+                secondParticipant:
+                  summary: Second participant
+                  value:
+                    organization: ACME_2
+                    creationTimestamp: 2025-01-20T17:32:28Z
+                    id: 00000002-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-22T17:32:28Z
+                    tierOnePublicKey: |-
+                      -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                      GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1
+                      -----END PUBLIC KEY-----
+                    credential:
+                      expiryDate: 2070-01-23T14:00:00.000Z
+                      issuanceDate: 2025-01-21T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      status: VALID
+                thirdParticipant:
+                  summary: Third participant
+                  value:
+                    organization: ACME_3
+                    creationTimestamp: 2025-01-22T17:32:28Z
+                    id: 00000003-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-24T17:32:28Z
+                    tierOnePublicKey: |-
+                      -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                      GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam3
+                      -----END PUBLIC KEY-----
+                    credential:
+                      expiryDate: 2070-01-23T14:00:00.000Z
+                      issuanceDate: 2025-01-21T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETREVOKED
+                      status: REVOKED
+                fourthParticipant:
+                  summary: Fourth participant
+                  value:
+                    organization: ACME_4
+                    creationTimestamp: 2025-01-23T17:32:28Z
+                    id: 00000004-0000-0000-0000-000000000000
+                    updateTimestamp: 2025-01-25T17:32:28Z
+                    tierOnePublicKey: |-
+                      -----BEGIN PUBLIC KEY----- MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h
+                      GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam4
+                      -----END PUBLIC KEY-----
+                    credential:
+                      expiryDate: 2070-01-23T14:00:00.000Z
+                      issuanceDate: 2025-01-21T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETSUSPENDED
+                      status: SUSPENDED
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - NOTARY
+      - IATTR_M
+      - APPLICANT
+  /participants/{participantId}/csr:
+    get:
+      tags:
+      - Participants
+      summary: Retrieves the CSR for the specified participant
+      description: Retrieves the CSR for the specified participant
+      operationId: getParticipantCSR
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          firstParticipantCsr:
+            summary: First participant CSR
+            value: 00000001-0000-0000-0000-000000000000
+          secondParticipantCsr:
+            summary: Second participant CSR
+            value: 00000002-0000-0000-0000-000000000000
+          thirdParticipantCsr:
+            summary: Third participant CSR
+            value: 00000003-0000-0000-0000-000000000000
+          fourthParticipantCsr:
+            summary: Fourth participant CSR
+            value: 00000004-0000-0000-0000-000000000000
+      responses:
+        "200":
+          description: CSR retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CsrResponse"
+              examples:
+                firstParticipantCsr:
+                  summary: csr is retrieved
+                  value:
+                    commonName: participant1
+                    organization: ACME_1
+                    organizationalUnit: IT Department
+                    country: IT
+                    csr: '-----BEGIN CERTIFICATE REQUEST----- MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                      DABTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+                      b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+                      eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+                      EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+                      nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+                      BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+                      1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+                      WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+                      Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+                      y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+                      gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+                      KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+                      3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+                      9g== -----END CERTIFICATE REQUEST-----'
+                secondParticipantCsr:
+                  value:
+                    commonName: participant2
+                    organization: ACME_2
+                    organizationalUnit: Engineering
+                    country: IT
+                    csr: '-----BEGIN CERTIFICATE REQUEST----- MIICzDCCAbQCAQAwUzELMAkGA1UEBhMCVVMxEzARBgNVBAoMCkFDTUUgQ29ycDEW
+                      MBQGA1UECwwNRW5naW5lZXJpbmcxFzAVBgNVBAMMDnBhcnRpY2lwYW50Mi5jb20w
+                      ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/6pH3GzGxRds1fZ0n3PoM
+                      Q5i5/3bcs+29c3OdZ9V4ha8CuvW9vMk4aUoKxHRgGXKcQ13smWyci8HcI0pBePMJ
+                      vMnV5FiRA0Khrn8TPZcAZt9t7+8cHPa1m6AtFQxgXt3Mr+8tHkg2ZbFtVrp3hrrF
+                      4b4y8d6M1AqUT3l8K2J1v5z6PoEoOVmfRnxL38RPu8u7LO5q5c8c3l8m0uZNh3R2
+                      9K+isXAbKjRYReFfKZ7BRjqFYeW9PZhzRI9mzyZZBML6xR8kN2U7VZ3w9n+G8N5j
+                      bsvMlZ6Adx4PNwOfZhMbBDp1uGq+I2oy8faM3g0OLJ/hH5yRZr6KkYBFAgMBAAGg
+                      ADANBgkqhkiG9w0BAQsFAAOCAQEAMav/CYOn8T7h6E5LuRl1Kx6U1Q0s6AKQaKZT
+                      W0n7bk91I6wn9IGRQ9w4wnZXgMtbwWcIG7zC2lB7or2q7JIGWJzfrI2l0OeCJ4Ol
+                      LtfA6q7I5ElD6kjJKGqOY0bdpLo1B2sIX6/6XyrBd4m77kpI4sF7tbx/JrU1S8VJ
+                      p1L+QjRZhFOPeM0fNuhhO1Fh2ErWQK9csAbLt0uPOJ8fj2L3FOe7YJMRUdox34Y8
+                      u5M86T3Tf7Y2Gx9trRUoZ2c9+BP36DRiZ6r2ZrIdIYxYcz6os+R7OVC69Z7/6eb1
+                      PC+qt7O7slN8X0xD28dTxXVRuQFG5JmbtOtrTo3yN8Yv4w== -----END CERTIFICATE
+                      REQUEST-----'
+                thirdParticipantCsr:
+                  summary: CSR is retrieved
+                  value:
+                    commonName: participant3
+                    organization: ACME_3
+                    organizationalUnit: Finance
+                    country: IT
+                    csr: '-----BEGIN CERTIFICATE REQUEST----- MIICwDCCAakCAQAwSzELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMREwDwYDVQQH
+                      DAhMb3MgQW5nMTEQMA4GA1UECgwHRXhhbXBsZTEQMA4GA1UEAwwHbXljZXJ0My5j
+                      b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCvczO1N5+nDZdjNpM7P
+                      JLZrmLZyZCCqWyQwz+KUrJZ7PQkZT0xhqlxTv1oQEBRkz5CH1zTpzJ7VzVayk57D
+                      6iYh7EWZPQiFIFMmApxHU4pZyE8Ax57lDlDxlTcj5P9/YaMt+x2QbY7GUN9KvS6Y
+                      Fsq6Xi6XHpWcGiVyy3r1ykv3Yf6J+2WRT+kD54KiSzM7wCh/Bj8q8b3aN15aVdG3
+                      4ntzX7EZy+rZpT9mM8RH6oQG49nY6nKqdz7n/YpV1WwC6y0GsM8n6iJrq2sdxzIw
+                      eB7YazA2hDfpSjKPC9hu7pz1aKhizTG5I87GhIXMw9ej1L5b49/jN7+fi9d8N6ku
+                      V1uzAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEAgVbp3W9u3CMYUxCnp7mfGu1Z
+                      VyNnznt0o7+z3VPK8lGqJbXx1XzElQWu/ByTpu7n/z+IqQEjH5A1nt+THMwWmL8p
+                      8qhw9uc+67skxnO8cFXxEV09ve2rHyS9ldDkaqEpJYYyypLo3GgLq3mj9QL9NdmQ
+                      HIUfiRmlslXmgWUnIQ1hh7FG9Lkvyh8NkyXMrXFLwJq0BJO4tNQ== -----END
+                      CERTIFICATE REQUEST-----'
+                fourthParticipantCsr:
+                  summary: CSR is retrieved
+                  value:
+                    commonName: participant4
+                    organization: ACME_4
+                    organizationalUnit: Marketing
+                    country: IT
+                    csr: '-----BEGIN CERTIFICATE REQUEST----- MIICxDCCAakCAQAwRTELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                      DAhNYXJrZXRpbmcxEDAOBgNVBAoMB0V4YW1wbGUxEDAOBgNVBAMMB215Y2VydDQw
+                      ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCqFzUpq6I+8Dw57rm9+iUOE
+                      TxqImP6v6CYl0FwGq7ZhLPdzqN8DRlKhOAzIqdbMqLY5ZpCVrYYXE/2Us1PAkFq6Q
+                      c8GguVvI1RzB+1Z5i50jyMfH/n3PQYfGx0YZn1CZvy4fHz0Iq6hwoJfYH6IOfG5u
+                      Qgy9EqI2ON9X9d6vMFbNdkM8m+Ed/ZgUQ3Zfv0B2UPi5L95ktakWg6yPQgVyEwR9q
+                      3lGcMsE78Tf8NQx3NYOJzPeEYzB/ocxQwZqGHcC4i+gTqJ+fOZ0mrjUwq45GTxIC
+                      a9ScM+pZkIjU7BXnBxxKOM/veb9i4gUmyk17RY2kH3qPvhP3Ud9j1lpF29vlrOqW
+                      AgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEAt7WORCD8Dg4H8e41gDjDJ6PC5yyF
+                      Txw8K9hQOwG1X3i4q2bUlC6B7JoNiE1v3pntCxXOjGdzP6Nk7MWTT1BjrmWt26DD
+                      z5f9Uz8/xaTWVfXLsOIQ1/6cY5hFyUq9v9ISZs+w5Z1m7GQWosVhQF2/g==
+                      -----END CERTIFICATE REQUEST-----'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - NOTARY
+      - IATTR_M
+    put:
+      tags:
+      - Participants
+      summary: Stores the CSR for the specified participant
+      description: Stores the CSR for the specified participant
+      operationId: updateParticipantCSR
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          firstParticipantCsr:
+            summary: First participant CSR
+            value: 00000001-0000-0000-0000-000000000000
+          secondParticipantCsr:
+            summary: Second participant CSR
+            value: 00000002-0000-0000-0000-000000000000
+          thirdParticipantCsr:
+            summary: Third participant CSR
+            value: 00000003-0000-0000-0000-000000000000
+          fourthParticipantCsr:
+            summary: Fourth participant CSR
+            value: 00000004-0000-0000-0000-000000000000
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateParticipant"
+            examples:
+              default:
+                summary: Default
+                value:
+                  csr: |
+                    -----BEGIN CERTIFICATE REQUEST-----
+                    MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                    DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+                    b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+                    eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+                    EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+                    nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+                    BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+                    1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+                    WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+                    Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+                    y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+                    gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+                    KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+                    3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+                    9g==
+                    -----END CERTIFICATE REQUEST-----
+        required: true
+      responses:
+        "201":
+          description: CSR uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CsrResponse"
+              examples:
+                firstParticipantCsr:
+                  summary: First participant CSR
+                  value:
+                    commonName: participant1
+                    organization: ACME_1
+                    organizationalUnit: IT Department
+                    country: IT
+                    csr: "{{request.body/csr}}"
+                secondParticipantCsr:
+                  summary: Second participant CSR
+                  value:
+                    commonName: participant2
+                    organization: ACME_2
+                    organizationalUnit: Engineering
+                    country: IT
+                    csr: "{{request.body/csr}}"
+                thirdParticipantCsr:
+                  summary: Third participant CSR
+                  value:
+                    commonName: participant3
+                    organization: ACME_3
+                    organizationalUnit: Finance
+                    country: IT
+                    csr: "{{request.body/csr}}"
+                fourthParticipantCsr:
+                  summary: Fourth participant CSR
+                  value:
+                    commonName: participant4
+                    organization: ACME_4
+                    organizationalUnit: Marketing
+                    country: IT
+                    csr: "{{request.body/csr}}"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - APPLICANT
+      - NOTARY
+      - IATTR_M
+  /participants/{participantId}/credentials:
+    get:
+      tags:
+      - Credentials
+      summary: Retrieves the credentials given a Participant identifier
+      description: Retrieves the credentials (including their status and expiration
+        timestamp) given a participant identifier. Only accessible by users with the
+        NOTARY or IATTR_M roles.
+      operationId: getParticipantCredentials
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          firstPage:
+            summary: First page
+            value: 00000001-0000-0000-0000-000000000000
+          firstPageSortedByIssuanceDateAsc:
+            summary: First page sorted by issuance date asc
+            value: 00000001-0000-0000-0000-000000000000
+          firstPageSortedByIssuanceDateDesc:
+            summary: First page sorted by issuance date desc
+            value: 00000001-0000-0000-0000-000000000000
+          firstPageFilteredByIssuanceDate:
+            summary: First page filtered by issuance date
+            value: 00000001-0000-0000-0000-000000000000
+          secondPageEmpty:
+            summary: Second page empty
+            value: 00000001-0000-0000-0000-000000000000
+          credentialRenewal:
+            value: 00000002-0000-0000-0000-000000000000
+      - name: page
+        in: query
+        description: the index of page to be retrieved
+        required: false
+        schema:
+          $ref: "#/components/schemas/PageQueryParam"
+        examples:
+          firstPage:
+            summary: First page
+            value: 0
+          firstPageSortedByIssuanceDateAsc:
+            summary: First page sorted by issuance date asc
+            value: 0
+          firstPageSortedByIssuanceDateDesc:
+            summary: First page sorted by issuance date desc
+            value: 0
+          firstPageFilteredByIssuanceDate:
+            summary: First page filtered by issuance date
+            value: 0
+          secondPageEmpty:
+            summary: Second page empty
+            value: 1
+          credentialRenewal:
+            summary: Credential renewal
+            value: 0
+      - name: pageSize
+        in: query
+        description: maximum number of items per page desired by client
+        required: false
+        schema:
+          $ref: "#/components/schemas/PageSizeQueryParam"
+        examples:
+          firstPage:
+            summary: First page
+            value: 10
+          firstPageSortedByIssuanceDateAsc:
+            summary: First page sorted by issuance date asc
+            value: 10
+          firstPageSortedByIssuanceDateDesc:
+            summary: First page sorted by issuance date desc
+            value: 10
+          firstPageFilteredByIssuanceDate:
+            summary: First page filtered by issuance date
+            value: 10
+          secondPageEmpty:
+            summary: Second page empty
+            value: 10
+          credentialRenewal:
+            summary: Credential renewal
+            value: 10
+      - name: sort
+        in: query
+        description: "Multi-value query param with list of properties to sort on.\
+          \ Direction is ascending by default. To indicate descending, prefix property\
+          \ with -."
+        required: false
+        schema:
+          $ref: "#/components/schemas/SortQueryParam"
+        examples:
+          firstPageSortedByIssuanceDateAsc:
+            summary: First page sorted by issuance date asc
+            value: issuanceDate
+          firstPageSortedByIssuanceDateDesc:
+            summary: First page sorted by issuance date desc
+            value: -issuanceDate
+      - name: issuanceDateFrom
+        in: query
+        description: RFC3339 start interval timestamp of the issuance date to filter
+          credentials.
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          firstPageFilteredByIssuanceDate:
+            summary: First page filtered by issuance date
+            value: 2025-01-20T14:00:00.000Z
+      - name: issuanceDateTo
+        in: query
+        description: RFC3339 end interval timestamp of the issuance date to filter
+          credentials.
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          firstPageFilteredByIssuanceDate:
+            summary: First page filtered by issuance date
+            value: 2025-01-23T14:00:00.000Z
+      - name: expiryDateFrom
+        in: query
+        description: RFC3339 start interval timestamp of the expiry date to filter
+          credentials.
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          default:
+            summary: Filtered by expiry date
+            value: 2025-01-20T14:00:00.000Z
+      - name: expiryDateTo
+        in: query
+        description: RFC3339 end interval timestamp of the expiry date to filter credentials.
+        required: false
+        schema:
+          type: string
+          format: date-time
+        examples:
+          default:
+            summary: Filtered by expiry date
+            value: 2025-01-23T14:00:00.000Z
+      - name: status
+        in: query
+        description: Status to filter credentials.
+        required: false
+        schema:
+          $ref: "#/components/schemas/CredentialStatus"
+        examples:
+          default:
+            summary: Filtered by status
+            value: VALID
+      responses:
+        "200":
+          description: List of credentials by participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CredentialsPagedResponse"
+              examples:
+                firstPage:
+                  summary: First page of credentials
+                  value:
+                    self: /participants/00000001-0000-0000-0000-000000000000/credentials?page=0&pageSize=10
+                    installedCSR:
+                      commonName: participant1
+                      organization: SIMPL
+                      organizationalUnit: IT Dep
+                      country: IT
+                      csr: |-
+                        -----BEGIN CERTIFICATE REQUEST-----
+                        MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                        DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+                        b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+                        eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+                        EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+                        nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+                        BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+                        1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+                        WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+                        Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+                        y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+                        gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+                        KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+                        3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+                        9g==
+                        -----END CERTIFICATE REQUEST-----
+                    renew:
+                      requested: false
+                    items:
+                    - expiryDate: 2070-01-23T14:00:00.000Z
+                      issuanceDate: 2025-01-21T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      content: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV
+                        BAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP
+                        cmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw
+                        MDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV
+                        BAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B
+                        AQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8
+                        N5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk
+                        JbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g
+                        3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b
+                        3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP
+                        NOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV
+                        HQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz
+                        +3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx
+                        iDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ
+                        c6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT
+                        u2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW
+                        TFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv
+                        JjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo
+                        M0gC5vj+IEGR+MLKWA==
+                        -----END CERTIFICATE-----
+                      status: SUSPENDED
+                      participant:
+                        tierOnePublicKey: "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+                          GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END\
+                          \ PUBLIC KEY-----"
+                        organization: ACME Corp
+                        creationTimestamp: 2025-01-20T17:32:28Z
+                        id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                        updateTimestamp: 2025-01-22T17:32:28Z
+                    - expiryDate: 2070-01-25T14:00:00.000Z
+                      issuanceDate: 2025-01-25T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-28T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      content: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV
+                        BAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP
+                        cmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw
+                        MDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV
+                        BAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B
+                        AQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8
+                        N5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk
+                        JbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g
+                        3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b
+                        3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP
+                        NOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV
+                        HQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz
+                        +3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx
+                        iDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ
+                        c6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT
+                        u2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW
+                        TFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv
+                        JjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo
+                        M0gC5vj+IEGR+MLKWB==
+                        -----END CERTIFICATE-----
+                      status: VALID
+                      participant:
+                        tierOnePublicKey: "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+                          GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END\
+                          \ PUBLIC KEY-----"
+                        organization: ACME Corp
+                        creationTimestamp: 2025-01-20T17:32:28Z
+                        id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                        updateTimestamp: 2025-01-22T17:32:28Z
+                    pageSize: 10
+                    page: 0
+                    total: 2
+                firstPageSortedByIssuanceDateAsc:
+                  summary: First page sorted by issuance date ascending
+                  value:
+                    self: /participants/00000001-0000-0000-0000-000000000000/credentials?page=0&pageSize=10&sort=issuanceDate
+                    installedCSR:
+                      commonName: participant1
+                      organization: SIMPL
+                      organizationalUnit: IT Dep
+                      country: IT
+                      csr: |-
+                        -----BEGIN CERTIFICATE REQUEST-----
+                        MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                        DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+                        b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+                        eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+                        EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+                        nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+                        BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+                        1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+                        WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+                        Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+                        y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+                        gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+                        KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+                        3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+                        9g==
+                        -----END CERTIFICATE REQUEST-----
+                    renew:
+                      requested: false
+                    items:
+                    - expiryDate: 2070-01-23T14:00:00.000Z
+                      issuanceDate: 2025-01-21T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      content: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV
+                        BAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP
+                        cmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw
+                        MDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV
+                        BAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B
+                        AQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8
+                        N5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk
+                        JbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g
+                        3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b
+                        3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP
+                        NOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV
+                        HQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz
+                        +3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx
+                        iDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ
+                        c6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT
+                        u2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW
+                        TFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv
+                        JjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo
+                        M0gC5vj+IEGR+MLKWA==
+                        -----END CERTIFICATE-----
+                      status: SUSPENDED
+                      participant:
+                        tierOnePublicKey: "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+                          GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END\
+                          \ PUBLIC KEY-----"
+                        organization: ACME Corp
+                        creationTimestamp: 2025-01-20T17:32:28Z
+                        id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                        updateTimestamp: 2025-01-22T17:32:28Z
+                    - expiryDate: 2070-01-25T14:00:00.000Z
+                      issuanceDate: 2025-01-25T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-28T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      content: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV
+                        BAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP
+                        cmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw
+                        MDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV
+                        BAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B
+                        AQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8
+                        N5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk
+                        JbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g
+                        3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b
+                        3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP
+                        NOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV
+                        HQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz
+                        +3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx
+                        iDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ
+                        c6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT
+                        u2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW
+                        TFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv
+                        JjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo
+                        M0gC5vj+IEGR+MLKWB==
+                        -----END CERTIFICATE-----
+                      status: VALID
+                      participant:
+                        tierOnePublicKey: "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+                          GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END\
+                          \ PUBLIC KEY-----"
+                        organization: ACME Corp
+                        creationTimestamp: 2025-01-20T17:32:28Z
+                        id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                        updateTimestamp: 2025-01-22T17:32:28Z
+                    pageSize: 10
+                    page: 0
+                    total: 2
+                firstPageSortedByIssuanceDateDesc:
+                  summary: First page sorted by issuance date descending
+                  value:
+                    self: /participants/00000001-0000-0000-0000-000000000000/credentials?page=0&pageSize=10&sort=-issuanceDate
+                    installedCSR:
+                      commonName: participant1
+                      organization: SIMPL
+                      organizationalUnit: IT Dep
+                      country: IT
+                      csr: |-
+                        -----BEGIN CERTIFICATE REQUEST-----
+                        MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                        DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+                        b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+                        eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+                        EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+                        nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+                        BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+                        1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+                        WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+                        Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+                        y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+                        gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+                        KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+                        3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+                        9g==
+                        -----END CERTIFICATE REQUEST-----
+                    renew:
+                      requested: false
+                    items:
+                    - expiryDate: 2070-01-25T14:00:00.000Z
+                      issuanceDate: 2025-01-25T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-28T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      content: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV
+                        BAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP
+                        cmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw
+                        MDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV
+                        BAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B
+                        AQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8
+                        N5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk
+                        JbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g
+                        3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b
+                        3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP
+                        NOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV
+                        HQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz
+                        +3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx
+                        iDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ
+                        c6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT
+                        u2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW
+                        TFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv
+                        JjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo
+                        M0gC5vj+IEGR+MLKWB==
+                        -----END CERTIFICATE-----
+                      status: VALID
+                      participant:
+                        tierOnePublicKey: "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+                          GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END\
+                          \ PUBLIC KEY-----"
+                        organization: ACME Corp
+                        creationTimestamp: 2025-01-20T17:32:28Z
+                        id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                        updateTimestamp: 2025-01-22T17:32:28Z
+                    - expiryDate: 2070-01-23T14:00:00.000Z
+                      issuanceDate: 2025-01-21T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      content: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV
+                        BAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP
+                        cmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw
+                        MDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV
+                        BAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B
+                        AQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8
+                        N5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk
+                        JbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g
+                        3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b
+                        3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP
+                        NOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV
+                        HQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz
+                        +3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx
+                        iDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ
+                        c6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT
+                        u2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW
+                        TFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv
+                        JjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo
+                        M0gC5vj+IEGR+MLKWA==
+                        -----END CERTIFICATE-----
+                      status: SUSPENDED
+                      participant:
+                        tierOnePublicKey: "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+                          GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END\
+                          \ PUBLIC KEY-----"
+                        organization: ACME Corp
+                        creationTimestamp: 2025-01-20T17:32:28Z
+                        id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                        updateTimestamp: 2025-01-22T17:32:28Z
+                    pageSize: 10
+                    page: 0
+                    total: 2
+                firstPageFilteredByIssuanceDate:
+                  summary: First page sorted by issuance date descending
+                  value:
+                    self: /participants/00000001-0000-0000-0000-000000000000/credentials?page=0&pageSize=10&sort=-issuanceDate
+                    installedCSR:
+                      commonName: participant1
+                      organization: SIMPL
+                      organizationalUnit: IT Dep
+                      country: IT
+                      csr: |-
+                        -----BEGIN CERTIFICATE REQUEST-----
+                        MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                        DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+                        b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+                        eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+                        EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+                        nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+                        BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+                        1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+                        WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+                        Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+                        y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+                        gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+                        KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+                        3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+                        9g==
+                        -----END CERTIFICATE REQUEST-----
+                    renew:
+                      requested: false
+                    items:
+                    - expiryDate: 2070-01-23T14:00:00.000Z
+                      issuanceDate: 2025-01-21T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      content: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV
+                        BAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP
+                        cmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw
+                        MDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV
+                        BAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B
+                        AQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8
+                        N5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk
+                        JbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g
+                        3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b
+                        3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP
+                        NOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV
+                        HQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz
+                        +3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx
+                        iDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ
+                        c6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT
+                        u2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW
+                        TFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv
+                        JjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo
+                        M0gC5vj+IEGR+MLKWA==
+                        -----END CERTIFICATE-----
+                      status: SUSPENDED
+                      participant:
+                        tierOnePublicKey: "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+                          GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END\
+                          \ PUBLIC KEY-----"
+                        organization: ACME Corp
+                        creationTimestamp: 2025-01-20T17:32:28Z
+                        id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                        updateTimestamp: 2025-01-22T17:32:28Z
+                    pageSize: 10
+                    page: 0
+                    total: 1
+                secondPageEmpty:
+                  summary: Second page with no results
+                  value:
+                    self: /participants/00000001-0000-0000-0000-000000000000/credentials?page=1&pageSize=10
+                    installedCSR:
+                      commonName: participant1
+                      organization: SIMPL
+                      organizationalUnit: IT Dep
+                      country: IT
+                      csr: |-
+                        -----BEGIN CERTIFICATE REQUEST-----
+                        MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                        DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+                        b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+                        eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+                        EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+                        nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+                        BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+                        1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+                        WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+                        Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+                        y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+                        gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+                        KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+                        3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+                        9g==
+                        -----END CERTIFICATE REQUEST-----
+                    renew:
+                      requested: false
+                    items: []
+                    pageSize: 10
+                    page: 1
+                    total: 2
+                credentialRenewal:
+                  summary: Credential renewal
+                  value:
+                    self: /participants/00000002-0000-0000-0000-000000000000/credentials?page=0&pageSize=10
+                    installedCSR:
+                      commonName: participant1
+                      organization: SIMPL
+                      organizationalUnit: IT Dep
+                      country: IT
+                      csr: |-
+                        -----BEGIN CERTIFICATE REQUEST-----
+                        MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+                        DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+                        b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+                        eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+                        EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+                        nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+                        BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+                        1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+                        WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+                        Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+                        y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+                        gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+                        KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+                        3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+                        9g==
+                        -----END CERTIFICATE REQUEST-----
+                    renew:
+                      requested: true
+                    items:
+                    - expiryDate: 2070-01-23T14:00:00.000Z
+                      issuanceDate: 2025-01-21T14:00:00.000Z
+                      lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                      credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                      content: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV
+                        BAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP
+                        cmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw
+                        MDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV
+                        BAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B
+                        AQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8
+                        N5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk
+                        JbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g
+                        3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b
+                        3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP
+                        NOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV
+                        HQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz
+                        +3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx
+                        iDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ
+                        c6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT
+                        u2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW
+                        TFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv
+                        JjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo
+                        M0gC5vj+IEGR+MLKWA==
+                        -----END CERTIFICATE-----
+                      status: SUSPENDED
+                      participant:
+                        tierOnePublicKey: "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+                          GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END\
+                          \ PUBLIC KEY-----"
+                        organization: ACME Corp
+                        creationTimestamp: 2025-01-20T17:32:28Z
+                        id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                    pageSize: 10
+                    page: 0
+                    total: 2
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - NOTARY
+      - IATTR_M
+    post:
+      tags:
+      - Credentials
+      summary: Create a credential for the given participant
+      description: Create a credential for the given participant. Only accessible
+        by users with the IATTR_M roles or by the participant’s associated APPLICANT
+        user.
+      operationId: createCredential
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          credentialRetrieved:
+            summary: credentials returned
+            value: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      requestBody:
+        description: Credential issuing request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCredentialRequest"
+            examples:
+              withReasonOfIssuance:
+                summary: A request with reason of issuance
+                value: |
+                  {
+                    "reason" : "A reason for the issuance"
+                  }
+              withoutReasonOfIssuance:
+                summary: A request without reason of issuance
+                value: |
+                  {
+                  }
+        required: true
+      responses:
+        "200":
+          description: Credential created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CredentialDetailResponse"
+              examples:
+                credentialRetrieved:
+                  summary: credentials returned
+                  value: |
+                    {
+                      "expiryDate": "2070-01-23T14:00:00.000Z",
+                      "issuanceDate": "2025-01-21T14:00:00.000Z",
+                      "lastStatusChangeDate": "2025-01-24T14:00:00.000Z",
+                      "credentialId": "zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMN",
+                      "content": "-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV\nBAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP\ncmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw\nMDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV\nBAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8\nN5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk\nJbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g\n3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b\n3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP\nNOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV\nHQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx\niDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ\nc6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT\nu2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW\nTFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv\nJjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo\nM0gC5vj+IEGR+MLKWB==\n-----END CERTIFICATE-----\n",
+                      "status": "VALID",
+                      "participant": {
+                        "tierOnePublicKey": "-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\nGAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END PUBLIC KEY-----\n",
+                        "organization": "ACME Corp",
+                        "creationTimestamp": "2025-01-20T17:32:28Z",
+                        "id": "26fa5d4f-ff89-490d-ba3e-fac0a33cb26f",
+                        "updateTimestamp": "2025-01-22T17:32:28Z"
+                      }
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+      - APPLICANT
+  /credentials/{credentialId}:
+    get:
+      tags:
+      - Credentials
+      summary: Retrieve information about a participant credential
+      description: Get participant credential details by credentialId. Returns 404
+        if the participant is not found or if the participant has not active credential.
+      operationId: getCredential
+      parameters:
+      - name: credentialId
+        in: path
+        description: Public Key Hash of credential
+        required: true
+        schema:
+          type: string
+        examples:
+          credentialsDetail:
+            summary: credentials by credentialId
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      responses:
+        "200":
+          description: The credential details along with participant details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CredentialDetailResponse"
+              examples:
+                credentialsDetail:
+                  summary: credentials by credentialId
+                  value: |
+                    {
+                      "expiryDate": "2070-01-23T14:00:00.000Z",
+                      "issuanceDate": "2025-01-21T14:00:00.000Z",
+                      "lastStatusChangeDate": "2025-01-24T14:00:00.000Z",
+                      "credentialId": "zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM",
+                      "content": "-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV\nBAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP\ncmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw\nMDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV\nBAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8\nN5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk\nJbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g\n3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b\n3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP\nNOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV\nHQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx\niDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ\nc6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT\nu2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW\nTFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv\nJjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo\nM0gC5vj+IEGR+MLKWA==\n-----END CERTIFICATE-----\n",
+                      "status": "SUSPENDED",
+                      "participant": {
+                        "organization": "ACME #1",
+                        "creationTimestamp": "2025-01-20T17:32:28Z",
+                        "id": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                        "updateTimestamp": "2025-01-22T17:32:28Z",
+                        "tierOnePublicKey": "-----BEGIN PUBLIC KEY-----MFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30hGAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1-----END PUBLIC KEY-----"
+                      }
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - NOTARY
+      - IATTR_M
+      - APPLICANT
+    patch:
+      tags:
+      - Credentials
+      summary: Change the status of a participant credential
+      description: Modify the status of a participant's credential. Only accessible
+        by users with the IATTR_M roles.
+      operationId: updateCredential
+      parameters:
+      - name: credentialId
+        in: path
+        required: true
+        schema:
+          type: string
+          description: multiformat-base58btc of a credentialId
+        examples:
+          credentialChangeToSuspended:
+            summary: credential change status to Suspended
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCredential"
+            examples:
+              credentialChangeToSuspended:
+                summary: credential change status to Suspended
+                value:
+                  status: SUSPENDED
+        required: true
+      responses:
+        "200":
+          description: Credential status updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CredentialDetailResponse"
+              examples:
+                suspended:
+                  summary: credentials status is changed to Suspended
+                  value:
+                    expiryDate: 2070-01-23T14:00:00.000Z
+                    issuanceDate: 2025-01-21T14:00:00.000Z
+                    lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                    credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                    content: '-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV\nBAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP\ncmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw\nMDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV\nBAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8\nN5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk\nJbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g\n3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b\n3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP\nNOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV\nHQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx\niDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ\nc6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT\nu2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW\nTFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv\nJjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo\nM0gC5vj+IEGR+MLKWA==\n-----END
+                      CERTIFICATE-----\n'
+                    status: SUSPENDED
+                    participant:
+                      tierOnePublicKey: '-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\nGAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END
+                        PUBLIC KEY-----\n'
+                      organization: ACME Corp
+                      creationTimestamp: 2025-01-20T17:32:28Z
+                      id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                      updateTimestamp: 2025-01-22T17:32:28Z
+                revoked:
+                  summary: credentials status is changed to Suspended
+                  value:
+                    expiryDate: 2070-01-23T14:00:00.000Z
+                    issuanceDate: 2025-01-21T14:00:00.000Z
+                    lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                    credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                    content: '-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV\nBAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP\ncmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw\nMDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV\nBAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8\nN5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk\nJbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g\n3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b\n3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP\nNOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV\nHQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx\niDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ\nc6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT\nu2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW\nTFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv\nJjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo\nM0gC5vj+IEGR+MLKWA==\n-----END
+                      CERTIFICATE-----\n'
+                    status: REVOKED
+                    participant:
+                      tierOnePublicKey: '-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\nGAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END
+                        PUBLIC KEY-----\n'
+                      organization: ACME Corp
+                      creationTimestamp: 2025-01-20T17:32:28Z
+                      id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                      updateTimestamp: 2025-01-22T17:32:28Z
+                valid:
+                  summary: credentials status is changed to Suspended
+                  value:
+                    expiryDate: 2070-01-23T14:00:00.000Z
+                    issuanceDate: 2025-01-21T14:00:00.000Z
+                    lastStatusChangeDate: 2025-01-24T14:00:00.000Z
+                    credentialId: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+                    content: '-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV\nBAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP\ncmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw\nMDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV\nBAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8\nN5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk\nJbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g\n3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b\n3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP\nNOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV\nHQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx\niDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ\nc6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT\nu2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW\nTFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv\nJjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo\nM0gC5vj+IEGR+MLKWA==\n-----END
+                      CERTIFICATE-----\n'
+                    status: VALID
+                    participant:
+                      tierOnePublicKey: '-----BEGIN PUBLIC KEY----- \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\nGAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END
+                        PUBLIC KEY-----\n'
+                      organization: ACME Corp
+                      creationTimestamp: 2025-01-20T17:32:28Z
+                      id: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+                      updateTimestamp: 2025-01-22T17:32:28Z
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-microcks-operation:
+        dispatcher: JSON_BODY
+        dispatcherRules: |
+          {
+            "exp": "/status",
+            "operator": "equals",
+            "cases": {
+              "SUSPENDED": "suspended",
+              "REVOKED": "revoked",
+              "VALID": "valid",
+              "default": "badRequest"
+            }
+          }
+      x-simpl-roles:
+      - IATTR_M
+  /participants/{participantId}/credentials/active:
+    get:
+      tags:
+      - Credentials
+      summary: Get the active credential of a participant
+      description: |
+        Retrieves the active credential (the last credential communicated as in use by the participant).
+          - IAATR_M and NOTARY users can retrieve the active credential of any participant.
+          - APPLICANT users can retrieve only the active credential of the participant they onboarded.
+        If an APPLICANT attempts to request the credential of another participant, a 403 response will be returned.
+      operationId: getActiveCredential
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          exampleParticipantId:
+            summary: a participant id
+            value: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        "200":
+          description: The active credential detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CredentialResponse"
+              examples:
+                activeCredential:
+                  summary: an active credential
+                  value: |
+                    {
+                      "expiryDate": "2070-01-23T14:00:00.000Z",
+                      "issuanceDate": "2025-01-21T14:00:00.000Z",
+                      "lastStatusChangeDate": "2025-01-24T14:00:00.000Z",
+                      "credentialId": "zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM",
+                      "content": "-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAODWwI1OnrEuMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV\nBAYTAk5MMRMwEQYDVQQIDApyYW5kb21zdGF0ZTESMBAGA1UECgwJRXhhbXBsZSBP\ncmcxEDAOBgNVBAMMB1Jvb3QgQ0EwHhcNMjMwNTAxMDAwMDAwWhcNMjQwNTAxMDAw\nMDAwWjBFMQswCQYDVQQGEwJOTDETMBEGA1UECAwKcmFuZG9tc3RhdGUxEjAQBgNV\nBAoMCUV4YW1wbGUgT3JnMRAwDgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAr3Rc8T2X69eWj9E3SkNv3cEk4qXXlbE2FOuoE0U8\nN5wObkI4s5Q7Qu4h0Qp28/0ipm93h9Rw44MJgdxGsvFso93yaM+RIEqFj0e/JYsk\nJbzE3M9kY0R0Je8AjQ0Xk0UFiq+kjyHJ92oGzK8Q3U+U3cM9p3Bo6wzGn4hNQ30g\n3Yr4Kx1oMOnFdq5v1gxfZOC98j8J9TJSbhAptGi1CzYkMSslDmgEVPAQfZXj+Y5b\n3VJDaUN8/n2pl2eV7/qD5OzjRswVcbBpBzoIsv43p/iy9bFtKOtv2Tw2Tz5Zy3MP\nNOmKJm4bDnOeBpMDFxOwT0Ycl9L5sNwYkYlJ7B0sY/etZQIDAQABo1AwTjAdBgNV\nHQ4EFgQUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wHwYDVR0jBBgwFoAUG5nv1TfzJ8qz+3u0QdnM5L+3WB4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAfQnx\niDZtxuQWPOZAGux3nLzbnKPfaKvEtw0qR1qN4npN3A9byrNfE/zndfqP/lyXg2dQ\nc6sihcybVtsPoFT+cY2xDgYx+yLZK7uD9Imy9zSbKZwIfuK6V7kM3VFWQQqzZaTT\nu2yUuRZQBrz+NFB3rpYK9UsO8YFnM8L47A6BdMdN4nKZcd7zUYO3oRx5wEQ3UIsW\nTFPP2tEuHU3E5zWkOUIzV15VL7nX3qex2u4xShDkfhN3M3qXH6VgXsmQcbT07xjv\nJjOnAklGe4hVa4t8VoTIrYpHUOtQZ4wZgCrVR2Wx2myZQxgF+O4K3Mr4N1NNRkEo\nM0gC5vj+IEGR+MLKWA==\n-----END CERTIFICATE-----\n",
+                      "status": "VALID"
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IAATR_M
+      - NOTARY
+      - APPLICANT
+  /participants/automaticRenewal:
+    get:
+      tags:
+      - Automatic Renewals
+      summary: Retrieves the default automatic renewal configuration
+      description: Returns the default automatic renewal configuration for all participants
+        who will have automatic renewal enabled. Only accessible by users with the
+        IATTR_M (Tier 2 identity attributes manager) role.
+      operationId: getDefaultAutomaticRenewal
+      responses:
+        "200":
+          description: The default automatic renewal configuration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+              examples:
+                defaultAutomaticRenewalConfigurationResponse:
+                  summary: a default automatic renewal configuration
+                  value: |
+                    {
+                      "daysBeforeRenewal": 20
+                    }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: |
+          return "defaultAutomaticRenewalConfigurationResponse"
+      x-simpl-roles:
+      - IATTR_M
+    put:
+      tags:
+      - Automatic Renewals
+      summary: Update the default automatic renewal configuration
+      description: Updates the default automatic renewal configuration for all participants
+        who will have automatic renewal enabled. Only accessible by users with the
+        IATTR_M (Tier 2 identity attributes manager) role.
+      operationId: updateDefaultAutomaticRenewal
+      requestBody:
+        description: Default automatic renewal configuration
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+            examples:
+              defaultAutomaticRenewalConfiguration:
+                summary: a default automatic renewal configuration
+                value: |
+                  {
+                    "daysBeforeRenewal": 30
+                  }
+        required: true
+      responses:
+        "200":
+          description: Updated default automatic renewal configuration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+              examples:
+                updatedDefaultAutomaticRenewalConfigurationResponse:
+                  summary: a default automatic renewal configuration
+                  value: |
+                    {
+                          "daysBeforeRenewal": {{request.body/daysBeforeRenewal}}
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-microcks-operation:
+        dispatcher: JSON_BODY
+        dispatcherRules: |
+          {
+            "exp": "/daysBeforeRenewal",
+            "operator": "regexp",
+            "cases": {
+              "\\d+": "updatedDefaultAutomaticRenewalConfigurationResponse",
+              "default": "badRequest"
+            }
+          }
+      x-simpl-roles:
+      - IATTR_M
+    post:
+      tags:
+      - Automatic Renewals
+      summary: Create the default automatic renewal configuration
+      description: Creates the default automatic renewal configuration for all participants
+        who will have automatic renewal enabled.
+      operationId: createDefaultAutomaticRenewal
+      requestBody:
+        description: Default automatic renewal configuration
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+            examples:
+              defaultAutomaticRenewalConfiguration:
+                summary: a default automatic renewal configuration
+                value: |
+                  {
+                    "daysBeforeRenewal": 20
+                  }
+        required: true
+      responses:
+        "201":
+          description: Default automatic renewal configuration is stored
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+              examples:
+                defaultAutomaticRenewalConfigurationResponse:
+                  summary: a default automatic renewal configuration
+                  value: |
+                    {
+                        "daysBeforeRenewal": {{request.body/daysBeforeRenewal}}
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+      x-microcks-operation:
+        dispatcher: JSON_BODY
+        dispatcherRules: |
+          {
+            "exp": "/daysBeforeRenewal",
+            "operator": "regexp",
+            "cases": {
+              "\\d+": "defaultAutomaticRenewalConfigurationResponse",
+              "default": "badRequest"
+            }
+          }
+    delete:
+      tags:
+      - Automatic Renewals
+      summary: Delete the default automatic renewal configuration
+      description: Deletes the default automatic renewal configuration for all participants
+        who will have automatic renewal enabled.
+      operationId: deleteDefaultAutomaticRenewal
+      responses:
+        "204":
+          description: The default automatic renewal configuration is deleted
+          content:
+            application/json:
+              examples:
+                default: {}
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2ClientCredentials: []
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: |
+          return "default"
+  /participants/{participantId}/automaticRenewal:
+    get:
+      tags:
+      - Participants
+      summary: Retrieves the automatic renewal configuration for a participant.
+      description: Returns the automatic renewal configuration for a participants
+        eventually overwriting the default configuration. Only accessible by users
+        with the IATTR_M (Tier 2 identity attributes manager) role.
+      operationId: getParticipantAutomaticRenewal
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          participantAutomaticRenewal:
+            summary: participant automatic renewal
+            value: 00000000-0000-0000-0000-000000000001
+          badRequest:
+            summary: invalid uuid
+            value: invalid uuid
+          notFound:
+            summary: participant not found
+            value: 00000000-0000-0000-0000-000000000000
+      responses:
+        "200":
+          description: The participant automatic renewal configuration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantAutomaticRenewalConfiguration"
+              examples:
+                participantAutomaticRenewal:
+                  summary: An automatic renewal configuration
+                  value: |
+                    {
+                      "enabled": true,
+                      "customRenewal": {
+                        "daysBeforeRenewal": 20
+                      }
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+    put:
+      tags:
+      - Participants
+      summary: Update the automatic renewal configuration for a participant.
+      description: Updates the automatic renewal configuration for a participants
+        eventually overwriting the default configuration. Only accessible by users
+        with the IATTR_M (Tier 2 identity attributes manager) role.
+      operationId: updateParticipantAutomaticRenewal
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          updatedParticipantAutomaticRenewalConfigurationResponse:
+            summary: participant automatic renewal
+            value: 00000000-0000-0000-0000-000000000001
+          badRequest:
+            summary: invalid uuid
+            value: invalid uuid
+          notFound:
+            summary: participant not found
+            value: 00000000-0000-0000-0000-000000000000
+      requestBody:
+        description: The participant automatic renewal configuration
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParticipantAutomaticRenewalConfiguration"
+            examples:
+              automaticRenewalConfiguration:
+                summary: A participant automatic renewal configuration
+                value: |
+                  {
+                    "enabled": true,
+                    "customRenewal": {
+                      "daysBeforeRenewal": 20
+                    }
+                    "reason" : "A reason for the automatic renewal update"
+                  }
+        required: true
+      responses:
+        "200":
+          description: Updated participant automatic renewal configuration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantAutomaticRenewalConfiguration"
+              examples:
+                updatedParticipantAutomaticRenewalConfigurationResponse:
+                  summary: a participant automatic renewal configuration
+                  value: |
+                    {
+                      "enabled": {{request.body/enabled}},
+                      "customRenewal": {
+                        "daysBeforeRenewal": {{request.body/customRenewal/daysBeforeRenewal}}
+                      }
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+    post:
+      tags:
+      - Participants
+      summary: Create the automatic renewal configuration for a participant.
+      description: Creates the automatic renewal configuration for a participants
+        eventually overwriting the default configuration. Only accessible by users
+        with the IATTR_M (Tier 2 identity attributes manager) role.
+      operationId: createParticipantAutomaticRenewal
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          automaticRenewalConfiguration:
+            summary: participant automatic renewal
+            value: 00000000-0000-0000-0000-000000000001
+          badRequest:
+            summary: invalid uuid
+            value: invalid uuid
+          notFound:
+            summary: participant not found
+            value: 00000000-0000-0000-0000-000000000000
+      requestBody:
+        description: Automatic renewal configuration
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParticipantAutomaticRenewalConfiguration"
+            examples:
+              automaticRenewalConfiguration:
+                summary: An automatic renewal configuration
+                value: |
+                  {
+                    "enabled": true,
+                    "customRenewal": {
+                      "daysBeforeRenewal": 20
+                    }
+                    "reason" : "A reason for the automatic renewal"
+                  }
+        required: true
+      responses:
+        "201":
+          description: Automatic renewal configuration is stored
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantAutomaticRenewalConfiguration"
+              examples:
+                automaticRenewalConfiguration:
+                  summary: An automatic renewal configuration
+                  value: |
+                    {
+                        "enabled": {{request.body/enabled}},
+                        "customRenewal": {
+                          "daysBeforeRenewal": {{request.body/customRenewal/daysBeforeRenewal}}
+                        }
+                    }
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+    delete:
+      tags:
+      - Participants
+      summary: Delete the automatic renewal configuration for a participant.
+      description: Deletes the automatic renewal configuration for a participants
+        eventually overwriting the default configuration. Only accessible by users
+        with the IATTR_M (Tier 2 identity attributes manager) role.
+      operationId: deleteParticipantAutomaticRenewal
+      parameters:
+      - name: participantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        examples:
+          participantAutomaticRenewal:
+            summary: participant automatic renewal
+            value: 00000000-0000-0000-0000-000000000001
+          badRequest:
+            summary: invalid uuid
+            value: invalid uuid
+          notFound:
+            summary: participant not found
+            value: 00000000-0000-0000-0000-000000000000
+      - name: reason
+        in: query
+        required: false
+        schema:
+          type: string
+          maxLength: 1024
+        examples:
+          reasonForDeletion:
+            summary: reason for deletion
+            value: Reason for deleting the automatic renewal configuration
+      responses:
+        "204":
+          description: The participant automatic renewal configuration is deleted
+          x-microcks-refs:
+          - participantAutomaticRenewal
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - IATTR_M
+components:
+  schemas:
+    PageQueryParam:
+      type: integer
+      default: 0
+      minimum: 0
+    PageSizeQueryParam:
+      type: integer
+      default: 10
+    SortQueryParam:
+      type: array
+      items:
+        type: string
+        description: a sorting policy
+    ParticipantPagedResponse:
+      allOf:
+      - $ref: "#/components/schemas/PageResponse"
+      - type: object
+        properties:
+          items:
+            type: array
+            description: Elements in sliced search
+            items:
+              $ref: "#/components/schemas/ParticipantDetailResponse"
+    ParticipantRequest:
+      type: object
+      properties:
+        organization:
+          type: string
+          description: the organization represented by the participant
+          example: ACME Corp
+          maxLength: 255
+        applicantEmail:
+          type: string
+          format: email
+          example: applicant@email.com
+        isAuthority:
+          type: boolean
+          description: whether the participant is an authority in the dataspace
+          example: false
+      required:
+      - organization
+    ParticipantDetailResponse:
+      allOf:
+      - $ref: "#/components/schemas/ParticipantResponse"
+      - type: object
+        required:
+        - credential
+    ParticipantResponse:
+      allOf:
+      - $ref: "#/components/schemas/Participant"
+      - type: object
+        required:
+        - creationTimestamp
+        - id
+        - organization
+        - tierOnePublicKey
+        - updateTimestamp
+    CsrResponse:
+      type: object
+      properties:
+        commonName:
+          type: string
+          example: participant1
+          maxLength: 255
+        organization:
+          type: string
+          example: SIMPL
+          maxLength: 255
+        organizationalUnit:
+          type: string
+          example: IT Dep
+          maxLength: 255
+        country:
+          type: string
+          example: IT
+          maxLength: 255
+        csr:
+          type: string
+          description: Certificate Signing Request (CSR) in PEM format
+          example: |
+            -----BEGIN CERTIFICATE REQUEST-----
+            MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+            DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+            b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+            eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+            EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+            nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+            BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+            1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+            WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+            Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+            y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+            gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+            KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+            3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+            9g==
+            -----END CERTIFICATE REQUEST-----
+      required:
+      - commonName
+      - country
+      - csr
+      - organization
+      - organizationalUnit
+    UpdateParticipant:
+      allOf:
+      - $ref: "#/components/schemas/CsrRequest"
+    CredentialStatus:
+      type: string
+      description: |
+        The status of the credential:<br> - **Valid**: The credential is valid and usable.<br> - **Expired**: The credential has expired.<br> - **Revoked**: The credential is permanently revoked and no longer usable.<br> - **Suspended**: The credential is temporarily revoked and may transition back to valid.<br>
+      enum:
+      - VALID
+      - EXPIRED
+      - REVOKED
+      - SUSPENDED
+    CredentialsPagedResponse:
+      allOf:
+      - $ref: "#/components/schemas/PageResponse"
+      - type: object
+        properties:
+          renew:
+            $ref: "#/components/schemas/RenewResponse"
+          installedCSR:
+            $ref: "#/components/schemas/CsrResponse"
+          items:
+            type: array
+            description: Elements in sliced search
+            items:
+              $ref: "#/components/schemas/CredentialDetailResponse"
+      - type: object
+        required:
+        - renew
+    CreateCredentialRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: Reason for issuing a credential
+          example: A reason for issuing a credential
+          maxLength: 1024
+      required:
+      - reason
+    CredentialDetailResponse:
+      allOf:
+      - $ref: "#/components/schemas/CredentialResponse"
+      - type: object
+        required:
+        - participant
+    UpdateCredential:
+      type: object
+      example:
+        status: VALID
+      properties:
+        status:
+          $ref: "#/components/schemas/CredentialStatus"
+        reason:
+          type: string
+          description: reason for the credential upload
+          example: This is a reason
+          maxLength: 1024
+      required:
+      - reason
+      - status
+    CredentialResponse:
+      allOf:
+      - $ref: "#/components/schemas/Credential"
+      - type: object
+        required:
+        - content
+        - credentialId
+        - expiryDate
+        - issuanceDate
+        - lastStatusChangeDate
+        - status
+    AutomaticRenewalConfiguration:
+      type: object
+      example:
+        daysBeforeRenewal: 20
+      properties:
+        daysBeforeRenewal:
+          type: integer
+          default: 20
+          description: The days where the automatic renewal will happen before the
+            credentials' expiration
+          maximum: 1830
+          minimum: 0
+      required:
+      - daysBeforeRenewal
+    ParticipantAutomaticRenewalConfiguration:
+      type: object
+      example:
+        enabled: true
+        customRenewal:
+          daysBeforeRenewal: 10
+        reason: This is a reason
+      properties:
+        enabled:
+          type: boolean
+          default: true
+          description: Enables the automatic renewal
+        customRenewal:
+          $ref: "#/components/schemas/AutomaticRenewalConfiguration"
+        reason:
+          type: string
+          description: reason for the credential upload
+          example: This is a reason
+          maxLength: 1024
+      required:
+      - enabled
+    Problem:
+      type: object
+      description: |
+        A Problem Details object (RFC 9457).
+
+        Additional properties specific to the problem type may be present.
+      example:
+        type: urn:problem-type:exampleOrganization:exampleProblem
+        href: https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types
+        title: Description of the type of problem that occurred
+        status: 400
+        detail: Description of specific occurrence of the problem
+        instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+          description: |
+            An absolute URI that identifies the problem type.  When dereferenced,
+            it SHOULD provide human-readable documentation for the problem type
+            (e.g., using HTML).
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: |
+            A short, summary of the problem type. Written in english and readable
+            for engineers (usually not suited for non technical stakeholders and
+            not localized); example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status code generated by the origin server for this occurrence
+            of the problem.
+          example: 503
+          maximum: 600
+          minimum: 100
+        detail:
+          type: string
+          description: |
+            A human readable explanation specific to this occurrence of the
+            problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: |-
+            An absolute URI that identifies the specific occurrence of the problem.
+            It may or may not yield further information if dereferenced.
+    PageResponse:
+      type: object
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Absolute URI to the resource's own location.
+        pageSize:
+          type: integer
+          description: "Maximum number of items per page. For the last page, its value\
+            \ should be independent of the number of actually returned items."
+        page:
+          type: integer
+          description: "Index of the current page of items, should be 1-based (the\
+            \ default and first page is 1)"
+        total:
+          type: integer
+          description: "Total number of items across all pages. If query parameters\
+            \ are used to filter the result set, this is the total of the collection\
+            \ result set, not of the entire collection."
+        first:
+          type: string
+          format: uri
+          description: Absolute URI to the first page
+        last:
+          type: string
+          format: uri
+          description: Absolute URI to the last page
+        prev:
+          type: string
+          format: uri
+          description: Absolute URI to the previous page
+        next:
+          type: string
+          format: uri
+          description: Absolute URI to the next page
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: participant unique identifier in the dataspace
+          example: 26fa5d4f-ff89-490d-ba3e-fac0a33cb26f
+        organization:
+          type: string
+          description: the organization represented by the participant
+          example: ACME Corp
+          maxLength: 255
+        tierOnePublicKey:
+          type: string
+          description: the tier 1 public key of the participant
+          example: "-----BEGIN PUBLIC KEY-----      \nMFUwEwYHKoZIzj0CAQYIKoZIzj0DAQQDPgAEb2Rysur9oTJVtptNNoGsHOMXW30h\n\
+            GAm9FiybDpmsXsdrW1zsxSu+bBCBM8wUpemGx5H2Eb2p247dxam1\n-----END PUBLIC\
+            \ KEY-----\n"
+        applicantEmail:
+          type: string
+          format: email
+          example: applicant@email.com
+        credential:
+          $ref: "#/components/schemas/CredentialResponse"
+        isAuthority:
+          type: boolean
+          description: whether the participant is an authority in the dataspace
+          example: false
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: participant creation timestamp
+          example: 2025-01-20T17:32:28Z
+        updateTimestamp:
+          type: string
+          format: date-time
+          description: participant last update timestamp
+          example: 2025-01-22T17:32:28Z
+    CsrRequest:
+      type: object
+      properties:
+        csr:
+          type: string
+          description: Certificate Signing Request (CSR) in PEM format
+          example: |
+            -----BEGIN CERTIFICATE REQUEST-----
+            MIICxTCCAa0CAQAwTDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMQ8wDQYDVQQH
+            DAZTYW5Kb3NlMRAwDgYDVQQKDAdNeUNvbXBhbnkxEDAOBgNVBAMMB215Y2VydC5j
+            b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1hrWLEsw9vLkZCHdy
+            eWcX0Gbd7s0P1qgl2nTspN2bgoctW3gvQAKN7O8r9TFO7hXvvjF2HCEb41CSiFoE
+            EgmSvVAOpMtCjMdFctvX3MCABGHYLU5nImLZhTMRdflyoTRJz25uq5hYrfmBdzP4
+            nZn4QuYp+h6pRZ07Plq+URrIF4E/c+0N9rwleAVoY9Frn/vwopAhv8l0U6AypS8S
+            BlBfZ2MIUXgAWRA1T+n9lgv3X2snFnSxrUqbi4tSPcJDk+7ZcS9M1QetKnPB6ROZ
+            1f7xVylTbQ8FzMMhJgNx+iRPLFffYp+iYzC80eTf65U7/ClfGBM4CfdI+TF0nNbf
+            WruTAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEALSTjePZKeZspsx+CrcV+hH3u
+            Wh2gKfr8bA4arZGGzC5ovCfrcK6C6OUKkiVvP9ADv4g5iG0eFmcg2hZsmMJex8sH
+            y6x8zbiZ+T9hG66UZS04iEtUqMzjsSCpIWK97e2lZDHwV7Qgvc2sw8QvUnDj6e4D
+            gpcEG3KGEp3XnYOBfHrkAfldz7NVyRftrF+y0kC8r/xLZzv9KKToWWAOyxlql2Qi
+            KwbtWZAM7gA77RCRUtAhxD/kPlLM2YwQkh0QwRAxVIkKR82DbK90AcBuSmayPbjo
+            3eXjfwtrCbb6UVfWn3xAAHYy46D5iFkkq6Y7mOCUNZ7X9uAIKzqJ12plAUoMBxkM
+            9g==
+            -----END CERTIFICATE REQUEST-----
+      required:
+      - csr
+    RenewResponse:
+      type: object
+      properties:
+        requested:
+          type: boolean
+          default: false
+          description: true if the credential is asked for renew from the participant
+          example: false
+        timestamp:
+          type: string
+          format: date-time
+          description: timestamp when the renewal request by the participant is made
+          example: 2025-01-31T17:32:28Z
+      required:
+      - requested
+    Credential:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/CredentialStatus"
+        lastStatusChangeDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last change of status for the credential.
+        issuanceDate:
+          type: string
+          format: date-time
+          description: Timestamp when the credential is issued.
+        expiryDate:
+          type: string
+          format: date-time
+          description: Timestamp when the credential is expiring.
+        credentialId:
+          type: string
+          description: public key hash (sha384) bound to the credential
+          example: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+          maxLength: 64
+        content:
+          type: string
+          description: The credential (x.509 certificate in PEM format)
+          example: |
+            -----BEGIN CERTIFICATE-----
+            MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+            -----END CERTIFICATE-----
+        participant:
+          $ref: "#/components/schemas/ParticipantResponse"
+  responses:
+    BadRequest:
+      description: "Bad request, invalid input data"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            badRequest:
+              summary: Bad Request
+              value:
+                type: urn:problem-type:simpl:badRequest
+                title: Bad request
+                detail: Invalid input data
+                status: 400
+    Unauthorized:
+      description: "Unauthorized, the user is not authenticated"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unauthorized:
+              summary: Unauthorized
+              value:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                detail: The user is not authenticated
+                status: 401
+    Forbidden:
+      description: "Forbidden, the user does not have the roles to perform the operation"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            forbidden:
+              summary: Forbidden
+              value:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                detail: The user does not have the roles to perform the operation
+                status: 403
+    InternalServerError:
+      description: "Internal Server Error, an internal server error occurred"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            internalServerError:
+              summary: Internal Server Error
+              value:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                detail: Internal Server Error
+                status: 500
+    Conflict:
+      description: "Conflict, action requested cannot be performed"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            conflict:
+              summary: Conflict
+              value:
+                type: urn:problem-type:simpl:conflict
+                title: Conflict
+                detail: Conflict
+                status: 409
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            notFound:
+              summary: Not Found
+              value:
+                type: urn:problem-type:simpl:notFound
+                title: Not Found
+                detail: Resource not found
+                status: 404
+    UnprocessableEntity:
+      description: Unprocessable. Needed entity for continue not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unprocessableEntity:
+              summary: Unprocessable Entity
+              value:
+                type: urn:problem-type:simpl:unprocessableEntity
+                title: Unprocessable Entity
+                detail: Unprocessable Entity
+                status: 422
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: SIMPL Tier1 end users authentication process
+      flows:
+        authorizationCode:
+          authorizationUrl: ""
+          tokenUrl: ""
+          scopes: {}
+    oauth2ClientCredentials:
+      type: oauth2
+      description: SIMPL internal APIs authentication process
+      flows:
+        clientCredentials:
+          tokenUrl: ""
+          scopes: {}

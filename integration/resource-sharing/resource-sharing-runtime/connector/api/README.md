@@ -3,21 +3,22 @@
 <hr/>
 <p>
 📍 <strong>You are here</strong><br/>
-<a href="../../../../../README.md">🏠 Home</a><br/>
-    <a href="../../../../README.md">Dimension: Integration</a><br/>
-        <a href="../../../README.md">Capability: Resource Sharing</a><br/>
-            <a href="../../README.md">Service: Resource Sharing Runtime</a><br/>
-                <a href="../README.md">Solution: Connector</a><br/>
-                    <strong>API: API Documentation</strong><br/>
+<a href="../../../../../README.md">🏠 Home</a> &nbsp;»&nbsp;
+<a href="../README.md">connector</a> &nbsp;»&nbsp;
+<strong>API specifications</strong>
 </p>
 </div>
 
-# Connector — API index
+# API specifications — Connector
 
-| API | File | Description |
-|-----|------|-------------|
-| Management API | [management.openapi.yaml](management.openapi.yaml) | RESTful interface for client applications to interact with the Control Plane (asset/policy/contract management) |
-| Control Plane API (DSP) | [control-plane.openapi.yaml](control-plane.openapi.yaml) | Dataspace Protocol RESTful API for agent-to-agent contract negotiation |
-| Data Plane API | [data-plane.openapi.yaml](data-plane.openapi.yaml) | Data transfer API used after contract establishment |
+The Simpl Connector is a fork of the upstream **Eclipse Dataspace Connector (EDC)**. The API specifications it exposes are inherited from upstream and are not redefined in the Simpl repository.
 
-Status: OpenAPI specifications not yet available in this documentation catalogue — see source repository and Eclipse EDC documentation for runtime API documentation.
+## Three API surfaces (per upstream EDC)
+
+| API | Purpose | Upstream documentation |
+|-----|---------|------------------------|
+| Management API | Asset / policy / contract registration; called by upper-layer Simpl components via the [EDC Connector Adapter](../../edc-connector-adapter/api/README.md) | [EDC Management API](https://eclipse-edc.github.io/Connector/openapi/management-api/) |
+| Dataspace Protocol (DSP) API | Agent-to-agent contract negotiation per the IDSA DSP specification | [DSP specification](https://docs.internationaldataspaces.org/ids-knowledgebase/v/dataspace-protocol/) |
+| Data Plane API | Data transfer execution (Consumer Pull, Provider Push) | [EDC Data Plane](https://eclipse-edc.github.io/Connector/openapi/data-plane-api/) |
+
+For Simpl-specific extensions to these APIs (MinIO S3 Extension, Triggering Extension, eDelivery extension, Contract Management extensions), see the [connector architecture document](../doc/architecture.md).

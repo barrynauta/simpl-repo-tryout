@@ -33,6 +33,11 @@ Provenance: built by Simpl. Java 21 / Maven 3.6+. Source repository: `gaia-x-edc
 
 - [BP06 Consumer searches resources](../../../../foundations/business-processes/BP06-consumer-searches-resources/README.md)
 
+
+## API
+
+[`api/`](api/README.md) — 1 OpenAPI/AsyncAPI spec imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/poc-gaia-edc>

@@ -3,24 +3,29 @@
 <hr/>
 <p>
 📍 <strong>You are here</strong><br/>
-<a href="../../../../../README.md">🏠 Home</a><br/>
-    <a href="../../../../README.md">Dimension: Security</a><br/>
-        <a href="../../../README.md">Capability: Access Control And Trust</a><br/>
-            <a href="../../README.md">Service: Authorisation</a><br/>
-                <a href="../README.md">Solution: Authorisation</a><br/>
-                    <strong>API: API Documentation</strong><br/>
+<a href="../../../../README.md">🏠 Home</a> &nbsp;»&nbsp;
+<a href="../README.md">authorisation</a> &nbsp;»&nbsp;
+<strong>API specifications</strong>
 </p>
 </div>
 
-# Authorisation — API index
+# API specifications — authorisation
 
-The Authorisation component exposes two Spring Cloud Gateway-based APIs, one per trust tier.
+Specifications imported verbatim from the source repository. Last imported: 2026-04-28.
 
-| API | File | Description |
-|-----|------|-------------|
-| Tier 1 Gateway API | [tier1-gateway.openapi.yaml](tier1-gateway.openapi.yaml) | RBAC gateway for human user (Tier 1) inbound traffic |
-| Tier 2 Gateway API | [tier2-gateway.openapi.yaml](tier2-gateway.openapi.yaml) | ABAC gateway for agent-to-agent (Tier 2) inbound traffic |
+| File | Kind | Title | Version | Size |
+|------|------|-------|---------|------|
+| [`asyncapi-v1.yaml`](asyncapi-v1.yaml) | asyncapi | Tier 2 Gateway Async API | `1.3.0` | 2 KB |
+| [`tier1gateway-v1.yaml`](tier1gateway-v1.yaml) | openapi | Tier 1 Gateway | `1.5.0` | 2 KB |
 
-Both APIs are routing/proxy interfaces: they accept requests, validate credentials/tokens, enforce policy rules, and forward to downstream Simpl-Open services. The downstream service APIs are documented in the respective solution `doc/api.md` files.
+## How to view these specs
 
-Status: OpenAPI specifications not yet available in this documentation catalogue — see source repositories for runtime API documentation.
+- **OpenAPI**: paste the YAML into [editor.swagger.io](https://editor.swagger.io/) for an interactive view.
+- **AsyncAPI**: paste into [studio.asyncapi.com](https://studio.asyncapi.com/) for diagram + message browser.
+- **Locally with Redoc**: `npx redoc-cli serve <file>.yaml`.
+
+## Notes
+
+- These are imported from the implementation repos under `code.europa.eu/simpl/simpl-open/development/...`. The source-of-truth path is recorded in the parent solution's `README.md` under "Source code".
+- Tier 1 vs Tier 2 spec variants reflect the IAA two-tier architecture: Tier 1 specs cover human/end-user APIs reached through the Tier 1 gateway; Tier 2 specs cover agent-to-agent APIs reached through the Tier 2 gateway under mTLS.
+- AsyncAPI specs describe Kafka topic schemas (publishers / subscribers / message payloads) used by event-driven flows.

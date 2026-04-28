@@ -38,6 +38,11 @@ Note on naming: the capability in the capmap uses the singular `security-attribu
 - [BP03A Onboarding of a new data space Participant](../../../../foundations/business-processes/BP03A-onboarding-participant-providers/dynamic-view.md)
 - [SA03 Credentials actions by the Governance Authority](../../../../foundations/business-processes/SA03-credentials-actions-governance-authority/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 3 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - Backend: `code.europa.eu/simpl/simpl-open/development/iaa/security-attributes-provider`

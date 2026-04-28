@@ -36,6 +36,11 @@ Provenance: deployment wrapper (Helm + ArgoCD) over the upstream **Eclipse XFSC 
 - [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/dynamic-view.md)
 - [BP07 Consumer and Provider establish a usage contract](../../../../foundations/business-processes/BP07-establish-usage-contract/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 1 OpenAPI/AsyncAPI spec imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - Simpl deployment wrapper: <https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer>

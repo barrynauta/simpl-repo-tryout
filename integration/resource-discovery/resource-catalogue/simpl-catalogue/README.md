@@ -32,6 +32,11 @@ Provenance: forked from the upstream **XFSC Federated Catalogue** (Eclipse proje
 - [BP09A Consumer consumes a data resource](../../../../foundations/business-processes/BP09A-consume-data-resource/dynamic-view.md)
 - [BP09B Consumer receives a data processing service](../../../../foundations/business-processes/BP09B-consume-data-via-application/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 2 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - Simpl fork: <https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-fc-service>

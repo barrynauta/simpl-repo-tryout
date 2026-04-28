@@ -37,6 +37,11 @@ Note: the architecture spec describes a planned split into Contract Manager Orch
 
 - [BP07 Consumer and Provider establish a usage contract](../../../../foundations/business-processes/BP07-establish-usage-contract/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 1 OpenAPI/AsyncAPI spec imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - `code.europa.eu/simpl/simpl-open/development/contract-billing/contract`

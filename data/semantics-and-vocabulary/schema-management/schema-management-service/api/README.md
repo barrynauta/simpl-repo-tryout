@@ -3,24 +3,30 @@
 <hr/>
 <p>
 📍 <strong>You are here</strong><br/>
-<a href="../../../../../README.md">🏠 Home</a><br/>
-    <a href="../../../../README.md">Dimension: Data</a><br/>
-        <a href="../../../README.md">Capability: Semantics And Vocabulary</a><br/>
-            <a href="../../README.md">Service: Schema Management</a><br/>
-                <a href="../README.md">Solution: Schema Management Service</a><br/>
-                    <strong>API: API Documentation</strong><br/>
+<a href="../../../../README.md">🏠 Home</a> &nbsp;»&nbsp;
+<a href="../README.md">schema-management-service</a> &nbsp;»&nbsp;
+<strong>API specifications</strong>
 </p>
 </div>
 
-# Schema Management Service — API specifications
+# API specifications — schema-management-service
 
-The SMS exposes two distinct interfaces:
+Specifications imported verbatim from the source repository. Last imported: 2026-04-28.
 
-| Specification | Description |
-|--------------|-------------|
-| [schema-management-api.openapi.yaml](schema-management-api.openapi.yaml) | Management API — private, authenticated RESTful interface for schema lifecycle management (create versions, publish, revoke) |
-| [resolver-interface.openapi.yaml](resolver-interface.openapi.yaml) | Resolver Interface — public, read-only interface for retrieving raw RDF schema content at stable URIs |
+| File | Kind | Title | Version | Size |
+|------|------|-------|---------|------|
+| [`resolver-interface.openapi.yaml`](resolver-interface.openapi.yaml) | openapi | Schema Management Service — Resolver Interface | `0.0.0-stub` | 0 KB |
+| [`schema-management-api.openapi.yaml`](schema-management-api.openapi.yaml) | openapi | Schema Management Service — Management API | `0.0.0-stub` | 0 KB |
+| [`schema_openapi.yaml`](schema_openapi.yaml) | openapi | Schema Management API | `1.0.0` | 67 KB |
 
-The SMS also publishes lifecycle events (SchemaPublished, SchemaRevoked) via webhooks to subscribed services; this channel is defined in the AsyncAPI contract maintained in the source repository.
+## How to view these specs
 
-Full specifications: Status: stub files — see source repositories for runtime documentation.
+- **OpenAPI**: paste the YAML into [editor.swagger.io](https://editor.swagger.io/) for an interactive view.
+- **AsyncAPI**: paste into [studio.asyncapi.com](https://studio.asyncapi.com/) for diagram + message browser.
+- **Locally with Redoc**: `npx redoc-cli serve <file>.yaml`.
+
+## Notes
+
+- These are imported from the implementation repos under `code.europa.eu/simpl/simpl-open/development/...`. The source-of-truth path is recorded in the parent solution's `README.md` under "Source code".
+- Tier 1 vs Tier 2 spec variants reflect the IAA two-tier architecture: Tier 1 specs cover human/end-user APIs reached through the Tier 1 gateway; Tier 2 specs cover agent-to-agent APIs reached through the Tier 2 gateway under mTLS.
+- AsyncAPI specs describe Kafka topic schemas (publishers / subscribers / message payloads) used by event-driven flows.

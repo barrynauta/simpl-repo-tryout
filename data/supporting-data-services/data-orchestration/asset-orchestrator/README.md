@@ -44,6 +44,11 @@ Provenance: built by Simpl. Java/Maven service deployed as part of the Provider 
 - [BP09B Consumer receives a data processing service](../../../../foundations/business-processes/BP09B-consume-data-via-application/README.md)
 - [SA01 Data orchestration](../../../../foundations/business-processes/SA01-data-orchestration/README.md)
 
+
+## API
+
+[`api/`](api/README.md) — 1 OpenAPI/AsyncAPI spec imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - Simpl repo: <https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/asset-orchestrator>

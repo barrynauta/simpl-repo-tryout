@@ -1,0 +1,309 @@
+info:
+  title: Schema Sync Adapter API
+  description: |-
+    The exposed API enables the reception of schema publication or revocation events, triggered by actions performed by the Governance Authority through the Schema Management Service.
+
+    ## Business Context
+
+    When the Governance Authority publishes a new schema or revokes an existing one, the Schema Management Service sends a notification to the Schema Sync Adapter application to indicate the availability of a new schema or the need to remove one. This ensures that all provider-side and consumer-side applications that depend on the schema registry always have access to the correct and up-to-date schema versions they need to operate.
+
+    ### Key Actors
+
+    - **Provider**: It manages updated schema versions to ensure that self-descriptions can be created using the latest schema versions.
+
+    - **Consumer**: Following the publication or revocation of a schema on the catalogue side, it sends a notification to the Schema Sync Adapter component on the provider side.
+
+    ### Typical Flow
+
+    1. GA publishes a new schema
+
+    2. Schema Management Service sends an event to Schema Sync Adapter
+
+    3. Schema Sync Adapter updates participant local schema storage
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: "1.0"
+servers: []
+security:
+- NoAuth: []
+openapi: 3.0.1
+components:
+  securitySchemes:
+    NoAuth:
+      type: apiKey
+      description: Placeholder scheme used when security is not required
+      name: X-No-Auth
+      in: header
+  schemas:
+    InputObject:
+      type: object
+      properties:
+        in:
+          type: string
+          enum:
+          - body
+          - path
+          - query
+          - header
+        name:
+          type: string
+        value:
+          type: object
+    SchemaEventInfo:
+      required:
+      - description
+      - name
+      - resourceType
+      - status
+      - title
+      - uri
+      type: object
+      properties:
+        uri:
+          minLength: 1
+          type: string
+        title:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        description:
+          minLength: 1
+          type: string
+        resourceType:
+          minLength: 1
+          type: string
+        status:
+          type: string
+          enum:
+          - PUBLISHED
+          - REVOKED
+    SchemaEventData:
+      required:
+      - schema
+      type: object
+      properties:
+        schema:
+          $ref: '#/components/schemas/SchemaEventInfo'
+        version:
+          $ref: '#/components/schemas/SchemaVersionInfo'
+    InternalServerErrorProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    SchemaVersionInfo:
+      required:
+      - created
+      - uri
+      - version
+      type: object
+      properties:
+        uri:
+          minLength: 1
+          type: string
+        version:
+          minLength: 1
+          type: string
+        changelog:
+          type: string
+        created:
+          type: string
+          format: date-time
+    SchemaEvent:
+      required:
+      - data
+      - eventId
+      - eventType
+      - timestamp
+      type: object
+      properties:
+        eventId:
+          minLength: 1
+          type: string
+        eventType:
+          type: string
+          enum:
+          - SchemaPublished
+          - SchemaRevoked
+        timestamp:
+          type: string
+          format: date-time
+        data:
+          $ref: '#/components/schemas/SchemaEventData'
+        published:
+          type: boolean
+        versionValorized:
+          type: boolean
+        revoked:
+          type: boolean
+    BadRequestProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputValidationIssue'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    InputValidationIssue:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+        in:
+          type: string
+          enum:
+          - body
+          - path
+          - query
+          - header
+        name:
+          type: string
+        value:
+          type: object
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputObject'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+paths:
+  /schemas/events:
+    post:
+      tags:
+      - Schema Events
+      summary: Receives lifecycle events for schemas from the Schema Management Service
+      description: |-
+        This endpoint is invoked by the Schema Management Service (SMS) whenever a schema is published or revoked. It allows the SD Tooling to update its local storage consistently.
+
+        Supported event types:
+        - `SchemaPublished`
+        - `SchemaRevoked`
+      operationId: receiveSchemaEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemaEvent'
+            examples:
+              SchemaPublishedExample:
+                summary: Example of a SchemaPublished event
+                description: SchemaPublishedExample
+                value:
+                  eventId: evt_123456789
+                  eventType: SchemaPublished
+                  timestamp: 2023-10-27T10:00:00Z
+                  data:
+                    schema:
+                      uri: https://api.simpl.space/schemas/ApplicationAsset
+                      title: Application Asset
+                      name: application-health-v1
+                      description: Schema for describing a software application.
+                      resourceType: application
+                      status: PUBLISHED
+                    version:
+                      uri: https://api.simpl.space/schemas/ApplicationAsset/1.0.0
+                      version: 1.0.0
+                      changelog: Initial version.
+                      created: 2023-01-15T09:30:00Z
+              SchemaRevokedExample:
+                summary: Example of a SchemaRevoked event
+                description: SchemaRevokedExample
+                value:
+                  eventId: evt_987654321
+                  eventType: SchemaRevoked
+                  timestamp: 2024-02-15T12:45:00Z
+                  data:
+                    schema:
+                      uri: https://api.simpl.space/schemas/DataAsset
+                      title: Data Asset
+                      name: application-health-v1
+                      description: Schema for describing a dataset.
+                      resourceType: data
+                      status: REVOKED
+                    version:
+                      uri: https://api.simpl.space/schemas/DataAsset/2.1.0
+                      version: 2.1.0
+                      changelog: Deprecated due to regulatory changes.
+                      created: 2023-05-22T08:00:00Z
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              example:
+                type: urn:problem-type:simpl:badRequest
+                title: Bad request
+                status: 400
+                detail: Invalid schema event payload
+                instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorProblem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                detail: An unexpected error occurred
+                instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+        "204":
+          description: Event successfully received and processed

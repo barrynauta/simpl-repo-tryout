@@ -1,0 +1,4437 @@
+openapi: 3.0.1
+info:
+  title: Infrastructure Provisioning OpenApi
+  description: 'API for managing infrastructure deployment scripts, including storage,execution triggers and decommission.'
+  version: 1.9.0
+  contact:
+    name: Simpl Programme
+    email: cnect-simpl@ec.europa.eu
+    url: https://simpl-programme.ec.europa.eu/
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+servers:
+  - url: 'https://localhost:8080/api/infrastructureProvisioning/v1'
+    description: Base URL used to access the API in a specific environment (e.g., development, int, preprod)
+security:
+  - bearerAuth: []
+paths:
+  /scripts:
+    get:
+      tags:
+        - script-controller
+      summary: Retrieve a list of deployment scripts.
+      description: >
+        This endpoint retrieves a list of deployment scripts available in the system.
+        Each script in the response contains metadata such as the script title, description,
+        associated cloud environment, and creation/update timestamps. The `payload` is an array of
+        script objects, each containing identifiers (like `id` and `deploymentScriptId`), an
+        encoded YAML file (`file`), and the original filename used during upload. Scripts may
+        also be linked to version control (e.g., via a `giteaSha`), and include execution-related
+        metadata such as `location`, `active` status, and `scriptIdentify` references.
+      operationId: getScriptList
+      parameters:
+        - name: page
+          in: query
+          description: The page number to retrieve.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The number of items per page.
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: active
+          in: query
+          description: Filter by active status.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Script list found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptListResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: Script list found successfully.
+                    payload:
+                      content:
+                        - id: 1
+                          scriptIdentify:
+                            id: 1
+                            deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                          title: vm script
+                          description: VM Script
+                          file: >-
+                            YXBpVmVyc2lvbjogcGxhdGZvcm0uZXhhbXBsZS5vcmcvdjFhbHBoYTEKa2luZDogU2VydmVySW5zdGFuY2UKbWV0YWRhdGE6CiAgbmFtZXNwYWNlOiBpbmZyYXN0cnVjdHVyZQogIG5hbWU6IG9mZmVyaW5nLW5hbWUtbWVkaXVtLWluc3RhbmNlLXtVVUlEfQogIGxhYmVsczoKICAgIHV1aWQ6ICJ7VVVJRH0iCiAgICByZWZlcmVuY2Uta2luZDogeHNlcnZlcnNpbnN0YW5jZXMKc3BlYzoKICBwYXJhbWV0ZXJzOgogICAgZGF0YWNlbnRlck5hbWU6IGNyb3NzcGxhbmVfZGF0YWNlbnRlcl9tZWRpdW0te1VVSUR9CiAgICBkYXRhY2VudGVyRGVzY3JpcHRpb246IHRlc3RFeGFtcGxlRGVzY3JpcHRpb24KICAgIGRhdGFjZW50ZXJMb2NhdGlvbjogZGUvdHhsCiAgICBzZXJ2ZXJOYW1lOiBzZXJ2ZXIKICAgIGNvcmVzOiAyCiAgICByYW06IDIwNDgKICAgIGNwdUZhbWlseTogSU5URUxfSUNFTEFLRQpjbG91ZENvbmZpZzoKaG9zdG5hbWU6IGRlZmF1bHQtc2VydmVyIApzc2hfcHdhdXRoOiB0cnVlCmNocGFzc3dkOgogICAgZXhwaXJlOiBmYWxzZQp1c2VyczoKLSBkZWZhdWx0Ci0gbmFtZToge25hbWV9CiAgcGFzc3dkOiB7cHdkfQogIHNoZWxsOiAvYmluL2Jhc2gKICBsb2NrX3Bhc3N3ZDogZmFsc2UKICBzdWRvOiBBTEw9KEFMTCkgTk9QQVNTV0Q6QUxMCiAgZ3JvdXBzOiB1c2VycywgYWRtaW4sIHN1ZG8KcnVuY21kOgotIGVjaG8gInJlZ2VuZXJhdGluZyBob3N0IGtleXMiCi0gcm0gLWYgL2V0Yy9zc2gvc3NoX2hvc3RfKgotIHNzaC1rZXlnZW4gLUEKLSBlY2hvICJyZXN0YXJ0aW5nIHNzaGQiCi0gc3lzdGVtY3RsIHJlc3RhcnQgc3NoZApkZWJ1ZzogdHJ1ZQpvdXRwdXQ6CiAgYWxsOiAifCB0ZWUgLWEgL3Zhci9sb2cvY2xvdWQtaW5pdC1kZWJ1Zy5sb2ciCmZpbmFsX21lc3NhZ2U6ICJEZWZhdWx0IFZNIENsb3VkaW5pdCBkb25lIgogIA==
+                          location: path
+                          active: true
+                          cloudEnvironment:
+                            id: 2
+                            environmentName: Awesome env for data Analysis
+                            iac: Crossplane
+                            location: Paris
+                            cloudProvider:
+                              id: 1
+                              cloudProviderName: Ionos
+                            datacenterName: DC_Data1
+                            active: true
+                          creationDate: '2025-01-15'
+                          giteaSha: >-
+                            522dd886075b8b29eee323f38050901e4cb56247501e538492a10a9bf1773a31
+                          originalFileName: demoScriptInfra.yaml
+                      page:
+                        size: 10
+                        number: 0
+                        totalElements: 1
+                        totalPages: 1
+                success_with_no_data:
+                  value:
+                    success: true
+                    message: Script list found successfully.
+                    payload:
+                      content: []
+                      page:
+                        size: 10
+                        number: 0
+                        totalElements: 0
+                        totalPages: 0
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/scripts"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/scripts"
+    post:
+      tags:
+        - script-controller
+      summary: Submit a new deployment script.
+      description: >
+        This endpoint allows the submission of a new deployment script to the system. The request body must contain:
+        
+        - `script`: a JSON object containing script metadata such as title, description, associated cloud provider, and other identifiers.
+        - `file`: the actual YAML-based script file to be encoded and stored; it must be sent as a binary (base64) string.
+        
+        Once successfully processed, the script is saved in the system and stored in version control (Gitea). The response returns the persisted script's metadata including `id`, `deploymentScriptId`, encoded `file`, and version tracking fields like `giteaSha`.
+        
+        The `payload` field in the response wraps the full persisted script data as confirmation of successful storage.
+
+      operationId: saveScript
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - file
+                - script
+              type: object
+              properties:
+                script:
+                  $ref: '#/components/schemas/ScriptRequest'
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Script submitted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptResponse'
+              examples:
+                saved_successfully:
+                  value:
+                    success: true
+                    message: Script save successfully
+                    payload:
+                      id: 1
+                      scriptIdentify:
+                        id: 1
+                        deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                      title: vm script
+                      description: VM Script
+                      file: >-
+                        YXBpVmVyc2lvbjogcGxhdGZvcm0uZXhhbXBsZS5vcmcvdjFhbHBoYTEKa2luZDogU2VydmVySW5zdGFuY2UKbWV0YWRhdGE6CiAgbmFtZXNwYWNlOiBpbmZyYXN0cnVjdHVyZQogIG5hbWU6IG9mZmVyaW5nLW5hbWUtbWVkaXVtLWluc3RhbmNlLXtVVUlEfQogIGxhYmVsczoKICAgIHV1aWQ6ICJ7VVVJRH0iCiAgICByZWZlcmVuY2Uta2luZDogeHNlcnZlcnNpbnN0YW5jZXMKc3BlYzoKICBwYXJhbWV0ZXJzOgogICAgZGF0YWNlbnRlck5hbWU6IGNyb3NzcGxhbmVfZGF0YWNlbnRlcl9tZWRpdW0te1VVSUR9CiAgICBkYXRhY2VudGVyRGVzY3JpcHRpb246IHRlc3RFeGFtcGxlRGVzY3JpcHRpb24KICAgIGRhdGFjZW50ZXJMb2NhdGlvbjogZGUvdHhsCiAgICBzZXJ2ZXJOYW1lOiBzZXJ2ZXIKICAgIGNvcmVzOiAyCiAgICByYW06IDIwNDgKICAgIGNwdUZhbWlseTogSU5URUxfSUNFTEFLRQpjbG91ZENvbmZpZzoKaG9zdG5hbWU6IGRlZmF1bHQtc2VydmVyIApzc2hfcHdhdXRoOiB0cnVlCmNocGFzc3dkOgogICAgZXhwaXJlOiBmYWxzZQp1c2VyczoKLSBkZWZhdWx0Ci0gbmFtZToge25hbWV9CiAgcGFzc3dkOiB7cHdkfQogIHNoZWxsOiAvYmluL2Jhc2gKICBsb2NrX3Bhc3N3ZDogZmFsc2UKICBzdWRvOiBBTEw9KEFMTCkgTk9QQVNTV0Q6QUxMCiAgZ3JvdXBzOiB1c2VycywgYWRtaW4sIHN1ZG8KcnVuY21kOgotIGVjaG8gInJlZ2VuZXJhdGluZyBob3N0IGtleXMiCi0gcm0gLWYgL2V0Yy9zc2gvc3NoX2hvc3RfKgotIHNzaC1rZXlnZW4gLUEKLSBlY2hvICJyZXN0YXJ0aW5nIHNzaGQiCi0gc3lzdGVtY3RsIHJlc3RhcnQgc3NoZApkZWJ1ZzogdHJ1ZQpvdXRwdXQ6CiAgYWxsOiAifCB0ZWUgLWEgL3Zhci9sb2cvY2xvdWQtaW5pdC1kZWJ1Zy5sb2ciCmZpbmFsX21lc3NhZ2U6ICJEZWZhdWx0IFZNIENsb3VkaW5pdCBkb25lIgogIA==
+                      location: path
+                      active: true
+                      cloudEnvironment:
+                        id: 2
+                        environmentName: Awesome env for data Analysis
+                        iac: Crossplane
+                        location: Paris
+                        cloudProvider:
+                          id: 1
+                          cloudProviderName: Ionos
+                        datacenterName: DC_Data1
+                        active: true
+                      creationDate: '2025-01-15'
+                      giteaSha: >-
+                        522dd886075b8b29eee323f38050901e4cb56247501e538492a10a9bf1773a31
+                      originalFileName: demoScriptInfra.yaml
+        '400':
+          description: Script is invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_invalid:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:unsupportedFileType"
+                    href: null
+                    title: "File type is not accepted."
+                    status: 400
+                    detail: "The uploaded file has an unsupported file type and cannot be processed."
+                    instance: "/api/infrastructureProvisioning/v1/scripts"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/scripts"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/scripts"
+  /scripts/trigger:
+    post:
+      tags:
+        - script-controller
+      summary: Starts the execution of a script based on the provided deployment script id.
+      description: >
+        This endpoint initiates the execution of a script previously registered in the system.
+        The script is identified by the `deploymentScriptId` provided in the request.
+        If the script is active and passes checksum validation, it is processed and sent for provisioning
+        via Kafka with the appropriate headers and configuration.
+      operationId: triggeringScript
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptTriggerRequest'
+        required: true
+      responses:
+        '200':
+          description: Script triggering started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+              examples:
+                script_triggering_started_successfully:
+                  value:
+                    success: true
+                    message: Script Triggering started successfully.
+                    payload: null
+        '400':
+          description: Script is invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_invalid:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:scriptNotValid"
+                    href: null
+                    title: "The requested Script id is not valid."
+                    status: 400
+                    detail: "The requested script id is not valid and cannot be used."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+        '404':
+          description: Script not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:scriptNotFound"
+                    href: null
+                    title: "Script not found."
+                    status: 404
+                    detail: "The script with the provided deploymentScriptId does not exist."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+        '409':
+          description: Script status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:scriptViolation"
+                    href: null
+                    title: "Script status violation."
+                    status: 409
+                    detail: "The request related to this Script id could not be completed due to a conflict with the current state of the target resource."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+      callbacks:
+        notificationCallback:
+          '{$request.body#/callbackUrl}':
+            post:
+              summary: Notification sent to the callback URL to update request status
+              description: >
+                This endpoint must be implemented by the client to receive asynchronous updates regarding infrastructure provisioning requests. 
+                Since the provisioning process can take a significant amount of time to complete, this callback mechanism enables real-time status 
+                tracking and event-driven integration, ensuring the client is notified as soon as relevant updates occur, without the need manual checks.
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/LongRunProcessRequest'
+              responses:
+                '200':
+                  description: Notification successfully received
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/DefaultResponse'
+                      examples:
+                        script_triggering_started_successfully:
+                          value:
+                            success: true
+                            message: Notification successfully received
+                            payload: null
+                '400':
+                  description: Invalid input.
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/Problem'
+                      examples:
+                        script_invalid:
+                          value:
+                            type: "urn:problem-type:simpl:infrastructureProvisioning:inputNotValid"
+                            href: null
+                            title: "Invalid request format"
+                            status: 400
+                            detail: "The payload was malformed or missing required fields."
+                            instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+                '401':
+                  description: Authorization token is missing or invalid.
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/Problem'
+                      examples:
+                        Unauthorized:
+                          value:
+                            type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                            href: null
+                            title: "Authorization token is missing or invalid."
+                            status: 401
+                            detail: "The request requires a valid authorization token, which was either missing or invalid."
+                            instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+                '404':
+                  description: Deployment not found.
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/Problem'
+                      examples:
+                        script_not_found:
+                          value:
+                            type: "urn:problem-type:simpl:infrastructureProvisioning:deploymentNotFound"
+                            href: null
+                            title: "Deployment not found."
+                            status: 404
+                            detail: "The deployment with the provided requesterUniqueId does not exist."
+                            instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+                '500':
+                  description: Internal server error. Couldn't connect to server (API is down).
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/Problem'
+                      examples:
+                        service_unavailable:
+                          value:
+                            type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                            href: null
+                            title: "Internal Server Error"
+                            status: 500
+                            detail: "An unexpected error occurred. Please try again later."
+                            instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+
+  /scripts/metadata:
+      get:
+        tags:
+          - script-controller
+        summary: Retrieve a list of deployment script metadata.
+        description: >
+          Returns only metadata for deployment scripts (without file content, repository location,
+          cloud environment details, triggers or configuration files). Intended for use by the external SD-UI.
+        operationId: getScriptMetadataList
+        parameters:
+        - name: page
+          in: query
+          description: The page number to retrieve.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The number of items per page.
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: active
+          in: query
+          description: Filter by active status.
+          required: false
+          schema:
+            type: boolean
+        responses:
+          '200':
+            description: Script metadata list returned successfully.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ScriptListMetadataResponse'
+                examples:
+                  success_with_data:
+                    value:
+                      success: true
+                      message: Script metadata list returned successfully.
+                      payload:
+                        content:
+                          - id: 1
+                            scriptIdentify:
+                              id: 1
+                              deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                            title: vm script
+                            description: VM Script
+                            active: true
+                            creationDate: '2025-01-15'
+                            giteaSha: >-
+                              522dd886075b8b29eee323f38050901e4cb56247501e538492a10a9bf1773a31
+                            originalFileName: demoScriptInfra.yaml
+                        page:
+                          size: 10
+                          number: 0
+                          totalElements: 1
+                          totalPages: 1
+                  success_with_no_data:
+                    value:
+                      success: true
+                      message: Script metadata list returned successfully.
+                      payload: 
+                        content: []
+                        page:
+                          size: 10
+                          number: 0
+                          totalElements: 0
+                          totalPages: 0
+          '401':
+            description: Authorization token is missing or invalid.
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+                examples:
+                  Unauthorized:
+                    value:
+                      type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                      href: null
+                      title: "Authorization token is missing or invalid."
+                      status: 401
+                      detail: "The request requires a valid authorization token, which was either missing or invalid."
+                      instance: "/api/infrastructureProvisioning/v1/scripts/metadata"
+          '500':
+            description: Internal server error. Couldn't connect to server (API is down).
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+                examples:
+                  service_unavailable:
+                    value:
+                      type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                      href: null
+                      title: "Internal Server Error"
+                      status: 500
+                      detail: "An unexpected error occurred. Please try again later."
+                      instance: "/api/infrastructureProvisioning/v1/scripts/metadata"
+  '/scripts/{deploymentScriptId}/configFiles':
+    post:
+      tags:
+        - script-controller
+      summary: Upload configuration files for a deployment script
+      description: Upload one or more configuration files to be associated with a specific deployment script identified by `deploymentScriptId`. These files will be stored and managed as part of the script's configuration.
+      operationId: addConfigFile
+      parameters:
+        - name: deploymentScriptId
+          in: path
+          required: true
+          description: The unique identifier for the deployment script.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                configFiles:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Script triggering started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+              examples:
+                config_files_saved_successfully:
+                  value:
+                    success: true
+                    message: Config file(s) save successfully.
+                    payload: null
+        '400':
+          description: Configuration file not present or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                configuration_file_not_present:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:noConfigFilesProvided"
+                    href: null
+                    title: "No configuration files provided."
+                    status: 400
+                    detail: "No configuration files were provided in the request. Please upload at least one valid config file before proceeding."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}/configFiles"
+                invalid_configuration_file:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:unsupportedConfigFileType"
+                    href: null
+                    title: "The Config file extension is not accepted."
+                    status: 400
+                    detail: "Only files with yaml extension is accepted for Config file. Please verify the file type and try again."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}/configFiles"
+
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}/configFiles"
+        '404':
+          description: Script not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:scriptNotFound"
+                    href: null
+                    title: "Script not found."
+                    status: 404
+                    detail: "The script with the provided deploymentScriptId does not exist."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}/configFiles"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}/configFiles"
+  /status:
+    get:
+      tags:
+        - status-controller
+      summary: Retrieve current API health and version information
+      description: Returns the current operational status and version of the API, allowing clients to verify that the service is available and working correctly.
+      operationId: getStatus
+      responses:
+        '200':
+          description: API is working
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                status_ok:
+                  value:
+                    version: 1.0.0
+                    status: ok
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:status:tokenMissingOrInvalid"
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token."
+                    instance: "/api/infrastructureProvisioning/v1/status"
+
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/status"
+  '/scripts/{deploymentScriptId}':
+    get:
+      tags:
+        - script-controller
+      summary: Retrieve deployment script details by deploymentScriptId
+      description: Fetch detailed information about a deployment script identified by the given `deploymentScriptId`. Returns the script metadata and associated data.
+      operationId: getScriptByDeploymentScriptId
+      parameters:
+        - name: deploymentScriptId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Script found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptResponse'
+              examples:
+                script_found:
+                  value:
+                    success: true
+                    message: Script found successfully.
+                    payload:
+                      id: 1
+                      scriptIdentify:
+                        id: 1
+                        deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                      title: vm script
+                      description: VM Script
+                      file: >-
+                        YXBpVmVyc2lvbjogcGxhdGZvcm0uZXhhbXBsZS5vcmcvdjFhbHBoYTEKa2luZDogU2VydmVySW5zdGFuY2UKbWV0YWRhdGE6CiAgbmFtZXNwYWNlOiBpbmZyYXN0cnVjdHVyZQogIG5hbWU6IG9mZmVyaW5nLW5hbWUtbWVkaXVtLWluc3RhbmNlLXtVVUlEfQogIGxhYmVsczoKICAgIHV1aWQ6ICJ7VVVJRH0iCiAgICByZWZlcmVuY2Uta2luZDogeHNlcnZlcnNpbnN0YW5jZXMKc3BlYzoKICBwYXJhbWV0ZXJzOgogICAgZGF0YWNlbnRlck5hbWU6IGNyb3NzcGxhbmVfZGF0YWNlbnRlcl9tZWRpdW0te1VVSUR9CiAgICBkYXRhY2VudGVyRGVzY3JpcHRpb246IHRlc3RFeGFtcGxlRGVzY3JpcHRpb24KICAgIGRhdGFjZW50ZXJMb2NhdGlvbjogZGUvdHhsCiAgICBzZXJ2ZXJOYW1lOiBzZXJ2ZXIKICAgIGNvcmVzOiAyCiAgICByYW06IDIwNDgKICAgIGNwdUZhbWlseTogSU5URUxfSUNFTEFLRQpjbG91ZENvbmZpZzoKaG9zdG5hbWU6IGRlZmF1bHQtc2VydmVyIApzc2hfcHdhdXRoOiB0cnVlCmNocGFzc3dkOgogICAgZXhwaXJlOiBmYWxzZQp1c2VyczoKLSBkZWZhdWx0Ci0gbmFtZToge25hbWV9CiAgcGFzc3dkOiB7cHdkfQogIHNoZWxsOiAvYmluL2Jhc2gKICBsb2NrX3Bhc3N3ZDogZmFsc2UKICBzdWRvOiBBTEw9KEFMTCkgTk9QQVNTV0Q6QUxMCiAgZ3JvdXBzOiB1c2VycywgYWRtaW4sIHN1ZG8KcnVuY21kOgotIGVjaG8gInJlZ2VuZXJhdGluZyBob3N0IGtleXMiCi0gcm0gLWYgL2V0Yy9zc2gvc3NoX2hvc3RfKgotIHNzaC1rZXlnZW4gLUEKLSBlY2hvICJyZXN0YXJ0aW5nIHNzaGQiCi0gc3lzdGVtY3RsIHJlc3RhcnQgc3NoZApkZWJ1ZzogdHJ1ZQpvdXRwdXQ6CiAgYWxsOiAifCB0ZWUgLWEgL3Zhci9sb2cvY2xvdWQtaW5pdC1kZWJ1Zy5sb2ciCmZpbmFsX21lc3NhZ2U6ICJEZWZhdWx0IFZNIENsb3VkaW5pdCBkb25lIgogIA==
+                      location: path
+                      active: true
+                      cloudEnvironment:
+                        id: 2
+                        environmentName: Awesome env for data Analysis
+                        iac: Crossplane
+                        location: Paris
+                        cloudProvider:
+                          id: 1
+                          cloudProviderName: Ionos
+                        datacenterName: DC_Data1
+                        active: true
+                      creationDate: '2025-01-15'
+                      giteaSha: >-
+                        522dd886075b8b29eee323f38050901e4cb56247501e538492a10a9bf1773a31
+                      originalFileName: demoScriptInfra.yaml
+                      provisionedResources:
+                        - resourceProvisionedId: 2
+                          resourceProvisionedStatus: SENT
+                        - resourceProvisionedId: 1
+                          resourceProvisionedStatus: SENT
+                      configFiles:
+                        - id: 1
+                          filename: config_example.yaml
+                        - id: 2
+                          filename: config_example_1.yaml
+        '400':
+          description: Script is not active or checksum validation failed.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_not_active:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:scriptNotActiveOrValid"
+                    href: null
+                    title: "The requested Script is not active/valid."
+                    status: 400
+                    detail: "The requested script is either inactive or failed checksum validation and cannot be used."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}"
+        '404':
+          description: Script not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:scriptNotFound"
+                    href: null
+                    title: "Script not found."
+                    status: 404
+                    detail: "The script with the provided deploymentScriptId does not exist."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}"
+    delete:
+      tags:
+        - script-controller
+      summary: Script delete operation
+      description: >-
+        Endpoint to delete one script resulting in the update of the column
+        valid (set to false) in the database and remove file from the
+        repository.
+      operationId: deleteScript
+      parameters:
+        - name: deploymentScriptId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Script deleted successfully. No content is returned.
+        '400':
+          description: This script is not valid to remove.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_not_valid_to_delete:
+                  summary: This script is not valid to remove. Already removed before.
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:scriptAlreadyRemoved"
+                    href: null
+                    title: "Script already removed."
+                    status: 400
+                    detail: "This script cannot be removed because it was already removed previously."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}"
+        '404':
+          description: Script not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_not_found:
+                  summary: Script not found
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:scriptNotFound"
+                    href: null
+                    title: "Script not found."
+                    status: 404
+                    detail: "The script with the provided deploymentScriptId does not exist."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/{deploymentScriptId}"
+  /scripts/triggerList:
+    get:
+      tags:
+        - script-controller
+      summary: Retrieve the list of script triggers
+      description: Returns a list of deployment script with triggering process execution, including their metadata, associated files, cloud provider information, and provisioning status.
+      operationId: getScriptTriggerList
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: Script list found successfully.
+                    payload:
+                      - id: 1
+                        scriptIdentify:
+                          id: 1
+                          deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                        title: vm script
+                        description: VM Script
+                        file: >-
+                          YXBpVmVyc2lvbjogcGxhdGZvcm0uZXhhbXBsZS5vcmcvdjFhbHBoYTEKa2luZDogU2VydmVySW5zdGFuY2UKbWV0YWRhdGE6CiAgbmFtZXNwYWNlOiBpbmZyYXN0cnVjdHVyZQogIG5hbWU6IG9mZmVyaW5nLW5hbWUtbWVkaXVtLWluc3RhbmNlLXtVVUlEfQogIGxhYmVsczoKICAgIHV1aWQ6ICJ7VVVJRH0iCiAgICByZWZlcmVuY2Uta2luZDogeHNlcnZlcnNpbnN0YW5jZXMKc3BlYzoKICBwYXJhbWV0ZXJzOgogICAgZGF0YWNlbnRlck5hbWU6IGNyb3NzcGxhbmVfZGF0YWNlbnRlcl9tZWRpdW0te1VVSUR9CiAgICBkYXRhY2VudGVyRGVzY3JpcHRpb246IHRlc3RFeGFtcGxlRGVzY3JpcHRpb24KICAgIGRhdGFjZW50ZXJMb2NhdGlvbjogZGUvdHhsCiAgICBzZXJ2ZXJOYW1lOiBzZXJ2ZXIKICAgIGNvcmVzOiAyCiAgICByYW06IDIwNDgKICAgIGNwdUZhbWlseTogSU5URUxfSUNFTEFLRQpjbG91ZENvbmZpZzoKaG9zdG5hbWU6IGRlZmF1bHQtc2VydmVyIApzc2hfcHdhdXRoOiB0cnVlCmNocGFzc3dkOgogICAgZXhwaXJlOiBmYWxzZQp1c2VyczoKLSBkZWZhdWx0Ci0gbmFtZToge25hbWV9CiAgcGFzc3dkOiB7cHdkfQogIHNoZWxsOiAvYmluL2Jhc2gKICBsb2NrX3Bhc3N3ZDogZmFsc2UKICBzdWRvOiBBTEw9KEFMTCkgTk9QQVNTV0Q6QUxMCiAgZ3JvdXBzOiB1c2VycywgYWRtaW4sIHN1ZG8KcnVuY21kOgotIGVjaG8gInJlZ2VuZXJhdGluZyBob3N0IGtleXMiCi0gcm0gLWYgL2V0Yy9zc2gvc3NoX2hvc3RfKgotIHNzaC1rZXlnZW4gLUEKLSBlY2hvICJyZXN0YXJ0aW5nIHNzaGQiCi0gc3lzdGVtY3RsIHJlc3RhcnQgc3NoZApkZWJ1ZzogdHJ1ZQpvdXRwdXQ6CiAgYWxsOiAifCB0ZWUgLWEgL3Zhci9sb2cvY2xvdWQtaW5pdC1kZWJ1Zy5sb2ciCmZpbmFsX21lc3NhZ2U6ICJEZWZhdWx0IFZNIENsb3VkaW5pdCBkb25lIgogIA==
+                        location: path
+                        active: true
+                        cloudEnvironment:
+                          id: 2
+                          environmentName: Awesome env for data Analysis
+                          iac: Crossplane
+                          location: Paris
+                          cloudProvider:
+                            id: 1
+                            cloudProviderName: Ionos
+                          datacenterName: DC_Data1
+                          active: true
+                        creationDate: '2025-01-15'
+                        giteaSha: >-
+                          522dd886075b8b29eee323f38050901e4cb56247501e538492a10a9bf1773a31
+                        originalFileName: demoScriptInfra.yaml
+                        provisionedResources:
+                          - resourceProvisionedId: 2
+                            resourceProvisionedStatus: SENT
+                          - resourceProvisionedId: 1
+                            resourceProvisionedStatus: SENT
+                        configFiles:
+                          - id: 1
+                            filename: config_example.yaml
+                          - id: 2
+                            filename: config_example_1.yaml
+                success_with_no_data:
+                  value:
+                    success: true
+                    message: Script list found successfully.
+                    payload: []
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/triggerList"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/scripts/triggerList"
+  '/cloudProviders':
+    get:
+      tags:
+        - cloud-provider-controller
+      summary: Get all Cloud Providers
+      operationId: getCloudProviders
+      responses:
+        '200':
+          description: List of Cloud Providers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudProviderListResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: Provider list found successfully.
+                    payload:
+                      - id: 1
+                        cloudProviderName: "Ionos"
+                      - id: 2
+                        cloudProviderName: "Aruba"
+                      - id: 3
+                        cloudProviderName: "Ovh"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProviders"
+
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProviders"
+
+  /cloudEnvironments:
+    get:
+      tags:
+        - cloud-environment-controller
+      summary: Retrieve a basic list of Cloud Environments
+      description: Returns a simple list of configured cloud environments with their IDs and names.
+      operationId: getCloudEnvironmentList
+      parameters:
+        - name: page
+          in: query
+          description: Page number (zero-based) to retrieve.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of items per page.
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: active
+          in: query
+          description: Filter results by active status. If not provided, returns both active and inactive environments.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Cloud Environment list found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudEnvironmentListResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: Cloud Environment list found successfully.
+                    payload:
+                      content:
+                        - id: 1
+                          cloudProvider:
+                            id: 1
+                            cloudProviderName: Ionos
+                          iac: iac
+                          environmentName: environmentName
+                          environmentDescription: environmentDescription
+                          datacenterName: datacenterName
+                          datacenterDescription: datacenterDescription
+                          location: europe-west3
+                          active: true
+                        - id: 2
+                          cloudProvider:
+                            id: 2
+                            cloudProviderName: Ovh
+                          iac: iac
+                          environmentName: environmentName
+                          environmentDescription: environmentDescription
+                          datacenterName: datacenterName
+                          datacenterDescription: datacenterDescription
+                          location: europe-west3
+                          active: true
+                      page:
+                        size: 10
+                        number: 0
+                        totalElements: 2
+                        totalPages: 1
+                success_with_no_data:
+                  value:
+                    success: true
+                    message: Provider list found successfully.
+                    payload:
+                      content: [ ]
+                      page:
+                        size: 0
+                        number: 0
+                        totalElements: 0
+                        totalPages: 0
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments"
+
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments"
+    post:
+      tags:
+        - cloud-environment-controller
+      summary: Create a new cloud environment
+      description: Creates a new cloud environment and stores its token in HashiCorp Vault.
+      operationId: createCloudEnvironment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudEnvironmentRequest'
+      responses:
+        '201':
+          description: Cloud Environment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+              examples:
+                saved_successfully:
+                  value:
+                    success: true
+                    message: Cloud Environment saved successfully.
+                    payload:
+                      id: 1
+                      cloudProvider:
+                        id: 1
+                        cloudProviderName: Ionos
+                      environmentName: environmentName
+                      environmentDescription: environmentDescription
+                      iac: iac
+                      datacenterName: datacenterName
+                      datacenterDescription: datacenterDescription
+                      location: europe-west3
+                      active: true
+        '400':
+          description: Invalid input.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                invalid_payload:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudEnvironmentInvalidPayload"
+                    href: null
+                    title: "Cloud environment with wrong payload"
+                    status: 400
+                    detail: This request payload cannot be used in this operation."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments"
+        '409':
+          description: Cloud Environment status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudEnvironmentViolation"
+                    href: null
+                    title: "Cloud Environment status violation."
+                    status: 409
+                    detail: "The request related to this Cloud Environment is valid but could not be completed due to a violation conflict with its current state."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments"
+  /cloudEnvironments/{cloudEnvironmentId}:
+    get:
+      tags:
+        - cloud-environment-controller
+      summary: Retrieve a cloud provider by ID
+      description: Returns a specific cloud provider by its identifier.
+      operationId: getCloudEnvironmentById
+      parameters:
+        - name: cloudEnvironmentId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: active
+          in: query
+          description: If provided, the endpoint will only return the Cloud Environment when its 'active' status matches this value. If omitted, the resource will be returned regardless of its active status.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Cloud Environment retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudEnvironmentResponse'
+              examples:
+                retrieved_successfully:
+                  value:
+                    success: true
+                    message: Cloud Environment found successfully.
+                    payload:
+                      id: 1
+                      cloudProvider:
+                        id: 3
+                        cloudProviderName: "Ovh"
+                      environmentName: "ovh_1"
+                      environmentDescription: null
+                      iac: "terraform"
+                      datacenterName: "ovh_1"
+                      datacenterDescription: null
+                      location: "eua"
+                      active: true
+
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+
+        '404':
+          description: Cloud Environment not found.
+          content:
+            application/problem+json:
+              examples:
+                not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudEnvironmentNotFound"
+                    href: null
+                    title: "Cloud Environment not found."
+                    status: 404
+                    detail: "This Cloud Environment id not exists in the system with that id and status. Please verify it and try again."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+
+    put:
+      tags:
+        - cloud-environment-controller
+      summary: Update a cloud environment
+      description: Updates metadata for an existing cloud environment.
+      operationId: updateCloudEnvironment
+      parameters:
+        - name: cloudEnvironmentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudEnvironmentRequest'
+      responses:
+        '200':
+          description: Cloud Environment updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+              examples:
+                cloud_environment_updated:
+                  summary: Provider updated
+                  value:
+                    success: true
+                    message: Cloud Environment updated successfully.
+                    payload:
+                      id: 1
+                      cloudProvider:
+                        id: 1
+                        cloudProviderName: Ionos
+                      environmentName: environmentName
+                      environmentDescription: environmentDescription
+                      iac: iac
+                      datacenterName: datacenterName
+                      datacenterDescription: datacenterDescription
+                      location: europe-west3
+                      active: true
+        '400':
+          description: Invalid input.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                invalid_payload:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudEnvironmentInvalidPayload"
+                    href: null
+                    title: "Cloud environment with wrong payload"
+                    status: 400
+                    detail: "This request payload cannot be used in this operation."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+        '404':
+          description: Cloud Environment not found.
+          content:
+            application/problem+json:
+              examples:
+                not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudEnvironmentNotFound"
+                    href: null
+                    title: "Cloud Environment not found."
+                    status: 404
+                    detail: "This Cloud Environment id not exists in the system. Please verify the id and try again."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+        '409':
+          description: Cloud Environment status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudEnvironmentViolation"
+                    href: null
+                    title: "Cloud Environment status violation."
+                    status: 409
+                    detail: "The request related to this Cloud Environment id could not be completed due to a conflict with the current state of the target resource."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+
+    delete:
+      tags:
+        - cloud-environment-controller
+      summary: Delete a cloud environment
+      description: Removes an existing cloud environment.
+      operationId: deleteCloudEnvironment
+      parameters:
+        - name: cloudEnvironmentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Cloud Environment deleted successfully. No content is returned.
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+        '404':
+          description: Cloud Environment not found.
+          content:
+            application/problem+json:
+
+              examples:
+                not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudEnvironmentNotFound"
+                    href: null
+                    title: "Cloud Environment not found."
+                    status: 404
+                    detail: "This Cloud Environment id not exists in the system. Please verify the id and try again."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+        '409':
+          description: Cloud Environment status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudEnvironmentViolation"
+                    href: null
+                    title: "Cloud Environment status violation."
+                    status: 409
+                    detail: "The request related to this Cloud Environment id could not be completed due to a conflict with the current state of the target resource."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudEnvironments/{cloudEnvironmentId}"
+  '/requesters':
+    get:
+      tags:
+        - requester-info-controller
+      summary: Retrieve a paginated list of requester unique infos
+      description: Retrieve a paginated list of requester unique infos with resource status and timestamps.
+      operationId: getAllRequesterUniqueInfos
+      parameters:
+        - name: page
+          in: query
+          description: Page number (0-based)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+            minimum: 0
+        - name: size
+          in: query
+          description: Page size
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+            minimum: 1
+      responses:
+        '200':
+          description: Requester Infos found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequesterInfoListResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: Requester Infos found successfully.
+                    payload:
+                      content:
+                        - requesterUniqueId: e16b5450-c15f-476a-8b42-7de46b4cc8bd
+                          resourceStatus: DECOMMISSIONED
+                          provisionedDateTime: null
+                          decommissionedDateTime: "2026-01-27T12:12:29.542328"
+                        - requesterUniqueId: 980608e6-b242-4e34-b8f0-c649d086ca52
+                          resourceStatus: PROVISIONED
+                          provisionedDateTime: "2026-01-29T13:39:34.936312"
+                          decommissionedDateTime: null
+                      page:
+                        size: 10
+                        number: 0
+                        totalElements: 2
+                        totalPages: 1
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/requesters"
+
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/requesters"
+  '/resources/deactivation/{requesterUniqueId}':
+    delete:
+      tags:
+        - resource-controller
+      summary: Initiate deactivation of provisioned resources by requester ID
+      description: Starts the process of deactivating all provisioned resources associated with the specified requester unique ID. The operation is asynchronous and triggers the resource deactivation workflow.
+      operationId: deactivateResourceByRequesterUniqueId
+      parameters:
+        - name: requesterUniqueId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+              examples:
+                deactivation_started_successfully:
+                  value:
+                    success: true
+                    message: >-
+                      The process of deactivating all resources linked to
+                      requester unique id xpto has been started.
+                    payload: null
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/resources/deactivation/{requesterUniqueId}"
+        '404':
+          description: Requester Unique Id not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                resource_not_valid_to_remove:
+                  summary: The requester unique id was not found or is not active.
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:requesterNotFoundOrInactive"
+                    href: null
+                    title: "Requester not found or inactive."
+                    status: 404
+                    detail: "The requester with the provided unique identifier was not found or is inactive."
+                    instance: "/api/infrastructureProvisioning/v1/resources/deactivation/{requesterUniqueId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/resources/deactivation/{requesterUniqueId}"
+      callbacks:
+        notificationCallback:
+          '{$request.body#/callbackUrl}':
+            post:
+              summary: Notification sent to the callback URL to update request status
+              description: >
+                This endpoint must be implemented by the client to receive asynchronous updates regarding infrastructure decommissioning requests. 
+                Since the decommissioning process can take a significant amount of time to complete, this callback mechanism enables real-time status 
+                tracking and event-driven integration, ensuring the client is notified as soon as relevant updates occur, without the need manual checks.
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/LongRunProcessRequest'
+              responses:
+                '200':
+                  description: Notification successfully received
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/DefaultResponse'
+                      examples:
+                        script_triggering_started_successfully:
+                          value:
+                            success: true
+                            message: Notification successfully received
+                            payload: null
+                '400':
+                  description: Invalid input.
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/Problem'
+                      examples:
+                        script_invalid:
+                          value:
+                            type: "urn:problem-type:simpl:infrastructureProvisioning:inputNotValid"
+                            href: null
+                            title: "Invalid request format"
+                            status: 400
+                            detail: "The payload was malformed or missing required fields."
+                            instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+                '401':
+                  description: Authorization token is missing or invalid.
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/Problem'
+                      examples:
+                        Unauthorized:
+                          value:
+                            type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                            href: null
+                            title: "Authorization token is missing or invalid."
+                            status: 401
+                            detail: "The request requires a valid authorization token, which was either missing or invalid."
+                            instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+                '404':
+                  description: Deployment not found.
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/Problem'
+                      examples:
+                        script_not_found:
+                          value:
+                            type: "urn:problem-type:simpl:infrastructureProvisioning:deploymentNotFound"
+                            href: null
+                            title: "Deployment not found."
+                            status: 404
+                            detail: "The deployment with the provided requesterUniqueId does not exist."
+                            instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+                '500':
+                  description: Internal server error. Couldn't connect to server (API is down).
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/Problem'
+                      examples:
+                        service_unavailable:
+                          value:
+                            type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                            href: null
+                            title: "Internal Server Error"
+                            status: 500
+                            detail: "An unexpected error occurred. Please try again later."
+                            instance: "/api/infrastructureProvisioning/v1/scripts/trigger"
+  /templates:
+    get:
+      tags:
+        - template-controller
+      summary: Retrieve a list of Templates
+      description: Returns a list of configured VM templates with the most relevant data.
+      operationId: getTemplateList
+      parameters:
+        - name: page
+          in: query
+          description: The page number to retrieve.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The number of items per page.
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: active
+          in: query
+          description: Filter results by active status. If not provided, returns both active and inactive templates.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: VM Template list found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateListResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: VM Template list found successfully.
+                    payload:
+                      content:
+                        - id: 1
+                          cloudEnvironment:
+                            id: 1
+                            environmentName: Env for Data Analysis
+                            cloudProvider:
+                              id: 1
+                              cloudProviderName: IONOS
+                            active: true
+                          cloudProvisionerTemplate:
+                            id: 2
+                            fileName: terraform_data_temp_v1
+                            minCpu: 1
+                            maxCpu: 4
+                            minRam: 1024
+                            maxRam: 2048
+                            minStorage: 20
+                            maxStorage: 100
+                            os:
+                              - "Ubuntu-22.04"
+                              - "Ubuntu-24.01"
+                              - "Ubuntu-24.02"
+                              - "Ubuntu-24.03"
+                              - "Centos 6"
+                          templateScript:
+                            id: 4
+                            scriptIdentify:
+                              deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                          cpuCores: 2
+                          ram: 1024
+                          storage: 98
+                          os: Ubuntu-22.04
+                          active: true
+                          components:
+                            - id: 12345
+                              type:
+                                id: 1
+                                name: VM Configuration
+                              name: "Base Cloud-init Script"
+                              description: "A simple cloud-init script for initial setup."
+                              content: "#cloud-config\nhostname: ServerApache12"
+                              active: true
+                              creationDate: "2025-07-28"
+                              updateDate: "2025-08-28"
+                            - id: 12346
+                              type:
+                                id: 2
+                                name: Post Provisioning Operations
+                              name: "Install Apache"
+                              description: "Installs and enables the Apache web server."
+                              content: "#!/bin/bash\nsudo apt-get update\nsudo apt-get install -y apache2"
+                              active: true
+                              creationDate: "2024-07-28"
+                              updateDate: "2024-07-30"
+                        - id: 2
+                          cloudEnvironment:
+                            id: 1
+                            environmentName: Env for AI/ML
+                            cloudProvider:
+                              id: 1
+                              cloudProviderName: OVH
+                            active: true
+                          cloudProvisionerTemplate:
+                            id: 5
+                            fileName: terraform_ml_temp_v1
+                            minCpu: 1
+                            maxCpu: 4
+                            minRam: 1024
+                            maxRam: 2048
+                            minStorage: 20
+                            maxStorage: 100
+                            os:
+                              - "Ubuntu-22.04"
+                              - "Ubuntu-24.01"
+                              - "Ubuntu-24.02"
+                              - "Ubuntu-24.03"
+                              - "Centos 6"
+                          templateScript:
+                            id: 5
+                            scriptIdentify:
+                              deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a8a
+                          name: Template for AI/ML
+                          cpuCores: 4
+                          ram: 2048
+                          storage: 90
+                          os: Ubuntu-24.01
+                          active: true
+                          components:
+                            - id: 12345
+                              type:
+                                id: 1
+                                name: VM Configuration
+                              name: "Base Cloud-init Script"
+                              description: "A simple cloud-init script for initial setup."
+                              content: "#cloud-config\nhostname: ServerApache12"
+                              active: true
+                              creationDate: "2025-07-28"
+                              updateDate: "2025-08-28"
+                      page:
+                        size: 10
+                        number: 0
+                        totalElements: 2
+                        totalPages: 1
+                success_with_no_data:
+                  value:
+                    success: true
+                    message: Provider list found successfully.
+                    payload:
+                      content: []
+                      page:
+                        size: 10
+                        number: 0
+                        totalElements: 0
+                        totalPages: 0
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/templates"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/templates"
+    post:
+      tags:
+        - template-controller
+      summary: Create a new VM Template
+      description: >-
+        Creates a new VM Template with all the required data. Using this VM template, the Infrastructure Provider 
+        can create offers in a simple way by creating deployment script based on the VM Template.
+        Combining the Cloud Provisioner Template and adding the specific hardware and operative systems for this template, 
+        the Infrastructure Provider will define an offer to be used on the SIMPL Dataspace.
+      operationId: createTemplate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/IONOSTemplateRequest'
+                - $ref: '#/components/schemas/OVHTemplateRequest'
+              discriminator:
+                propertyName: providerType
+                mapping:
+                  IONOS: '#/components/schemas/IONOSTemplateRequest'
+                  OVH: '#/components/schemas/OVHTemplateRequest'
+      responses:
+        '201':
+          description: VM Template created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+              examples:
+                saved_successfully:
+                  value:
+                    success: true
+                    message: Vm Template saved successfully.
+                    payload:
+                      id: 3
+                      cloudEnvironment:
+                        id: 1
+                        environmentName: Env for AI/ML
+                        cloudProvider:
+                          id: 1
+                          cloudProviderName: OVH
+                        active: true
+                      cloudProvisionerTemplate:
+                        id: 2
+                        fileName: terraform_ai_temp_v1
+                        minCpu: 1
+                        maxCpu: 4
+                        minRam: 1024
+                        maxRam: 2048
+                        minStorage: 20
+                        maxStorage: 100
+                        os:
+                          - "Ubuntu-22.04"
+                          - "Ubuntu-24.01"
+                          - "Ubuntu-24.02"
+                          - "Ubuntu-24.03"
+                          - "Centos 6"
+                      templateScript:
+                        id: 4
+                        scriptIdentify:
+                          deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                      name: Template for AI/ML
+                      cpuCores: 4
+                      ram: 2048
+                      storage: 98
+                      os: Ubuntu-24.01
+                      components:
+                        - id: 12345
+                          type:
+                            id: 1
+                            name: VM Configuration
+                          name: "Base Cloud-init Script"
+                          description: "A simple cloud-init script for initial setup."
+                          content: "#cloud-config\nhostname: ServerApache12"
+                          active: true
+                          creationDate: "2025-07-28"
+                        - id: 12346
+                          type:
+                            id: 2
+                            name: Post Provisioning Operations
+                          name: "Install Apache"
+                          description: "Installs and enables the Apache web server."
+                          content: "#!/bin/bash\nsudo apt-get update\nsudo apt-get install -y apache2"
+                          active: true
+                          creationDate: "2024-07-28"
+        '400':
+          description: Invalid input.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                invalid_payload:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateInvalidPayload"
+                    href: null
+                    title: "Template with wrong payload"
+                    status: 400
+                    detail: "This request payload cannot be used in this operation."
+                    instance: "/api/infrastructureProvisioning/v1/templates"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/templates"
+        '409':
+          description: Template status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateViolation"
+                    href: null
+                    title: "Template status violation."
+                    status: 409
+                    detail: "The request related to this VM Template is valid but could not be completed due to a violation conflict with its current state."
+                    instance: "/api/infrastructureProvisioning/v1/templates"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/templates"
+  /templates/{templateId}:
+    get:
+      tags:
+        - template-controller
+      summary: Retrieve a template by Id
+      description: Returns a specific template by its identifier.
+      operationId: getTemplateById
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: active
+          in: query
+          description: If provided, the endpoint will only return the Template when its 'active' status matches this value. If omitted, the resource will be returned regardless of its active status.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Template retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+              examples:
+                retrieved_successfully:
+                  value:
+                    success: true
+                    message: VM Template found successfully.
+                    payload:
+                      id: 3
+                      cloudEnvironment:
+                        id: 1
+                        environmentName: Env for Data Analysis
+                        cloudProvider:
+                          id: 1
+                          cloudProviderName: IONOS
+                        active: true
+                      cloudProvisionerTemplate:
+                        id: 2
+                        fileName: terraform_data_temp_v1
+                        minCpu: 1
+                        maxCpu: 4
+                        minRam: 1024
+                        maxRam: 2048
+                        minStorage: 20
+                        maxStorage: 100
+                        os:
+                          - "Ubuntu-22.04"
+                          - "Ubuntu-24.01"
+                          - "Ubuntu-24.02"
+                          - "Ubuntu-24.03"
+                          - "Centos 6"
+                      templateScript:
+                        id: 4
+                        scriptIdentify:
+                          deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                      name: Template for Env for Data Analysis
+                      cpuCores: 2
+                      ram: 1024
+                      storage: 98
+                      os: Ubuntu-22.04
+                      active: true
+                      components:
+                        - id: 12345
+                          type:
+                            id: 1
+                            name: VM Configuration
+                          name: "Base Cloud-init Script"
+                          description: "A simple cloud-init script for initial setup."
+                          content: "#cloud-config\nhostname: ServerApache12"
+                          active: true
+                          creationDate: "2025-07-28"
+                        - id: 12346
+                          type:
+                            id: 2
+                            name: Post Provisioning Operations
+                          name: "Install Apache"
+                          description: "Installs and enables the Apache web server."
+                          content: "#!/bin/bash\nsudo apt-get update\nsudo apt-get install -y apache2"
+                          active: true
+                          creationDate: "2024-07-28"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '404':
+          description: Template not found.
+          content:
+            application/problem+json:
+              examples:
+                not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateNotFound"
+                    href: null
+                    title: "Template not found."
+                    status: 404
+                    detail: "This Template id does not exists in the system. Please verify the id and try again."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+    put:
+      tags:
+        - template-controller
+      summary: Update a VM Template
+      description: Updates metadata for an existing VM template.
+      operationId: updateTemplate
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/IONOSTemplateRequest'
+                - $ref: '#/components/schemas/OVHTemplateRequest'
+              discriminator:
+                propertyName: providerType
+                mapping:
+                  IONOS: '#/components/schemas/IONOSTemplateRequest'
+                  OVH: '#/components/schemas/OVHTemplateRequest'
+      responses:
+        '200':
+          description: Template updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+              examples:
+                template_updated:
+                  summary: Template updated
+                  value:
+                    success: true
+                    message: Template updated successfully.
+                    payload:
+                      id: 3
+                      cloudEnvironment:
+                        id: 1
+                        environmentName: Env for AI/ML
+                        cloudProvider:
+                          id: 1
+                          cloudProviderName: OVH
+                        active: true
+                      cloudProvisionerTemplate:
+                        id: 2
+                        fileName: terraform_ai_temp_v1
+                        minCpu: 1
+                        maxCpu: 4
+                        minRam: 1024
+                        maxRam: 2048
+                        minStorage: 20
+                        maxStorage: 100
+                        os:
+                          - "Ubuntu-22.04"
+                          - "Ubuntu-24.01"
+                          - "Ubuntu-24.02"
+                          - "Ubuntu-24.03"
+                          - "Centos 6"
+                      templateScript:
+                        id: 4
+                        scriptIdentify:
+                          deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a3f
+                      name: Template for AI/ML
+                      cpuCores: 4
+                      ram: 2048
+                      storage: 98
+                      os: Ubuntu-24.01
+                      components:
+                        - id: 12345
+                          type:
+                            id: 1
+                            name: VM Configuration
+                          name: "Base Cloud-init Script"
+                          description: "A simple cloud-init script for initial setup."
+                          content: "#cloud-config\nhostname: ServerApache12"
+                          active: true
+                          creationDate: "2025-07-28"
+                        - id: 12346
+                          type:
+                            id: 2
+                            name: Post Provisioning Operations
+                          name: "Install Apache"
+                          description: "Installs and enables the Apache web server."
+                          content: "#!/bin/bash\nsudo apt-get update\nsudo apt-get install -y apache2"
+                          active: true
+                          creationDate: "2024-07-28"
+        '400':
+          description: Invalid input.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                invalid_payload:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateInvalidPayload"
+                    href: null
+                    title: "Template with wrong payload"
+                    status: 400
+                    detail: "This request payload cannot be used in this operation."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '404':
+          description: Template not found.
+          content:
+            application/problem+json:
+              examples:
+                not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateNotFound"
+                    href: null
+                    title: "Template not found."
+                    status: 404
+                    detail: "This template id does not exist in the system. Please verify the id and try again."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '409':
+          description: Template status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateViolation"
+                    href: null
+                    title: "Template status violation."
+                    status: 409
+                    detail: "The request related to this VM Template id could not be completed due to a conflict with the current state of the target resource."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+    delete:
+      tags:
+        - template-controller
+      summary: Delete a template
+      description: Removes an existing template.
+      operationId: deleteTemplate
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Template deleted successfully. No content is returned.
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '404':
+          description: Template not found.
+          content:
+            application/problem+json:
+              examples:
+                not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateNotFound"
+                    href: null
+                    title: "Template not found."
+                    status: 404
+                    detail: "This Template id does not exist in the system. Please verify the id and try again."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '409':
+          description: Template status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateViolation"
+                    href: null
+                    title: "Template status violation."
+                    status: 409
+                    detail: "The request related to this VM Template id could not be completed due to a conflict with the current state of the target resource."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+  /templates/{templateId}/copy:
+    post:
+      tags:
+        - template-controller
+      summary: Creates a new template based on another one.
+      description: Creates a new template based on another one based on the id that is provided.
+      operationId: copyTemplate
+      parameters:
+        - in: path
+          name: templateId
+          schema:
+            type: integer
+          required: true
+          description: The unique identifier of the template whose metadata is to be copied.
+      responses:
+        '200':
+          description: Template copied successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+              examples:
+                template_copied:
+                  summary: Template copied
+                  value:
+                    success: true
+                    message: Template copied successfully.
+                    payload:
+                      id: 4
+                      cloudEnvironment:
+                        id: 1
+                        environmentName: Env for AI/ML
+                        cloudProvider:
+                          id: 1
+                          cloudProviderName: OVH
+                        active: true
+                      cloudProvisionerTemplate:
+                        id: 2
+                        fileName: terraform_ai_temp_v1
+                        minCpu: 1
+                        maxCpu: 4
+                        minRam: 1024
+                        maxRam: 2048
+                        minStorage: 20
+                        maxStorage: 100
+                        os:
+                          - "Ubuntu-22.04"
+                          - "Ubuntu-24.01"
+                          - "Ubuntu-24.02"
+                          - "Ubuntu-24.03"
+                          - "Centos 6"
+                      templateScript:
+                        id: 4
+                        scriptIdentify:
+                          deploymentScriptId: c4745f86-f947-4549-8de4-3ee25d310a33
+                      name: COPY OF Template for AI/ML
+                      cpuCores: 4
+                      ram: 2048
+                      storage: 98
+                      os: Ubuntu-24.01
+                      components:
+                        - id: 12345
+                          type:
+                            id: 1
+                            name: VM Configuration
+                          name: "Base Cloud-init Script"
+                          description: "A simple cloud-init script for initial setup."
+                          content: "#cloud-config\nhostname: ServerApache12"
+                          active: true
+                          creationDate: "2025-07-28"
+                        - id: 12346
+                          type:
+                            id: 2
+                            name: Post Provisioning Operations
+                          name: "Install Apache"
+                          description: "Installs and enables the Apache web server."
+                          content: "#!/bin/bash\nsudo apt-get update\nsudo apt-get install -y apache2"
+                          active: true
+                          creationDate: "2024-07-28"
+        '400':
+          description: Template is invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                script_invalid:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateInvalidPayload"
+                    href: null
+                    title: "Template with wrong payload"
+                    status: 400
+                    detail: "This request payload cannot be used in this operation."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}/copy"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}/copy"
+        '404':
+          description: Template not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                template_not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateNotFound"
+                    href: null
+                    title: "Template not found."
+                    status: 404
+                    detail: "The templateId does not exist."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}/copy"
+        '409':
+          description: Template status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateViolation"
+                    href: null
+                    title: "Template status violation."
+                    status: 409
+                    detail: "The request related to this VM Template id could not be completed due to a conflict with the current state of the target resource."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/templates/{templateId}/copy"
+  /cloudProvisionerTemplates:
+    get:
+      tags:
+        - cloud-provisioner-template-controller
+      summary: Retrieve a list of Provisioner Templates
+      description: Returns a list of provision templates with their details.
+      operationId: getCloudProvisionerTemplateList
+      responses:
+        '200':
+          description: Cloud Provisioner Template list found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudProvisionerTemplateListResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: Cloud Provisioner Template list found successfully.
+                    payload:
+                      - id: 1
+                        fileName: terraform_data_temp_v1
+                        minCpu: 1
+                        maxCpu: 4
+                        minRam: 1024
+                        maxRam: 2048
+                        minStorage: 20
+                        maxStorage: 100
+                        os:
+                          - "Ubuntu-22.04"
+                          - "Ubuntu-24.01"
+                          - "Ubuntu-24.02"
+                          - "Ubuntu-24.03"
+                          - "Centos 6"
+                        providerType: IONOS
+                      - id: 2
+                        fileName: terraform_ml_temp_v1
+                        os:
+                          - "Ubuntu-22.04"
+                          - "Ubuntu-24.01"
+                          - "Ubuntu-24.02"
+                          - "Ubuntu-24.03"
+                          - "Centos 6"
+                        projectId: c67c62fb7a574a88ba4cXXXXXXXXXXXX
+                        region: GRA11
+                        flavor:  d2-2
+                        providerType: OVH
+                success_with_no_data:
+                  value:
+                    success: true
+                    message: Cloud Provisioner Template list found successfully.
+                    payload: []
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates"
+    post:
+      tags:
+        - cloud-provisioner-template-controller
+      summary: Create a new Cloud Provisioner Template
+      description: >-
+        Creates a new Cloud Provisioner Template with all the required data. This provisioner template will then be used to create 
+        SIMPL VM templates to support the Infrastructure Provider in the creation of offers that the end user will consume.
+        By uploading a provisioning technology like Terraform or Crossplane and adding the hardware and operative systems, 
+        the Infrastructure Provider will define the rules of creation of the SIMPL VM Template.
+      operationId: createCloudProvisionerTemplate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - file
+                - cloudProvisionerTemplateRequest
+              type: object
+              properties:
+                cloudProvisionerTemplateRequest:
+                  oneOf:
+                    - $ref: '#/components/schemas/IONOSProvisionerTemplateRequest'
+                    - $ref: '#/components/schemas/OVHProvisionerTemplateRequest'
+                  discriminator:
+                    propertyName: providerType
+                    mapping:
+                      IONOS: '#/components/schemas/IONOSProvisionerTemplateRequest'
+                      OVH: '#/components/schemas/OVHProvisionerTemplateRequest'
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Cloud Provisioner Template created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudProvisionerTemplateResponse'
+              examples:
+                saved_successfully:
+                  value:
+                    success: true
+                    message: Cloud Provisioner Template saved successfully.
+                    payload:
+                      id: 3
+                      fileName: terraform_ai_temp_v1
+                      minCpu: 1
+                      maxCpu: 4
+                      minRam: 1024
+                      maxRam: 2048
+                      minStorage: 20
+                      maxStorage: 100
+                      os:
+                        - "Ubuntu-22.04"
+                        - "Ubuntu-24.01"
+                        - "Ubuntu-24.02"
+                        - "Ubuntu-24.03"
+                        - "Centos 6"
+                      providerType: IONOS
+        '400':
+          description: Invalid request or duplicate template.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                duplicate_name:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateDuplicatedName"
+                    href: null
+                    title: "Template this name already exists."
+                    status: 400
+                    detail: "Template with the same name already exists. This name cannot be used in this operation."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates"
+        '409':
+          description: Cloud Provisioner Template status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:cloudProvisionerTemplateViolation"
+                    href: null
+                    title: "Cloud Provisioner Template status violation."
+                    status: 409
+                    detail: "The request related to this Cloud Provisioner Template is valid but could not be completed due to a violation conflict with its current state."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates"
+  /cloudProvisionerTemplates/{cloudProvisionerTemplateId}/componentLimits:
+    get:
+      tags:
+        - cloud-provisioner-template-controller
+      summary: Retrieve component limits details
+      description: Fetch detailed information about the components limits of the Cloud Provisioner Template id to be used on the creation of the VM template.
+      operationId: getComponentLimitsByCloudProvisionerTemplateId
+      parameters:
+        - name: cloudProvisionerTemplateId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Limits found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentLimitsResponse'
+              examples:
+                limits_found:
+                  value:
+                    success: true
+                    message: Range limits found successfully.
+                    payload:
+                      id: 1
+                      minCpu: 1
+                      maxCpu: 4
+                      minRam: 1024
+                      maxRam: 2048
+                      minStorage: 20
+                      maxStorage: 100
+                      os:
+                        - "Ubuntu-22.04"
+                        - "Ubuntu-24.01"
+                        - "Ubuntu-24.02"
+                        - "Ubuntu-24.03"
+                        - "Centos 6"
+        '400':
+          description: Limits are invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                limits_not_active:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateNotActiveOrValid"
+                    href: null
+                    title: "The requested limits are not active/valid."
+                    status: 400
+                    detail: "The requested script are either inactive or not valid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates/{cloudProvisionerTemplateId}/componentLimits"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates/{cloudProvisionerTemplateId}/componentLimits"
+        '404':
+          description: Cloud Provisioner Template not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                template_not_found:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:templateNotFound"
+                    href: null
+                    title: "Template not found."
+                    status: 404
+                    detail: "The templateId does not exist."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates/{cloudProvisionerTemplateId}/componentLimits"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/cloudProvisionerTemplates/{cloudProvisionerTemplateId}/componentLimits"
+  # --- Endpoints for managing independent VM components ---
+  /components:
+    get:
+      tags:
+        - components-controller
+      summary: List all components (with optional filtering by type)
+      description: Returns a list of all component definitions, optionally filtered by component type.
+      operationId: getComponentList
+      parameters:
+        - name: type
+          in: query
+          description: Filter components by their type.
+          required: false
+          schema:
+            type: string
+            enum:
+              - vm-configuration
+              - post-provisioning-operations
+              - policies
+      responses:
+        '200':
+          description: Components list found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentListResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: Components list found successfully.
+                    payload:
+                      - id: 12345
+                        type:
+                          id: 1
+                          name: VM Configuration
+                        name: "Base Cloud-init Script"
+                        description: "A simple cloud-init script for initial setup."
+                        content: "#cloud-config\nhostname: ServerApache12"
+                        active: true
+                        creationDate: "2025-07-28"
+                      - id: 12346
+                        type:
+                          id: 2
+                          name: Post Provisioning Operations
+                        name: "Install Apache"
+                        description: "Installs and enables the Apache web server."
+                        content: "#!/bin/bash\nsudo apt-get update\nsudo apt-get install -y apache2"
+                        active: true
+                        creationDate: "2024-07-28"
+                success_with_no_data:
+                  value:
+                    success: true
+                    message: Components list found successfully.
+                    payload: []
+        '400':
+          description: Invalid request.
+          content:
+            application/problem+json:
+              examples:
+                invalid_filter_type:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:invalidName"
+                    href: null
+                    title: "Component type does not exists."
+                    status: 400
+                    detail: "Input component type does not exists. This name cannot be used in this operation."
+                    instance: "/api/infrastructureProvisioning/v1/components"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/components"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/components"
+    post:
+      tags:
+        - components-controller
+      summary: Create a new component
+      description: Creates a new component definition that can be assigned to a VM template.
+      operationId: createComponent
+      requestBody:
+        description: The component object to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComponentRequest'
+      responses:
+        '201':
+          description: The component was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentResponse'
+              examples:
+                newComponent:
+                  value:
+                    success: true
+                    message: Vm Component saved successfully.
+                    payload:
+                      id: 12347
+                      type:
+                        id: 3
+                        name: Policies
+                      name: "User Limit Policy"
+                      description: "Policy that limits the number of users on the VM."
+                      content: "apt-get remove --purge -y adduser useradd deluser"
+                      active: true
+                      creationDate: "2024-03-28"
+        '400':
+          description: Invalid component.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                invalid_payload:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:componentInvalidPayload"
+                    href: null
+                    title: "Component with wrong payload"
+                    status: 400
+                    detail: "This request payload cannot be used in this operation."
+                    instance: "/api/infrastructureProvisioning/v1/components"
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/components"
+        '409':
+          description: Component status violation
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                violation:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:componentViolation"
+                    href: null
+                    title: "Component status violation."
+                    status: 409
+                    detail: "The request related to this Component is valid but could not be completed due to a violation conflict with its current state."
+                    instance: "/api/infrastructureProvisioning/v1/components"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/components"
+
+  /components/types:
+    get:
+      tags:
+        - components-controller
+      summary: Retrieve a list of component types
+      description: Returns a list of component types.
+      operationId: getComponentTypeList
+      responses:
+        '200':
+          description: Component type list found successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentTypeListResponse'
+              examples:
+                success_with_data:
+                  value:
+                    success: true
+                    message: Component type list found successfully.
+                    payload:
+                      - id: 1
+                        name: VM Configuration
+                      - id: 2
+                        name: Post Provisioning Operations
+                      - id: 3
+                        name: Policies
+                success_with_no_data:
+                  value:
+                    success: true
+                    message: Component type list found successfully.
+                    payload: []
+        '401':
+          description: Authorization token is missing or invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                Unauthorized:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:tokenMissingOrInvalid"
+                    href: null
+                    title: "Authorization token is missing or invalid."
+                    status: 401
+                    detail: "The request requires a valid authorization token, which was either missing or invalid."
+                    instance: "/api/infrastructureProvisioning/v1/components/types"
+        '500':
+          description: Internal server error. Couldn't connect to server (API is down).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                service_unavailable:
+                  value:
+                    type: "urn:problem-type:simpl:infrastructureProvisioning:internalError"
+                    href: null
+                    title: "Internal Server Error"
+                    status: 500
+                    detail: "An unexpected error occurred. Please try again later."
+                    instance: "/api/infrastructureProvisioning/v1/components/types"
+components:
+  schemas:
+    CloudProviderLimits:
+      required:
+        - os
+        - providerType
+      type: object
+      properties:
+        os:
+          type: array
+          items:
+            type: string
+          description: OS's allows for the creation of VM's
+          example:
+            - "Ubuntu-22.04"
+            - "Ubuntu-24.01"
+            - "Ubuntu-24.02"
+            - "Ubuntu-24.03"
+            - "Centos 6"
+        providerType:
+          type: string
+          description: Discriminator field to identify the cloud provider.
+          example: "OVH"
+    IONOSProvisionerTemplate:
+      allOf:
+        - $ref: '#/components/schemas/CloudProvisionerTemplate'
+        - type: object
+          properties:
+            minCpuCore:
+              type: integer
+              format: int32
+              description: Minimum number of cores for the VM
+              example: 1
+            maxCpuCore:
+              type: integer
+              format: int32
+              description: Maximum number of cores for the VM
+              example: 4
+            minRam:
+              type: integer
+              format: int32
+              description: Minimum ram size (Mb) for the VM
+              example: 1024
+            maxRam:
+              type: integer
+              format: int32
+              description: Maximum ram size (Mb) for the VM
+              example: 2048
+            minStorage:
+              type: integer
+              format: int32
+              description: Minimum storage size (Gb) for the VM
+              example: 25
+            maxStorage:
+              type: integer
+              format: int32
+              description: Maximum storage size (Gb) for the VM
+              example: 100
+    IONOSProvisionerTemplateRequest:
+      required:
+        - minCpuCore
+        - maxCpuCore
+        - minRam
+        - maxRam
+        - minStorage
+        - maxStorage
+        - providerType
+      allOf:
+        - $ref: '#/components/schemas/CloudProvisionerTemplateRequest'
+        - type: object
+          properties:
+            minCpuCore:
+              type: integer
+              format: int32
+              description: Minimum number of cores for the VM
+              example: 1
+            maxCpuCore:
+              type: integer
+              format: int32
+              description: Maximum number of cores for the VM
+              example: 4
+            minRam:
+              type: integer
+              format: int32
+              description: Minimum ram size (Mb) for the VM
+              example: 1024
+            maxRam:
+              type: integer
+              format: int32
+              description: Maximum ram size (Mb) for the VM
+              example: 2048
+            minStorage:
+              type: integer
+              format: int32
+              description: Minimum storage size (Gb) for the VM
+              example: 25
+            maxStorage:
+              type: integer
+              format: int32
+              description: Maximum storage size (Gb) for the VM
+              example: 100
+            providerType:
+              type: string
+              description: Discriminator field to identify the cloud provider.
+              example: "IONOS"
+    IONOSLimits:
+      allOf:
+        - $ref: '#/components/schemas/CloudProviderLimits'
+        - type: object
+          properties:
+            minCpuCore:
+              type: integer
+              format: int32
+              description: Minimum number of cores for the VM
+              example: 1
+            maxCpuCore:
+              type: integer
+              format: int32
+              description: Maximum number of cores for the VM
+              example: 4
+            minRam:
+              type: integer
+              format: int32
+              description: Minimum ram size (Mb) for the VM
+              example: 1024
+            maxRam:
+              type: integer
+              format: int32
+              description: Maximum ram size (Mb) for the VM
+              example: 2048
+            minStorage:
+              type: integer
+              format: int32
+              description: Minimum storage size (Gb) for the VM
+              example: 25
+            maxStorage:
+              type: integer
+              format: int32
+              description: Maximum storage size (Gb) for the VM
+              example: 100
+        - description: 'IONOS limits sent to the client to IONOS VMs'
+    OVHProvisionerTemplate:
+      allOf:
+        - $ref: '#/components/schemas/CloudProvisionerTemplate'
+        - type: object
+          properties:
+            projectId:
+              type: string
+              description: Project id related to the environment of the VM
+              example: c67c62fb7a574a88ba4cXXXXXXXXXXXX
+            region:
+              type: string
+              description: Region where the VM will be running
+              example: GRA11
+            flavor:
+              type: string
+              description: OVH flavor for the VM
+              example: d2-2
+    OVHProvisionerTemplateRequest:
+      required:
+        - projectId
+        - region
+        - flavor
+        - providerType
+      allOf:
+        - $ref: '#/components/schemas/CloudProvisionerTemplateRequest'
+        - type: object
+          properties:
+            projectId:
+              type: string
+              description: Project id related to the environment of the VM
+              example: c67c62fb7a574a88ba4cXXXXXXXXXXXX
+            region:
+              type: string
+              description: Region where the VM will be running
+              example: GRA11
+            flavor:
+              type: string
+              description: OVH flavor for the VM
+              example: d2-2
+            providerType:
+              type: string
+              description: Discriminator field to identify the cloud provider.
+              example: "OVH"
+    OVHLimits:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/CloudProviderLimits'
+        - type: object
+        - description: 'OVH limits sent to the client to build OVH VMs'
+    CloudEnvironment:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Auto Increment, Primary Key, unique identifier for each Cloud Environment'
+          format: int64
+        environmentName:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Environment name.
+        environmentDescription:
+          minLength: 3
+          type: string
+          description: Environment description.
+        iac:
+          maxLength: 50
+          minLength: 5
+          type: string
+          description: Infrastructure as Code technology to support the deployed resources.
+        datacenterName:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Name of the DataCenter where the resources will be provisioned.
+        datacenterDescription:
+          minLength: 3
+          type: string
+          description: Description of the DataCenter.
+        location:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Cloud Environment location identifier (e.g., us-east-1, europe-west3).
+        totalCpuCores:
+          type: integer
+          format: int32
+          description: The number of total cores available for the Cloud Environment
+          minimum: 1
+          example: 200
+        usedCpuCores:
+          type: integer
+          format: int32
+          description: The number of cores used by the Cloud Environment
+          minimum: 1
+          example: 20
+        totalRam:
+          type: integer
+          format: int32
+          description: The total amount of memory available for the Cloud Environment
+          minimum: 1
+          example: 128
+        usedRam:
+          type: integer
+          format: int32
+          description: RAM used by the Cloud Environment
+          minimum: 1
+          example: 20
+        totalStorage:
+          type: integer
+          format: int32
+          description: The total amount of storage available for the Cloud Environment
+          minimum: 1
+          example: 128
+        usedStorage:
+          type: integer
+          format: int32
+          description: Storage used by the Cloud Environment
+          minimum: 1
+          example: 20
+        vaultUser:
+          type: string
+          description: Vault identity or role with permissions to access the cloud environment token.
+        vaultKey:
+          type: string
+          description: Vault path or key where the cloud environment token is securely stored.
+        cloudProvider:
+          allOf:
+            - $ref: '#/components/schemas/CloudProviderResponse'
+          description: Cloud Provider where the script will be executed
+        active:
+          type: boolean
+          description: Indicates if the cloud environment is active (True) or inactive (False).
+      description: >-
+        Cloud Environment entity class. Cloud Environment compatible with the script (e.g.
+        Ionos, Aruba, Ovh...).
+    CloudProviderResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Auto Increment, Primary Key, unique identifier for each Cloud Provider'
+          format: int64
+        cloudProviderName:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Cloud Provider name.
+    CloudEnvironmentRequest:
+      required:
+        - cloudProviderId
+        - environmentName
+        - location
+        - iac
+        - datacenterName
+        - authenticationConfig
+      type: object
+      properties:
+        cloudProviderId:
+          type: integer
+          format: int64
+          description: Cloud Provider id.
+          example: 123
+        environmentName:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Environment name.
+          example: HealthEnv
+        environmentDescription:
+          minLength: 3
+          type: string
+          description: Environment description.
+          example: Environment for health data processing
+        iac:
+          maxLength: 50
+          minLength: 5
+          type: string
+          description: Infrastructure as Code technology to support the deployed resources.
+          example: Crossplane
+        datacenterName:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Name of the DataCenter where the resources will be provisioned.
+          example: DC1_Health
+        datacenterDescription:
+          minLength: 3
+          type: string
+          description: Description of the DataCenter.
+          example: Datacenter to provision resources for health data
+        location:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Cloud Environment location identifier (e.g., us-east-1, europe-west3).
+          example: Frankfurt
+        totalCpuCores:
+          type: integer
+          format: int32
+          description: The number of total cores available for the Cloud Environment
+          minimum: 1
+          example: 200
+        usedCpuCores:
+          type: integer
+          format: int32
+          description: The number of cores used by the Cloud Environment
+          minimum: 1
+          example: 20
+        totalRam:
+          type: integer
+          format: int32
+          description: The total amount of memory available for the Cloud Environment
+          minimum: 1
+          example: 128
+        usedRam:
+          type: integer
+          format: int32
+          description: RAM used by the Cloud Environment
+          minimum: 1
+          example: 20
+        totalStorage:
+          type: integer
+          format: int32
+          description: The total amount of storage available for the Cloud Environment
+          minimum: 1
+          example: 128
+        usedStorage:
+          type: integer
+          format: int32
+          description: Storage used by the Cloud Environment
+          minimum: 1
+          example: 20
+        authenticationConfig:
+          type: string
+          description: >
+            JSON-formatted string containing authentication credentials (e.g., keys, tokens)
+            required to interact with the cloud provider API for resource management.
+          example: {"IONOS_TOKEN":"abc123-fake-token-456xyz","REFRESH_TOKEN":"refresh-token-789xyz","EXPIRATION":"2025-12-31T23:59:59Z"}
+      description: >-
+        Object with mandatory parameters to store a Cloud Environment (using API or UI).
+    RequesterInfoResponse:
+      type: object
+      properties:
+        requesterUniqueId:
+          type: string
+          description: Unique identifier field for each requester.
+          example: e16b5450-c15f-476a-8b42-7de46b4cc8bd
+        resourceStatus:
+          type: string
+          description: Resource status name.
+          example: PROVISIONED
+        provisionedDateTime:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp when resource was provisioned.
+          example: "2026-01-29T13:39:34.936312"
+        decommissionedDateTime:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp when resource was decommissioned.
+          example: "2026-01-29T16:40:48.11922"
+    RequesterInfoListResponse:
+      description: >-
+        List of Requester Info data sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: object
+              properties:
+                content:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RequesterInfoResponse'
+                page:
+                  type: object
+                  properties:
+                    size:
+                      type: integer
+                    number:
+                      type: integer
+                    totalElements:
+                      type: integer
+                    totalPages:
+                      type: integer
+    ScriptRequest:
+      required:
+        - cloudEnvironmentId
+        - description
+        - title
+      type: object
+      properties:
+        title:
+          maxLength: 100
+          minLength: 5
+          type: string
+          example: Virtual_Machine_Script
+          description: Script file title.
+        description:
+          maxLength: 2147483647
+          minLength: 10
+          type: string
+          example: Script to deploy a virtual machine
+          description: Script file description.
+        cloudEnvironmentId:
+          type: integer
+          description: 'Unique identifier for the selected Cloud Environment'
+          format: int64
+          example: 12345
+      description: Object with mandatory parameters to storage a Script (using API or UI).
+    ScriptListResponse:
+      description: >-
+        List of Deployment Scripts sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: object
+              properties:
+                content:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Script'
+                page:
+                  type: object
+                  properties:
+                    size:
+                      type: integer
+                    number:
+                      type: integer
+                    totalElements:
+                      type: integer
+                    totalPages:
+                      type: integer
+    ScriptResponse:
+      description: >-
+        Structure of a Deployment Script sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              $ref: '#/components/schemas/Script'
+    ScriptListMetadataResponse:
+      description: >-
+        List of Deployment Scripts metadata sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: object
+              properties:
+                content:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ScriptMetadata'
+                page:
+                  type: object
+                  properties:
+                    size:
+                      type: integer
+                    number:
+                      type: integer
+                    totalElements:
+                      type: integer
+                    totalPages:
+                      type: integer
+    ScriptMetadata:
+      type: object
+      description: >
+        Script metadata (without file content, repository location, cloudEnvironment, scriptTriggers or configFiles).
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 'Auto-increment primary key; unique identifier for the Script.'
+        scriptIdentify:
+          allOf:
+            - $ref: '#/components/schemas/ScriptIdentify'
+          description: Contains the unique deploymentScriptId and the script hash.
+        title:
+          type: string
+          minLength: 5
+          maxLength: 100
+          description: Script title.
+        description:
+          type: string
+          minLength: 10
+          description: Script description.
+        active:
+          type: boolean
+          description: Indicates whether the script is active (true) or inactive (false).
+        creationDate:
+          type: string
+          format: date
+          description: Date when the script was created.
+        giteaSha:
+          type: string
+          description: SHA returned by the Gitea repository after storing the script file.
+        originalFileName:
+          type: string
+          description: Original filename uploaded for the script.
+    CloudProviderListResponse:
+      description: >-
+        Structure of a Cloud Providers list sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: array
+              items:
+                $ref: '#/components/schemas/CloudProviderResponse'
+    DefaultResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: >-
+            If true, it means that the request was executed successfully. If
+            false, it means that there was an error in processing the request.
+        message:
+          type: string
+          description: Detailed message of the operation result.
+        payload:
+          type: object
+          description: >-
+            This field returns an object. This object may vary depending on the
+            operation. For example it can be an object of certain type (e.g. Script)
+            or an array of specific objects (e.g. array of Scripts).
+      description: API Default Response Class
+    Problem:
+      type: object
+      description: API Problem Response Class based on RFC 9457
+      properties:
+        type:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the problem type.
+          default: about:blank
+        href:
+          type: string
+          format: uri
+          description: An absolute URI that provides human-readable documentation for the problem type (e.g., using HTML).
+        title:
+          type: string
+          description: A short summary of the problem type, written in English and readable for engineers (not localized).
+          example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 400
+          maximum: 599
+          example: 503
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+    ScriptTriggerRequest:
+      required:
+        - deploymentScriptId
+        - requesterEmail
+        - requesterUniqueId
+      type: object
+      properties:
+        deploymentScriptId:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Unique identifier field for each script.
+        requesterUniqueId:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Unique identifier field for each requester.
+        requesterEmail:
+          type: string
+          description: Email field for each requester.
+        callbackUrl:
+          type: string
+          format: uri
+          description: URL to update async requests.
+      example:
+        deploymentScriptId: c2468ec1-92fa-462a-b26d-4458a0706316
+        requesterUniqueId: 179ee1f3-6afd-4f73-96b0-88eced0f131a
+        requesterEmail: john.doe@awesome.com
+        callbackUrl: https://client.simpl.com/process-status
+      description: Object with mandatory parameters to start triggering the Script.
+    ScriptIdentify:
+      type: object
+      description: >-
+        Script Identify entity class. To store the UniqueID and Hash of the
+        script.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: >-
+            Auto Increment, Primary Key, unique identifier for each Script
+            Identify data.
+        deploymentScriptId:
+          type: string
+          maxLength: 50
+          description: Unique identifier field for each script.
+        hash:
+          type: string
+          maxLength: 64
+          description: Hash value generated from the deployment script.
+          nullable: false
+      required:
+        - deploymentScriptId
+        - hash
+    Script:
+      type: object
+      description: Script entity class
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 'Auto Increment, Primary Key, unique identifier for each Script.'
+        scriptIdentify:
+          allOf:
+            - $ref: '#/components/schemas/ScriptIdentify'
+          description: To store the UniqueID and Hash of the script.
+        title:
+          type: string
+          minLength: 5
+          maxLength: 100
+          description: Script file title.
+        description:
+          type: string
+          minLength: 10
+          description: Script file description.
+        file:
+          type: string
+          description: Contains the deployment script sanitized via stored procedure.
+        location:
+          type: string
+          minLength: 5
+          maxLength: 255
+          description: Link to the script in the repository.
+        active:
+          type: boolean
+          description: Indicates if the script is active (True) or inactive (False).
+        cloudEnvironment:
+          allOf:
+            - $ref: '#/components/schemas/CloudEnvironment'
+          description: >-
+            Cloud Environment where the script will be executed
+        creationDate:
+          type: string
+          format: date
+          description: Date when script was stored.
+        giteaSha:
+          type: string
+          description: SHA provided by Gitea repo after storing script file.
+        originalFileName:
+          type: string
+          description: Original script filename.
+        scriptTriggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptTrigger'
+          description: List of script trigger events.
+        configFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigFile'
+          description: List of configuration files associated with the script.
+    ScriptTrigger:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: >-
+            Auto Increment, Primary Key, unique identifier for each Script
+            Trigger.
+        requesterUniqueId:
+          type: string
+          description: Unique identifier field for each requester.
+          maxLength: 50
+        requesterEmail:
+          type: string
+          description: >-
+            Requester Email field to answer the asynchronous request after
+            finish.
+        script:
+          allOf:
+            - $ref: '#/components/schemas/Script'
+          description: Identified Script to be executed
+        status:
+          type: string
+          description: Script Trigger status name.
+        resourceStatus:
+          type: string
+          description: Resource status name.
+        decommissionedDateTime:
+          type: string
+          format: date-time
+          description: Resource decommission dateTime.
+        callbackUrl:
+          type: string
+          format: uri
+          description: URL to update async requests.
+      required:
+        - requesterUniqueId
+        - requesterEmail
+        - script
+        - status
+        - resourceStatus
+    LongRunProcessRequest:
+      type: object
+      properties:
+        requesterUniqueId:
+          type: string
+          description: Unique identifier field that identifies the infrastructure commissioning request.
+          maxLength: 50
+        processType:
+          type: string
+          description: Operation type.
+          maxLength: 50
+        processStatus:
+          type: string
+          description: State of the infrastructure provider's process execution.
+          enum: [started, processing, waiting, finished, failed, cancelled]
+        processStatusMessage:
+          type: string
+          description: Message of the resulting infrastructure provider execution.
+        statusDateTime:
+          type: string
+          format: date-time
+          description: Timestamp of this payload.
+      example:
+        requesterUniqueId: 179ee1f3-6afd-4f73-96b0-88eced0f131a
+        processType: "Long Run Task"
+        resourceStatus: "finished"
+        resourceStatusMessage: "The process has been completed on the Infrastructure Provider"
+        statusDateTime: "20250624_120000"
+      required:
+        - requesterUniqueId
+        - processType
+        - processStatus
+        - statusDateTime
+    ComponentLimitsResponse:
+      description: >-
+        Structure of components limits sent back to the client, to be used in a VM Template.
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: object
+              oneOf:
+                - $ref: '#/components/schemas/IONOSLimits'
+                - $ref: '#/components/schemas/OVHLimits'
+              discriminator:
+                propertyName: providerType
+                mapping:
+                  IONOS: '#/components/schemas/IONOSLimits'
+                  OVH: '#/components/schemas/OVHLimits'
+    CloudEnvironmentListResponse:
+      description: >-
+        Paginated list of Cloud Environment data sent back to the client.
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: object
+              properties:
+                content:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CloudEnvironment'
+                page:
+                  type: object
+                  properties:
+                    size:
+                      type: integer
+                    number:
+                      type: integer
+                    totalElements:
+                      type: integer
+                    totalPages:
+                      type: integer
+    CloudEnvironmentResponse:
+      description: >-
+        Cloud Environment response structure returned to the client.
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              $ref: '#/components/schemas/CloudEnvironment'
+    CloudProvisionerTemplateListResponse:
+      description: >-
+        List of Cloud Provisioner Templates sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/IONOSProvisionerTemplate'
+                  - $ref: '#/components/schemas/OVHProvisionerTemplate'
+                discriminator:
+                  propertyName: providerType
+                  mapping:
+                    IONOS: '#/components/schemas/IONOSProvisionerTemplate'
+                    OVH: '#/components/schemas/OVHProvisionerTemplate'
+    CloudProvisionerTemplateResponse:
+      description: >-
+        Structure of a Cloud Provisioner Template sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              oneOf:
+                - $ref: '#/components/schemas/IONOSProvisionerTemplate'
+                - $ref: '#/components/schemas/OVHProvisionerTemplate'
+              discriminator:
+                propertyName: providerType
+                mapping:
+                  IONOS: '#/components/schemas/IONOSProvisionerTemplate'
+                  OVH: '#/components/schemas/OVHProvisionerTemplate'
+    CloudProvisionerTemplate:
+      type: object
+      required:
+        - providerType
+      properties:
+        id:
+          type: integer
+          description: >-
+            Auto Increment, Primary Key, unique identifier for each Cloud Provisioner Template.
+        fileName:
+          type: string
+          description: "Template file title."
+          maxLength: 100
+          minLength: 5
+        file:
+          type: string
+          format: binary
+          description: "File content of the Cloud Provisioner Template (Terraform/Crossplane)"
+        os:
+          type: array
+          items:
+            type: string
+          description: OS's allows for the creation of VM's
+          example:
+            - "Ubuntu-22.04"
+            - "Ubuntu-24.01"
+            - "Ubuntu-24.02"
+            - "Ubuntu-24.03"
+            - "Centos 6"
+        providerType:
+          type: string
+          description: Discriminator field to identify the cloud provider.
+          example: "IONOS"
+    CloudProvisionerTemplateRequest:
+      required:
+        - fileName
+        - os
+        - providerType
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: "Template file title."
+          maxLength: 100
+          minLength: 5
+          example: Terraform_Provisioning_Template_File
+        os:
+          type: array
+          items:
+            type: string
+          description: OS's allows for the creation of VM's
+          example:
+            - "Ubuntu-22.04"
+            - "Ubuntu-24.01"
+            - "Ubuntu-24.02"
+            - "Ubuntu-24.03"
+            - "Centos 6"
+        providerType:
+          type: string
+          description: Discriminator field to identify the cloud provider.
+          example: "IONOS"
+      description: >-
+        Object with mandatory parameters to store a Cloud Provisioner Template.
+    TemplateListResponse:
+      description: >-
+        List of VM Templates sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: array
+              items:
+                $ref: '#/components/schemas/Template'
+    TemplateResponse:
+      description: >-
+        Structure of a VM Template sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              $ref: '#/components/schemas/Template'
+    Template:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Auto Increment, Primary Key, unique identifier for each templates'
+          format: int64
+        cloudEnvironment:
+          allOf:
+            - $ref: '#/components/schemas/CloudEnvironment'
+          description: Cloud Environment where the template will be running.
+        cloudProvisionerTemplate:
+          allOf:
+            - $ref: '#/components/schemas/CloudProvisionerTemplate'
+          description: Cloud Provider Template file and description of VM limits.
+        name:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Template name.
+          example: Template for AI/ML processing
+        description:
+          type: string
+          minLength: 10
+          description: Template description.
+        cpuCore:
+          type: integer
+          format: int32
+          description: The number of cores of the VM
+          minimum: 1
+          maximum: 20
+          example: 2
+        ram:
+          type: integer
+          format: int32
+          description: The amount (Mb) of memory to be assign to the VM.
+          minimum: 1024
+          maximum: 102400
+          example: 2048
+        storage:
+          type: integer
+          format: int32
+          description: The storage (Gb) size of the VM.
+          minimum: 5
+          maximum: 250
+          example: 204
+        os:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: Name of the Operative System do be installed.
+          example: Ubuntu-22.04
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+          description: Related components (vm-configuration, post-provisioning and policies)
+        active:
+          type: boolean
+          description: Indicates if the template is active (True) or inactive (False).
+          example: True
+        creationDate:
+          type: string
+          format: date
+          description: Date when template was stored.
+        templateScript:
+          allOf:
+            - $ref: '#/components/schemas/Script'
+          description: Deployment script created based on this template.
+      description: >-
+        Template entity class.
+    TemplateRequest:
+      required:
+        - cloudEnvironmentId
+        - cloudProvisionerTemplateId
+        - name
+        - components
+        - os
+        - providerType
+      type: object
+      properties:
+        cloudEnvironmentId:
+          type: integer
+          format: int64
+          description: Cloud Environment id.
+          example: 123
+        cloudProvisionerTemplateId:
+          type: integer
+          format: int64
+          description: Cloud provider template file id that contains the Terraform/Crossplane structure to be used.
+          example: 123
+        name:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: Template name.
+          example: Template for AI/ML processing
+        description:
+          type: string
+          minLength: 10
+          description: Template description.
+          example: VM Template to create VM for AI processing.
+        components:
+          type: array
+          description: A list of component IDs associated with this VM Template.
+          items:
+            type: integer
+            format: int64
+          example:
+            - 12345
+            - 12346
+        os:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: Name of the Operative System do be installed.
+          example: Ubuntu-22.04
+        providerType:
+          type: string
+          description: Discriminator field to identify the cloud provider.
+          example: "OVH"
+      description: >-
+        Object with mandatory parameters to store a VM Template (using API or UI).
+    IONOSTemplateRequest:
+      required:
+        - cpuCore
+        - ram
+        - storage
+      allOf:
+        - $ref: '#/components/schemas/TemplateRequest'
+        - type: object
+          properties:
+            cpuCore:
+              type: integer
+              format: int32
+              description: The number of cores of the VM
+              minimum: 1
+              maximum: 20
+              example: 2
+            ram:
+              type: integer
+              format: int32
+              description: The amount (Mb) of memory to be assign to the VM.
+              minimum: 1024
+              maximum: 102400
+              example: 2048
+            storage:
+              type: integer
+              format: int32
+              description: The storage (Gb) size of the VM.
+              minimum: 5
+              maximum: 250
+              example: 204
+      description: >-
+        Object with mandatory parameters for IONOS VM Template (using API or UI).
+    OVHTemplateRequest:
+      allOf:
+        - $ref: '#/components/schemas/TemplateRequest'
+        - type: object
+      description: >-
+        Object with mandatory parameters for OVH VM Template (using API or UI).
+    ComponentResponse:
+      description: >-
+        Structure of a Component sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              $ref: '#/components/schemas/Component'
+    Component:
+      type: object
+      required:
+        - id
+        - type
+        - name
+        - description
+        - content
+      properties:
+        id:
+          type: integer
+          description: 'Auto Increment, Primary Key, unique identifier for each component'
+          format: int64
+        type:
+          $ref: '#/components/schemas/ComponentType'
+          description: The type of the component.
+        name:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: A user-friendly name for the component.
+        description:
+          maxLength: 100
+          minLength: 3
+          type: string
+          description: A detailed description of the component's purpose.
+        content:
+          type: string
+          description: The actual content of the component (e.g., a cloud-init script, a shell command, or policy data).
+        active:
+          type: boolean
+          description: Indicates if the component is active (True) or inactive (False).
+        creationDate:
+          type: string
+          format: date
+          description: Date when component was stored.
+    ComponentType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique ID of the component type.
+        name:
+          type: string
+          description: The human-readable name of the component type.
+          enum:
+            - vm-configuration
+            - post-provisioning-operations
+            - policies
+    ComponentTypeListResponse:
+      description: >-
+        List of component types sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: array
+              items:
+                $ref: '#/components/schemas/ComponentType'
+    ComponentListResponse:
+      description: >-
+        List of VM Templates components sent back to the client
+      allOf:
+        - $ref: '#/components/schemas/DefaultResponse'
+        - type: object
+          properties:
+            payload:
+              type: array
+              items:
+                $ref: '#/components/schemas/Component'
+    ComponentRequest:
+      type: object
+      required:
+        - typeId
+        - name
+        - content
+      properties:
+        typeId:
+          type: integer
+          format: int64
+          description: The unique ID of the component type.
+          example: 1234
+        name:
+          type: string
+          description: A user-friendly name for the component.
+          example: "Script to install awesome app"
+        description:
+          type: string
+          description: A detailed description of the component's purpose in the creation of VM Templates.
+          example: "This post provisioning operation will install an application that will help end users to find insights."
+        content:
+          type: string
+          description: The actual content of the component.
+          example: "apt install mariadb-server mariadb-client -y\nsudo cp /path/to/iot_data.csv /var/lib/mysql-files/"
+    ConfigFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: >-
+            Auto Increment, Primary Key, unique identifier for each Config file.
+        fileName:
+          type: string
+          description: "Config file title."
+          maxLength: 100
+          minLength: 5
+        file:
+          type: string
+          format: binary
+          description: "Configuration file content."
+        script:
+          allOf:
+            - $ref: '#/components/schemas/Script'
+          description: "The associated script for this configuration file."
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: Use the bearer token to authenticate
+      scheme: bearer

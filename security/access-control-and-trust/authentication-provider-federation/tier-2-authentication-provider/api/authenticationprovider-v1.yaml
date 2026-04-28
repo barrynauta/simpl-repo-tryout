@@ -1,0 +1,1763 @@
+openapi: 3.0.1
+info:
+  title: Authentication Provider
+  description: OpenAPI definition for the Authentication Provider component of the
+    SIMPL project
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: 1.5.0
+servers:
+- url: https://localhost:8085/v1
+  description: authenticationprovider
+security:
+- mtls: []
+- mtlsWithEphemeralProof: []
+- oauth2AuthCode: []
+- oauth2ClientCredentials: []
+tags:
+- name: Keypairs
+  description: API for managing Keypairs
+- name: Certificate Sign Requests
+  description: API for managing Certificate Sign Requests
+paths:
+  /keypairs:
+    get:
+      tags:
+      - Keypairs
+      summary: Get installed Key Pair
+      description: ONBOARDER_M user get the public/private Key Pair
+      operationId: getInstalledKeyPair
+      responses:
+        "200":
+          description: Key Pair successfully retrieved. The response body contains
+            the details of the requested KeyPair.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyPair"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    privateKey: 9JFtFuN0RSnxnkMlOZbnrYZfFfFThhsGhI6/F9kXNAk=
+                    publicKey: L87PbSJyrfjZcVVShgTLSnAfWVR/dCTgC1GckbQhGXc=
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2ClientCredentials: []
+      x-deprecation-info:
+        replacements:
+        - POST /tier1/v2/keypairs/active
+        reason: Changes in response data due to credentials handling revise
+    post:
+      tags:
+      - Keypairs
+      summary: Import Key Pair
+      description: ONBOARDER_M user import a public/private Key Pair and store it
+        to database
+      operationId: importKeyPair
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportKeyPair"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  privateKey: 9JFtFuN0RSnxnkMlOZbnrYZfFfFThhsGhI6/F9kXNAk=
+                  publicKey: L87PbSJyrfjZcVVShgTLSnAfWVR/dCTgC1GckbQhGXc=
+        required: true
+      responses:
+        "204":
+          description: Key Pair generate and stored successfully
+          x-microcks-refs:
+          - default
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+      x-deprecation-info:
+        replacements:
+        - POST /tier1/v2/keypairs/import
+        reason: Changes in response data due to credentials handling revise
+    head:
+      tags:
+      - Keypairs
+      summary: Keypair Exists
+      description: ONBOARDER_M checks whether a public/private Key Pair is stored
+        in the database
+      operationId: existsKeypair
+      responses:
+        "200":
+          description: KeyPair is present
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+      x-deprecation-info:
+        replacements:
+        - HEAD /tier1/v2/keypairs/active
+        reason: Changes in response data due to credentials handling revise
+  /keypairs/generate:
+    post:
+      tags:
+      - Keypairs
+      summary: Generate Key Pair
+      description: ONBOARDER_M user generate a public/private Key Pair and store it
+        to database
+      operationId: generateKeyPair
+      responses:
+        "204":
+          description: Key Pair generate and stored successfully
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/keypairs
+        reason: Changes in response data due to credentials handling revise
+  /csr/generate:
+    post:
+      tags:
+      - Certificate Sign Requests
+      summary: Generates the CSR for the applicant participant
+      description: Generates the CSR for the applicant participant
+      operationId: generateCSR
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DistinguishedName"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  commonName: Organization Name
+                  country: EU
+                  organization: Organization Name
+                  organizationalUnit: Organizational Unit
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              example: "[binary data]"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+      x-deprecation-info:
+        replacements:
+        - "POST /tier1/v2/keypairs/{keyPairId}/csr"
+        reason: Changes in response data due to credentials handling revise
+  /agent/ping:
+    get:
+      tags:
+      - Agents
+      summary: Ping a participant
+      description: Pings a participant using the provided FQDN and returns identity
+        attributes
+      operationId: pingAgent
+      parameters:
+      - name: fqdn
+        in: query
+        description: Fully Qualified Domain Name of the participant
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: t2.participant.dev.simpl-europe.eu
+      responses:
+        "200":
+          description: Successfully pinged the participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiteParticipantWithIdentityAttributes"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    organization: Organization Name
+                    participantType: CONSUMER
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    identityAttributes:
+                    - code: CONSUMER
+                      name: Consumer
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    - code: DATA_SEARCHER
+                      name: Data searcher
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        "400":
+          description: Invalid FQDN provided
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              example:
+                summary: Invalid FQDN
+                value:
+                  type: urn:problem-type:simpl:invalidFqdn
+                  title: Invalid FQDN
+                  detail: Invalid FQDN provided
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - SIMPL_USER
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/ping
+        reason: Changes in response data due to credentials handling revise
+  /agent/identityAttributes:
+    get:
+      tags:
+      - Agents
+      summary: Get identity attributes with ownership
+      description: Returns a list of identity attributes with ownership details
+      operationId: getIdentityAttributesWithOwnership
+      responses:
+        "200":
+          description: Successfully retrieved identity attributes with ownership
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdentityAttributeWithOwnership"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    assignedToParticipant: true
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    assignedToParticipant: true
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - T1UAR_M
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/identityAttributes
+        reason: Changes in response data
+  /agent/identityAttributes/{credentialId}:
+    get:
+      tags:
+      - Agents
+      summary: Get identity attributes with ownership
+      description: Returns a list of identity attributes with ownership details
+      operationId: getParticipantIdentityAttributes
+      parameters:
+      - name: credentialId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: GWSxr+Iz2Mm5W/6Zn/wumQF6lG6nuPyzKPOnMX+8q9+jRBNvDaPLbb2VLdHEqyA+
+      responses:
+        "200":
+          description: Successfully retrieved identity attributes with ownership
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdentityAttribute"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - T1UAR_M
+      x-deprecation-info:
+        replacements: []
+        reason: participant attributes are managed internally by authentication provider
+  /agent/echo:
+    get:
+      tags:
+      - Agents
+      summary: Get echo information
+      description: Returns echo information including connection and MTLS status
+      operationId: echo
+      responses:
+        "200":
+          description: Successfully retrieved echo information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Echo"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    mtlsStatus: SECURED
+                    participantType: CONSUMER
+                    userIdentityAttributes:
+                    - DATA_PROVIDER
+                    - DATA_PROVIDER_PUBLISHER
+                    identityAttributes:
+                    - code: CONSUMER
+                      name: Consumer
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    - code: DATA_SEARCHER
+                      name: Data searcher
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    organization: Organization Name
+                    connectionStatus: CONNECTED
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    email: user@email.com
+                    username: user_12345
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - SIMPL_USER
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/echo
+        reason: Changes in response data due to credentials handling revise
+  /agent/ephemeralProof:
+    get:
+      tags:
+      - Agents
+      summary: Request ephemeral proof from authority
+      description: Request an ephemeral proof from the authority that can be used
+        to connect with other agents into the dataspace
+      operationId: requestEphemeralProofFromAuthority
+      responses:
+        "200":
+          description: The Dataspace Governance Authority successfully issued an ephemeral
+            proof to this agent
+          content:
+            application/json:
+              schema:
+                type: string
+              example: |
+                IxvaN4ER-PlPgLYzfRhk_JiY4VAow3GNjaK5rYCINFsEPa7VaYnRsaCmQVq8CTgddihEPPXe
+                t2laH8_c3WqxY4AeZO5eljwSCobCHzxYdOoFKbpNXIm7dqHg_5xpQz-YBJMiDM1ILOEsER8A
+                DyF4NC2sN0K_0t6xZLSAQIRrHvpGOrtYr5E-SllTWHWPmqCkX2BUZxoYNK2FWgQZpuUOD55H
+                fsvFXNVQa_5TFRDibi9LsT7Sd_az0iGB0TfAb0v3ZR0qnmgyp5pTeIeU5UqhtbgU9RnUCVmG
+                IK-SZYNvrlXgv9hiKAZGhLgeI8hO40utfT2YTYHgD2Aiufqo3RIbJA
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      deprecated: true
+      security:
+      - oauth2ClientCredentials: []
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/ephemeralProof
+        reason: Changes in response data
+  /agent/credentials/validate:
+    post:
+      tags:
+      - Agents
+      summary: Validates a counterpart credential
+      description: Checks if a counterpart credentials is valid in the Dataspace
+      operationId: validateCredential
+      requestBody:
+        content:
+          application/x-pem-file:
+            schema:
+              type: string
+              description: The credential (x.509 certificate in PEM format)
+            examples:
+              default:
+                summary: Default example
+                value: |
+                  -----BEGIN CERTIFICATE-----
+                  MIIC+TCCAmKgAwIBAgIBADANBgkqhkiG9w0BAQUFADCB...
+                  -----END CERTIFICATE-----
+        required: true
+      responses:
+        "204":
+          description: Certificate is valid.
+          x-microcks-refs:
+          - default
+        "400":
+          description: Invalid certificate
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              examples:
+                invalidCredential:
+                  summary: Invalid Credential
+                  description: 'Generic error stating that the credential is not valid. '
+                  value:
+                    type: /error/invalid-credential
+                revoked:
+                  summary: Credential Revoked
+                  description: The credential is valid but has been revoked (e.g.
+                    OCSP revocation for x.509 certificates)
+                  value:
+                    type: /error/credential-revoked
+      deprecated: true
+      security:
+      - oauth2ClientCredentials: []
+      x-deprecation-info:
+        replacements:
+        - POST /tier1/v2/credentials/validate
+        reason: Changes in response data due to credentials handling revise
+  /credentials:
+    get:
+      tags:
+      - Credentials
+      summary: Replaces hasCredential. Returns the participant's credentials' information.
+      description: "Returns the public participant's credentials' information, i.e.\
+        \ the participant id, the credential id and the public key"
+      operationId: getCredential
+      parameters:
+      - name: checkStatus
+        in: query
+        description: "If false, the credential validity check is not performed"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: true
+        examples:
+          default:
+            summary: Default example
+            value: false
+      responses:
+        "200":
+          description: Successfully retrieve credential information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Credential"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    participantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+                    publicKey: xLLPYLEhSZqtOCGSubdLlw==
+                    lastStatusChangeDate: 2000-01-23T04:56:07.000+00:00
+                    status: VALID
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security: []
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/credentials/active
+        reason: Changes in response data due to credentials handling revise
+    post:
+      tags:
+      - Credentials
+      summary: Upload a credential file
+      description: Uploads a credential file to the server and returns the ID of the
+        uploaded credential
+      operationId: uploadCredential
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UploadCredentialRequest"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  credential: "[binary content]"
+        required: true
+      responses:
+        "201":
+          description: Successfully uploaded credential
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+                description: The id of the uploaded credential
+              examples:
+                default:
+                  summary: Default example
+                  value: 12345
+        "400":
+          description: Invalid file format
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              example:
+                summary: Invalid file format
+                value:
+                  type: urn:problem-type:simpl:invalidFileFormat
+                  title: Invalid file format
+                  detail: Invalid file format
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+      x-deprecation-info:
+        replacements:
+        - POST /tier1/v2/credentials
+        reason: Changes in response data due to credentials handling revise
+    delete:
+      tags:
+      - Credentials
+      summary: Delete the credential
+      description: Deletes the existing credential from the server
+      operationId: delete
+      responses:
+        "204":
+          description: Successfully deleted credential
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - ONBOARDER_M
+      x-deprecation-info:
+        replacements: []
+        reason: end user manages credentials differently in v2
+  /credentials/download:
+    get:
+      tags:
+      - Credentials
+      summary: Download the participant's credential
+      description: Download the participant's credential
+      operationId: downloadInstalledCredentials
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              example: "[binary data]"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - SIMPL_USER
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/credentials/active
+        reason: Changes in response data due to credentials handling revise
+  /mtls/ping:
+    get:
+      tags:
+      - Mtls
+      summary: Ping the participant
+      description: Performs a ping operation to check the participant's status using
+        its credential id
+      operationId: ping
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: The Public Key Hash of the participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      responses:
+        "200":
+          description: Successfully pinged the participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantWithIdentityAttributes"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    expiryDate: 2000-01-23T04:56:07.000+00:00
+                    organization: Organization Name
+                    participantType: CONSUMER
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    identityAttributes:
+                    - code: CONSUMER
+                      name: Consumer
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    - code: DATA_SEARCHER
+                      name: Data searcher
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtlsWithEphemeralProof: []
+      x-deprecation-info:
+        replacements:
+        - GET /tier2/v2/ping
+        reason: Changes in response data due to credentials handling revise
+  /mtls/ephemeralProof:
+    post:
+      tags:
+      - Mtls
+      summary: Store Ephemeral Proof
+      description: Stores the ephemeral proof for the target participant
+      operationId: storeCallerEphemeralProof
+      parameters:
+      - name: Credential-Id
+        in: header
+        description: The Public Key Hash of the participant
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      requestBody:
+        description: The ephemeral proof to be stored
+        content:
+          text/plain:
+            schema:
+              type: string
+            examples:
+              default:
+                summary: Default example
+                value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        required: true
+      responses:
+        "200":
+          description: Ephemeral proof successfully stored
+          x-microcks-refs:
+          - default
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      deprecated: true
+      security:
+      - mtls: []
+      x-deprecation-info:
+        replacements:
+        - POST /tier2/v2/ephemeralProof
+        reason: Changes in response data due to credentials handling revise
+  /sessions/credentials:
+    post:
+      tags:
+      - Sessions
+      summary: Validate Tier 1 session
+      description: Validate the tier one session against the ephemeral proof stored
+        in the agent
+      operationId: validateTierOneSession
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TierOneSession"
+            examples:
+              default:
+                summary: Default example
+                value:
+                  jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        required: true
+      responses:
+        "204":
+          description: Tier 1 session validated successfully
+          x-microcks-refs:
+          - default
+        "422":
+          description: Invalid Tier 1 session
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+              example:
+                summary: Invalid Tier 1 session
+                value:
+                  type: urn:problem-type:simpl:invalidTierOneSession
+                  title: Invalid Tier 1 session
+                  detail: The provided Tier 1 session is not valid
+      security:
+      - oauth2ClientCredentials: []
+  /sessions/identityAttributes:
+    get:
+      tags:
+      - Sessions
+      summary: Retrieve identity attributes of a participant
+      description: Fetches the identity attributes associated with the specified participant
+        ID
+      operationId: getIdentityAttributesOfParticipant
+      parameters:
+      - name: credentialId
+        in: query
+        description: The Public Key Hash of the participant
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+        examples:
+          default:
+            summary: Default example
+            value: zPPJ4TbEd8xNJPkdmePpAsamcKEQf8nxAMa7vw58Fc7eEtAzMrRDLA4oWNETGzrpcwsoQ5GwnEFhpeLxrYyV1gC1LnVXt1KBMM
+      responses:
+        "200":
+          description: Successfully retrieved identity attributes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdentityAttribute"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                  - code: CONSUMER
+                    name: Consumer
+                    creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                    description: Identity attribute used for tagging an end user able
+                      to act as a user of a data consumer participant (can start contract
+                      and transfer process)
+                    assignableToRoles: true
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    used: true
+                    right: true
+                    enabled: true
+                    updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        "404":
+          $ref: "#/components/responses/NotFound"
+      deprecated: true
+      security:
+      - oauth2ClientCredentials: []
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/participant/identityAttributes
+        reason: Changes in response data due to credentials handling revise
+  /identityAttributes:
+    get:
+      tags:
+      - Identity Attributes
+      summary: Search identity attributes with ownership
+      description: Searches for identity attributes with ownership based on the provided
+        filter and pagination settings
+      operationId: searchIdentityAttributesWithOwnership
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+        examples:
+          default:
+            summary: Default example
+            value: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+        examples:
+          default:
+            summary: Default example
+            value: 10
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          default:
+          - "id,ASC"
+          items:
+            type: string
+        examples:
+          default:
+            summary: Default example
+            value: "id,asc"
+      - name: filter
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: "#/components/schemas/SearchIdentityAttributesWithOwnershipFilterParameter"
+        examples:
+          default:
+            summary: Default example
+            value:
+              code: code
+              participantTypeIn: participantTypeIn
+              updateTimestampFrom: 2000-01-23T04:56:07.000+00:00
+              assignedToParticipant: true
+              name: name
+              updateTimestampTo: 2000-01-23T04:56:07.000+00:00
+              enabled: true
+              participantTypeNotIn: participantTypeNotIn
+        x-parameter-object: true
+      responses:
+        "200":
+          description: Successfully retrieved the identity attributes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PagedModelIdentityAttributeWithOwnership"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    page:
+                      number: 6
+                      size: 0
+                      totalPages: 5
+                      totalElements: 1
+                    content:
+                    - code: CONSUMER
+                      name: Consumer
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      assignedToParticipant: true
+                    - code: DATA_SEARCHER
+                      name: Data searcher
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      used: true
+                      right: true
+                      enabled: true
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      assignedToParticipant: false
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      deprecated: true
+      security:
+      - oauth2AuthCode: []
+      x-simpl-roles:
+      - T1UAR_M
+      - NOTARY
+      - IATTR_M
+      x-deprecation-info:
+        replacements:
+        - GET /tier1/v2/identityAttributes
+        reason: Changes in response data due to credentials handling revise
+components:
+  schemas:
+    ImportKeyPair:
+      type: object
+      example:
+        privateKey: 9JFtFuN0RSnxnkMlOZbnrYZfFfFThhsGhI6/F9kXNAk=
+        publicKey: L87PbSJyrfjZcVVShgTLSnAfWVR/dCTgC1GckbQhGXc=
+      properties:
+        publicKey:
+          type: string
+        privateKey:
+          type: string
+      required:
+      - privateKey
+      - publicKey
+    KeyPair:
+      type: object
+      example:
+        privateKey: 9JFtFuN0RSnxnkMlOZbnrYZfFfFThhsGhI6/F9kXNAk=
+        publicKey: L87PbSJyrfjZcVVShgTLSnAfWVR/dCTgC1GckbQhGXc=
+      properties:
+        publicKey:
+          type: string
+          format: byte
+        privateKey:
+          type: string
+          format: byte
+      required:
+      - privateKey
+      - publicKey
+    DistinguishedName:
+      type: object
+      example:
+        commonName: Organization Name
+        country: EU
+        organization: Organization Name
+        organizationalUnit: Organizational Unit
+      properties:
+        commonName:
+          type: string
+          maxLength: 255
+        organization:
+          type: string
+          maxLength: 255
+        organizationalUnit:
+          type: string
+          maxLength: 255
+        country:
+          type: string
+          maxLength: 255
+      required:
+      - commonName
+      - country
+      - organization
+      - organizationalUnit
+    Problem:
+      type: object
+      description: |
+        A Problem Details object (RFC 9457).
+
+        Additional properties specific to the problem type may be present.
+      example:
+        type: urn:problem-type:exampleOrganization:exampleProblem
+        href: https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types
+        title: Description of the type of problem that occurred
+        status: 400
+        detail: Description of specific occurrence of the problem
+        instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+          description: |
+            An absolute URI that identifies the problem type.  When dereferenced,
+            it SHOULD provide human-readable documentation for the problem type
+            (e.g., using HTML).
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: |
+            A short, summary of the problem type. Written in english and readable
+            for engineers (usually not suited for non technical stakeholders and
+            not localized); example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status code generated by the origin server for this occurrence
+            of the problem.
+          example: 503
+          maximum: 600
+          minimum: 100
+        detail:
+          type: string
+          description: |
+            A human readable explanation specific to this occurrence of the
+            problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: |-
+            An absolute URI that identifies the specific occurrence of the problem.
+            It may or may not yield further information if dereferenced.
+    ParticipantWithIdentityAttributes:
+      type: object
+      example:
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        organization: Organization Name
+        participantType: CONSUMER
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        identityAttributes:
+        - code: CONSUMER
+          name: Consumer
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: Identity attribute used for tagging an end user able to act
+            as a user of a data consumer participant (can start contract and transfer
+            process)
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        - code: DATA_SEARCHER
+          name: Data searcher
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: "Identity Attributes used for tagging an end user able to act\
+            \ only as a searcher in the catalogue, but he can't start a contract negotiation\
+            \ or transfer process"
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+          format: uuid
+        participantType:
+          type: string
+          maxLength: 100
+        organization:
+          type: string
+          maxLength: 255
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+          maxLength: 64
+        expiryDate:
+          type: string
+          format: date-time
+        identityAttributes:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdentityAttribute"
+      required:
+      - credentialId
+      - expiryDate
+      - id
+      - identityAttributes
+      - organization
+      - participantType
+    IdentityAttributeWithOwnership:
+      allOf:
+      - $ref: "#/components/schemas/IdentityAttribute"
+      - type: object
+        properties:
+          assignedToParticipant:
+            type: boolean
+        required:
+        - assignedToParticipant
+      example:
+        code: CONSUMER
+        name: Consumer
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        description: Identity attribute used for tagging an end user able to act as
+          a user of a data consumer participant (can start contract and transfer process)
+        assignableToRoles: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        used: true
+        right: true
+        enabled: true
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        assignedToParticipant: true
+    IdentityAttribute:
+      type: object
+      example:
+        code: CONSUMER
+        name: Consumer
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        description: Identity attribute used for tagging an end user able to act as
+          a user of a data consumer participant (can start contract and transfer process)
+        assignableToRoles: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        used: true
+        right: true
+        enabled: true
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          maxLength: 255
+        assignableToRoles:
+          type: boolean
+        enabled:
+          type: boolean
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+        used:
+          type: boolean
+          readOnly: true
+        right:
+          type: boolean
+          readOnly: true
+      required:
+      - assignableToRoles
+      - code
+      - enabled
+      - id
+      - name
+      - right
+      - used
+    Echo:
+      type: object
+      example:
+        mtlsStatus: SECURED
+        participantType: CONSUMER
+        userIdentityAttributes:
+        - DATA_PROVIDER
+        - DATA_PROVIDER_PUBLISHER
+        identityAttributes:
+        - code: CONSUMER
+          name: Consumer
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: Identity attribute used for tagging an end user able to act
+            as a user of a data consumer participant (can start contract and transfer
+            process)
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        - code: DATA_SEARCHER
+          name: Data searcher
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: "Identity Attributes used for tagging an end user able to act\
+            \ only as a searcher in the catalogue, but he can't start a contract negotiation\
+            \ or transfer process"
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        organization: Organization Name
+        connectionStatus: CONNECTED
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: user@email.com
+        username: user_12345
+      properties:
+        username:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          maxLength: 255
+        connectionStatus:
+          $ref: "#/components/schemas/ConnectionStatus"
+        mtlsStatus:
+          $ref: "#/components/schemas/MtlsStatus"
+        userIdentityAttributes:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+          format: uuid
+        participantType:
+          type: string
+          maxLength: 100
+        organization:
+          type: string
+          maxLength: 255
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+          maxLength: 64
+        expiryDate:
+          type: string
+          format: date-time
+        identityAttributes:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdentityAttribute"
+      required:
+      - connectionStatus
+      - credentialId
+      - email
+      - expiryDate
+      - id
+      - mtlsStatus
+      - organization
+      - participantType
+      - userIdentityAttributes
+      - username
+    Credential:
+      type: object
+      example:
+        participantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+        publicKey: xLLPYLEhSZqtOCGSubdLlw==
+        lastStatusChangeDate: 2000-01-23T04:56:07.000+00:00
+        status: VALID
+      properties:
+        publicKey:
+          type: string
+        credentialId:
+          type: string
+          maxLength: 64
+        participantId:
+          type: string
+          format: uuid
+        status:
+          $ref: "#/components/schemas/CredentialStatus"
+        lastStatusChangeDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last change of status for the credential.
+        expiryDate:
+          type: string
+          format: date-time
+          description: "Expiration date of the credential, if applicable."
+    TierOneSession:
+      type: object
+      example:
+        jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      properties:
+        jwt:
+          type: string
+      required:
+      - jwt
+    PagedModelIdentityAttributeWithOwnership:
+      type: object
+      example:
+        page:
+          number: 6
+          size: 0
+          totalPages: 5
+          totalElements: 1
+        content:
+        - code: CONSUMER
+          name: Consumer
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: Identity attribute used for tagging an end user able to act
+            as a user of a data consumer participant (can start contract and transfer
+            process)
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          assignedToParticipant: true
+        - code: DATA_SEARCHER
+          name: Data searcher
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          description: "Identity Attributes used for tagging an end user able to act\
+            \ only as a searcher in the catalogue, but he can't start a contract negotiation\
+            \ or transfer process"
+          assignableToRoles: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          used: true
+          right: true
+          enabled: true
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          assignedToParticipant: false
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdentityAttributeWithOwnership"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    ConnectionStatus:
+      type: string
+      enum:
+      - CONNECTED
+      - NOT_CONNECTED
+    MtlsStatus:
+      type: string
+      enum:
+      - SECURED
+      - NOT_SECURED
+    CredentialStatus:
+      type: string
+      description: |
+        The status of the credential:<br> - **Valid**: The credential is valid and usable.<br> - **Expired**: The credential has expired.<br> - **Revoked**: The credential is permanently revoked and no longer usable.<br> - **Suspended**: The credential is temporarily revoked and may transition back to valid.<br>
+      enum:
+      - VALID
+      - EXPIRED
+      - REVOKED
+      - SUSPENDED
+    PageMetadata:
+      type: object
+      example:
+        number: 6
+        size: 0
+        totalPages: 5
+        totalElements: 1
+      properties:
+        size:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+    UploadCredentialRequest:
+      type: object
+      example:
+        credential: "[binary content]"
+      properties:
+        credential:
+          type: string
+          format: binary
+      required:
+      - credential
+    SearchIdentityAttributesWithOwnershipFilterParameter:
+      type: object
+      properties:
+        code:
+          type: string
+          maxLength: 255
+        participantTypeIn:
+          type: string
+          maxLength: 255
+        updateTimestampFrom:
+          type: string
+          format: date-time
+        assignedToParticipant:
+          type: boolean
+        name:
+          type: string
+          maxLength: 255
+        updateTimestampTo:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        participantTypeNotIn:
+          type: string
+          maxLength: 255
+    LiteParticipantWithIdentityAttributes:
+      type: object
+      example:
+        expiryDate: 2000-01-23T04:56:07.000+00:00
+        organization: Organization Name
+        participantType: CONSUMER
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        credentialId: w/dQ6cq/hWkZ6lS6Ika0xF+LwN8fbhTYHygR3RChZz59ldkCAJPvyWqFjm4/6Foh
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        identityAttributes:
+        - code: CONSUMER
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - code: DATA_SEARCHER
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+          format: uuid
+        participantType:
+          type: string
+          maxLength: 100
+        organization:
+          type: string
+          maxLength: 255
+        creationTimestamp:
+          type: string
+          format: date-time
+        updateTimestamp:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+          maxLength: 64
+        expiryDate:
+          type: string
+          format: date-time
+        identityAttributes:
+          type: array
+          items:
+            $ref: "#/components/schemas/LiteIdentityAttribute"
+      required:
+      - credentialId
+      - expiryDate
+      - id
+      - identityAttributes
+      - organization
+      - participantType
+    LiteIdentityAttribute:
+      type: object
+      example:
+        code: CONSUMER
+        name: Consumer
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 255
+      required:
+      - code
+      - id
+  responses:
+    "401":
+      description: "Unauthorized, the user is not authenticated"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            summary: Unauthorized
+            value:
+              type: urn:problem-type:simpl:unauthorized
+              title: Unauthorized
+              detail: The user is not authenticated
+    "403":
+      description: "Forbidden, the user does not have the roles to perform the operation"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            summary: Forbidden
+            value:
+              type: urn:problem-type:simpl:forbidden
+              title: Forbidden
+              detail: The user does not have the roles to perform the operation
+    "404":
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            summary: Not Found
+            value:
+              type: urn:problem-type:simpl:notFound
+              title: Not Found
+              detail: Resource not found
+    "500":
+      description: "Internal Server Error, an internal server error occurred"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            summary: Internal Server Error
+            value:
+              type: urn:problem-type:simpl:internalServerError
+              title: Internal Server Error
+              detail: Internal Server Error
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            notFound:
+              summary: Not Found
+              value:
+                type: urn:problem-type:simpl:notFound
+                title: Not Found
+                detail: Resource not found
+                status: 404
+    Unauthorized:
+      description: "Unauthorized, the user is not authenticated"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unauthorized:
+              summary: Unauthorized
+              value:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                detail: The user is not authenticated
+                status: 401
+    Forbidden:
+      description: "Forbidden, the user does not have the roles to perform the operation"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            forbidden:
+              summary: Forbidden
+              value:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                detail: The user does not have the roles to perform the operation
+                status: 403
+    InternalServerError:
+      description: "Internal Server Error, an internal server error occurred"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            internalServerError:
+              summary: Internal Server Error
+              value:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                detail: Internal Server Error
+                status: 500
+    BadRequest:
+      description: "Bad request, invalid input data"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            badRequest:
+              summary: Bad Request
+              value:
+                type: urn:problem-type:simpl:badRequest
+                title: Bad request
+                detail: Invalid input data
+                status: 400
+  securitySchemes:
+    mtls:
+      type: http
+      description: SIMPL Tier 2 mTLS authentication process
+      scheme: mutual
+    mtlsWithEphemeralProof:
+      type: http
+      description: SIMPL Tier 2 mTLS authentication process with Ephemeral Proof exchange
+      scheme: mutual
+    oauth2AuthCode:
+      type: oauth2
+      description: SIMPL Tier1 end users authentication process
+      flows:
+        authorizationCode:
+          authorizationUrl: ""
+          tokenUrl: ""
+          scopes: {}
+    oauth2ClientCredentials:
+      type: oauth2
+      description: SIMPL internal APIs authentication process
+      flows:
+        clientCredentials:
+          tokenUrl: ""
+          scopes: {}

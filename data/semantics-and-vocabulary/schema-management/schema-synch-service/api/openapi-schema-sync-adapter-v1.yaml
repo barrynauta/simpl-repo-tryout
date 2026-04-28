@@ -1,0 +1,305 @@
+info:
+  title: Schema Sync Adapter API
+  description: |-
+    The exposed API enables the reception of schema publication or revocation events, triggered by actions performed by the Governance Authority through the Schema Management Service.
+
+    ## Business Context
+
+    When the Governance Authority publishes a new schema or revokes an existing one, the Schema Management Service sends a notification to the Schema Sync Adapter application to indicate the availability of a new schema or the need to remove one. This ensures that all provider-side and consumer-side applications that depend on the schema registry always have access to the correct and up-to-date schema versions they need to operate.
+
+    ### Key Actors
+
+    - **Provider**: It manages updated schema versions to ensure that self-descriptions can be created using the latest schema versions.
+
+    - **Consumer**: Following the publication or revocation of a schema on the catalogue side, it sends a notification to the Schema Sync Adapter component on the provider side.
+
+    ### Typical Flow
+
+    1. GA publishes a new schema
+
+    2. Schema Management Service sends an event to Schema Sync Adapter
+
+    3. Schema Sync Adapter updates participant local schema storage
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: "1.0"
+servers: []
+security:
+- NoAuth: []
+openapi: 3.0.1
+components:
+  securitySchemes:
+    NoAuth:
+      type: apiKey
+      description: Placeholder scheme used when security is not required
+      name: X-No-Auth
+      in: header
+  schemas:
+    InternalServerErrorProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    NotAcceptableProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    NotFoundProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    InputObject:
+      type: object
+      properties:
+        in:
+          type: string
+          enum:
+          - body
+          - path
+          - query
+          - header
+        name:
+          type: string
+        value:
+          type: object
+    BadRequestProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputValidationIssue'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+    InputValidationIssue:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        href:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+        in:
+          type: string
+          enum:
+          - body
+          - path
+          - query
+          - header
+        name:
+          type: string
+        value:
+          type: object
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputObject'
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: object
+paths:
+  /schemas/{schemaName}/{version}:
+    get:
+      tags:
+      - Schemas
+      summary: Retrieve a specific version of a schema
+      description: Retrieves the content of a specific version of a schema identified by its schema name and version. The endpoint returns the representation of the schema as published by the Governance Authority
+      operationId: getSchemaByVersion
+      parameters:
+      - name: schemaName
+        in: path
+        description: Unique identifier of the TTL schema
+        required: true
+        schema:
+          type: string
+          description: Unique identifier of the TTL schema
+          example: dataOfferingShape
+        example: dataOfferingShape
+      - name: version
+        in: path
+        description: Version of the TTL schema
+        required: true
+        schema:
+          type: string
+          description: Version of the TTL schema
+          example: 1.0.0
+        example: 1.0.0
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Invalid payload
+                status: 400
+                detail: missing required arguments
+                instance: /schemas/{schemaName}/{version}
+                issues:
+                - detail: Field 'schemaName' must not be empty
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorProblem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                instance: /schemas/{schemaName}/{version}
+                detail: Unexpected internal error
+        "200":
+          description: Returns the content of the specified TTL file
+          content:
+            text/turtle:
+              schema:
+                type: string
+              example: |
+                @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+                @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+                @prefix sh: <http://www.w3.org/ns/shacl#> .
+                @prefix simpl: <http://w3id.org/gaia-x/simpl#> .
+                @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+                simpl:DataOfferingShape
+                  rdf:type sh:NodeShape ;
+                  sh:targetClass simpl:DataOffering ;
+                  sh:property [
+                    sh:path simpl:name ;
+                    sh:datatype xsd:string ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    sh:description "The name of the data offering." ;
+                  ] ;
+                  sh:property [
+                    sh:path simpl:description ;
+                    sh:datatype xsd:string ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    sh:description "A description of the data offering." ;
+                  ] ;
+                  sh:property [
+                    sh:path simpl:format ;
+                    sh:datatype xsd:string ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    sh:description "The format of the data offering, e.g. XML, JSON, CSV." ;
+                  ] .
+        "404":
+          description: Schema not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/NotFoundProblem'
+              examples:
+                Schema Not Found Example:
+                  description: Schema not found
+                  value:
+                    type: urn:problem-type:simpl:notFound
+                    title: Resource not found
+                    status: 404
+                    detail: Schema with identifier 'dataOfferingShape' was not found
+                    instance: /schemas/dataOfferingShape/content
+        "406":
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptableProblem'
+              examples:
+                Not Acceptable Example:
+                  description: Requested media type is not supported
+                  value:
+                    type: urn:problem-type:simpl:notAcceptable
+                    title: Not Acceptable
+                    status: 406
+                    detail: Requested media type 'application/json' is not supported. Use 'text/turtle'.
+                    instance: /schemas/dataOfferingShape/content

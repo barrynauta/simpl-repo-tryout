@@ -28,6 +28,11 @@ Provenance: planned — Contract / Catalogue team (no current source repository)
 
 - [BP07 Consumer and Provider establish a usage contract](../../../../foundations/business-processes/BP07-establish-usage-contract/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 1 OpenAPI/AsyncAPI spec imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 No current source repository. Planned for the Contract / Catalogue team.

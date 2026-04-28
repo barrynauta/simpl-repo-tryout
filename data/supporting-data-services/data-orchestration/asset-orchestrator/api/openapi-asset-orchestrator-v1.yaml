@@ -1,0 +1,1527 @@
+openapi: 3.0.1
+info:
+  title: Asset Orchestrator API
+  description: |
+    The Asset Orchestrator API enables the management and orchestration of resources
+    and their associated workflows through integration with Workflow Engine.
+
+    ## Business Context
+
+    The Asset Orchestrator serves as a bridge between the providers connector
+    and the orchestration execution engine. It allows users to:
+    - Register and manage workflow definition
+    - Associate resources with workflows and configuration
+    - Validate the configuration for a workflow
+    - Monitor workflow execution status
+
+    ### Key Actors
+
+    - **Provider**: Creates the resource self-description
+    and associate it with workflow and configuration
+    - **Provider Workflow Designer**: Creates resource processing workflows,
+    defines default configuration
+    - **Consumer**: Triggers the execution of the workflow when consuming the resource
+
+    ### Typical Flow
+    1. Provider Workflow Designer creates a workflow and default configuration
+    2. Provider creates the self-description for a resource that should trigger a workflow
+    on consumption
+    3. Provider creates an association between resource and workflow with configuration
+    4. Consumer consumes the resource over the connector
+    5. Asset Orchestrator submits the job to the orchestration platform
+    6. Asset Orchestrator tracks execution status and stores run history
+
+    ## Error Handling
+
+    All error responses follow RFC 7807 Problem Details standard with BelGIF guidelines.
+    Each error response includes:
+    - `type`: URI identifying the problem type (urn:problem-type:simpl:*)
+    - `title`: Short summary of the error
+    - `status`: HTTP status code
+    - `detail`: Specific explanation for this occurrence
+    - `instance`: URI of the request that caused the error
+    - `timestamp`: When the error occurred (ISO-8601 format)
+
+    Error types:
+    - **400 Bad Request**: Invalid input or malformed request
+    - **400 Validation Error**: Field validation failures (includes field-level details)
+    - **404 Not Found**: Requested resource does not exist
+    - **500 Internal Server Error**: Unexpected server error
+    - **502 Bad Gateway**: External service (Workflow Engine) communication error
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: 1.0.0
+servers:
+  - url: https://asset-orchestrator.dataorchestrator.dev.simpl-europe.eu/v1
+    description: Asset Orchestrator API Server
+security:
+  - bearerAuth: []
+tags:
+  - name: Workflow Definitions
+    description: Create associations between catalog assets and workflows with configuration templates
+  - name: Workflow
+    description: Retrieve available workflows, default configurations, and validate workflow configurations
+  - name: Runs
+    description: Execute workflows associated with catalog assets and monitor execution status
+paths:
+  /workflows/configValidation:
+    post:
+      tags:
+        - Workflow
+      summary: Validate workflow configuration
+      description: Validates a workflow configuration against its schema before creating a workflow definition
+      operationId: validateWorkflowConfig
+      requestBody:
+        description: Workflow configuration validation request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateJobConfigRequest'
+            examples:
+              Validate Config Example:
+                description: Validate Config Example
+                value:
+                  repositoryName: my_repository
+                  codeLocation: user_code
+                  jobName: data_pipeline
+                  yamlConfiguration: |-
+                    ops:
+                      process_data:
+                        config:
+                          url: ${APP_URL}
+                          api_key: ${API_KEY}
+        required: true
+      responses:
+        '200':
+          description: Validation completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigValidation'
+              examples:
+                Valid Configuration:
+                  description: Example of a valid configuration
+                  value:
+                    jobName: data_pipeline
+                    isValid: true
+                    errors: []
+                Invalid Configuration:
+                  description: Example of an invalid configuration with errors
+                  value:
+                    jobName: data_pipeline
+                    isValid: false
+                    errors:
+                      - message: Field "url" is required but not provided
+                        path:
+                          - ops
+                          - process_data
+                          - config
+                          - url
+                        reason: MISSING_REQUIRED_FIELD
+                        errorType: FIELD_NOT_DEFINED
+                        fieldName: url
+                        fieldNames: []
+                        valueRep: null
+                      - message: Invalid type for field "timeout". Expected Int, got String
+                        path:
+                          - ops
+                          - process_data
+                          - config
+                          - timeout
+                        reason: RUNTIME_TYPE_MISMATCH
+                        errorType: FIELD_TYPE_MISMATCH
+                        fieldName: timeout
+                        fieldNames: []
+                        valueRep: not_a_number
+        '400':
+          description: Bad Request - Invalid input
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Validation Error
+                status: 400
+                detail: Validation failed for one or more fields
+                instance: /v1/workflows/configValidation
+                timestamp: '2024-12-03T10:15:30.123Z'
+                errors:
+                  repositoryName: must not be blank
+                  jobName: must not be blank
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                detail: Missing or invalid Authorization header
+                instance: /v1/workflows/configValidation
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                status: 403
+                detail: User does not have the required permissions to perform this action
+                instance: /v1/workflows/configValidation
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '404':
+          description: Workflow not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:resourceNotFound
+                title: Resource Not Found
+                status: 404
+                detail: 'Workflow not found with identifier: my_repository/user_code/data_pipeline'
+                instance: /v1/workflows/configValidation
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                title: Not Acceptable
+                status: 406
+                detail: The requested representation (Accept header) is not supported.
+                instance: /v1/workflows/configValidation
+                timestamp: '2024-12-03T10:15:30.123Z'
+                requested: application/xml
+                supported:
+                  - application/json
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unsupportedMediaType
+                title: Unsupported Media Type
+                status: 415
+                detail: The Content-Type of the request is not supported.
+                instance: /v1/workflows/configValidation
+                timestamp: '2024-12-03T10:15:30.123Z'
+                received: application/xml
+                supported:
+                  - application/json
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                detail: An unexpected error occurred
+                instance: /v1/workflows/configValidation
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '502':
+          description: External service error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:externalServiceError
+                title: External Service Error
+                status: 502
+                detail: 'Failed to communicate with Workflow Engine: Connection refused'
+                instance: /v1/workflows/configValidation
+                timestamp: '2024-12-03T10:15:30.123Z'
+                service: Workflow Engine
+  /workflowDefinitions:
+    get:
+      tags:
+        - Workflow Definitions
+      summary: Get workflow definitions
+      description: Retrieves all workflow definitions matching the applied filters
+      operationId: getAssociations
+      parameters:
+        - name: assetId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: onlyActive
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Workflow definitions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkflowDefinition'
+              example:
+                - id: 1
+                  assetId: asset-001
+                  assetType: dataset
+                  assetDescription: Customer analytics dataset
+                  providerEmail: provider@example.com
+                  repositoryName: my_repository
+                  codeLocation: user_code
+                  jobName: data_pipeline
+                  associationTitle: Data Processing Pipeline
+                  isActive: true
+                  yamlConfiguration: |-
+                    ops:
+                      process_data:
+                        config:
+                          url: ${APP_URL}
+        '400':
+          description: Bad Request - Invalid input
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Validation Error
+                status: 400
+                detail: Validation failed for one or more fields
+                instance: /v1/workflowDefinitions?onlyActive=not_a_string
+                timestamp: '2024-12-03T10:15:30.123Z'
+                errors:
+                  onlyActive: Expected type Boolean but received 'not_a_string'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                detail: Missing or invalid Authorization header
+                instance: /v1/workflowDefinitions?assetId=asset-001
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                status: 403
+                detail: User does not have the required permissions to perform this action
+                instance: /v1/workflowDefinitions?assetId=asset-001
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '404':
+          description: Catalog resource not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:resourceNotFound
+                title: Resource Not Found
+                status: 404
+                detail: 'Catalog resource not found with originalId: 404'
+                instance: /v1/workflowDefinitions?assetId=404
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                title: Not Acceptable
+                status: 406
+                detail: The requested representation (Accept header) is not supported.
+                instance: /v1/workflowDefinitions?assetId=asset-001
+                timestamp: '2024-12-03T10:15:30.123Z'
+                requested: application/xml
+                supported:
+                  - application/json
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                detail: An unexpected error occurred
+                instance: /v1/workflowDefinitions?assetId=asset-001
+                timestamp: '2024-12-03T10:15:30.123Z'
+    post:
+      tags:
+        - Workflow Definitions
+      summary: Create a workflow definition
+      description: |
+        Creates a workflow definition, an association between a catalog resource and
+        a workflow with YAML configuration template
+      operationId: createAssociation
+      requestBody:
+        description: Workflow definition request with YAML template
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkflowDefinitionRequest'
+            examples:
+              Create Workflow Definition Example:
+                description: Create Workflow Definition Example
+                value:
+                  assetId: asset-001
+                  assetType: dataset
+                  assetDescription: Customer analytics dataset for processing
+                  providerEmail: provider@example.com
+                  repositoryName: my_repository
+                  codeLocation: user_code
+                  jobName: data_pipeline
+                  yamlConfiguration: |-
+                    ops:
+                      process_data:
+                        config:
+                          url: ${APP_URL}
+                          api_key: ${API_KEY}
+        required: true
+      responses:
+        '201':
+          description: Workflow definition successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDefinition'
+              example:
+                id: 1
+                assetId: asset-001
+                assetType: dataset
+                assetDescription: Customer analytics dataset
+                providerEmail: provider@example.com
+                repositoryName: my_repository
+                codeLocation: user_code
+                jobName: data_pipeline
+                associationTitle: Data Processing Pipeline
+                isActive: true
+                yamlConfiguration: |-
+                  ops:
+                    process_data:
+                      config:
+                        url: ${APP_URL}
+        '400':
+          description: Bad Request - Invalid input or YAML syntax
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Validation Error
+                status: 400
+                detail: Validation failed for one or more fields
+                instance: /v1/workflowDefinitions
+                timestamp: '2024-12-03T10:15:30.123Z'
+                errors:
+                  yamlConfiguration: Invalid YAML syntax
+                  assetId: must not be blank
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                detail: Missing or invalid Authorization header
+                instance: /v1/workflowDefinitions
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                status: 403
+                detail: User does not have the required permissions to perform this action
+                instance: /v1/workflowDefinitions
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '404':
+          description: Workflow not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:resourceNotFound
+                title: Resource Not Found
+                status: 404
+                detail: 'Workflow not found with identifier: my_repository/user_code/data_pipeline'
+                instance: /v1/workflowDefinitions
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                title: Not Acceptable
+                status: 406
+                detail: The requested representation (Accept header) is not supported.
+                instance: /v1/workflowDefinitions
+                timestamp: '2024-12-03T10:15:30.123Z'
+                requested: application/xml
+                supported:
+                  - application/json
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unsupportedMediaType
+                title: Unsupported Media Type
+                status: 415
+                detail: The Content-Type of the request is not supported.
+                instance: /v1/workflowDefinitions
+                timestamp: '2024-12-03T10:15:30.123Z'
+                received: application/xml
+                supported:
+                  - application/json
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                detail: An unexpected error occurred
+                instance: /v1/workflowDefinitions
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '502':
+          description: External service error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:externalServiceError
+                title: External Service Error
+                status: 502
+                detail: 'Failed to communicate with Workflow Engine: Connection refused'
+                instance: /v1/workflowDefinitions
+                timestamp: '2024-12-03T10:15:30.123Z'
+                service: Workflow Engine
+  /runs:
+    post:
+      tags:
+        - Runs
+      summary: Execute workflow definition for a resource
+      description: |
+        Executes the active workflow definition associated with a catalog resource.
+
+        The workflow configuration is defined and stored by the provider inside the workflow definition.
+        During execution, this configuration is dynamically augmented with runtime variables
+        supplied by the consumer.
+
+        **Variable Substitution**: Variables in the provider-defined YAML template
+        (format: ${VARIABLE_NAME}) are resolved by applying the consumer-provided values
+        from the config map.
+
+        **Flow**:
+        1. Find the active workflow definition for the resource
+        2. Load the provider-defined YAML configuration template
+        3. Augment it with consumer-supplied variables by resolving placeholders
+        4. Submit workflow to Workflow Engine
+        5. Store execution run in database
+        6. Return run details and status
+      operationId: executeWorkflow
+      requestBody:
+        description: Workflow execution request with resource ID and runtime configuration variables
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteWorkflowRequest'
+            examples:
+              Execute Workflow Definition Example:
+                description: Execute Workflow Definition Example
+                value:
+                  assetId: asset-001
+                  config:
+                    APP_URL: https://example.com
+                    API_KEY: secret-key-123
+                    ENVIRONMENT: production
+        required: true
+      responses:
+        '202':
+          description: Workflow definition execution started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteWorkflowResponse'
+              example:
+                runId: abc123-def456-ghi789
+                status: STARTED
+                resolvedYaml: |-
+                  ops:
+                    process_data:
+                      config:
+                        url: https://example.com
+                        api_key: secret-key-123
+        '400':
+          description: |
+            Bad Request - Invalid input or missing YAML configuration
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Validation Error
+                status: 400
+                detail: Validation failed for one or more fields
+                instance: /v1/runs
+                timestamp: '2024-12-03T10:15:30.123Z'
+                errors:
+                  assetId: must not be blank
+                  config: must not be null
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                detail: Missing or invalid Authorization header
+                instance: /v1/runs
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                status: 403
+                detail: User does not have the required permissions to perform this action
+                instance: /v1/runs
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '404':
+          description: No active workflow definition found for resource
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:resourceNotFound
+                title: Resource Not Found
+                status: 404
+                detail: 'No active workflow definition found for resource: asset-001'
+                instance: /v1/runs
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                title: Not Acceptable
+                status: 406
+                detail: The requested representation (Accept header) is not supported.
+                instance: /v1/runs
+                timestamp: '2024-12-03T10:15:30.123Z'
+                requested: application/xml
+                supported:
+                  - application/json
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unsupportedMediaType
+                title: Unsupported Media Type
+                status: 415
+                detail: The Content-Type of the request is not supported.
+                instance: /v1/runs
+                timestamp: '2024-12-03T10:15:30.123Z'
+                received: application/xml
+                supported:
+                  - application/json
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                detail: An unexpected error occurred
+                instance: /v1/runs
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '502':
+          description: External service error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:externalServiceError
+                title: External Service Error
+                status: 502
+                detail: 'Failed to communicate with Workflow Engine API: Connection timeout'
+                instance: /v1/runs
+                timestamp: '2024-12-03T10:15:30.123Z'
+                service: Workflow Engine
+  /workflows:
+    get:
+      tags:
+        - Workflow
+      summary: Get available workflows
+      description: |
+        Retrieves all available workflows from the orchestration engine
+        that can be associated with resources. Optionally filter by tag.
+      operationId: getWorkflows
+      parameters:
+        - name: tag
+          in: query
+          description: Optional tag to filter workflows
+          required: false
+          schema:
+            type: string
+          example: data-processing
+      responses:
+        '200':
+          description: Workflows retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeLocationsResponse'
+              example:
+                total: 1
+                codeLocations:
+                  - id: user_code
+                    name: user_code
+                    loadStatus: LOADED
+                    locationDetails:
+                      id: user_code
+                      name: user_code
+                      repositories:
+                        - id: my_repository
+                          name: my_repository
+                          jobs:
+                            - id: data_pipeline
+                              name: data_pipeline
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                detail: Missing or invalid Authorization header
+                instance: /v1/workflows
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                status: 403
+                detail: User does not have the required permissions to perform this action
+                instance: /v1/workflows
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                title: Not Acceptable
+                status: 406
+                detail: The requested representation (Accept header) is not supported.
+                instance: /v1/workflows
+                timestamp: '2024-12-03T10:15:30.123Z'
+                requested: application/xml
+                supported:
+                  - application/json
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                detail: An unexpected error occurred
+                instance: /v1/workflows
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '502':
+          description: External service error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:externalServiceError
+                title: External Service Error
+                status: 502
+                detail: 'Failed to communicate with Workflow Engine: Connection refused'
+                instance: /v1/workflows
+                timestamp: '2024-12-03T10:15:30.123Z'
+                service: Workflow Engine
+  /workflows/{repositoryName}/{codeLocation}/{jobName}/defaultConfig:
+    get:
+      tags:
+        - Workflow
+      summary: Get workflow default configuration
+      description: |
+        Retrieves the default configuration schema for a workflow
+        to be used when creating a workflow definition
+      operationId: getWorkflowDefaultConfig
+      parameters:
+        - name: repositoryName
+          in: path
+          required: true
+          schema:
+            type: string
+          example: my_repository
+        - name: codeLocation
+          in: path
+          required: true
+          schema:
+            type: string
+          example: user_code
+        - name: jobName
+          in: path
+          required: true
+          schema:
+            type: string
+          example: data_pipeline
+      responses:
+        '200':
+          description: Default configuration generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDefaultConfigResponse'
+              example:
+                jobName: data_pipeline
+                repositoryName: my_repository
+                codeLocation: user_code
+                defaultYamlConfig: |-
+                  ops:
+                    process_data:
+                      config:
+                        url: https://default.com
+                        api_key: default-key
+        '400':
+          description: Bad Request - Invalid input
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Validation Error
+                status: 400
+                detail: Validation failed for one or more parameters
+                instance: /v1/workflows/my_repository/%20/data_pipeline/defaultConfig
+                timestamp: '2024-12-03T10:15:30.123Z'
+                errors:
+                  codeLocation: must not be blank
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                detail: Missing or invalid Authorization header
+                instance: /v1/workflows/my_repository/user_code/data_pipeline/defaultConfig
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                status: 403
+                detail: User does not have the required permissions to perform this action
+                instance: /v1/workflows/my_repository/user_code/data_pipeline/defaultConfig
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '404':
+          description: Workflow not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:resourceNotFound
+                title: Resource Not Found
+                status: 404
+                detail: 'Workflow not found with identifier: my_repository/user_code/data_pipeline'
+                instance: /v1/workflows/my_repository/user_code/unknown/defaultConfig
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                title: Not Acceptable
+                status: 406
+                detail: The requested representation (Accept header) is not supported.
+                instance: /v1/workflows/my_repository/user_code/data_pipeline/defaultConfig
+                timestamp: '2024-12-03T10:15:30.123Z'
+                requested: application/xml
+                supported:
+                  - application/json
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                detail: An unexpected error occurred
+                instance: /v1/workflows/my_repository/user_code/data_pipeline/defaultConfig
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '502':
+          description: External service error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:externalServiceError
+                title: External Service Error
+                status: 502
+                detail: Error communicating with Workflow Engine
+                instance: /v1/workflows/my_repository/user_code/data_pipeline/defaultConfig
+                timestamp: '2024-12-03T10:15:30.123Z'
+                service: Workflow Engine
+  /runs/{runId}:
+    get:
+      tags:
+        - Runs
+      summary: Get workflow run status
+      description: Retrieves the status and details of a workflow definition execution run by its run ID
+      operationId: getRun
+      parameters:
+        - name: runId
+          in: path
+          description: Run identifier
+          required: true
+          schema:
+            type: string
+          example: abc123-def456-ghi789
+      responses:
+        '200':
+          description: Run retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
+              example:
+                runId: abc123-def456-ghi789
+                status: SUCCESS
+                resolvedYaml: |-
+                  ops:
+                    process_data:
+                      config:
+                        url: https://example.com
+                startTime: '2024-12-03T10:15:30.123Z'
+                endTime: '2024-12-03T10:16:10.456Z'
+                stepErrors: []
+                runErrors: []
+        '400':
+          description: Bad Request - Blank run ID
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:validationError
+                title: Validation Error
+                status: 400
+                detail: Validation failed for one or more parameters
+                instance: /v1/runs/%20
+                timestamp: '2024-12-03T10:15:30.123Z'
+                errors:
+                  runId: must not be blank
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:unauthorized
+                title: Unauthorized
+                status: 401
+                detail: Missing or invalid Authorization header
+                instance: /v1/runs/abc123-def456
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:forbidden
+                title: Forbidden
+                status: 403
+                detail: User does not have the required permissions to perform this action
+                instance: /v1/runs/abc123-def456
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '404':
+          description: Run not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:resourceNotFound
+                title: Resource Not Found
+                status: 404
+                detail: Run not found
+                instance: /v1/runs/99999
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:notAcceptable
+                title: Not Acceptable
+                status: 406
+                detail: The requested representation (Accept header) is not supported.
+                instance: /v1/runs/abc123-def456
+                timestamp: '2024-12-03T10:15:30.123Z'
+                requested: application/xml
+                supported:
+                  - application/json
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                status: 500
+                detail: An unexpected error occurred
+                instance: /v1/runs/abc123-def456
+                timestamp: '2024-12-03T10:15:30.123Z'
+        '502':
+          description: External service error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: urn:problem-type:simpl:externalServiceError
+                title: External Service Error
+                status: 502
+                detail: 'Failed to query run status from Workflow Engine: Service temporarily unavailable'
+                instance: /v1/runs/abc123-def456
+                timestamp: '2024-12-03T10:15:30.123Z'
+                service: Workflow Engine
+components:
+  schemas:
+    Problem:
+      required:
+        - detail
+        - status
+        - title
+        - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type
+          example: urn:problem-type:simpl:resourceNotFound
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type
+          example: Resource Not Found
+        status:
+          type: integer
+          description: The HTTP status code
+          example: 404
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence
+          example: 'CatalogAsset not found with id: 123'
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence
+          example: /v1/catalog-assets/123
+        timestamp:
+          type: string
+          description: Timestamp when the error occurred
+          format: date-time
+          example: '2024-12-03T10:15:30.123Z'
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+          description: Field-level validation errors (key = field, value = message)
+          example:
+            name: size must be between 1 and 255
+            originalId: must not be blank
+      description: RFC 7807 Problem for API error responses according to BelGIF guidelines
+    ValidateJobConfigRequest:
+      required:
+        - codeLocation
+        - jobName
+        - repositoryName
+        - yamlConfiguration
+      type: object
+      properties:
+        repositoryName:
+          type: string
+        codeLocation:
+          type: string
+        jobName:
+          type: string
+        yamlConfiguration:
+          type: object
+    ConfigValidation:
+      required:
+        - isValid
+        - jobName
+      type: object
+      properties:
+        jobName:
+          type: string
+          description: Name of the job being validated
+          example: data_pipeline
+        isValid:
+          type: boolean
+          description: Whether the configuration is valid
+          example: true
+        errors:
+          type: array
+          description: List of validation errors (empty if valid)
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      description: Configuration validation result
+    ValidationError:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Field validation failed
+        path:
+          type: array
+          description: Path to the field that caused the error
+          example:
+            - ops
+            - config
+          items:
+            type: string
+            description: Path to the field that caused the error
+            example: '["ops","config"]'
+        reason:
+          type: string
+          description: Reason for the validation failure
+          example: Invalid value
+        errorType:
+          type: string
+          description: Type of error
+          example: ValidationError
+        fieldName:
+          type: string
+          description: Name of the field that failed validation
+          example: config
+        fieldNames:
+          type: array
+          description: List of field names involved in the error
+          items:
+            type: string
+            description: List of field names involved in the error
+        valueRep:
+          type: string
+          description: String representation of the invalid value
+      description: List of validation errors (empty if valid)
+    CreateWorkflowDefinitionRequest:
+      required:
+        - assetDescription
+        - assetId
+        - assetType
+        - providerEmail
+      type: object
+      properties:
+        assetId:
+          type: string
+        assetType:
+          type: string
+          description: Type of the catalog asset
+          example: dataset
+        assetDescription:
+          type: string
+          description: Description of the catalog asset
+          example: Customer analytics dataset
+        providerEmail:
+          type: string
+          description: Email of the asset provider
+          example: provider@example.com
+        repositoryName:
+          type: string
+        codeLocation:
+          type: string
+        jobName:
+          type: string
+        yamlConfiguration:
+          type: object
+    WorkflowDefinition:
+      required:
+        - assetId
+        - associationTitle
+        - codeLocation
+        - id
+        - isActive
+        - jobName
+        - repositoryName
+        - yamlConfiguration
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Internal database ID of the workflow definition
+          format: int64
+          example: 1
+        assetId:
+          type: string
+          description: Original ID of the catalog resource
+          example: asset-001
+        assetType:
+          type: string
+          description: Type of the catalog asset
+          example: dataset
+        assetDescription:
+          type: string
+          description: Description of the catalog asset
+          example: Customer analytics dataset
+        providerEmail:
+          type: string
+          description: Email of the asset provider
+          example: provider@example.com
+        repositoryName:
+          type: string
+          description: Repository name
+          example: my_repository
+        codeLocation:
+          type: string
+          description: Code location name
+          example: user_code
+        jobName:
+          type: string
+          description: Job name
+          example: data_pipeline
+        associationTitle:
+          type: string
+          description: Title describing this workflow definition
+          example: Data Processing Pipeline
+        isActive:
+          type: boolean
+          description: Whether this workflow definition is currently active
+          example: true
+        yamlConfiguration:
+          type: string
+          description: YAML configuration template with variable placeholders
+          example: |
+            ops:
+              process_data:
+                config:
+                  url: ${APP_URL}
+                  api_key: ${API_KEY}
+      description: Workflow definition - association between a catalog resource and a workflow
+    ExecuteWorkflowRequest:
+      required:
+        - assetId
+        - config
+      type: object
+      properties:
+        assetId:
+          type: string
+        config:
+          type: object
+          additionalProperties:
+            type: string
+    ExecuteWorkflowResponse:
+      required:
+        - resolvedYaml
+        - runId
+        - status
+      type: object
+      properties:
+        runId:
+          type: string
+          description: Run identifier
+          example: abc123-def456-ghi789
+        status:
+          type: string
+          description: Execution status
+          example: STARTED
+          enum:
+            - QUEUED
+            - NOT_STARTED
+            - STARTING
+            - STARTED
+            - SUCCESS
+            - FAILURE
+            - CANCELING
+            - CANCELED
+            - UNKNOWN
+        resolvedYaml:
+          type: string
+          description: Resolved YAML configuration with substituted variables
+          example: |
+            ops:
+              process_data:
+                config:
+                  url: https://example.com
+                  api_key: secret-key-123
+      description: Response from workflow execution request
+    CodeLocation:
+      required:
+        - id
+        - loadStatus
+        - locationDetails
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        loadStatus:
+          type: string
+        locationDetails:
+          $ref: '#/components/schemas/LocationDetails'
+    CodeLocationsResponse:
+      required:
+        - codeLocations
+        - total
+      type: object
+      properties:
+        codeLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeLocation'
+        total:
+          type: integer
+          format: int32
+    LocationDetails:
+      required:
+        - id
+        - name
+        - repositories
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        repositories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Repository'
+    Pipeline:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Repository:
+      required:
+        - id
+        - jobs
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pipeline'
+    JobDefaultConfigResponse:
+      required:
+        - codeLocation
+        - defaultYamlConfig
+        - jobName
+        - repositoryName
+      type: object
+      properties:
+        jobName:
+          type: string
+          description: Job name
+          example: data_pipeline
+        repositoryName:
+          type: string
+          description: Repository name
+          example: my_repository
+        codeLocation:
+          type: string
+          description: Code location name
+          example: user_code
+        defaultYamlConfig:
+          type: string
+          description: YAML configuration built from default values
+          example: |
+            ops:
+              process_data:
+                config:
+                  url: "https://default.com"
+                  api_key: "default-key"
+      description: Response containing default YAML configuration for a Workflow Engine job
+    RunError:
+      type: object
+      properties:
+        message:
+          type: string
+    RunResponse:
+      required:
+        - resolvedYaml
+        - runId
+        - startTime
+        - status
+      type: object
+      properties:
+        runId:
+          type: string
+          description: Run identifier
+          example: abc123-def456-ghi789
+        status:
+          type: string
+          description: Execution status
+          enum:
+            - QUEUED
+            - NOT_STARTED
+            - STARTING
+            - STARTED
+            - SUCCESS
+            - FAILURE
+            - CANCELING
+            - CANCELED
+            - UNKNOWN
+        resolvedYaml:
+          type: string
+          description: Resolved YAML configuration with substituted variables
+          example: |
+            ops:
+              process_data:
+                config:
+                  url: https://example.com
+                  api_key: secret-key-123
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        stepErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepError'
+        runErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunError'
+    StepError:
+      type: object
+      properties:
+        stepKey:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: IAA cloud gateway JWT token
+      scheme: bearer
+      bearerFormat: JWT

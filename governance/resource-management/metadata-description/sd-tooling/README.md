@@ -60,6 +60,11 @@ Deployed on the **Provider Agent**. The backend communicates with the **Tier-2 G
 
 - [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/dynamic-view.md)
 
+
+## API
+
+[`api/`](api/README.md) — 3 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - Backend: <https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-api-be>

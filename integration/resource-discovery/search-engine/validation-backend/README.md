@@ -37,6 +37,11 @@ Deployed on **both the Provider Agent and the Consumer Agent**.
 - [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/README.md)
 - [BP09A Consumer consumes a data resource](../../../../foundations/business-processes/BP09A-consume-data-resource/README.md)
 
+
+## API
+
+[`api/`](api/README.md) — 1 OpenAPI/AsyncAPI spec imported from the source repository (last imported 2026-04-28).
+
 ## Source code
 
 - Simpl repo: <https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be>

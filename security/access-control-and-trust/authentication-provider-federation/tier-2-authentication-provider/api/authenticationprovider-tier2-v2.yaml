@@ -1,0 +1,351 @@
+openapi: 3.0.1
+info:
+  title: Authentication Provider Tier 2
+  description: Tier 2 OpenAPI definition for the Authentication Provider component
+    of the SIMPL project
+  contact:
+    name: Simpl Programme
+    url: https://simpl-programme.ec.europa.eu/
+    email: cnect-simpl@ec.europa.eu
+  license:
+    name: European Union Public License (EUPL) 1.2
+    url: https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf
+  version: 2.0.0
+servers:
+- url: https://t2.authentication-provider.dev.simpl.eu/tier2/v2
+  description: Tier2 Authentication Provider
+security:
+- mtlsWithEphemeralProof: []
+tags:
+- name: Participants
+  description: Retrieve information about the agent participant and other data space
+    participants
+paths:
+  /ping:
+    get:
+      tags:
+      - Participants
+      summary: Respond to a ping from another participant
+      description: Reply to a connectivity check made by other agents in the dataspace
+      operationId: ping
+      responses:
+        "200":
+          description: Successfully pinged the participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PingResponse"
+              examples:
+                default:
+                  summary: Default example
+                  value:
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    organization: Organization Name
+                    identityAttributes:
+                    - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      code: CONSUMER
+                      name: Consumer
+                      description: Identity attribute used for tagging an end user
+                        able to act as a user of a data consumer participant (can
+                        start contract and transfer process)
+                      assignableToRoles: true
+                      enabled: true
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      used: true
+                      right: true
+                      builtIn: true
+                    - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      code: DATA_SEARCHER
+                      name: Data searcher
+                      description: "Identity Attributes used for tagging an end user\
+                        \ able to act only as a searcher in the catalogue, but he\
+                        \ can't start a contract negotiation or transfer process"
+                      assignableToRoles: true
+                      enabled: true
+                      creationTimestamp: 2000-01-23T04:56:07.000+00:00
+                      updateTimestamp: 2000-01-23T04:56:07.000+00:00
+                      used: true
+                      right: true
+                      builtIn: false
+        "401":
+          $ref: "#/components/responses/MissingTier2Credential"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - mtlsWithEphemeralProof: []
+  /ephemeralProof:
+    post:
+      tags:
+      - Participants
+      summary: Stores the Ephemeral Proof
+      description: Stores the ephemeral proof of another participant in the participant
+        agent
+      operationId: storeCallerEphemeralProof
+      requestBody:
+        description: The ephemeral proof to be stored
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EphemeralProof"
+            examples:
+              issuedEphemeralProof:
+                summary: an ephemeral proof issued
+                value: |
+                  {
+                    "proof": "IxvaN4ER-PlPgLYzfRhk_JiY4VAow3GNjaK5rYCINFsEPa7VaYnRsaCmQVq8CTgddihEPPXet2laH8_c3WqxY4AeZO5eljwSCobCHzxYdOoFKbpNXIm7dqHg_5xpQz-YBJMiDM1ILOEsER8ADyF4NC2sN0K_0t6xZLSAQIRrHvpGOrtYr5E-SllTWHWPmqCkX2BUZxoYNK2FWgQZpuUOD55HfsvFXNVQa_5TFRDibi9LsT7Sd_az0iGB0TfAb0v3ZR0qnmgyp5pTeIeU5UqhtbgU9RnUCVmGIK-SZYNvrlXgv9hiKAZGhLgeI8hO40utfT2YTYHgD2Aiufqo3RIbJA"
+                  }
+        required: true
+      responses:
+        "204":
+          description: Ephemeral proof successfully stored
+          x-microcks-refs:
+          - issuedEphemeralProof
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/MissingTier2Credential"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+      - mtls: []
+components:
+  schemas:
+    PingResponse:
+      type: object
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        organization: Organization Name
+        identityAttributes:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          code: CONSUMER
+          name: Consumer
+          description: Identity attribute used for tagging an end user able to act
+            as a user of a data consumer participant (can start contract and transfer
+            process)
+          assignableToRoles: true
+          enabled: true
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          used: true
+          right: true
+          builtIn: true
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          code: DATA_SEARCHER
+          name: Data searcher
+          description: "Identity Attributes used for tagging an end user able to act\
+            \ only as a searcher in the catalogue, but he can't start a contract negotiation\
+            \ or transfer process"
+          assignableToRoles: true
+          enabled: true
+          creationTimestamp: 2000-01-23T04:56:07.000+00:00
+          updateTimestamp: 2000-01-23T04:56:07.000+00:00
+          used: true
+          right: true
+          builtIn: false
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The participant unique identifier
+        organization:
+          type: string
+          description: The participant organization name
+          maxLength: 255
+        identityAttributes:
+          type: array
+          description: The participant assigned identity attributes
+          items:
+            $ref: "#/components/schemas/IdentityAttribute"
+      required:
+      - id
+      - identityAttributes
+      - organization
+    EphemeralProof:
+      type: object
+      example:
+        proof: |
+          IxvaN4ER-PlPgLYzfRhk_JiY4VAow3GNjaK5rYCINFsEPa7VaYnRsaCmQVq8CTgddihEPPXe
+          t2laH8_c3WqxY4AeZO5eljwSCobCHzxYdOoFKbpNXIm7dqHg_5xpQz-YBJMiDM1ILOEsER8A
+          DyF4NC2sN0K_0t6xZLSAQIRrHvpGOrtYr5E-SllTWHWPmqCkX2BUZxoYNK2FWgQZpuUOD55H
+          fsvFXNVQa_5TFRDibi9LsT7Sd_az0iGB0TfAb0v3ZR0qnmgyp5pTeIeU5UqhtbgU9RnUCVmG
+          IK-SZYNvrlXgv9hiKAZGhLgeI8hO40utfT2YTYHgD2Aiufqo3RIbJA
+      properties:
+        proof:
+          type: string
+          description: a JWT signed by the Dataspace Governance Authority identifying
+            a dataspace participant
+      required:
+      - proof
+    Problem:
+      type: object
+      description: |
+        A Problem Details object (RFC 9457).
+
+        Additional properties specific to the problem type may be present.
+      example:
+        type: urn:problem-type:exampleOrganization:exampleProblem
+        href: https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types
+        title: Description of the type of problem that occurred
+        status: 400
+        detail: Description of specific occurrence of the problem
+        instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+          description: |
+            An absolute URI that identifies the problem type.  When dereferenced,
+            it SHOULD provide human-readable documentation for the problem type
+            (e.g., using HTML).
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: |
+            A short, summary of the problem type. Written in english and readable
+            for engineers (usually not suited for non technical stakeholders and
+            not localized); example: Service Unavailable
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status code generated by the origin server for this occurrence
+            of the problem.
+          example: 503
+          maximum: 600
+          minimum: 100
+        detail:
+          type: string
+          description: |
+            A human readable explanation specific to this occurrence of the
+            problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: |-
+            An absolute URI that identifies the specific occurrence of the problem.
+            It may or may not yield further information if dereferenced.
+    IdentityAttribute:
+      type: object
+      example:
+        code: CONSUMER
+        name: Consumer
+        creationTimestamp: 2000-01-23T04:56:07.000+00:00
+        description: Identity attribute used for tagging an end user able to act as
+          a user of a data consumer participant (can start contract and transfer process)
+        assignableToRoles: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        used: true
+        right: true
+        enabled: true
+        builtIn: true
+        updateTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: the unique UUID identifier of the identity attribute
+        code:
+          type: string
+          description: the unique code identifying the identity attribute
+          maxLength: 255
+        name:
+          type: string
+          description: the human readable name of the identity attribute
+          maxLength: 255
+        description:
+          type: string
+          description: the human readable description of the identity attribute
+          maxLength: 255
+        assignableToRoles:
+          type: boolean
+          description: boolean stating if the identity attribute can be assigned to
+            a role
+        enabled:
+          type: boolean
+          description: boolean flag stating if the identity attribute is enabled
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: the creation timestamp of the identity attribute in ISO 8601
+            format
+        updateTimestamp:
+          type: string
+          format: date-time
+          description: the update timestamp of the identity attribute in ISO 8601
+            format
+        used:
+          type: boolean
+          description: boolean saying if the identity attribute is assigned to at
+            least a participant
+          readOnly: true
+        right:
+          type: boolean
+          description: boolean stating if the identity attribute represent a legal
+            right
+          readOnly: true
+        builtIn:
+          type: boolean
+          description: boolean stating if the identity attribute is built-in an therefore
+            cannot be created modified or deleted
+          readOnly: true
+      required:
+      - assignableToRoles
+      - code
+      - enabled
+      - name
+  responses:
+    MissingTier2Credential:
+      description: "Unauthorized, the caller did not provide the tier two credential\
+        \ to identify itself"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            unauthorized:
+              summary: Missing Tier 2 Credential
+              value:
+                type: urn:problem-type:simpl:missingTier2Credential
+                title: Missing Tier 2 Credential
+                detail: Tier 2 Credential is missing
+                status: 401
+    InternalServerError:
+      description: "Internal Server Error, an internal server error occurred"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            internalServerError:
+              summary: Internal Server Error
+              value:
+                type: urn:problem-type:simpl:internalServerError
+                title: Internal Server Error
+                detail: Internal Server Error
+                status: 500
+    BadRequest:
+      description: "Bad request, invalid input data"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          examples:
+            badRequest:
+              summary: Bad Request
+              value:
+                type: urn:problem-type:simpl:badRequest
+                title: Bad request
+                detail: Invalid input data
+                status: 400
+  securitySchemes:
+    mtls:
+      type: http
+      description: SIMPL Tier 2 mTLS authentication process
+      scheme: mutual
+    mtlsWithEphemeralProof:
+      type: http
+      description: SIMPL Tier 2 mTLS authentication process with Ephemeral Proof exchange
+      scheme: mutual
