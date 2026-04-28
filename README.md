@@ -15,6 +15,7 @@ Method:
 - Used the capability map as base, setup a structure <dimension>/<capability>/<service>/<solution>
 - Worked heavily with Claude code to analyse the architecture document
 - Approximately 9 distinct steps to distribute the documentation to the correct location (iterative)
+- Traverse the development branch in code.europa.eu to retrieve all documentation from the code base
 ```
 ## Table of Contents
 
