@@ -1,95 +1,77 @@
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
-<p>📍 <strong>You are here</strong><br/>
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP08 — Consume infrastructure resource</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP08 — Consume Infrastructure Resource</strong><br/>
 </p>
 </div>
 
 # BP08 – Consumer consumes an infrastructure resource from a Provider
 
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
+> showing how this business process executes at runtime, with links
+> to each participating solution.
+
 ## Overview
 
-This business process covers the situation where a **Consumer** has a usage contract for a certain infrastructure resource and seeks to consume it from an **Infrastructure Provider**. The goal is to facilitate secure, transparent, and contractually governed access within a data space.
-
-## Main Steps
-
-1.  **Request infrastructure resource:** The Consumer requests the resource from the Provider.
-2.  **Provision infrastructure resource:** The Provider provisions and configures the resource on a dedicated environment.
-3.  **Provide access to infrastructure resource:** The Provider applies access control rules and provides credentials.
+This business process covers the situation where a  Consumer  has a usage contract for a certain infrastructure resource, and   seeks to consume that infrastructure resource from an  Infrastructure Provider. The aim of the process is to facilitate secure, transparent, and contractually governed access to an infrastructure resource within a data space, ensuring that both the Infrastructure Provider  and  Consumer have clearly defined rights and obligations.  The Consumer can consume the infrastructure resource until it is decommissioned. It includes the following main steps: Request infrastructure resource: The Consumer requests the infrastructure resource from the Infrastructure Provider . Provision infrastructure resource: The Infrastructure Provider provisions and configures the infrastructure resource on a dedicated environment specific for the Consumer . Provide access to infrastructure resource: The Infrastructure Provider applies the access control rules and provides the Consumer with the right access credentials.
 
 ## Actors
 
--   **Infrastructure Provider**
--   **Consumer**
+The following actors are involved in the business process: Infrastructure Provider Consumer
 
-## Assumptions & Prerequisites
+## Assumptions
 
-### Assumptions
+The following assumptions are made: The Infrastructure Provider has its services available and running. The Consumer understands the available infrastructure resources from the Infrastructure Provider and knows how to use them.
 
--   The Infrastructure Provider has services available and running.
--   The Consumer understands the available resources and how to use them.
+## Prerequisites
 
-### Prerequisites
+The following prerequisites must be fulfilled:  Data space is configured:   The  Governance Authority   has configured the catalogue with the corresponding vocabulary and schemas to have the general structure of a resource description, contract clauses, and other vital components (Business Process 2). Consumer / Infrastructure Provider onboarded:  Both the   Consumer   and   Infrastructure Provider   must complete the onboarding process (Business Process 3A) before they can consume or provide any available resources. End-User authenticated & authorised:  The   End-User  is authenticated and has the appropriate role and permissions to perform the steps in the process (Business Process 3B). Resource description is present in the data space catalogue:  A resource description   must be published in the data space catalogue for the  Consumer  to find a resource in the data space catalogue (Business Process 5). As such, it is assumed that the  Consumer  has searched in the data space catalogue and found the   resource description   (Business Process 6).
 
--   **Data space is configured:** Governance Authority has configured the catalogue (BP02).
--   **Onboarding complete:** Both parties are onboarded (BP03A).
--   **Authenticated & Authorised:** The End-User has appropriate permissions (BP03B).
--   **Resource description present:** The resource is published in the catalogue (BP05) and found by the Consumer (BP06).
+![BP08 figure 1](./media/BP08-figure-1.png)
+*BP08 figure 1*
 
-## Detailed Process Steps
+![BP08 figure 2](./media/BP08-figure-2.png)
+*BP08 figure 2*
 
-### 1. Trigger infrastructure resource consumption
+## Details
 
-The Consumer initiates the process.
+T he   following  shows the detailed business process diagram and gives the step descriptions.
 
-### 2. BP08.01 Request infrastructure resource
+Trigger infrastructure resource consumption The  Consumer  initiates the process to consume an infrastructure resource from an  Infrastructure Provider .
 
-The Consumer sends a request for the infrastructure resource to the Provider.
+BP08.01 Request infrastructure resource The Consumer requests the infrastructure resource from the Infrastructure Provider .
 
-### 3. BP08.02 Provision infrastructure resource
+BP08.02 Provision infrastructure resource The Infrastructure Provider provisions and configures the infrastructure resource for a dedicated environment specific for the Consumer .
 
-The Provider provisions and configures the resource for a dedicated environment specific to the Consumer.
+BP08.03 Post configuration If the deployment script contains any part for the post configuration process, such as deployment of applications or loading datasets or images, t he Infrastructure Provider performs the necessary actions in the post configuration phase.
 
-### 4. BP08.03 Post configuration
+BP08.04 Provide access to the infrastructure resource The Infrastructure Provider configures and applies usage and access policies (e.g., who has access, the instance usage duration, resource limitations) on the infrastructure resource (and the applications/datasets, if they are a part of the deployment script) based on the usage contract, and provides the Consumer with the right access credentials.
 
-If deployment scripts include post-configuration (e.g., deploying apps, loading datasets), the Provider executes these actions.
+BP08.05 Access the infrastructure resource The Consumer consumes the infrastructure resource until decommissioning .
 
-### 5. BP08.04 Provide access to the infrastructure resource
+BP08.06 Remediate errors and notify Consumer If during the provisioning or post configuration process an error occurs, both the Consumer and the Infrastructure Provider are be informed through a notification. The Infrastructure Provider subsequently reviews the process to solve the errors and manually continue and monitor the process until the errors are remediated, until the infrastructure resource can be made available as per the usage contract. The Infrastructure Provider informs the Consumer of the outcome of the remediation process.
 
-The Provider configures usage and access policies (duration, limitations) based on the usage contract and delivers access credentials.
+Outcome
 
-### 6. BP08.05 Access the infrastructure resource
+## Sub-processes
 
-The Consumer consumes the resource until it is decommissioned.
-
-### 7. BP08.06 Remediate errors and notify Consumer
-
-If errors occur during provisioning, both parties are notified. The Provider reviews, solves, and monitors the process until remediation is complete.
-
-## Outcome
-
--   **Infrastructure resource is consumed:** The Consumer has access based on contract details, including access policies and decommissioning terms.
-
-## High Level Requirements
-
-### 8.1 - Requesting a resource (app/data/infrastructure)
-
-SIMPL shall have a mechanism to allow consumers to request resources through the platform.
-
-### 8.2 - Using infrastructure from a provider - Consumer Monitoring
-
-Simpl shall provide monitoring capabilities to ensure the Consumer can track resource usage and performance.
-
-### 8.3 - Using infrastructure from a provider - Connectivity
-
-SIMPL shall support the establishment of necessary communication channels between the Consumer and the Provider's infrastructure.
-
-### 8.4 - Mechanisms to configure and provision infrastructure resources
-
-Simpl shall provide mechanisms to automatically configure and provision resources based on predefined scripts or templates.
+- [8.1 - Requesting a resource (app/data/infrastructure)](./81-requesting-resource-appdatainfrastructure.md)
+- [8.2 - Using infrastructure from a provider  - Consumer Monitoring](./82-using-infrastructure-provider-consumer-monitoring.md)
+- [8.3 - Using infrastructure from a provider - Connectivity](./83-using-infrastructure-provider-connectivity.md)
+- [8.4 - Mechanisms to configure and provision infrastructure resources](./84-mechanisms-configure-and-provision-infrastructure-resources.md)
+- [8.5 - Using infrastructure from a provider - Credential Management](./85-using-infrastructure-provider-credential-management.md)
+- [8.6 - Using infrastructure from a provider - IAM](./86-using-infrastructure-provider-iam.md)
+- [8.8 - Catalogue of services](./88-catalogue-services.md)
 
 ## Canonical source
 
 [https://simpl-programme.ec.europa.eu/book-page/bp08-consumer-consumes-infrastructure-resource-provider](https://simpl-programme.ec.europa.eu/book-page/bp08-consumer-consumes-infrastructure-resource-provider)
+
+## Touches
+
+- (auto-inferred — verify) [`../../../governance/`](../../../governance/README.md)
