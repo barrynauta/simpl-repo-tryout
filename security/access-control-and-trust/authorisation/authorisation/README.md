@@ -40,6 +40,11 @@ Per the architecture spec these three repos are treated as one logical component
 - [api/tier2-gateway.openapi.yaml](api/tier2-gateway.openapi.yaml) — Tier 2 gateway OpenAPI specification (stub).
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (1 file), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+
 ## Source code
 
 - Tier 1 gateway: <https://code.europa.eu/simpl/simpl-open/development/iaa/tier1-gateway>

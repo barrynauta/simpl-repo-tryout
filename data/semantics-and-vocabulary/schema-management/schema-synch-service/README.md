@@ -49,6 +49,11 @@ Provenance: built by Simpl. Source repository: `data1/schema-sync-adapter` — e
 
 [`api/`](api/README.md) — 2 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/data1/schema-sync-adapter>

@@ -50,6 +50,11 @@ Tier-1 gateway base URLs for the dependent services (no trailing slashes):
 - [BP09A Consumer consumes a data resource](../../../../foundations/business-processes/BP09A-consume-data-resource/dynamic-view.md)
 - [BP09B Consumer receives a data processing service](../../../../foundations/business-processes/BP09B-consume-data-via-application/dynamic-view.md)
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+
 ## Source code
 
 - Advanced search backend: `code.europa.eu/simpl/simpl-open/development/data1/xfsc-advsearch-be`

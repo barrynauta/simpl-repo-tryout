@@ -1,0 +1,174 @@
+classDiagram
+    Document "1" -- "0..n" ValidationRuleExecution
+    DocumentTemplate "1" -- "0..n" Document
+    DocumentTemplate "1" -- "0..n" OnboardingProcedureTemplateDocumentTemplate
+    DocumentTemplate "1" -- "0..n" ValidationRule
+    MimeType "1" -- "0..n" Document
+    MimeType "1" -- "0..n" DocumentTemplate
+    OnboardingApplicant "1" -- "0..n" OnboardingRequest
+    OnboardingProcedureTemplate "1" -- "0..n" OnboardingProcedureTemplateDocumentTemplate
+    OnboardingProcedureTemplate "1" -- "0..n" OnboardingRequest
+    OnboardingProcedureTemplate "1" -- "0..n" ValidationRule
+    OnboardingProcedureTemplate "1" -- "0..n" OnboardingProcedureTemplateIdentityAttribute
+    OnboardingRequest "1" -- "0..n" Comment
+    OnboardingRequest "1" -- "0..n" Document
+    OnboardingRequest "1" -- "0..n" ValidationRuleExecution
+    OnboardingRequest "1" -- "0..n" OnboardingRequestIdentityAttribute
+    OnboardingStatus "1" -- "0..n" OnboardingRequest
+    ValidationRule "1" -- "0..n" ValidationRule
+    ValidationRule "1" -- "0..n" ValidationRuleExecution
+    ValidationRuleExecution "1" -- "0..n" ValidationRuleExecutionRemark
+
+    class OnboardingProcedureTemplateIdentityAttribute {
+        +uuid onboarding_procedure_template_id
+        +string identity_attribute_code
+    }
+
+    class OnboardingRequestIdentityAttribute {
+        +uuid onboarding_request_id
+        +string identity_attribute_code
+    }
+
+
+    class Comment {
+        +uuid id
+        +uuid onboarding_request_id
+        +string author
+        +string content
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+    }
+
+    class Document {
+        +uuid id
+        +uuid document_template_id
+        +uuid onboarding_request_id
+        +string description
+        +bytea content
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+        +string filename
+        +int filesize
+        +uuid mime_type_id
+    }
+
+    class DocumentTemplate {
+        +uuid id
+        +string description
+        +boolean mandatory
+        +uuid mime_type_id
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+        +string name
+        +string type
+    }
+
+    class EventLog {
+        +uuid id
+        +uuid onboarding_request_id
+        +uuid initiator_user_id
+        +string initiator_service
+        +string event_type
+        +jsonb event_details
+        +uuid entity_id
+        +timestamp without time zone creation_timestamp
+    }
+
+    class MimeType {
+        +uuid id
+        +string value
+        +string description
+    }
+
+    class OnboardingApplicant {
+        +uuid id
+        +string username
+        +string firstname
+        +string lastname
+        +string email
+    }
+
+    class OnboardingProcedureTemplate {
+        +uuid id
+        +uuid participant_type_id
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+        +int expiration_timeframe
+        +string description
+        +string expiration_timeframe_timeunit
+        +string application_instructions
+    }
+
+    class OnboardingProcedureTemplateDocumentTemplate {
+        +uuid onboarding_procedure_template_id
+        +uuid document_template_id
+    }
+
+    class OnboardingRequest {
+        +uuid id
+        +uuid onboarding_procedure_template_id
+        +uuid onboarding_status_id
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+        +int expiration_timeframe
+        +uuid participant_id
+        +string rejection_cause
+        +uuid onboarding_applicant_id
+        +string organization
+        +uuid participant_type_id
+        +timestamp last_status_update_timestamp
+        +string expiration_timeframe_timeunit
+    }
+
+    class OnboardingStatus {
+        +uuid id
+        +string value
+        +string label
+    }
+
+    class ParticipantType {
+        +uuid id
+        +string value
+        +string label
+    }
+
+    class ValidationRule {
+        +uuid id
+        +string name
+        +string description
+        +timestamp valid_since
+        +timestamp zone valid_to
+        +boolean active
+        +string type
+        +boolean auto_approval
+        +boolean required
+        +string content_validation_uri
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+        +uuid document_template_id
+        +uuid onboarding_procedure_template_id
+        +string strategy
+        +uuid parent_id
+        +string eidas_person_type
+        +string eidas_attribute
+        +string eidas_attribute_condition
+        +string eidas_attribute_value
+    }
+
+    class ValidationRuleExecution {
+        +uuid id
+        +uuid validation_rule_id
+        +uuid document_id
+        +uuid onboarding_request_id
+        +timestamp execution_start_date
+        +timestamp execution_end_date
+        +string status
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+    }
+
+    class ValidationRuleExecutionRemark {
+        +uuid id
+        +uuid execution_id
+        +jsonb remark
+    }

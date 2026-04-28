@@ -37,6 +37,11 @@ Provenance: built by Simpl. Source repositories: `iaa/authentication_provider` (
 
 [`api/`](api/README.md) — 4 OpenAPI/AsyncAPI specs imported from the source repository (last imported 2026-04-28).
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (4 files), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+
 ## Source code
 
 - Backend: <https://code.europa.eu/simpl/simpl-open/development/iaa/authentication_provider>

@@ -1,0 +1,50 @@
+classDiagram
+    Participant "1" -- "n" Credential
+    Participant "1" -- "1" AutoRenewalParticipant
+
+    class Participant {
+        +uuid id
+        +string organization
+        +string participant_type
+        +text certificate_signing_request_content
+        +text tier_one_public_key_content
+        +uuid active_credential_id
+        +string applicant_email
+        +boolean is_authority
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+        +timestamp renewal_request_timestamp
+    }
+
+    class Credential {
+        +uuid id
+        +uuid participant_id
+        +enum credential_type
+        +string certificate_authority
+        +string serial
+        +string credential_id
+        +timestamp expiry_date
+    }
+
+    class AutoRenewalDefault {
+        +uuid id
+        +integer days_before_expiry
+        +boolean modified_by_user
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+    }
+
+    class AutoRenewalParticipant {
+        +uuid participant_id
+        +integer days_before_expiry
+        +boolean enabled
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+    }
+
+    class AutoRenewalError {
+        +uuid id
+        +uuid participant_id
+        +string description
+        +timestamp creation_timestamp
+    }

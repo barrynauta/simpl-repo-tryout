@@ -39,6 +39,11 @@ Provenance: built by Simpl. Source repository: `agents/consumer`. Owner: Cross-t
 
 - [deployment-guide.md](deployment-guide.md) — full deployment procedure (ArgoCD and manual paths), prerequisites, OpenBao secrets, post-deploy steps, and troubleshooting. Sourced from `agents/consumer/documents/deployment-guide/`.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (1 file).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/agents/consumer>

@@ -39,6 +39,11 @@ The plugin is packaged as a JAR loaded into Keycloak as an SPI. It enriches Keyc
 - [BP03A Onboarding of a new data space Participant](../../../../foundations/business-processes/BP03A-onboarding-participant-providers/dynamic-view.md)
 - [BP03B Participant User and Roles Configuration](../../../../foundations/business-processes/BP03B-onboarding-participant-end-user/dynamic-view.md)
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+
 ## Source code
 
 - Custom authenticator plugin (Simpl-built, EUPL 1.2): <https://code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator>

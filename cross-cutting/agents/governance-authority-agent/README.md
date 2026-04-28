@@ -34,6 +34,11 @@ Provenance: built by Simpl. Source repository: `agents/governance-authority`. Ow
 
 - [deployment-guide.md](deployment-guide.md) — full deployment procedure (ArgoCD and manual paths), prerequisites including the common-components dependency, post-deploy initialisation, and a step-by-step recovery for the **Identity Provider failure** race condition (drop+recreate the EJBCA and identity-provider Postgres DBs). Sourced from `agents/governance-authority/documents/deployment-guide/`.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (1 file).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/agents/governance-authority>

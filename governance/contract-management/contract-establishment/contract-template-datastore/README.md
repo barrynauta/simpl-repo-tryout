@@ -24,6 +24,11 @@ Provenance: planned — no dedicated source repository yet. **Interim implementa
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — EUPL 1.2.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+
 ## Source code
 
 - **Target (planned)**: dedicated repository — not yet existing.

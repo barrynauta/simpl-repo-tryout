@@ -26,6 +26,11 @@ Note: the architecture spec frames this component both as a Connector extension/
 - [doc/architecture.md](doc/architecture.md) — six-view architecture document.
 - [LICENSE](LICENSE) — Apache 2.0 (Dagster upstream).
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (6 files).
+
 ## Source code
 
 - Simpl fork: `code.europa.eu/simpl/simpl-open/development/orchestration-platform/dagster`

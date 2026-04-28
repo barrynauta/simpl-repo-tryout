@@ -1,0 +1,65 @@
+classDiagram
+    PrivateKey "1" -- "1" Keypair
+    Keypair "1" -- "n" Credential
+
+    class Credential {
+        +uuid id
+        +string content
+        +string credential_id
+        +timestamp issuance_date
+        +timestamp expiry_date
+        +uuid keypair_id
+        +boolean active
+        +timestamp creation_timestamp
+    }
+
+    class ParticipantInfo {
+        +uuid id
+        +uuid participant_id
+        +string organization
+        +timestamp authority_creation_timestamp
+        +timestamp authority_update_timestamp
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+    }
+
+    class IdentityAttribute {
+        +uuid id
+        +string code
+        +string name
+        +string description
+        +boolean assignable_to_roles
+        +boolean enabled
+        +boolean assigned_to_participant
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+    }
+
+    class AutomaticRenewalConfig {
+        +uuid id
+        +boolean active
+    }
+
+    class Keypair {
+        +uuid id
+        +string name
+        +boolean active
+        +string public_key
+        +string public_key_hash
+        +string certificate_signing_request
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+    }
+
+    class PrivateKey {
+        +uuid id
+        +bytea private_key
+        +uuid keypair_id
+        +timestamp creation_timestamp
+    }
+
+    class CredentialSyncExecutionError {
+        +uuid id
+        +timestamp execution_timestamp
+        +string error_message
+    }

@@ -18,6 +18,11 @@ Consumed by [Contract Manager](../../../governance/contract-management/contract-
 
 Provenance: built by Simpl. Source repository: `contract-billing/common`. Owner: Contract team. Licence: EUPL 1.2.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-guide/` (1 file).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/contract-billing/common>

@@ -23,6 +23,11 @@ Provenance: built by Simpl. Source repository: `agents/common_components`. Backs
 - **PostgreSQL** — `common-components/postgres-cluster` — pervasive persistence layer (Keycloak, EJBCA, identity/onboarding/users-roles, catalogue metadata, infrastructure provider storage).
 - **Shared specs** — `common-components/shared-specs` — OpenAPI/AsyncAPI specifications shared across services.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (2 files), `user-manual/` (3 files).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/agents/common_components>

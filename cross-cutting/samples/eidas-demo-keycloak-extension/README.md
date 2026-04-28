@@ -22,6 +22,11 @@ Provenance: built by Simpl. Source repository: `iaa/eidas-demo-keycloak-extensio
 
 - [eidas-demo-node-deploy](../eidas-demo-node-deploy/README.md) — the Ansible playbook that stands up the demo eIDAS Node this extension talks to.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/iaa/eidas-demo-keycloak-extension>

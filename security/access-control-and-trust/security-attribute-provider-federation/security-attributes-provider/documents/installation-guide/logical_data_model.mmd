@@ -1,0 +1,19 @@
+classDiagram
+    IdentityAttribute "1" -- "0..n" ParticipantIdentityAttribute
+
+    class IdentityAttribute {
+        +uuid id
+        +string code
+        +string name
+        +string description
+        +boolean assignable_to_roles
+        +boolean enabled
+        +timestamp creation_timestamp
+        +timestamp update_timestamp
+        +boolean is_right
+    }
+
+    class ParticipantIdentityAttribute {
+        +uuid participant_id
+        +uuid identity_attribute_id
+    }

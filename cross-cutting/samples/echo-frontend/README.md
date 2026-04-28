@@ -18,6 +18,11 @@ Used as a starting template by teams building new frontends.
 
 Provenance: built by Simpl. Source repository: `iaa/echo-frontend`. Owner: IAA team. Licence: EUPL 1.2.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/iaa/echo-frontend>

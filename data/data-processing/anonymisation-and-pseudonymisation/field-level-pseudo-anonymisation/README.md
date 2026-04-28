@@ -32,6 +32,11 @@ Provenance: built by Simpl. Packaged as a Dagster code-location and deployed int
 
 - [SA02 Data processing services used by a Participant](../../../../foundations/business-processes/SA02-data-processing-services/README.md) — sub-process *2.1 Participant pseudonymises a dataset*.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+
 ## Source code
 
 - Simpl repo: <https://code.europa.eu/simpl/simpl-open/development/data-services/field-level-pseudo-anonymisation>

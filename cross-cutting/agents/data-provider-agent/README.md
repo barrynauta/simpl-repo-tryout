@@ -37,6 +37,11 @@ Provenance: built by Simpl. Source repository: `agents/data-provider`. Owner: Cr
 
 - [deployment-guide.md](deployment-guide.md) — full deployment procedure (ArgoCD and manual paths), prerequisites, OpenBao secrets including Gitea token bootstrap, MinIO secrets for the EDC connector, post-deploy steps, troubleshooting, and a SuperAdmin / ManagementCA cert FAQ. Sourced from `agents/data-provider/documents/deployment-guide/`.
 
+
+## Documentation (imported from source)
+
+[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (1 file).
+
 ## Source code
 
 - <https://code.europa.eu/simpl/simpl-open/development/agents/data-provider>
