@@ -91,17 +91,3 @@ To test authentication using the retrieved credentials:
 vault write auth/approle/login role_id="$ROLE_ID" secret_id="$SECRET_ID"
 ```
 
-#### Example of expected output:
-
-```txt
-Key                     Value
----                     -----
-token                   hvs.CAESIGd4NhyQZFJ04W_6kBIGGCLgaESmbLZ_uECdTm-hcHtaGh4KHGh2cy4yNVl6RjlnZ0d3bU9KbDFQNmFQT0ZlSVQ
-token_accessor          stmxNXK6WDt9qHfkN8CCALgn
-token_duration          1h
-token_renewable         true
-token_policies          ["default" "my-policy"]
-identity_policies       []
-policies                ["default" "my-policy"]
-token_meta_role_name    myapp-role
-```
