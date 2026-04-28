@@ -17,3 +17,4 @@ Data Space Protocol (DSP) contract negotiation and data exchange runtime. Manage
 ## Solutions
 
 - [Connector](connector/README.md) — Eclipse EDC fork implementing DSP; includes Control Plane, Data Plane, Policy Engine, Triggering Extension, and S3 Extension.
+- [EDC Connector Adapter](edc-connector-adapter/README.md) — abstraction layer between the EDC Connector and the SD-Tooling / Contract Consumption components, decoupling business logic from the specific connector implementation.

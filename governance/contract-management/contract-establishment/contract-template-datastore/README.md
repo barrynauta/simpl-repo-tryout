@@ -17,7 +17,7 @@ Stores contract templates to ensure consistent application of contract terms. Te
 
 Capability-map placement: `governance / contract-management / contract-establishment / contract-template-datastore`. This solution implements the **Contract establishment** business service (alongside the Contract Manager).
 
-Provenance: built by Simpl. No current source repository — planned component. Licence: EUPL 1.2.
+Provenance: planned — no dedicated source repository yet. **Interim implementation:** the SD Tooling currently reads templates from `data1/simpl-files`, a generic-file store re-used as a placeholder. The PSO mapping spreadsheet labels this app-service as `contract-template-datastore-temporary` and notes it as "Workaround to make the SD Tooling work while waiting for the real contract template datastore." Licence: EUPL 1.2.
 
 ## Contents
 
@@ -26,7 +26,8 @@ Provenance: built by Simpl. No current source repository — planned component. 
 
 ## Source code
 
-No source repository identified at the time of documentation generation. This is a planned component.
+- **Target (planned)**: dedicated repository — not yet existing.
+- **Interim**: <https://code.europa.eu/simpl/simpl-open/development/data1/simpl-files> — generic file storage hosting contract templates until the dedicated datastore lands.
 
 ## Roadmap
 

@@ -17,7 +17,14 @@ Deployed inside the Governance Authority Agent. Generates and renews Tier 2 x.50
 
 Capability-map placement: `security / access-control-and-trust / identity-provider / identity-provider`. This solution implements the **Identity provider** business service.
 
-Provenance: built by Simpl. Source repositories: `iaa/identity-provider` (backend) and `iaa/fe-identity-provider` (frontend). Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repositories: `iaa/identity-provider` (backend, Java 21 / Maven 3.9+) and `iaa/fe-identity-provider` (frontend). Licence: EUPL 1.2.
+
+## Key features
+
+- **Identity APIs** to create, renew, retrieve, and manage participant identities.
+- **External CA integration**: integrates with **EJBCA** to issue and renew Tier 2 x.509 certificates; the IdP itself is the orchestration layer rather than the CA.
+- Operates as a Tier 2 component on the Governance Authority Agent; the Tier 1 layer is provided by the Tier 1 Authentication Provider (Keycloak-based).
+- Helm 3.19 for deployment; Postgres for persistence.
 
 ## Contents
 

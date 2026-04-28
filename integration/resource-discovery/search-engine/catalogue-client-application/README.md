@@ -13,11 +13,28 @@
 
 # Catalogue Client Application
 
-Frontend and backend for searching and browsing the Simpl-Open catalogue. Supports quick search and schema-driven advanced search. Includes a Validation Backend (syntax validation of self-descriptions before publication) and a Contract Consumption Adapter (contract negotiation initiation).
+Web application that lets a Consumer **search and browse** the Simpl-Open Federated Catalogue, then drive Contract Negotiation and Transfer Process from a chosen offering. Quick search hits the catalogue directly; advanced search renders a schema-driven form against the active SHACL schema.
 
 Capability-map placement: `integration / resource-discovery / search-engine / catalogue-client-application`. This solution implements the **Search engine** business service.
 
-Provenance: built by Simpl. Source repositories: `data1/xfsc-advsearch-be` (advanced search backend), `gaia-x-edc/simpl-catalogue-client` (catalogue client frontend), `data1/contract-consumption-be` (contract consumption adapter), `data1/sdtooling-validation-api-be` (validation backend). Licence: EUPL 1.2.
+Provenance: built by Simpl. The catalogue client (Astro + Keycloak) lives at `gaia-x-edc/simpl-catalogue-client`; the advanced-search backend at `data1/xfsc-advsearch-be`. Two adapters — [Contract Consumption Adapter](../contract-consumption-adapter/README.md) and [Validation Backend](../validation-backend/README.md) — are now separate sibling solutions under the same business service. Licence: EUPL 1.2.
+
+## Key features
+
+- **Authentication** with Keycloak via the **Tier-1 Gateway**.
+- **Quick search** (free-text against catalogue index).
+- **Advanced search** — schema-driven form built dynamically from the active SHACL schema.
+- **Contract negotiation kick-off** — once a result is selected, the UI triggers Contract Negotiation via the Contract Consumption Adapter and surfaces transfer status.
+
+## Frontend configuration
+
+Tier-1 gateway base URLs for the dependent services (no trailing slashes):
+
+| Variable | Purpose |
+|----------|---------|
+| `PUBLIC_AUTH_KEYCLOAK_SERVER_URL` / `_REALM` / `_CLIENT_ID` | Keycloak (Tier 1) |
+| `PUBLIC_SEARCH_API_URL` (+ `_API_VERSION`) | xfsc-advsearch-be — advanced-search schemas + quick/advanced search gateways |
+| `PUBLIC_CONTRACT_CONSUMPTION_API_URL` (+ `_API_VERSION`) | contract-consumption-be |
 
 ## Contents
 

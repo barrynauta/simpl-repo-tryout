@@ -16,4 +16,8 @@ Consumer and provider-side search interface for discovering resources in the Cat
 
 ## Solutions
 
-- [Catalogue Client Application](catalogue-client-application/README.md) — search frontend and backend (Java + Angular) with Validation Backend, Contract Consumption Adapter, and EDC Connector Adapter sub-components.
+- [Catalogue Client Application](catalogue-client-application/README.md) — search frontend and backend (Java + Angular) covering quick and advanced search.
+- [Contract Consumption Adapter](contract-consumption-adapter/README.md) — Consumer-side backend that initiates and tracks Contract Negotiation and Transfer Process workflows from the catalogue UI.
+- [Validation Backend](validation-backend/README.md) — syntactic validation of self-descriptions and resource-address parameters before catalogue publication and during data-exchange setup.
+
+The EDC abstraction used by these clients lives at [`integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/`](../../resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md).

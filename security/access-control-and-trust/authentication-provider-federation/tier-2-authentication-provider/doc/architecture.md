@@ -46,11 +46,12 @@ Data classification: x.509 private key material is highly sensitive. The Credent
 
 ## Technical view
 
-- **Credential Management** is implemented as a Java backend application.
-- **Tier 2 Authentication Provider UI** is implemented as an Angular frontend application.
-- **Credentials Database/Vault** is implemented with PostgreSQL and/or HashiCorp Vault; an application configuration flag selects which backend to use.
+- **Credential Management** — Java 21 / Maven 3.9+ Spring Boot backend (`iaa/authentication_provider`).
+- **Tier 2 Authentication Provider UI** — Angular frontend (`iaa/fe-authentication-provider`).
+- **Credentials Database/Vault** — PostgreSQL and/or HashiCorp Vault; an application configuration flag selects which backend to use. Vault is preferred where HSM-grade key handling is required.
+- **Helm 3.19** for deployment.
 
-Deployment: deployed in Participant Agents (both provider and consumer agents). Each participant agent has its own Tier 2 Authentication Provider instance.
+Deployment: deployed in Participant Agents (both provider and consumer agents). Each participant agent has its own Tier 2 Authentication Provider instance. See the [Consumer Agent](../../../../../cross-cutting/agents/consumer-agent/deployment-guide.md) and [Data Provider Agent](../../../../../cross-cutting/agents/data-provider-agent/deployment-guide.md) deployment guides for environment-specific values.
 
 ![TCV Static view — Tier 2 Authentication Service](./media/image123.jpeg)
 

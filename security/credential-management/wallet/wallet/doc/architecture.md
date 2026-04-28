@@ -1,4 +1,6 @@
-Source: functional-and-technical-architecture-specifications.md, sections 4.3.1 (ACV Static — Wallet Service), 6.1.2 (TCV Static — Wallet Service).
+Source: FTA spec, §4.3.1 (ACV Static — Wallet Service), §6.1.2 (TCV Static — Wallet Service). PSO mapping spreadsheet: `wallet` is **planned** — no source repository assigned yet. The XFSC OCM-based implementation referenced below is the *target* design.
+
+> **Status: planned — no source repository.** Treat content below as the spec snapshot; nothing is currently deployed against this folder.
 
 # Wallet — architecture
 

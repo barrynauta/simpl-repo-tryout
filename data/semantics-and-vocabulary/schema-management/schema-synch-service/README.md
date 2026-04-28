@@ -13,11 +13,27 @@
 
 # Schema Synch Service
 
-Distributes schema and vocabulary updates from the Schema Management Service to Provider and Consumer Nodes, ensuring that dependent components (SD Tooling, Catalogue Client Application) always have access to the most current schema standards. Implements the Schema Synch Adapter API and the Schema Synch Adapter.
+Distributes schema and vocabulary updates from the [Schema Management Service](../schema-management-service/README.md) to Provider and Consumer agents, keeping dependent components ([SD Tooling](../../../../governance/resource-management/metadata-description/sd-tooling/README.md), [Catalogue Client Application](../../../../integration/resource-discovery/search-engine/catalogue-client-application/README.md), [Validation Backend](../../../../integration/resource-discovery/search-engine/validation-backend/README.md)) aligned with the latest published schemas — without each component having to call the Schema Manager API directly.
 
 Capability-map placement: `data / semantics-and-vocabulary / schema-management / schema-synch-service`. This solution implements part of the **Schema management** business service.
 
-Provenance: built by Simpl. No standalone source repository identified (described in the architecture spec as part of the SMS ecosystem). Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repository: `data1/schema-sync-adapter` — earlier entries in MAPPING.md predate this discovery and listed it as "no standalone source"; the adapter is in fact a separate repo. Licence: EUPL 1.2.
+
+## How it works
+
+- **Initial full sync** at startup — pulls every published schema from the Schema Manager and writes them to a configured shared persistent volume in **Turtle (TTL)** format.
+- **Event subscription** — registers with the Schema Manager to receive lifecycle notifications (publication, revocation) and processes them in real time.
+- **Incremental updates** — on each event the local TTL files are added, replaced (new version), or removed (revocation) so the persistent volume always mirrors the Schema Manager's published set.
+- Other components (SD Tooling, Catalogue Client, Validation Backend) read schemas from the shared volume on each agent rather than calling the Schema Manager API on every operation.
+
+## Key features
+
+- Initial full synchronisation of all published schemas at startup.
+- TTL storage on a shared persistent volume.
+- Real-time handling of publication events.
+- Removal of revoked schemas.
+- Continuous synchronisation between Schema Manager and local persistent storage.
+- Logging, audit trail, and error handling for traceability.
 
 ## Contents
 
@@ -30,7 +46,7 @@ Provenance: built by Simpl. No standalone source repository identified (describe
 
 ## Source code
 
-No standalone source repository identified. See `gaia-x-edc/simpl-schema-manager` for the broader schema management ecosystem.
+- <https://code.europa.eu/simpl/simpl-open/development/data1/schema-sync-adapter>
 
 ## Roadmap
 

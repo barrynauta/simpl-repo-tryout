@@ -11,12 +11,14 @@
 
 # Data processing
 
-> **Status: Not yet implemented.** No business service or solution under this capability has been realised in the current catalogue. The planned services below are sourced from [foundations/capability-map.md](../../foundations/capability-map.md) and represent the intended scope.
+Provides the means to transform, aggregate, anonymise, and visualise datasets across multiple sources.
 
-Provides the means to transform, aggregate, and visualise datasets across multiple sources.
+## Business services
 
-## Planned business services
+- [Anonymisation and pseudonymisation](anonymisation-and-pseudonymisation/README.md) — applies masking, pseudonymisation, and irreversible anonymisation patterns to protect personal and sensitive data. Realised by two Dagster code-locations integrated into the Data Orchestration runtime.
+- **Data analytics** — provides batch and interactive analytics for descriptive, diagnostic, and predictive insights. _(Not yet implemented)_
+- **Data visualisation** — delivers charts and exploratory views to communicate insights and monitor KPIs. _(Not yet implemented)_
 
-- **Data analytics** — provides batch and interactive analytics for descriptive, diagnostic, and predictive insights.
-- **Data visualisation** — delivers charts and exploratory views to communicate insights and monitor KPIs.
-- **Anonymisation and pseudonymisation** — applies masking, pseudonymisation, and differential privacy patterns to protect personal data.
+## Notes
+
+The **Anonymisation and pseudonymisation** service is conceptually a Data Processing service per the functional and technical architecture, but it is physically deployed as Dagster code-locations on top of the [Orchestration Platform](../supporting-data-services/data-orchestration/orchestration-platform/README.md). Cross-references run between this capability and `supporting-data-services/data-orchestration/` accordingly.

@@ -44,11 +44,12 @@ Data classification: security identity attribute data is sensitive; it controls 
 
 ## Technical view
 
-- **Attributes Management** is implemented as a Java backend application.
-- **Security Attributes Provider UI** is implemented as an Angular frontend application.
-- **Attributes Database** is implemented in PostgreSQL.
+- **Attributes Management** — Java 21 / Maven 3.9+ Spring Boot application (`iaa/security-attributes-provider`).
+- **Security Attributes Provider UI** — Angular frontend (`iaa/fe-security-attribute-provider`).
+- **Attributes Database** — PostgreSQL.
+- **Helm 3.19** for deployment.
 
-Deployment: deployed exclusively in the Governance Authority Agent.
+Deployment: deployed exclusively in the Governance Authority Agent. See the [Governance Authority Agent deployment guide](../../../../cross-cutting/agents/governance-authority-agent/deployment-guide.md) for environment-specific values.
 
 ![TCV Static view — Identity Attributes Service](./media/image119.jpeg)
 

@@ -13,11 +13,32 @@
 
 # Connector
 
-Eclipse EDC-based Dataspace Protocol connector. Registers resources (datasets, applications, infrastructure) as assets in the data space, associates policies and contracts with each asset, and manages contractual relationships between providers and consumers. Implements both the control plane (contract negotiation) and the data plane (data transfer). Also includes extensions for infrastructure triggering and S3 object storage transfer.
+Eclipse EDC-based Dataspace Protocol connector — the **SIMPL EDC**. Registers resources (datasets, applications, infrastructure) as assets in the data space, associates policies and contracts with each asset, and manages contractual relationships between providers and consumers. Implements both the **control plane** (contract negotiation, DSP) and the **data plane** (data transfer). Customised for the European SIMPL programme to secure data exchange between participants.
 
 Capability-map placement: `integration / resource-sharing / resource-sharing-runtime / connector`. This solution implements the **Resource sharing runtime** business service.
 
-Provenance: forked from the upstream **Eclipse Dataspace Connector (EDC)** (Apache 2.0). The Simpl fork lives at `code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-edc`. Licence: Apache 2.0 (Eclipse EDC upstream). See licence notes — the Simpl-specific extensions (Triggering Extension, S3 Extension, Asset Orchestrator) may carry separate provenance.
+Provenance: forked from the upstream **Eclipse Dataspace Connector (EDC)** (Apache 2.0). The Simpl fork lives at `code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-edc`. Java 17+, Maven 3.6+. Licence: Apache 2.0 (Eclipse EDC upstream). The Simpl-specific extensions below may carry separate provenance.
+
+## Simpl extensions to upstream EDC
+
+The fork extends the Eclipse EDC framework with:
+
+- **MinIO S3 Extension** — native MinIO S3 support for data transfers (Gaia-X implementation).
+- **Infrastructure provisioning capabilities** — bridges to the [Triggering Module](../../../../infrastructure/provisioning/infrastructure-provisioning/triggering-module/README.md) over Kafka.
+- **Contract management extensions** — enhanced contract lifecycle hooks integrating with the [Contract Manager](../../../../governance/contract-management/contract-establishment/contract-manager/README.md).
+- **Enhanced policy constraints and validation** — additional ODRL constraint types beyond stock EDC.
+- **OpenTelemetry integration** for observability — traces and metrics flow into the [Monitoring Service](../../../../administration/observability/dashboarding/monitoring-service/README.md).
+- **eDelivery extension** — triggers eDelivery transfer.
+
+## Backing services
+
+- **PostgreSQL** — connector state and policies.
+- **HashiCorp Vault** — secrets and credentials.
+- **MinIO S3** — primary object storage for transfers.
+
+## Companion solution
+
+The [EDC Connector Adapter](../edc-connector-adapter/README.md) is the abstraction layer above this connector — SD-Tooling and Contract Consumption services call the adapter rather than the EDC API directly so a future replacement of EDC stays transparent to those services.
 
 ## Contents
 

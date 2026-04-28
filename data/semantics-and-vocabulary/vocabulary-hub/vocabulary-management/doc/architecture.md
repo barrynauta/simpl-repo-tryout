@@ -1,12 +1,14 @@
-Source: functional-and-technical-architecture-specifications.md, sections 4.3.1 (ACV Static — Vocabulary Management Service), 6.1.2 (TCV Static — Vocabulary Management Service).
+Source: FTA spec, §4.3.1 (ACV Static — Vocabulary Management Service) — heading-only entry — and §6.1.2 (TCV Static — Vocabulary Management Service). Cross-referenced against the PSO mapping spreadsheet (sheet "Repository mapping AS IS-TO PSO"), which marks both `vocabulary-management-backend` and `vocabulary-management-frontend` as **"Not yet existing"** under owner team Data1.
+
+> **Status: planned — no source repository.** This document is a stub pending implementation. Treat all content below as the *current spec snapshot*; do not promote any of it as committed design until source landing confirms it.
 
 # Vocabulary Management — architecture
 
 ## Business view
 
-The Vocabulary Management component manages ontologies and controlled vocabularies used across the Simpl-Open data space to ensure semantic consistency in self-descriptions, resource discovery, and validation. The architecture specification lists this component under the Vocabulary hub capability; however, the ACV Static section for this service contains no body description — only the section heading and diagram reference. This document is a stub pending further content from the architecture team.
+The Vocabulary Management component manages ontologies and controlled vocabularies used across the Simpl-Open data space to ensure semantic consistency in self-descriptions, resource discovery, and validation. The architecture specification lists this component under the Vocabulary hub capability; however, the ACV Static section for this service contains no body description — only the section heading and diagram reference.
 
-Note (from step 3, flag f-2): the ACV Static body for Vocabulary Management is empty in the architecture spec. The capmap note A7 observes that the vocabulary-hub may merge vocabulary and ontology management. Do not invent content; this stub reflects current spec state.
+Capmap note A7 (recorded against this section): the vocabulary-hub may merge vocabulary management and ontology management into a single component once Data1 begins implementation. Until source lands, this distinction is open.
 
 Capability-map placement: Data dimension → Semantics and vocabulary capability → Vocabulary hub business service.
 

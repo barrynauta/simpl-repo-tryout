@@ -1,4 +1,6 @@
-Source: functional-and-technical-architecture-specifications.md, sections 4.3.1 (ACV Static — Policy Template Datastore Service), 6.1.2 (TCV Static — Policy Template Datastore Service).
+Source: FTA spec, §4.3.1 (ACV Static — Policy Template Datastore Service), §6.1.2 (TCV Static — Policy Template Datastore Service). PSO mapping spreadsheet: `policy-template-datastore` is **planned** — no source repository assigned yet.
+
+> **Status: planned — no source repository.** The XFSC OCM-based implementation referenced below is the *target* design; nothing is currently deployed against this folder. Treat content here as the spec snapshot, not committed implementation.
 
 # Policy Template Datastore — architecture
 

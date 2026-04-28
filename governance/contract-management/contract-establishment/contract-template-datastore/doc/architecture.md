@@ -1,6 +1,8 @@
-Source: functional-and-technical-architecture-specifications.md, sections 4.3.1 (ACV Static — Contract Template Datastore Service), 6.1.2 (TCV Static — Contract Template Datastore Service).
+Source: FTA spec, §4.3.1 (ACV Static — Contract Template Datastore Service), §6.1.2 (TCV Static — Contract Template Datastore Service). PSO mapping spreadsheet: `contract-template-datastore` is **planned** (no dedicated source repo); `contract-template-datastore-temporary` is the **interim** workaround backed by `data1/simpl-files`.
 
 # Contract Template Datastore — architecture
+
+> **Status: planned (target) + interim (live).** The dedicated datastore has no source repo yet. SD Tooling currently reads contract templates from the generic file store `data1/simpl-files`; the PSO mapping explicitly labels this as "Workaround to make the SD Tooling work while waiting for the real contract template datastore." Treat all design content below as pre-implementation.
 
 ## Business view
 
@@ -15,7 +17,8 @@ Note from step 2 component inventory: the spec has very little detail on this co
 ## Data view
 
 - The Contract Template Datastore contains templates of contracts used as blueprints for resource negotiation.
-- Technology: implemented as a File System (§6.1.2 TCV).
+- Technology (target): File System (§6.1.2 TCV) — likely a CSI-backed persistent volume in Kubernetes.
+- **Interim**: today, contract templates live alongside other generic files in `data1/simpl-files` (a Helm-chart store). When the dedicated datastore lands, the templates will move; the SD Tooling integration point is the `Contract Template Editor`, which currently reads/writes through the same path.
 
 ## Application view
 

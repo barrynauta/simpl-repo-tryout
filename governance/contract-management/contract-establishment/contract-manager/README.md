@@ -13,13 +13,20 @@
 
 # Contract Manager
 
-Orchestrates contract validation, issuance, and storage. Coordinates with the VC Issuer, Signer, and Wallet to integrate contract validation, issuance, and storage functionalities. Also stores contracts for billing and record-keeping purposes, centralising key contract-related data. Interactions between the Orchestrator and Backend are asynchronous via a Message Broker (Kafka).
+Orchestrates contract validation, issuance, and storage between data-space participants. Coordinates with the VC Issuer, Signer, and Wallet to integrate contract validation, issuance, and storage functionalities. Also stores contracts for billing and record-keeping purposes, centralising key contract-related data. Interactions between the Orchestrator and the Backend are asynchronous via a message broker (Kafka).
 
 Capability-map placement: `governance / contract-management / contract-establishment / contract-manager`. This solution implements the **Contract establishment** business service.
 
-Provenance: built by Simpl. Source repository: `contract-billing/contract`. Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repository: `contract-billing/contract`. Java 21 / Maven 3.9+. Licence: EUPL 1.2.
 
-Note: the architecture spec describes a planned split into Contract Manager Orchestrator and Contract Manager Backend (referenced in Notion); the current implementation consolidates these as a single solution folder per the step 3 mapping decision.
+Note: the architecture spec describes a planned split into Contract Manager Orchestrator and Contract Manager Backend; per the current to-be mapping the two pieces share this solution folder. The PSO mapping spreadsheet lists them as separate app-services (`contract-manager-backend`, `contract-manager-orchestrator`) — keep that distinction in mind when the split actually lands in source.
+
+## Key features
+
+- **Contract storage and lifecycle**: stores, consults, and updates signed contracts established via the dataspace connectors during contract negotiation and signature.
+- **Extended negotiation**: extends the participant contract-management with additional negotiation steps in the contract-establishment flow.
+- **Usage reporting and enforcement**: reports on resource usage as defined in contracts, and triggers contract-closure and resource-decommissioning when usage thresholds or contract end-conditions are met. Monitoring contributes inputs to these triggers.
+- **Asynchronous orchestration**: Orchestrator ↔ Backend communicate over Kafka; persistent state in PostgreSQL; secrets via HashiCorp Vault; signing/verification through the EDC Connector and credential-management services.
 
 ## Contents
 

@@ -68,8 +68,8 @@ The Catalogue component contains:
 
 Two adapter components described in §4.3.1 alongside the Catalogue cooperate with it on every read:
 
-- **Query Mapper Adapter** — translates user-defined search parameters into a format compatible with the Catalogue's database query language, so that users can perform complex searches without knowing the database query language.
-- **Policy Filter Service** — dynamically enforces access policies on search queries by applying the access-control rules defined within each self-description. It is integrated in the Query Mapper Adapter and embeds policy-based filters into search queries before they are sent to the Catalogue, ensuring that all queries reflect the necessary governance controls. <!-- also relevant to: Security view -->
+- **Query Mapper Adapter** — translates user-defined search parameters into the Catalogue's native query language. Now its own sibling solution: see [`../query-mapper-adapter/doc/architecture.md`](../query-mapper-adapter/doc/architecture.md).
+- **Policy Filter Service** — dynamically enforces access policies on search queries by applying the access-control rules defined within each self-description. Embedded inside the Query Mapper Adapter; embeds policy-based filters into search queries before they are sent to the Catalogue. <!-- also relevant to: Security view -->
 
 ### Key interactions
 

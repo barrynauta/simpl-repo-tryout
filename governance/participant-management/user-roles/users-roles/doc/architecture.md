@@ -52,11 +52,12 @@ Data model diagrams:
 
 ## Technical view
 
-- **User & Roles Management** is implemented as a Java backend application.
-- **User & Roles UI** is implemented as an Angular frontend application.
-- **User & Roles Database** is implemented in PostgreSQL.
+- **User & Roles Management** — Java 21 / Maven 3.9+ Spring Boot application (`iaa/users-roles`). Source repository confirms the explicit feature set: roles/users CRUD, role-request workflow, assignable identity-attribute mapping per role, and search/filter/paginate over all three entity types.
+- **User & Roles UI** — Angular frontend (`iaa/fe-users-and-roles`).
+- **User & Roles Database** — PostgreSQL.
+- **Helm 3.19** for deployment.
 
-Deployment: deployed in both the Governance Authority Agent and Participant Agents. In the GA, it creates applicant temporary credentials during onboarding. In participant agents, it manages participant end-user roles.
+Deployment: deployed in both the Governance Authority Agent and Participant Agents. In the GA, it creates applicant temporary credentials during onboarding. In participant agents, it manages participant end-user roles. See the [Governance Authority Agent](../../../../../cross-cutting/agents/governance-authority-agent/deployment-guide.md) and [Consumer Agent](../../../../../cross-cutting/agents/consumer-agent/deployment-guide.md) deployment guides for environment-specific values.
 
 ![TCV Static view — User Management Service](./media/image124.jpeg)
 

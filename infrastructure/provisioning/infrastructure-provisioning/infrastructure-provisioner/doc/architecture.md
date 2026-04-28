@@ -1,108 +1,87 @@
-Source: functional-and-technical-architecture-specifications.md, sections 4.3.1 (ACV Static — Infrastructure Provisioning Service), 4.3.2 (ACV Dynamic — BP 08), 6.1.2 (TCV Static — Infrastructure Provisioning Service), 5.2.1–5.2.3 (CDM/LDM/PDM — Infrastructure Provider Storage).
+Source: source repo `infrastructure/infrastructure-crossplane`. FTA spec, §4.3.1 (ACV Static — Infrastructure Provisioning Service), §4.3.2 (ACV Dynamic — BP 08), §6.1.2 (TCV Static — Infrastructure Provisioning Service), §6.5.2 (Infrastructure Provisioning).
+
+> **Scope of this document.** Earlier editions described the Triggering Module + Deployment-Script Management + Infrastructure Provisioner as one combined service. With the recent solution-folder split they are now three sibling solutions, each with its own architecture document. This document scopes specifically to the **Crossplane/ArgoCD executor**. For the inbound coordinator and the script catalogue, see [Triggering Module](../../triggering-module/doc/architecture.md) and [Deployment Script & Template Management](../../deployment-script-and-template-management/doc/architecture.md) respectively.
 
 # Infrastructure Provisioner — architecture
 
 ## Business view
 
-The Infrastructure Provisioner manages, validates, and executes deployment scripts that provision infrastructure resources for data space consumers. On contract finalisation, the Connector's Triggering Extension sends a DeploymentScriptID and the consumer's email address to the Triggering Module; this kicks off the provisioning workflow.
-
-The component provides the following capabilities:
-
-- **Script Storage Management** — adding and managing deployment scripts in the local repository and database, including security checks to prevent malicious uploads.
-- **Script Execution** — retrieving and validating deployment scripts, then triggering execution via the Infrastructure Provisioner.
-- **Access Management** — sharing access credentials and endpoints with the consumer after provisioning completes.
+The Infrastructure Provisioner is the **executor** in the infrastructure-provisioning pipeline. It receives provisioning jobs over Kafka from the [Triggering Module](../../triggering-module/doc/architecture.md), then applies them — through ArgoCD + Crossplane — on the target Kubernetes cluster. After provisioning completes it produces the access data (credentials, endpoints) that flows back through the Triggering Module to the consumer. It also handles **decommissioning** at contract end.
 
 Capability-map placement: Infrastructure dimension → Provisioning capability → Infrastructure provisioning business service.
 
-**Business process — BP 08 (Consumer consumes an infrastructure resource):** On contract finalisation, the Triggering Module initiates the provisioning process. Once complete, access data (credentials, endpoints) is shared with the consumer via the Access Management submodule.
+**Business process — BP 08 (Consumer consumes an infrastructure resource):** triggered by the Triggering Module on contract finalisation; runs Provisioning → Post-configuration (apps + datasets) → Share Access Data. At contract end, runs Pre-decommissioning (notifications, backups) → Access Revocation.
 
-![ACV Static view — Infrastructure Provisioning Service (Triggering Module + Infrastructure Provisioner + Infrastructure Provider Storage + Message Broker)](./media/image49.jpeg)
+![ACV Static view — Infrastructure Provisioning Service](./media/image49.jpeg)
 ![ACV Dynamic — BP 08](./media/image65.jpeg)
-![UI screenshots — Infrastructure Deployment Script Management UI](./media/image78.png)
-
-![UI screenshots — Infrastructure Deployment Script Management UI](./media/image85.png)
-
-![UI screenshots — Infrastructure Deployment Script Management UI](./media/image86.png)
-
-![UI screenshots — Infrastructure Deployment Script Management UI](./media/image87.png)
-
-![UI screenshots — Infrastructure Deployment Script Management UI](./media/image88.png)
-
-![UI screenshots — Infrastructure Deployment Script Management UI](./media/image89.png)
-
-![UI screenshots — Infrastructure Deployment Script Management UI](./media/image90.png)
 
 ## Data view
 
-- **Infrastructure Provider Storage** (owned by the Triggering Module / Infrastructure Provisioner) — comprises:
-  - **Database** (PostgreSQL) — stores deployment script metadata, hashes, and state.
-  - **Repository** (Git-based) — stores the actual deployment scripts; supports versioning and audit trails.
+This component holds **no first-party persistent data**. Its inputs are:
 
-Data model diagrams:
-- CDM: `./media/image100.png` — Infrastructure Provider Storage conceptual data model (§5.2.1).
-- LDM: `./media/image109.png` — Infrastructure Provider Storage logical data model (§5.2.2).
-- PDM: `./media/image117.png` — Infrastructure Provider Storage physical data model (§5.2.3).
+- The **deployment-script content** retrieved from the [Deployment Script & Template Management](../../deployment-script-and-template-management/doc/architecture.md) Gitea repository (Crossplane manifests, OpenTofu/Terraform configs).
+- The **provisioning request** (DeploymentScriptID, consumer email, parameter values) received over Kafka from the Triggering Module.
+
+Its outputs are:
+- **Access data** (credentials, endpoints, post-configuration results) sent back over Kafka to the Triggering Module for delivery to the consumer.
+- **ArgoCD/Crossplane state** in the target cluster — the live infrastructure resources themselves.
+
+Data model diagrams (showing the shared Infrastructure Provider Storage owned by the script-management side):
+- CDM: `./media/image100.png` (§5.2.1).
+- LDM: `./media/image109.png` (§5.2.2).
+- PDM: `./media/image117.png` (§5.2.3).
 
 ![CDM — Infrastructure Provider Storage conceptual data model](./media/image100.png)
-![LDM — Infrastructure Provider Storage logical data model](./media/image109.png)
-![PDM — Infrastructure Provider Storage physical data model](./media/image117.png)
 
 ## Application view
 
 ### Internal decomposition
 
-**Triggering Module:**
-- **Script Storage Management submodule** (accessible via API and Infrastructure Deployment Script Management UI): adds and manages deployment scripts; Add Script (uploads to repository + DB, performs security checks), Remove/Invalidate Script.
-- **Script Execution submodule**: Retrieve Deployment Script (from repository), Validate Deployment Script (hash comparison against DB-stored hash for integrity), Trigger Execution (communicates with Infrastructure Provisioner via Message Broker).
-- **Access Management submodule**: Retrieve and Share Access Data — obtains access credentials/endpoints from the Infrastructure Provisioner and distributes them to the consumer.
-- **Triggering Module UI** — Angular frontend for deployment script management.
-- **API** — Kafka consumer (JSON/Kafka); the Triggering Module exposes its functionality via this API.
+- **Provisioning sub-component**:
+  - `Execute Deployment Script` — applies the Crossplane / OpenTofu / Terraform script via ArgoCD on the target cluster.
+  - `Set Policies` — applies the policies bundled with the deployment.
+  - `Create Access Information` — generates / collects credentials and endpoints exposed by the provisioned resources.
+  - `Post Configuration` — deploys ancillary applications and loads datasets into the freshly provisioned infrastructure where the script defines this.
+  - `Share Access Data` — emits the access-data event back over Kafka.
+- **Decommissioning sub-component**:
+  - `Pre-decommissioning` — notifications, backups (where defined by the script).
+  - `Access Revocation` — removes credentials and tears down the provisioned resources via ArgoCD.
 
-**Infrastructure Provisioner:**
-- **Provisioning sub-component**: Execute Deployment Script, Set Policies, Create Access Information, Post Configuration (deploy applications and load datasets), Share Access Data.
-- **Decommissioning sub-component**: Pre-decommissioning (notifications, backups), Access Revocation.
-- The Infrastructure Provisioner is not directly exposed via a public API — it is accessed through the Triggering Module.
-
-**Infrastructure Provider Storage**: Database (PostgreSQL) + Repository (Git-based).
-
-**Message Broker** (Kafka): facilitates asynchronous provisioning processes between the Triggering Module and the Infrastructure Provisioner.
+This service is **not exposed via a public API**. The only way to drive it is the Kafka topic produced by the Triggering Module; that asymmetry is intentional and load-bearing for the security view.
 
 ### Key integrations
 
-- [Connector](../../../../../integration/resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — the Connector's Triggering Extension sends the DeploymentScriptID and consumer email to the Triggering Module at contract finalisation, initiating provisioning.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — inbound traffic to the Triggering Module API passes through the Tier 1/Tier 2 Gateway.
+- [Triggering Module](../../triggering-module/doc/architecture.md) — sole upstream caller; sends provisioning jobs and consumes the access-data response, both over Kafka.
+- [Deployment Script & Template Management](../../deployment-script-and-template-management/doc/architecture.md) — sibling solution; the Gitea repository it owns is the source of every script this component runs.
+- **ArgoCD** (under [Infrastructure → Supporting Infrastructure Services → Infrastructure Orchestration](../../../../supporting-infrastructure-services/README.md)) — the GitOps deployment engine that applies Crossplane manifests on the target cluster.
+- **Crossplane** — the Kubernetes-native control-plane primitive that turns the manifests into actual cloud resources.
 
 ## Technical view
 
-- **Script Storage Management Module** is implemented as a Java backend application.
-- **Script Execution Module** is implemented as a Java backend application.
-- **Access Management Module** is implemented as a Java backend application.
-- **Triggering Module UI** is implemented as an Angular frontend application.
-- **API** interface is implemented as a Kafka consumer (JSON/Kafka).
-- **Infrastructure Provisioner** is implemented with ArgoCD and Crossplane.
-- **Infrastructure Provider Storage Database** is implemented in PostgreSQL.
-- **Infrastructure Provider Storage Repository** is implemented as a Git-based repository.
-- **Message Broker** is implemented with Kafka.
+- **Source repo**: `infrastructure/infrastructure-crossplane`.
+- **Executor stack**: ArgoCD + Crossplane on the target Kubernetes cluster. Supports OpenTofu and Terraform script formats alongside Crossplane primitives.
+- **Inbound channel**: Kafka topic shared with the Triggering Module.
+- **Outbound channel**: Kafka topic for status / access-data events (consumed by the Triggering Module's Access Management submodule).
 
-Deployment: deployed in Infrastructure Provider Agents.
+Deployment: deployed in Infrastructure Provider Agents. Crossplane is deployed as a single instance per cluster (the Provider Agent's Helm values flag `crossplane.enabled: true` and the [Data Provider Agent deployment guide](../../../../../cross-cutting/agents/data-provider-agent/deployment-guide.md) explicitly notes "only one instance per cluster").
 
 ![TCV Static view — Infrastructure Provisioning Service](./media/image141.jpeg)
 
 ## Security view
 
-- Script security checks (Add Script function) prevent uploading of malicious deployment scripts.
-- Script integrity is verified at execution time by comparing the retrieved script's hash against the hash stored at upload time.
-- Access credentials and endpoints shared with the consumer after provisioning are sensitive; the Access Management submodule controls their distribution.
-- The Infrastructure Provisioner is not exposed via a public API — it is only accessible through the Triggering Module.
+- **No public ingress** — this component is reachable only via the Kafka topic produced by the Triggering Module. Direct external requests cannot start a provisioning run.
+- **Script integrity** is checked **upstream** by the Triggering Module before the job arrives here; if the on-disk script hash differs from the stored hash, the Triggering Module refuses to dispatch.
+- **Access-data sensitivity** — credentials produced by `Create Access Information` are written onto the Kafka topic; SASL authentication on the topic restricts which services can consume them.
+- **ArgoCD permissions** scope what this executor can do on the target cluster; over-broad permissions would let a compromised Crossplane manifest escalate to cluster admin.
 
-Threat model: Status: not yet documented.
+Threat model: not yet documented.
 
-Secrets management: Status: not yet documented.
+Secrets management: ArgoCD service-account tokens for the target cluster; Vault for any credential material the deployment scripts themselves need at runtime.
 
 ## Testing
 
-Strategy: Status: not yet documented.
+Strategy: integration tests against a kind/k3d cluster with a stub Triggering Module producing onto the Kafka topic; assertion is the Crossplane resources land on the cluster and the access-data response surfaces back. CI/CD runs unit tests, SAST (SonarQube), and security tests (Fortify).
 
-PSO validation status: Status: not yet documented.
+PSO validation status: not yet documented.
 
-Requirements traceability: Status: not yet documented.
+Requirements traceability: not yet documented.

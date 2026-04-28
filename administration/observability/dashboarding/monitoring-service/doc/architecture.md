@@ -90,7 +90,7 @@ The Logs Repository serves as the central hub feeding the Monitoring Space, Logs
 ## Technical view
 
 Implemented on the Elastic Cloud on Kubernetes (ECK) stack:
-- **Log Collection Agent** — deployed as a DaemonSet on Kubernetes nodes; collects logs from all application pods.
+- **Log Collection Agent** — Filebeat deployed as a DaemonSet on Kubernetes nodes; collects logs from all application pods.
 - **Log Ingestion Pipeline** — Logstash (or Elastic ingest pipeline).
 - **Logs Repository** — Elasticsearch (via ECK); stores logs, metrics, and events.
 - **Monitoring Space** — Kibana dashboards.
@@ -98,10 +98,15 @@ Implemented on the Elastic Cloud on Kubernetes (ECK) stack:
 - **Reporting** — Kibana reporting module + Reporting API.
 - **Alert Manager** — Kibana alerting rules / Elastic Watcher.
 - **Infrastructure Metrics Collection Agent** — Metricbeat / Elastic Agent.
+- **Health Checks** — Heartbeat (Elastic stack); periodically queries Simpl-Open component health endpoints and stores results in Elasticsearch.
 - **Application Tracing** — Elastic APM.
-- **Health Checks** — `monitoring/infrastructure-consumption-monitoring-service` (custom Simpl component).
-- **Common Logging Library** — `contract-billing/common_logging` — shared library enabling Simpl-Open application components to emit structured business events alongside technical logs.
-- **ECK Operator** — `monitoring/eck-monitoring-operator` — manages ECK cluster lifecycle on Kubernetes.
+- **Common Logging Library** — [`cross-cutting/libs/common-logging-java`](../../../../cross-cutting/libs/common-logging-java/README.md) (Java) and [`common-logging-python`](../../../../cross-cutting/libs/common-logging-python/README.md) (Python) — shared structured-logging libraries that emit log lines in the format consumed by this stack.
+- **ECK Operator** — source repo `monitoring/eck-monitoring-operator` — manages ECK cluster lifecycle on Kubernetes (cluster creation, rolling upgrades, configuration changes).
+
+### Sibling solution
+
+Cloud-provider consumption-data ingestion is its own service:
+- [Infrastructure Consumption Monitoring Service](../../infrastructure-consumption-monitoring-service/doc/architecture.md) — scheduled extraction of consumption data (default OVH) published to Kafka. Distinct from the log/metric pipeline described above; downstream Kibana dashboards and billing flows consume from its Kafka topic.
 
 Deployment: deployed per node (intra-node scope). Each Simpl-Open agent runs its own Monitoring Service instance.
 

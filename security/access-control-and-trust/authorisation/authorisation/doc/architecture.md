@@ -27,10 +27,11 @@ The Authorisation component does not own a persistent data store. It reads ident
 
 ### Internal decomposition
 
-- **Authorisation Tier 1 RBAC** — Spring Cloud Gateway instance; validates JWT tokens issued by Keycloak, extracts role claims, and applies RBAC routing rules to forward or reject inbound Tier 1 requests.
-- **Authorisation Tier 2 ABAC** — Spring Cloud Gateway instance; validates Tier 2 credentials (Ephemeral Proof and Security Credentials) and applies ABAC rules based on identity attributes for agent-to-agent requests.
+- **Tier 1 Gateway** (`iaa/tier1-gateway`) — Spring Cloud Gateway instance; mediates Internet → Tier 1 components (Keycloak, Onboarding, Users-Roles, public Catalogue Client APIs). Validates JWT tokens issued by Keycloak, extracts role claims (including the Simpl-specific `client-roles`, `participant_id`, `credential_id`, `identity_attributes` claims injected by the [Tier 1 Authentication Provider](../../../authentication-provider-federation/tier-1-authentication-provider/doc/architecture.md)'s authenticator plugin), and applies **RBAC** routing rules. Concrete role examples seen in source: `INFRA_ADMIN` and `INFRA_DEPLOYER` for the infrastructure-provisioning APIs; `KIBANA_BUSINESS_USER` and `KIBANA_ADMIN` for the Monitoring Service.
+- **Tier 2 Gateway** (`iaa/tier2-gateway`) — Spring Cloud Gateway instance; **HTTPS + mTLS only**. Validates Tier 2 credentials (Ephemeral Proof + x.509 Security Credentials) and applies **ABAC** rules based on identity attributes for agent-to-agent requests.
+- **Tier 2 Proxy** (`iaa/tier2-proxy`) — companion proxy mediating outbound Tier 2 calls. Per the architecture spec these three repositories are treated as one logical component.
 
-The architecture spec (§4.3.1, step 5 sample notes) identifies the **Query Mapper Adapter** and **Policy Filter Service** as sub-components of the Catalogue that sit alongside the Tier 1 Gateway in the request path. These are documented in the Simpl Catalogue architecture document, not here, since the ACV Static view places them under the Catalogue Service component.
+The architecture spec (§4.3.1, step 5 sample notes) identifies the **Query Mapper Adapter** and **Policy Filter Service** as sub-components of the Catalogue that sit alongside the Tier 1 Gateway in the request path. They're now their own [sibling solution](../../../../integration/resource-discovery/resource-catalogue/query-mapper-adapter/doc/architecture.md) in the integration dimension.
 
 ### Key integrations
 
@@ -42,12 +43,13 @@ All Simpl-Open service components are downstream of the Authorisation layer — 
 
 ## Technical view
 
-- **Authorisation Tier 1 RBAC** is implemented with Spring Cloud Gateway.
-- **Authorisation Tier 2 ABAC** is implemented with Spring Cloud Gateway.
+- **Tier 1 Gateway** — Java 21 / Maven 3.9+ Spring Cloud Gateway. Source: `iaa/tier1-gateway`.
+- **Tier 2 Gateway** — same toolchain. Source: `iaa/tier2-gateway`.
+- **Tier 2 Proxy** — same toolchain. Source: `iaa/tier2-proxy`.
 
-The two gateways are implemented as separate deployable units corresponding to the two trust tiers, even though both use Spring Cloud Gateway as the underlying technology.
+The three are implemented as separate deployable units corresponding to the trust-tier split, even though all three use Spring Cloud Gateway as the underlying technology. Configuration is YAML-based (route declarations, RBAC rule sets, public-URL allowlists, business-log routing); examples per service live with the consumer (e.g. infrastructure-be exposes `appConfig.routes.logging.business`, `external-routes.rbac`, and `public-urls` blocks that the gateways consume).
 
-Deployment: deployed in both the Governance Authority Agent and Participant Agents. Each agent has its own Authorisation instance. The Tier 1 Gateway is the entry point for human user traffic; the Tier 2 Gateway handles agent-to-agent communication.
+Deployment: deployed in both the Governance Authority Agent and Participant Agents. Each agent has its own Authorisation instance. Tier 1 Gateway is the entry point for human user traffic; Tier 2 Gateway handles agent-to-agent communication. See the agent deployment guides under [`cross-cutting/agents/`](../../../../cross-cutting/agents/README.md) for environment-specific values.
 
 ![TCV Static view — Authorisation Service](./media/image118.jpeg)
 

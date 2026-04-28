@@ -49,7 +49,7 @@ The DSP information model is described in §6.5.3. Key models: Contract Negotiat
 - **Policy Engine** — evaluates whether all policy requirements are met for a requested resource; linked to registered assets in the Control Plane. Halts negotiation if requirements are not met.
 - **Triggering Extension** — sends the DeploymentScriptID and consumer email address to the Infrastructure Triggering Module (Infrastructure Provisioner) at contract finalisation; triggers infrastructure provisioning.
 - **S3 Object Storage Extension** — transfers datasets from the Data Provider's S3 storage to the Data Consumer's S3 storage at contract finalisation.
-- **EDC Connector Adapter** (used by other components to interact with the Connector) — handles registration of resource offerings with policies during self-description creation, and provides Connector asset references for consumption.
+- **EDC Connector Adapter** — abstraction layer above this Connector used by SD-Tooling (asset registration) and Contract Consumption (negotiation initiation). Now lives as a sibling solution: see [`../edc-connector-adapter/doc/architecture.md`](../edc-connector-adapter/doc/architecture.md).
 
 ### Key integrations
 
@@ -61,12 +61,25 @@ The DSP information model is described in §6.5.3. Key models: Contract Negotiat
 
 ## Technical view
 
-- The **Connector** is implemented as an Eclipse Dataspace Connector (EDC).
-- The **Control Plane** is implemented as a Java backend application.
-- The **Data Plane** is implemented as a Java backend application.
-- The **Infrastructure Orchestrator** (data plane for bundled infrastructure) is implemented as a Java backend application.
-- The **Policy Engine** is implemented as a Java backend application.
-- The **EDC Connector Adapter** is implemented as a Java backend application.
+- The **Connector** is implemented as an Eclipse Dataspace Connector (EDC) fork. Source repo: `gaia-x-edc/simpl-edc`. **Java 17+, Maven 3.6+** (note: most other Simpl components run on Java 21 — the connector lags upstream EDC's toolchain).
+- The **Control Plane**, **Data Plane**, **Infrastructure Orchestrator**, and **Policy Engine** are Java backend applications inside the EDC fork.
+
+### Simpl extensions to upstream EDC
+
+The fork extends Eclipse EDC with:
+
+- **MinIO S3 Extension** — native MinIO S3 support for data transfers (Gaia-X implementation; the **primary** data-plane storage).
+- **Infrastructure provisioning capabilities** — bridges to the [Triggering Module](../../../../infrastructure/provisioning/infrastructure-provisioning/triggering-module/doc/architecture.md) over Kafka.
+- **Contract management extensions** — enhanced contract-lifecycle hooks integrating with the [Contract Manager](../../../../governance/contract-management/contract-establishment/contract-manager/doc/architecture.md).
+- **Enhanced policy constraints and validation** — additional ODRL constraint types beyond stock EDC.
+- **OpenTelemetry integration** for observability — traces and metrics flow into the [Monitoring Service](../../../../administration/observability/dashboarding/monitoring-service/doc/architecture.md).
+- **eDelivery extension** — triggers eDelivery transfer.
+
+### Backing services
+
+- **PostgreSQL** — connector state and policies.
+- **HashiCorp Vault** — secrets and credentials.
+- **MinIO S3** — primary object storage for transfers.
 
 Deployment: deployed in Participant Agents (both Data Provider and Infrastructure Provider agents). Per DSP specification, each provider must have a local Connector instance.
 

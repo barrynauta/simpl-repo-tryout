@@ -28,17 +28,26 @@ The Orchestration Platform manages workflow definitions, run state, and pipeline
 
 - **Orchestration Engine (Dagster Daemons)** — several Dagster features (schedules, sensors, run queueing) require a long-running `dagster-daemon` process. Daemons start the RunLauncher as ephemeral processes.
 - **Orchestration Run Worker (K8Run Launcher)** — interface to computational resources; allocates a Kubernetes job per workflow run. Each run is an ephemeral Kubernetes job.
-- **Code Location** — a collection of Dagster definitions (Definitions instance in a top-level Python variable) loadable by Dagster tools. Comprises a reference to a Python module and the environment to load it.
+- **Code Location** — a collection of Dagster definitions (Definitions instance in a top-level Python variable) loadable by Dagster tools. Comprises a reference to a Python module and the environment to load it. The two anonymisation code-locations described below load through this mechanism.
 - **Orchestration Management UI (Dagit)** — browser-based orchestration console; visualises pipelines, manages runs, inspects logs, manages schedules/sensors, and observes asset materialisations.
 - **Orchestration Engine API (GraphQL)** — Dagster's primary programmatic interface; underpins Dagit and Python client libraries. Supports launching/cancelling runs, querying run state, managing workspace locations.
-- **Asset Orchestrator** — custom Simpl-Open component; connects data and application offerings from the Simpl Catalogue with the Dagster orchestration engine.
 - **Auth Proxy** — authentication sidecar; integrates the orchestration platform with the IAA stack (Tier 1/Tier 2 authentication) in a loosely coupled way.
 - **Repository (Gitea)** — source control for orchestration code. Enables versioning, audit trails, and rollbacks. CI/CD via Gitea Actions automates testing and deployment of pipeline changes.
+
+The **Asset Orchestrator** that historically sat inside this solution is now documented as its own sibling solution: see [`../asset-orchestrator/`](../../asset-orchestrator/doc/architecture.md).
+
+### Code locations loaded into this engine
+
+The Provider's Dagster instance loads these code locations alongside any Provider-specific ones:
+
+- [Dataframe-Level Anonymisation](../../../../data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation/doc/architecture.md) — k-anonymity / l-diversity / t-closeness jobs.
+- [Field-Level Pseudo-Anonymisation](../../../../data-processing/anonymisation-and-pseudonymisation/field-level-pseudo-anonymisation/doc/architecture.md) — reversible field-level and PII pseudonymisation jobs.
 
 ### Key integrations
 
 - [Connector](../../../../../integration/resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — the Orchestration Platform is described as a Connector extension/data plane bridge for data workflow execution.
-- [Simpl Catalogue](../../../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md) — the Asset Orchestrator links catalogue offerings with workflow execution.
+- [Asset Orchestrator](../../asset-orchestrator/doc/architecture.md) — sibling Java service that submits jobs into this engine in response to consumer-access events from the Connector.
+- [Simpl Catalogue](../../../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md) — catalogue offerings ↔ workflows are linked via the Asset Orchestrator.
 - [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — the Auth Proxy integrates with the IAA stack for authentication.
 
 ## Technical view

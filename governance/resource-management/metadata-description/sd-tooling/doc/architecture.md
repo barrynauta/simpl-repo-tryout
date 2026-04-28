@@ -48,15 +48,15 @@ Score calculation: `score(s, d) = (Σ δ(r,s) × w_r) / (Σ w_r) × 100` over al
 
 **Contract Template Editor:**
 - Enables creation and customisation of contract templates linked to resources in self-descriptions.
-- Templates created here are stored in the Contract Template Datastore.
+- Templates created here are stored in the Contract Template Datastore (currently the `data1/simpl-files` interim store).
 
 **Validation Backend:**
 - Performs syntax validation for self-descriptions on the provider side before publication.
 - Also validates resource source addresses used for registering service offerings in the Connector.
-- Implemented as a Java backend (`data1/sdtooling-validation-api-be`).
+- Implemented as a Java backend (`data1/sdtooling-validation-api-be`); now lives as a sibling solution under `integration/resource-discovery/search-engine/validation-backend/`.
 
 **SD Tooling UI:**
-- Angular frontend application for provider-facing self-description management.
+- **Astro**-based frontend application for provider-facing self-description management. (Previous editions of this document said "Angular" — corrected against the source repo, which is an Astro project.)
 - Implemented as `gaia-x-edc/simpl-sd-ui`.
 
 **SD Schema Creator (upstream XFSC component):**
@@ -64,6 +64,22 @@ Score calculation: `score(s, d) = (Σ δ(r,s) × w_r) / (Σ w_r) × 100` over al
 - Produces ontology (Turtle) and SHACL Constraints (Turtle) consumed by the SD Creation Tool.
 - Syntax validation uses JSON Schema; semantic validation uses a Python script.
 - For Simpl-Open, the YAML configuration is adjusted to define the data space's specific SD schema.
+
+### Publication flow (3 sequential calls from the UI)
+
+When a provider clicks **Submit** in the Astro UI, the frontend executes three calls in order, all routed through the Tier-1 Gateway:
+
+1. **`enrichAndValidate`** — backend validates the document and populates derived/computed fields. Backed by `PUBLIC_CREATION_WIZARD_API_URL` (API version `v2`).
+2. **`signing`** — the validated document is signed by the [Signer Service](../../../../../security/credential-management/signing/signer-service/doc/architecture.md). Backed by `PUBLIC_SIGNER_URL`.
+3. **`publishing`** — the signed document is published to the [Simpl Catalogue](../../../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md).
+
+The frontend's runtime config (Astro env vars, no trailing slashes):
+
+| Variable | Purpose |
+|----------|---------|
+| `PUBLIC_AUTH_KEYCLOAK_SERVER_URL` / `_REALM` / `_CLIENT_ID` | Keycloak OAuth (Tier 1 IdP) |
+| `PUBLIC_CREATION_WIZARD_API_URL` (+ `_API_VERSION`=`v2`) | SD Tooling backend through Tier-1 Gateway |
+| `PUBLIC_SIGNER_URL` | Signer endpoint through Tier-1 Gateway |
 
 ### Key integrations
 
@@ -77,13 +93,13 @@ Score calculation: `score(s, d) = (Σ δ(r,s) × w_r) / (Σ w_r) × 100` over al
 
 ## Technical view
 
-- **SD Manager** — Java backend application.
-- **Validation Backend** — Java backend application.
+- **SD Manager / SD Tooling backend** — Java 21 / Maven 3.9+ Spring Boot application (`data1/sdtooling-api-be`).
+- **Validation Backend** — Java 21 / Maven 3.9+ Spring Boot application (`data1/sdtooling-validation-api-be`); separate deployment unit, also packaged as a sibling solution under `integration/resource-discovery/search-engine/validation-backend/`.
 - **SD Creation Tool** — built on XFSC Organisation Credential Manager and XFSC SD Tooling (SD Creation Wizard API).
-- **SD Tooling UI** — Angular frontend application.
+- **SD Tooling UI** — **Astro** frontend (`gaia-x-edc/simpl-sd-ui`). Backend communicates **through the Tier-2 Gateway hosted on the Governance Authority Agent** to perform the publication step; locally it interacts with the Provider Connector via the [EDC Connector Adapter](../../../../../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md) for asset registration.
 - **SD Schema Creator** — Python-based YAML-to-schema pipeline; deployed as a GitLab CI pipeline that triggers on configuration changes.
 
-Deployment: deployed in Provider Nodes (SD Creation Tool, SD Manager, SD Tooling UI); quality rule validation runs at the Governance Authority Node during publication.
+Deployment: deployed in Provider Nodes (SD Creation Tool, SD Manager, SD Tooling UI); quality rule validation runs at the Governance Authority Node during publication. See the [Data Provider Agent](../../../../../cross-cutting/agents/data-provider-agent/deployment-guide.md) deployment guide for environment-specific values.
 
 ![SD Schema Creator component view](./media/image165.png)
 ![SD Schema Creator runtime view (GitLab CI pipeline)](./media/image169.png)

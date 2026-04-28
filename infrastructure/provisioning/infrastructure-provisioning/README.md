@@ -16,4 +16,6 @@ Deployment script management and execution, asynchronous provisioning of infrast
 
 ## Solutions
 
-- [Infrastructure Provisioner](infrastructure-provisioner/README.md) — Triggering Module (script storage, execution, access management) and Infrastructure Provisioner (ArgoCD + Crossplane), interacting via Kafka.
+- [Triggering Module](triggering-module/README.md) — receives provisioning requests from the EDC Connector triggering extension and dispatches jobs to the Infrastructure Provisioner over Kafka.
+- [Deployment Script & Template Management](deployment-script-and-template-management/README.md) — backend + frontend for authoring, storing, and versioning deployment scripts (Crossplane / OpenTofu / Terraform) in a Gitea-backed repository.
+- [Infrastructure Provisioner](infrastructure-provisioner/README.md) — Crossplane/ArgoCD-based executor that applies deployment scripts on the target Kubernetes cluster.

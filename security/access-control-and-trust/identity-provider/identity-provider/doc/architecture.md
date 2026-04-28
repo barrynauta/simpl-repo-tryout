@@ -52,12 +52,13 @@ Data classification: credential and identity data is sensitive participant ident
 
 ## Technical view
 
-- **Credential Management** and **Credential Verification** are implemented as Java backend applications.
-- **Identity Provider UI** is implemented as an Angular frontend application.
-- **Credential Factory** is implemented with EJBCA (Enterprise JavaBeans Certificate Authority).
-- **Identity Database** is implemented in PostgreSQL.
+- **Credential Management** and **Credential Verification** — Java 21 / Maven 3.9+ Spring Boot applications (`iaa/identity-provider`).
+- **Identity Provider UI** — Angular frontend (`iaa/fe-identity-provider`).
+- **Credential Factory** — EJBCA (Enterprise JavaBeans Certificate Authority). Bootstrap of EJBCA itself uses the [`ejbca-preconfig`](../../../../cross-cutting/utils/ejbca-preconfig/README.md) Dockerised init-container, which seeds CAs, REST API config, end-entity profiles, and SuperAdmin credentials on first start.
+- **Identity Database** — PostgreSQL.
+- **Helm 3.19** for deployment.
 
-Deployment: deployed exclusively in the Governance Authority Agent.
+Deployment: deployed exclusively in the Governance Authority Agent. See the [Governance Authority Agent deployment guide](../../../../cross-cutting/agents/governance-authority-agent/deployment-guide.md) — particularly the documented recovery procedure for the Identity Provider failure race condition (drop+recreate the EJBCA and identity-provider Postgres DBs).
 
 ![TCV Static view — Identity Provider Service](./media/image120.jpeg)
 
