@@ -365,8 +365,20 @@ See [foundations/capability-map.md](./foundations/capability-map.md) for the ful
 Supporting documents that establish the design vocabulary and governing commitments of Simpl-Open:
 
 - [Actors](./foundations/actors.md) — the five canonical Simpl-Open actor types (Application Provider, Data Provider, Infrastructure Provider, Consumer, Governance Authority) and the business processes each one touches.
+- [Data space concepts](./foundations/dataspace-concepts.md) — Tier I/Tier II model, agents, anatomy of a Simpl-Open service, built-in vs access-through services.
+- [High-level architecture](./foundations/high-level-architecture.md) — layered building-block view that bridges the data-space concepts with the capability map.
+- [Connector protocol](./foundations/connector-protocol.md) — Data Space Protocol (DSP / IDSA) concepts used across every agent.
+- [eIDAS / EUDI integration](./foundations/eidas-integration.md) — how the Simpl identity model maps onto the EU Digital Identity Framework.
 - [Architectural principles](./foundations/principles.md) — high-level design commitments informing every architecture decision across Simpl-Open, sourced from the functional and technical architecture document.
 - [Architectural patterns](./foundations/architectural-patterns.md) — recurring structural and behavioural design patterns applied across solutions, sourced from the functional and technical architecture document.
+- [Assumptions and architecture decisions](./foundations/assumptions-and-decisions.md) — architectural assumptions and ADRs constraining the design.
+- [Functional traceability](./foundations/functional-traceability.md) — requirement → component traceability matrix (FTA §4.6 + Annex 1).
+- [User interfaces](./foundations/user-interfaces.md) — inventory of every user interface shipped with Simpl-Open.
+- [Deployment model](./foundations/deployment-model.md) — logical and technical deployment views (FTA §2.8.1 + §6.2).
+- [Data architecture](./foundations/data-architecture/README.md) — open-source components data model + conceptual / logical / physical models for custom components.
+- [Technology roadmap](./foundations/technology-roadmap.md) — forward-looking candidate technologies beyond Release 3.0.
+- [Security architecture](./foundations/security-architecture.md) — perimeter of intervention, DevSecOps security aspects, functional + technical security.
+- [DevSecOps approach](./foundations/devsecops.md) — full DevSecOps approach across cluster lifecycle, security checks, GitOps, testing, backup, deprovisioning.
 - [Glossary](./foundations/glossary.md) — definitional anchor for Simpl terminology, sourced from the official Simpl programme glossary.
 - [API catalogue](./foundations/api-catalogue.md) — single index of all 42 OpenAPI/AsyncAPI specifications imported from the implementation source, browsable by dimension, by kind, and by tier.
 
