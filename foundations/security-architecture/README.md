@@ -3,8 +3,8 @@
 <hr/>
 <p>
 📍 <strong>You are here</strong><br/>
-<a href="../README.md">🏠 Home</a><br/>
-    <a href="README.md">Foundations</a><br/>
+<a href="../../README.md">🏠 Home</a><br/>
+    <a href="../README.md">Foundations</a><br/>
         <strong>Security architecture</strong><br/>
 </p>
 </div>

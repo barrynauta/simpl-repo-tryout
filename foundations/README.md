@@ -44,5 +44,6 @@ This folder contains foundational artefacts describing what Simpl is and should 
 - [deployment-model.md](deployment-model.md) — logical (agent-and-cluster) and technical (Kubernetes-and-cloud) deployment views
 - [data-architecture/README.md](data-architecture/README.md) — full data architecture chapter: open-source components data model + conceptual / logical / physical models for the custom components
 - [technology-roadmap.md](technology-roadmap.md) — forward-looking technology candidates beyond Release 3.0
-- [security-architecture.md](security-architecture.md) — perimeter of intervention, DevSecOps security aspects, functional + technical security architecture
-- [devsecops.md](devsecops.md) — full DevSecOps approach (cluster planning, provisioning, environment onboarding, security checks, GitOps, testing, monitoring/logging, backup, deprovisioning)
+- [security-architecture/](security-architecture/README.md) — perimeter of intervention, DevSecOps security aspects, functional + technical security architecture; includes stub children for ufw, wireguard, nftables, modsecurity
+- [devsecops/](devsecops/README.md) — full DevSecOps approach (cluster planning, provisioning, environment onboarding, security checks, GitOps, testing, monitoring/logging, backup, deprovisioning); includes stub children for gitea, gitlab, helm-charts, trivy, fortify, sonarqube, ansible, spring-cloud-config, gitea-actions
+- [interfaces/](interfaces/README.md) — cross-cutting interface technologies (Swagger/OpenAPI, Webpack Module Federation, Spring Cloud Circuit Breaker)

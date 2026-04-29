@@ -377,8 +377,9 @@ Supporting documents that establish the design vocabulary and governing commitme
 - [Deployment model](./foundations/deployment-model.md) — logical and technical deployment views (FTA §2.8.1 + §6.2).
 - [Data architecture](./foundations/data-architecture/README.md) — open-source components data model + conceptual / logical / physical models for custom components.
 - [Technology roadmap](./foundations/technology-roadmap.md) — forward-looking candidate technologies beyond Release 3.0.
-- [Security architecture](./foundations/security-architecture.md) — perimeter of intervention, DevSecOps security aspects, functional + technical security.
-- [DevSecOps approach](./foundations/devsecops.md) — full DevSecOps approach across cluster lifecycle, security checks, GitOps, testing, backup, deprovisioning.
+- [Security architecture](./foundations/security-architecture/README.md) — perimeter of intervention, DevSecOps security aspects, functional + technical security.
+- [DevSecOps approach](./foundations/devsecops/README.md) — full DevSecOps approach across cluster lifecycle, security checks, GitOps, testing, backup, deprovisioning.
+- [Interfaces](./foundations/interfaces/README.md) — cross-cutting interface technologies (Swagger/OpenAPI, micro-frontend composition, circuit breaker).
 - [Glossary](./foundations/glossary.md) — definitional anchor for Simpl terminology, sourced from the official Simpl programme glossary.
 - [API catalogue](./foundations/api-catalogue.md) — single index of all 42 OpenAPI/AsyncAPI specifications imported from the implementation source, browsable by dimension, by kind, and by tier.
 
