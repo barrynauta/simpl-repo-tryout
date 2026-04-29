@@ -364,6 +364,7 @@ See [foundations/capability-map.md](./foundations/capability-map.md) for the ful
 
 Supporting documents that establish the design vocabulary and governing commitments of Simpl-Open:
 
+- [Actors](./foundations/actors.md) — the five canonical Simpl-Open actor types (Application Provider, Data Provider, Infrastructure Provider, Consumer, Governance Authority) and the business processes each one touches.
 - [Architectural principles](./foundations/principles.md) — high-level design commitments informing every architecture decision across Simpl-Open, sourced from the functional and technical architecture document.
 - [Architectural patterns](./foundations/architectural-patterns.md) — recurring structural and behavioural design patterns applied across solutions, sourced from the functional and technical architecture document.
 - [Glossary](./foundations/glossary.md) — definitional anchor for Simpl terminology, sourced from the official Simpl programme glossary.
