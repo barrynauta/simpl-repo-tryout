@@ -4,65 +4,121 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP09B — Consume Data Via Application</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP09B — Consumer receives a data processing service on a data resource via an application</strong><br/>
 </p>
 </div>
 
 # BP09B – Consumer receives a data processing service on a data resource via an application
 
-> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
-> showing how this business process executes at runtime, with links
-> to each participating solution.
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram showing how
+> this business process executes at runtime, with links to each participating
+> solution.
 
 ## Overview
 
-This business process covers the situation where a Consumer has a usage contract for a certain data resource, and seeks to process that data resource via an application provided by a Data Provide r. This enables a Consumer to access an application that offers restricted viewing (such as read only) or processing capabilities on the data resource in two possible scenarios: Scenario 1: A stand-alone application deployed on a dedicated infrastructure resource per Consumer In this scenario, the Data Provider provisions dedicated infrastructure for each Consumer , hereby deploying an application that has access to the data source, and which can use its processing capabilities on the data source. The Consumer only receives access to the application endpoints (e.g., web interface), allowing them to perform various processes on the data source, such as data analysis. Scenario 2: Shared access to an existing application In this scenario, deploying a dedicated application for each Consumer is not feasible (e.g., due to expensive licensing) or not the preferred solution for the Data Provider . Instead, the Consumer gains access to an existing application. The type of access depends on the Application and the Data Provider and is not controlled by Simpl-Open (it is beyond what is indicated in the contract). For instance, the application may have its own identity and access management system, allowing the creation of new user accounts for a Consumer or the provision of temporary access. I t includes the following main steps : Request data resource: The Consumer initiates the process by requesting a specific data resource from the Data Provider . This request is based on the information found in the data space catalogue, which was previously searched and identified by the Consumer. Consumer consumes an infrastructure resource from a Provider: In the case of a dedicated application (scenario 1), an infrastructure resource is provisioned in collaboration between the Consumer and Data Provider with the aim of deploying the the application. Deploy the application on the provisioned infrastructure: In the case of a dedicated application (scenario 1), the Data Provider deploys a dedicated application on the provisioned infrastructure resource. The deployment occurs automatically via the infrastructure provisioning mechanism, and the deployment script that is linked to the service offering / usage contract.   Provide access to the application: The Data Provider a pplies the access control rules and provides the  Consumer  with the right access credentials .
+This business process covers the situation where a _Consumer_ has a usage
+contract for a certain data resource and seeks to process that data resource via
+an application provided by a _Data Provider_.
+
+The process enables two scenarios:
+
+1. **Stand-alone application** — deployed on a dedicated infrastructure resource per _Consumer_.
+2. **Shared access** — to an existing application.
+
+It includes the following main steps:
+
+- **Request data resource**
+- **Consumer consumes an infrastructure resource** (BP08)
+- **Deploy the application on the provisioned infrastructure resource**
+- **Provide access to the application**
+- **Access the data resource via the application**
 
 ## Actors
 
-The following actors are involved: Consumer Data Provider
+- _Consumer_
+- _Data Provider_
 
 ## Assumptions
 
-No specific assumptions are made for this business process.
+None listed.
 
 ## Prerequisites
 
-The following prerequisites must be fulfilled: Dataspace is configured:   The  Governance Authority   has configured the data space catalogue with the corresponding vocabulary and schemas to have the general structure of a resource description, contract clauses, and other vital components (Business Process 2). Consumer / Data Provider onboarded: Both the Consumer and Data Provider must complete the onboarding process (Business Process 3A) before they can consume or provide any available resources. End-User authenticated & authorised: The   End-User is authenticated and has the appropriate role and permissions to perform the steps in the process (Business Process 3B). Resource description is present in the data space catalogue: A resource description   must be published in the data space catalogue for the  Consumer  to find a resource in the data space catalogue (Business Process 5). As such, it is assumed that the  Consumer  has searched in the data space catalogue and found the   resource description   (Business Process 6). Usage contract established for the data resource: The  Consumer  can consume the data resource according to the terms and conditions of the usage contract (Business Process 7).
+- **Dataspace is configured** (BP02).
+- **Consumer / Data Provider onboarded** (BP03A).
+- **End-User authenticated & authorised** (BP03B).
+- **Resource description is present in the data space catalogue** (BP05B).
+- **Usage contract established** for the data resource (BP07).
 
 ![BP09B figure 1](./media/BP09B-figure-1.png)
-*BP09B figure 1*
+*BP09B figure 1 — overview diagram*
 
 ![BP09B figure 2](./media/BP09B-figure-2.png)
-*BP09B figure 2*
+*BP09B figure 2 — detailed diagram*
 
-## Details
+## Process steps
 
-The following shows the detailed business process diagram and gives the step descriptions.
+### BP09B.01 Request data resource
 
-Trigger data resource consumption via an application The Consumer  initiates the process to consume a data resource via an application from a Data Provider .
+The _Consumer_ initiates the process by requesting a specific data resource from
+the _Data Provider_.
 
-BP09B.01   Request data resource The   Consumer   initiates the process by requesting a specific data resource from the   Data Provider . This   request   is based on the information found in the data space catalogue, which was previously searched and identified by the   Consumer .
+### BP09B.02 Consumer consumes an infrastructure resource from a Provider (BP08)
 
-BP09B.02 Consumer consumes an infrastructure resource from a Provider (BP08) An infrastructure resource is provisioned in collaboration between the Consumer and Data Provider with the aim of deploying the the application.
+An infrastructure resource is provisioned in collaboration between the _Consumer_
+and _Data Provider_.
 
-BP09B.03 Deploy the application on the provisioned infrastructure resource The Data Provider deploys a dedicated application on the provisioned infrastructure resource. The deployment occurs automatically via the infrastructure provisioning mechanism, and the deployment script that is linked to the service offering / usage contract.
+### BP09B.03 Deploy the application on the provisioned infrastructure resource
 
-BP09B.04   Provide access to the application The Data Provider configures and a pplies the access control rules, and provides the  Consumer  with the right access credentials :
+The _Data Provider_ deploys a dedicated application on the provisioned
+infrastructure resource.
 
-BP09B.05 Access the data resource via the application The Consumer consumes the data resource via the application.
+### BP09B.04 Provide access to the application
 
-Outcomes
+The _Data Provider_ configures and applies the access control rules, and
+provides the _Consumer_ with the right access credentials.
 
-## Sub-processes
+### BP09B.05 Access the data resource via the application
 
-- [9B.1 - A Consumer requests an application resource](./9B1-consumer-requests-application-resource.md)
-- [9B.2 - A Provider provides access to the application resource](./-9b8-provider-provides-access-application-resource.md)
-- [9B.3 - A Provider provides the application deployment instructions](./-9b9-provider-provides-application-deployment-instructions.md)
-- [9B.4 - A Consumer finalises the preparation of the application deployment instructions](./-9b10-consumer-finalises-preparation-application-deployment-instructions.md)
-- [9B.5 - A Consumer performs the steps from the application deployment instructions](./9B11-consumer-performs-steps-application-deployment-instructions.md)
+The _Consumer_ consumes the data resource via the application.
+
+## High-level requirements
+
+| ID | Title | Local copy |
+|----|-------|------------|
+| 9B.1 | Simpl shall provide a number of built-in processing tools. | [9b1-…](./9b1-consumer-requests-application-resource.md) |
+| 9B.2 | Simpl shall provide the Data Consumer with the ability to choose. | [-9b8-…](./-9b8-provider-provides-access-application-resource.md) |
+| 9B.3 | The Data Consumer can request to store the results. | [-9b9-…](./-9b9-provider-provides-application-deployment-instructions.md) |
+| 9B.4 | Depending on the access rights and usage policies. | [-9b10-…](./-9b10-consumer-finalises-preparation-application-deployment-instructions.md) |
+| 9B.5 | Simpl shall generate a copy of the dataset that is to be processed. | [9b11-…](./9b11-consumer-performs-steps-application-deployment-instructions.md) |
+| 9B.6 | Simpl shall provide the mechanisms to be able to automatically configure. | _no local file yet_ |
+
+> **Source-site note:** the HLR detail-page slugs on the public site are not
+> aligned with the 9B.x numbering — they reuse 13.x and 8.x prefixes. Use the
+> URLs below if navigating directly.
+
+Detail pages on the public site:
+
+- 9B.1 → [132-dataset-processing-built-tool](https://simpl-programme.ec.europa.eu/book-page/132-dataset-processing-built-tool)
+- 9B.2 → [81-data-processing-initiation](https://simpl-programme.ec.europa.eu/book-page/81-data-processing-initiation)
+- 9B.3 → [83-dataset-processing-result-storage](https://simpl-programme.ec.europa.eu/book-page/83-dataset-processing-result-storage)
+- 9B.4 → [84-dataset-processing-results](https://simpl-programme.ec.europa.eu/book-page/84-dataset-processing-results)
+- 9B.5 → [85-dataset-source-copy](https://simpl-programme.ec.europa.eu/book-page/85-dataset-source-copy)
+- 9B.6 → [912-mechanisms-configure-and-provision-vms](https://simpl-programme.ec.europa.eu/book-page/912-mechanisms-configure-and-provision-vms)
+
+> **Local-file note:** the `-9b8-`, `-9b9-`, `-9b10-` filenames preserve the
+> source-site slug, which contains a leading hyphen. The HLR-to-file mapping
+> above is approximate; the public site does not provide a clean ID-to-slug
+> table for this BP.
+
+## Source page metadata
+
+- **Author:** Johan van Wyk
+- **Published:** 23 June 2025
+- **Status on source site:** Proposed
+- **Snapshot taken:** 28 April 2026
 
 ## Canonical source
 
@@ -70,4 +126,4 @@ Outcomes
 
 ## Touches
 
-- (auto-inferred — verify) [`../../../governance/`](../../../governance/README.md)
+- (auto-inferred — verify) [`../../../data/`](../../../data/README.md)

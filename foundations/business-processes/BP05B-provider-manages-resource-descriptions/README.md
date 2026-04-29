@@ -4,91 +4,172 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP05B — Provider Manages Resource Descriptions</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP05B — Provider manages resource descriptions</strong><br/>
 </p>
 </div>
 
-# BP05B - Provider manages resource descriptions
+# BP05B – Provider manages resource descriptions
 
-> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
-> showing how this business process executes at runtime, with links
-> to each participating solution.
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram showing how
+> this business process executes at runtime, with links to each participating
+> solution.
 
 ## Overview
 
-This business process covers the management of resource descriptions in the data space catalogue by both a Provider and the  Governance Authority . It includes the following main steps: Create a new resource description: The  Provider  creates a new resource description with the required and optional contents, signs and submits it to the  Governance Authority for publication in the data space catalogue. Create a new version of a resource description: The Provider  creates a new version of a resource description based on an already existing resource description, updates the contents, signs and submits it to the  Governance Authority for publication in the data space catalogue. This corresponds to an update, as resource descriptions are immutable and cannot be changed. Request resource description revocation: The  Provider sends a request to revoke a resource description from the data space catalogue to the  Governance Authority Publish a resource description: Having received a request to create a new resource description, or a new version of a resource description, the Governance Authority validates the received resource description and publishes it in the data space catalogue, if valid. Consumers of an existing resource description are informed about the new version. The old version of the resource description is revoked by the  Governance Authority. Revoke a resource description: Having received a request to revoke a resource description, the  Governance Authority  revokes the resource description from the data space catalogue. Consumers of the resource description are informed about the revocation.
+This business process covers the management of resource descriptions in the data
+space catalogue by both a _Provider_ and the _Governance Authority_. It includes
+the following main steps:
+
+- **Create a new resource description** — the _Provider_ creates a new resource description with the required and optional contents, signs and submits it to the _Governance Authority_ for publication in the data space catalogue.
+- **Create a new version of a resource description** — the _Provider_ creates a new version of an existing resource description, updates the contents, signs and submits it to the _Governance Authority_. This corresponds to an update; resource descriptions are immutable and cannot be changed in place.
+- **Request resource description revocation** — the _Provider_ sends a request to revoke a resource description from the data space catalogue to the _Governance Authority_.
+- **Publish a resource description** — having received a request to create a new resource description (or a new version), the _Governance Authority_ validates the received resource description and publishes it in the data space catalogue if valid. Consumers of an existing resource description are informed about the new version, and the old version is revoked by the _Governance Authority_.
+- **Revoke a resource description** — having received a request to revoke a resource description, the _Governance Authority_ revokes it from the data space catalogue. Consumers of the resource description are informed about the revocation.
 
 ## Actors
 
-The following actors are involved: Governance Authority Provider
+- _Governance Authority_
+- _Provider_
 
 ## Assumptions
 
-The following assumptions are made: The creation of a new resource description or a new version of a resource description always uses the latest version of a schema. If a new version of a resource description is created, usage contracts based on the old version continue without alteration. The revocation of a resource description does not alter or terminate usage contracts based on the specific resource description, which can still be inspected by the Consumer . Only new usage contracts are not possible any more with the revoked resource description, as they are no longer available in the data space catalogue.
+- The creation of a new resource description, or a new version of one, always uses the latest version of a schema.
+- If a new version of a resource description is created, usage contracts based on the old version continue without alteration.
+- The revocation of a resource description does not alter or terminate usage contracts based on that resource description, which can still be inspected by the _Consumer_. Only new usage contracts are no longer possible with the revoked resource description, since it is no longer available in the data space catalogue.
 
 ## Prerequisites
 
-The following prerequisites must be fulfilled: Data space is configured: The  Governance Authority has configured the data space catalogue with the corresponding vocabulary and schemas (containing quality rules) to have the general structure of a resource description (Business Process 2). Furthermore data space specific configurations such as contract templates and similar must be defined. Provider onboarded: The  Provider must be successfully onboarded (Business Processes 3A). Contract clauses are stored and available for inclusion in resource descriptions:  The  Provider must have created and stored at least one set of contract clauses so that these can be included in the resource description ( Business Process 5A) .
+- **Data space is configured** — the _Governance Authority_ has configured the data space catalogue with the corresponding vocabulary and schemas (containing quality rules) to have the general structure of a resource description (BP02). Data-space-specific configurations such as contract templates must also be defined.
+- **Provider onboarded** — the _Provider_ must be successfully onboarded (BP03A).
+- **Contract clauses stored and available for inclusion in resource descriptions** — the _Provider_ must have created and stored at least one set of contract clauses so they can be included in the resource description (BP05A).
 
 ![BP05B figure 1](./media/BP05B-figure-1.png)
-*BP05B figure 1*
+*BP05B figure 1 — high-level diagram*
 
 ![BP05B figure 2](./media/BP05B-figure-2.png)
-*BP05B figure 2*
+*BP05B figure 2 — detailed-level diagram*
 
-## Details
+## Process steps
 
-The following shows the detailed business process diagram and gives the step descriptions.
+### Trigger — resource description management
 
-Trigger resource description management The  Provider  decides whether to create a new resource description, to create a new version of an existing own resource description, or to revoke an existing own resource description. This initiates resource description management.
+The _Provider_ decides whether to create a new resource description, create a new
+version of an existing one, or revoke an existing one. This initiates resource
+description management.
 
-BP05B.01 Create a new resource description The  Provider selects the resource type, data, application or infrastructure, and enters required and optional common metadata in the new resource description.
+### BP05B.01 Create a new resource description
 
-BP05B.02 Add resource type specific metadata Depending on the selected resource type, the Provider adds the resource type specific required and optional metadata.
+The _Provider_ selects the resource type (data, application, or infrastructure)
+and enters required and optional common metadata.
 
-BP05B.03 Add policy and contract related metadata For access and usage control, the  Provider configures the policies that shall be applied to the new resource. Furthermore, the Provider needs to add required and optional metadata related to the usage contract for the specific resource.
+### BP05B.02 Add resource type specific metadata
 
-BP05B.04 Sign and submit the resource description After creating a new resource definition, or creating a new version of a resource description, the Provider signs new resource description with the Provider's credentials and submits it to the Governance Authority .
+Depending on the selected resource type, the _Provider_ adds the resource type
+specific required and optional metadata.
 
-BP05B.05 Validate the resource description When receiving a request to publish a new resource description, or a new version of a resource description, the Governance Authority performs the following validations:
+### BP05B.03 Add policy and contract related metadata
 
-BP05B.06 Remediate validation issues In case of validation issues, the Governance Authority informs the  Provider about the issues. The  Provider must remediate the issues and submit the resource description again to the Governance Authority for publication.
+For access and usage control, the _Provider_ configures the policies that shall
+be applied to the new resource. The _Provider_ also adds required and optional
+metadata related to the usage contract for the specific resource.
 
-BP05B.07 Publish the resource description Upon successful validation, the new (or new version of the) resource description is published in the data space catalogue.
+### BP05B.04 Sign and submit the resource description
 
-BP05B.08 Create a new version of a resource description The Provider selects a previously published resource description and initiates the creation of a new version of this resource description. The Provider updates the required and optional metadata in this new version.
+The _Provider_ signs the new resource description with the _Provider_'s
+credentials and submits it to the _Governance Authority_.
 
-BP05B.09 Update resource type specific metadata Similar to step BP05B06 the resource type specific metadata can be updated for a new version of a resource description.
+### BP05B.05 Validate the resource description
 
-BP05B.10 Update policies and contract related metadata Similar to step BP05B.07   the policies and contract related metadata can be updated for a new version of a resource description.
+When receiving a request to publish a new resource description (or a new
+version), the _Governance Authority_ performs syntactic validation, semantic
+validation against schema and vocabulary, and quality-rules validation.
 
-After this step, the creation of a new version of a resource description continues with signing and submitting, in the same way as for a new resource description.
+### BP05B.06 Remediate validation issues
 
-BP05B.11 Revoke the previous version of the resource description If the new version of the resource description is valid, the Governance Authority revokes the current resource description version.
+In case of validation issues, the _Governance Authority_ informs the _Provider_.
+The _Provider_ must remediate and resubmit the resource description for
+publication.
 
-BP05B.12 Inform about new version If a resource description is updated, the Consumers  of this resource are informed about the new version in the data space catalogue.
+### BP05B.07 Publish the resource description
 
-BP05B.13 Request resource description revocation The Provider selects a previously published resource description and initiates the revocation of this resource description.
+Upon successful validation, the new (or new version of the) resource description
+is published in the data space catalogue.
 
-BP05B.14 Revoke a resource description Upon receiving a request for revocation, the  Governance Authority revokes the resource description from the data space catalogue.
+### BP05B.08 Create a new version of a resource description
 
-BP05B.15 Inform about revocation If a resource description is revoked, the Consumers  of this resource are informed about the revocation.
+The _Provider_ selects a previously published resource description and initiates
+the creation of a new version, updating required and optional metadata.
 
-Outcomes
+### BP05B.09 Update resource type specific metadata
 
-## Sub-processes
+Resource-type-specific metadata can be updated for a new version of a resource
+description.
 
-- [5B.1 - A Provider consults its own Resource descriptions](./5B1-provider-consults-its-own-resource-descriptions.md)
-- [5B.2 - A Provider creates a new Resource description](./5B2-provider-creates-new-resource-description.md)
-- [5B.3 - A Provider creates a new version of a Resource description](./5B3-provider-creates-new-version-resource-description.md)
-- [5B.4 - A Provider signs and submits a new Resource description or a new version of a Resource description](./5B4-provider-signs-and-submits-new-resource-description-or-new-version-resource.md)
-- [5B.5 - The Governance Authority publishes a Resource description](./5B5-governance-authority-publishes-resource-description.md)
-- [5B.6 - A Provider notifies Consumers about a new version of a Resource description](./5B6-provider-notifies-consumers-about-new-version-resource-description.md)
-- [5B.7 - A Provider requests the revocation of a Resource description](./5B7-provider-requests-revocation-resource-description.md)
-- [5B.8 - The Governance Authority revokes a resource description](./5B8-governance-authority-revokes-resource-description.md)
-- [5B.9 - The Provider notifies Consumers about the revocation of a resource description](./5B9-provider-notifies-consumers-about-revocation-resource-description.md)
+### BP05B.10 Update policies and contract related metadata
+
+Policies and contract-related metadata can be updated for a new version of a
+resource description. After this step, creation of a new version continues with
+signing and submission, identical to the new-resource flow.
+
+### BP05B.11 Revoke the previous version of the resource description
+
+If the new version of the resource description is valid, the _Governance
+Authority_ revokes the current (previous) resource description version.
+
+### BP05B.12 Inform about new version
+
+If a resource description is updated, the _Consumers_ of this resource are
+informed about the new version in the data space catalogue.
+
+### BP05B.13 Request resource description revocation
+
+The _Provider_ selects a previously published resource description and initiates
+the revocation of this resource description.
+
+### BP05B.14 Revoke a resource description
+
+Upon receiving a request for revocation, the _Governance Authority_ revokes the
+resource description from the data space catalogue.
+
+### BP05B.15 Inform about revocation
+
+If a resource description is revoked, the _Consumers_ of this resource are
+informed about the revocation.
+
+## High-level requirements
+
+| ID | Title | Local copy |
+|----|-------|------------|
+| 5B.1 | A Provider consults its own Resource descriptions. | [5b1-…](./5b1-provider-consults-its-own-resource-descriptions.md) |
+| 5B.2 | A Provider creates a new Resource description. | [5b2-…](./5b2-provider-creates-new-resource-description.md) |
+| 5B.3 | A Provider creates a new version of a Resource description. | [5b3-…](./5b3-provider-creates-new-version-resource-description.md) |
+| 5B.4 | A Provider signs and submits a new Resource description or a new version. | [5b4-…](./5b4-provider-signs-and-submits-new-resource-description-or-new-version-resource.md) |
+| 5B.5 | The Governance Authority publishes a Resource description. | [5b5-…](./5b5-governance-authority-publishes-resource-description.md) |
+| 5B.6 | A Provider notifies Consumers about a new version of a Resource description. | [5b6-…](./5b6-provider-notifies-consumers-about-new-version-resource-description.md) |
+| 5B.7 | A Provider requests the revocation of a Resource description. | [5b7-…](./5b7-provider-requests-revocation-resource-description.md) |
+| 5B.8 | The Governance Authority revokes a resource description. | [5b8-…](./5b8-governance-authority-revokes-resource-description.md) |
+| 5B.9 | The Provider notifies Consumers about the revocation of a resource description. | [5b9-…](./5b9-provider-notifies-consumers-about-revocation-resource-description.md) |
+
+Detail pages on the public site:
+
+- 5B.1 → [tbp-5b1-provider-consults-its-own-resource-descriptions](https://simpl-programme.ec.europa.eu/book-page/tbp-5b1-provider-consults-its-own-resource-descriptions)
+- 5B.2 → [tbp-5b2-provider-creates-new-resource-description](https://simpl-programme.ec.europa.eu/book-page/tbp-5b2-provider-creates-new-resource-description)
+- 5B.3 → [tbp-5b3-provider-creates-new-version-resource-description](https://simpl-programme.ec.europa.eu/book-page/tbp-5b3-provider-creates-new-version-resource-description)
+- 5B.4 → [tbp-5b4-provider-signs-and-submits-new-resource-description-or-new-version-resource](https://simpl-programme.ec.europa.eu/book-page/tbp-5b4-provider-signs-and-submits-new-resource-description-or-new-version-resource)
+- 5B.5 → [tbp-5b5-governance-authority-publishes-resource-description](https://simpl-programme.ec.europa.eu/book-page/tbp-5b5-governance-authority-publishes-resource-description)
+- 5B.6 → [5b6-provider-notifies-consumers-about-new-version-resource-description](https://simpl-programme.ec.europa.eu/book-page/5b6-provider-notifies-consumers-about-new-version-resource-description)
+- 5B.7 → [5b7-provider-requests-revocation-resource-description](https://simpl-programme.ec.europa.eu/book-page/5b7-provider-requests-revocation-resource-description)
+- 5B.8 → [5b8-governance-authority-revokes-resource-description](https://simpl-programme.ec.europa.eu/book-page/5b8-governance-authority-revokes-resource-description)
+- 5B.9 → [5b9-provider-notifies-consumers-about-revocation-resource-description](https://simpl-programme.ec.europa.eu/book-page/5b9-provider-notifies-consumers-about-revocation-resource-description)
+
+## Source page metadata
+
+- **Author:** Rick Marinus Johannes Santbergen
+- **Published:** 23 June 2025
+- **Status on source site:** Proposed
+- **Snapshot taken:** 28 April 2026
 
 ## Canonical source
 

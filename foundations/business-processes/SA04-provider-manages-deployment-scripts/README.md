@@ -4,36 +4,142 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>SA04 — Provider Manages Deployment Scripts</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>SA04 — Provider manages deployment scripts</strong><br/>
 </p>
 </div>
 
-# SA04 - Provider manages deployment scripts
+# SA04 – Provider manages deployment scripts
 
 ## Overview
 
-This supporting activity covers the management of deployment scripts by a Provider, which supports the management of resource descriptions (BP05B) when adding or updating resource type specific metadata of an infrastructure resource. Upon the consumption of such an infrastructure resource (BP08), the deployment script is used for the provisioning and configuration of the infrastructure resource on a dedicated environment for the Consumer. During the post configuration process, the deployment script is used for actions such as deploying an application or loading data resources. Simpl-Open supports Infrastructure Providers in the management of deployment scripts by allowing them to: Consult and download the available deployment scripts. Consult the available VM templates. Create, update or delete a deployment script directly. Create or update a VM template by specifying its building blocks such as cloud environment configurations and post provisioning configurations (see SA04.01 for more details). This automatically generates a deployment script based on the provided building blocks. Delete a VM template: This automatically deletes the related deployment script, and hence makes it unavailable to link to a resource description. With the use of VM templates to create a deployment script, Simpl-Open hence provides mechanisms to configure and automatically provision VMs in multiple cloud providers, and provide a parametrisable approach to easily configure VMs to Infrastructure and Application Providers participating in the data space.
+This supporting activity covers the management of deployment scripts by a
+_Provider_, which supports the management of resource descriptions (BP05B) when
+adding or updating resource-type-specific metadata of an infrastructure
+resource. Upon the consumption of such an infrastructure resource (BP08), the
+deployment script is used for the provisioning and configuration of the
+infrastructure resource on a dedicated environment for the _Consumer_. During
+the post-configuration process, the deployment script is used for actions such
+as deploying an application or loading data resources.
+
+Simpl-Open supports Infrastructure _Providers_ in the management of deployment
+scripts by allowing them to:
+
+- **Consult and download** the available deployment scripts.
+- **Consult** the available VM templates.
+- **Create, update or delete a deployment script directly.**
+- **Create or update a VM template** by specifying its building blocks such as cloud environment configurations and post-provisioning configurations (see SA04.01 for more details). This automatically generates a deployment script based on the provided building blocks.
+- **Delete a VM template** — this automatically deletes the related deployment script, and hence makes it unavailable to link to a resource description.
+
+> With the use of VM templates to create a deployment script, Simpl-Open
+> provides mechanisms to configure and automatically provision VMs in multiple
+> cloud providers, and provides a parametrisable approach to easily configure
+> VMs to Infrastructure and Application _Providers_ participating in the data
+> space.
 
 ## Actors
 
-The following actors are involved:   Infrastructure Provider
+- _Infrastructure Provider_
 
 ## Assumptions
 
-None.
+None listed.
 
 ## Prerequisites
 
-The following prerequisites must be fulfilled: Provider onboarded:  The  Provider  must be successfully onboarded (Business Process 3A).
+- **Provider onboarded** — the _Provider_ must be successfully onboarded (BP03A).
 
-## Sub-processes
+## Process steps
 
-- [4.1 - A Provider consults their own VM templates](./41-provider-consults-their-own-vm-templates.md)
-- [4.2 - A Provider consults their own deployment scripts](./42-provider-consults-their-own-deployment-scripts.md)
-- [4.3 - A Provider creates a new VM template](./43-provider-creates-new-vm-template.md)
-- [4.4 - A Provider creates a new deployment script](./44-provider-creates-new-deployment-script.md)
+### Trigger — resource description management
+
+The Infrastructure _Provider_ consults their current set of VM templates and
+deployment scripts and decides whether to create a new VM template or
+deployment script, to update an existing VM template or deployment script, or
+to delete an existing VM template or deployment script.
+
+### SA04.01 Create a VM Template
+
+The Infrastructure _Provider_ creates a VM Template containing all its building
+blocks:
+
+- General properties.
+- Providing cloud environment configurations.
+- VM configurations (cloud-init).
+- Operating system.
+- Hardware configuration (CPU cores, RAM, storage).
+- Post-provisioning configurations.
+- VM policies.
+
+The VM template is stored, and a new deployment script is created automatically
+related to that VM template.
+
+### SA04.02 Update a VM Template
+
+The Infrastructure _Provider_ updates a selected VM Template by updating the
+content of one or more of its building blocks. The updated VM template is
+stored, and a new deployment script is created automatically related to the
+updated VM template.
+
+### SA04.03 Delete a VM Template
+
+The Infrastructure _Provider_ deletes a selected VM Template. The VM template
+will no longer be available for editing and generating deployment scripts. The
+existing deployment script that was generated by this VM template is deleted
+automatically upon the deletion of the VM template.
+
+### SA04.04 Create a Deployment Script
+
+The Infrastructure _Provider_ creates a deployment script by uploading a file
+that contains all the required instructions to create an infrastructure
+resource.
+
+### SA04.05 Update a Deployment Script
+
+The Infrastructure _Provider_ updates a selected deployment script with new
+configuration items.
+
+### SA04.06 Delete a Deployment Script
+
+The Infrastructure _Provider_ deletes a selected deployment script. It will no
+longer be available to link to a resource description.
+
+> **Note from source page:** The dynamic interaction of the update and deletion
+> (SA04.02, SA04.03, SA04.05 and SA04.06) of deployment scripts with the
+> catalogue will be handled in SIMPL-17079 — R31 Infrastructure catalogue
+> services *(new)*.
+
+## High-level requirements
+
+| ID | Title | Local copy |
+|----|-------|------------|
+| 4.1 | A Provider consults their own VM templates. | [41-…](./41-provider-consults-their-own-vm-templates.md) |
+| 4.2 | A Provider consults their own deployment scripts. | [42-…](./42-provider-consults-their-own-deployment-scripts.md) |
+| 4.3 | A Provider creates a new VM template. | [43-…](./43-provider-creates-new-vm-template.md) |
+| 4.4 | A Provider creates a new deployment script. | [44-…](./44-provider-creates-new-deployment-script.md) |
+
+> **Note on numbering:** the source site uses bare `4.x` IDs (and `4x-…` slugs)
+> for these HLRs, not `SA04.x`. Local files mirror that.
+
+Detail pages on the public site:
+
+- 4.1 → [41-provider-consults-their-own-vm-templates](https://simpl-programme.ec.europa.eu/book-page/41-provider-consults-their-own-vm-templates)
+- 4.2 → [42-provider-consults-their-own-deployment-scripts](https://simpl-programme.ec.europa.eu/book-page/42-provider-consults-their-own-deployment-scripts)
+- 4.3 → [43-provider-creates-new-vm-template](https://simpl-programme.ec.europa.eu/book-page/43-provider-creates-new-vm-template)
+- 4.4 → [44-provider-creates-new-deployment-script](https://simpl-programme.ec.europa.eu/book-page/44-provider-creates-new-deployment-script)
+
+## Outcomes
+
+- **VM Template created, updated, or deleted** — the Infrastructure _Provider_ has completed their actions on the VM Template, and the changes are reflected in the related deployment script.
+- **Deployment Script created, updated, or deleted** — the Infrastructure _Provider_ has completed the management of its Deployment Scripts directly or through the management of a VM Template.
+
+## Source page metadata
+
+- **Author:** Annalie te Hofste
+- **Published:** 19 December 2025
+- **Status on source site:** Proposed
+- **Snapshot taken:** 28 April 2026
 
 ## Canonical source
 
@@ -41,4 +147,4 @@ The following prerequisites must be fulfilled: Provider onboarded:  The  Provi
 
 ## Touches
 
-- (auto-inferred — verify) [`../../../governance/`](../../../governance/README.md)
+- (auto-inferred — verify) [`../../../infrastructure/`](../../../infrastructure/README.md)

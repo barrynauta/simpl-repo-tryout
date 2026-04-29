@@ -4,15 +4,20 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP01 — Define Dataspace Governance</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP01 — Define Dataspace Governance</strong><br/>
 </p>
 </div>
 
 # BP01 - Define Dataspace Governance
 
-> **Status: Work In Progress** — source page not yet fully published.
+> **Status: Work In Progress on the public site.**
+> The canonical page exists but contains no overview, actors, prerequisites, process
+> steps, or requirements at the time of this snapshot. Public commenters have flagged
+> the description as "still quite superficial" and asked for clarification on the
+> Governance Authority's role in dataspace setup. This local copy will be re-fetched
+> once the upstream page is filled in.
 
 ## Overview
 
@@ -24,11 +29,18 @@ Not specified.
 
 ## Assumptions
 
-None.
+None published.
 
 ## Prerequisites
 
-None.
+None published.
+
+## Source page metadata
+
+- **Author:** Laura Camargo
+- **Published:** 16 December 2025
+- **Snapshot taken:** 28 April 2026
+- **Navigation on source site:** previous → *Simpl Requirements*, next → *BP02 – Configuration of data space Governance Authority*
 
 ## Canonical source
 

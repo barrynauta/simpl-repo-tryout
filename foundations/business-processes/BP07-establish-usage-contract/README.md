@@ -4,50 +4,171 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Foundations</a><br/>
-        <a href="../README.md">Business Processes</a><br/>
-            <strong>BP07 — Establish Usage Contract</strong><br/>
+    <a href="../../README.md">Foundations</a><br/>
+        <a href="../README.md">Business Processes</a><br/>
+            <strong>BP07 — Consumer and Provider establish a usage contract</strong><br/>
 </p>
 </div>
 
-# BP07 - Consumer and Provider establish a usage contract for selected catalogue items
+# BP07 – Consumer and Provider establish a usage contract for selected catalogue items
 
-> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram
-> showing how this business process executes at runtime, with links
-> to each participating solution.
+> **See also: [Dynamic view](./dynamic-view.md)** — sequence diagram showing how
+> this business process executes at runtime, with links to each participating
+> solution.
 
 ## Overview
 
-This business process covers the the situation where a Consumer seeks to access a   data, application, or infrastructure resource from a Provider . To gain access, both parties must establish a usage contract. This legally binding contract defines the rights, limits, and obligations of both parties, including pricing, usage limits, data retention policies, and service level agreements (SLAs). The Consumer also agrees to the licensing terms set by the Provider .  Usage contract are established in two scenarios: New resource consumption: Whenever a Consumer wants to access a new resource from a Provider . Usage contract expiration: As u sage contracts are immutable , a new usage contract must be created when an existing one expire s to allow  continued resource usage. It includes the following main steps: Request usage contract offer: The Consumer requests a usage contract based on their selection of a desired resource from the data space catalogue (Business Process 6). Verify access policy: The Provider  verifies the   Consumer   description   details (as described in their self-description),   to ensure that they are allowed to access the requested resource according to the access policies. Verify existence usage contract: The Provider verifies whether the   Consumer already has an established usage contract in place for the desired resource from the data space catalogue. Provide usage contract: T he Provider creates a formal usage contract in response to the usage contract request from the Consumer . Review terms and conditions of usage contract: The Consumer reviews the usage contract and decides whether to agree to the terms and conditions. Sign usage contract: If the Consumer agrees to the terms and conditions, they sign the usage contract. Validate usage contract: The Provider validates that the Consumer has formally agreed to the usage contract, ensuring they have accepted the terms and conditions established by the Provider . Sign usage contract: If the validation is successful, the Provider signs the usage contract. While the possibility of usage contract term negotiation has been discussed, it is not a current requirement in this process. We have prioritised other areas for initial implementation and will re-evaluate the need for negotiation as our business requirements develop.
+This business process addresses scenarios where a _Consumer_ seeks to access
+data, application, or infrastructure resources from a _Provider_. Both parties
+must establish a legally binding usage contract defining rights, limits, and
+obligations of both parties — including pricing, usage limits, data retention
+policies, and service level agreements (SLAs).
+
+Usage contracts are established in two scenarios:
+
+1. **New resource consumption** — whenever a _Consumer_ wants to access a new resource from a _Provider_.
+2. **Usage contract expiration** — usage contracts are immutable, so a new contract must be created when an existing one expires.
+
+It includes the following main steps:
+
+- **Request usage contract offer**
+- **Verify access policy**
+- **Verify existence of usage contract**
+- **Provide usage contract**
+- **Review terms and conditions of usage contract**
+- **Sign usage contract** (Consumer)
+- **Validate usage contract**
+- **Sign usage contract** (Provider)
+
+> **Note:** While the possibility of usage contract term negotiation has been
+> discussed, it is not a current requirement in this process.
 
 ## Actors
 
-The following actors are involved: Consumer Provider: Infrastructure , Application or Data Provider .
+- _Consumer_
+- _Provider_ — Infrastructure, Application, or Data Provider
 
 ## Assumptions
 
-The following assumptions are made: The Consumer requests a usage contract based on the selection of a desired resource from the data space catalogue.
+- The _Consumer_ requests a usage contract based on the selection of a desired resource from the data space catalogue.
 
 ## Prerequisites
 
-The following prerequisites must be fulfilled: Dataspace is configured:   The  Governance Authority   has configured the data space catalogue with the corresponding vocabulary and schemas to have the general structure of a resource description, contract clauses, and other vital components (Business Process 2). End-User authentication and authorisation: The End-User must be authenticated and possess the necessary roles and permissions to execute the process steps (Business Process 3B). Resource description is present in the data space catalogue:  A resource description   must be published in the data space catalogue for the  Consumer  to find a resource in the data space catalogue (Business Process 5). As such, it is assumed that the  Consumer  has searched in the data space catalogue and found the   resource description   (Business Process 6).
+- **Dataspace is configured** — the _Governance Authority_ has configured the data space catalogue with the corresponding vocabulary and schemas (BP02).
+- **End-User authentication and authorisation** — the End-User must be authenticated and possess the necessary roles and permissions to execute the process steps (BP03B).
+- **Resource description is present in the data space catalogue** — a resource description must be published in the catalogue (BP05B).
 
 ![BP07 figure 1](./media/BP07-figure-1.png)
-*BP07 figure 1*
+*BP07 figure 1 — overview diagram*
 
 ![BP07 figure 2](./media/BP07-figure-2.png)
-*BP07 figure 2*
+*BP07 figure 2 — detailed business process diagram*
 
-## Sub-processes
+## Process steps
 
-- [7.1 - A Consumer requests a new usage contract offer](./71-consumer-requests-new-usage-contract-offer.md)
-- [7.2 - A Provider verifies the request for a usage contract offer](./72-provider-verifies-request-usage-contract-offer.md)
-- [7.3 - A Provider creates and provides the usage contract offer](./73-provider-creates-and-provides-usage-contract-offer.md)
-- [7.4 - A Consumer reviews the usage contract offer](./74-consumer-reviews-usage-contract-offer.md)
-- [7.5 - A Consumer signs, stores and provide the usage contract offer](./75-consumer-signs-stores-and-provide-usage-contract-offer.md)
-- [7.6 - A Provider validates the signed usage contract offer](./76-provider-validates-signed-usage-contract-offer.md)
-- [7.7 - A Provider signs, stores and provides the usage contract to the Consumer](./77-provider-signs-stores-and-provides-usage-contract-consumer.md)
-- [7.8 - A Consumer validates the signed usage contract](./78-consumer-validates-signed-usage-contract.md)
+### BP07.01 Request usage contract offer
+
+The _Consumer_ requests a usage contract based on their selection of a desired
+resource from the data space catalogue (BP06).
+
+### BP07.02 Verify access policy
+
+The _Provider_ verifies the _Consumer_ description details (as described in
+their self-description) to ensure that they are allowed to access the requested
+resource according to the access policies.
+
+### BP07.03 Verify existence usage contract
+
+The _Provider_ verifies whether the _Consumer_ already has an established usage
+contract in place for the desired resource from the data space catalogue.
+
+### BP07.04 Provide usage contract
+
+The _Provider_ creates a formal usage contract in response to the usage contract
+request from the _Consumer_.
+
+### BP07.05 Review terms and conditions of usage contract
+
+The _Consumer_ reviews the usage contract and decides whether to agree to the
+terms and conditions.
+
+### BP07.06 Sign usage contract
+
+If the _Consumer_ agrees to the terms and conditions, they sign the usage
+contract.
+
+### BP07.07 Store usage contract
+
+The _Consumer_ securely stores the finalised usage contract as part of their
+official business records for future reference, compliance, and operational
+needs.
+
+### BP07.08 Validate usage contract
+
+The _Provider_ validates that the _Consumer_ has formally agreed to the usage
+contract, ensuring they have accepted the terms and conditions established by
+the _Provider_.
+
+### BP07.09 Sign usage contract
+
+If the validation is successful, the _Provider_ signs the usage contract.
+
+### BP07.10 Store usage contract
+
+The _Provider_ securely stores the finalised usage contract as part of their
+official business records for future reference, compliance, and operational
+needs.
+
+### BP07.11 Notify Consumer
+
+The _Provider_ notifies the _Consumer_ that they have signed and stored the
+usage contract. The signed usage contract is made available to the _Consumer_.
+
+### BP07.12 Confirm usage contract
+
+The _Consumer_ confirms the signed usage contract from the _Provider_ against
+the original usage contract request (from BP07.01), to ensure consistency and
+accuracy.
+
+## High-level requirements
+
+| ID | Title | Local copy |
+|----|-------|------------|
+| 7.1 | A Consumer requests a new usage contract offer. | [71-…](./71-consumer-requests-new-usage-contract-offer.md) |
+| 7.2 | A Provider verifies the request for a usage contract offer. | [72-…](./72-provider-verifies-request-usage-contract-offer.md) |
+| 7.3 | A Provider creates and provides the usage contract offer. | [73-…](./73-provider-creates-and-provides-usage-contract-offer.md) |
+| 7.4 | A Consumer reviews the usage contract offer. | [74-…](./74-consumer-reviews-usage-contract-offer.md) |
+| 7.5 | A Consumer signs, stores and provides the usage contract offer. | [75-…](./75-consumer-signs-stores-and-provide-usage-contract-offer.md) |
+| 7.6 | A Provider validates the signed usage contract offer. | [76-…](./76-provider-validates-signed-usage-contract-offer.md) |
+| 7.7 | A Provider signs, stores and provides the usage contract to the Consumer. | [77-…](./77-provider-signs-stores-and-provides-usage-contract-consumer.md) |
+| 7.8 | A Consumer validates the signed usage contract. | [78-…](./78-consumer-validates-signed-usage-contract.md) |
+
+Detail pages on the public site:
+
+- 7.1 → [71-consumer-requests-new-usage-contract-offer](https://simpl-programme.ec.europa.eu/book-page/71-consumer-requests-new-usage-contract-offer)
+- 7.2 → [72-provider-verifies-request-usage-contract-offer](https://simpl-programme.ec.europa.eu/book-page/72-provider-verifies-request-usage-contract-offer)
+- 7.3 → [73-provider-creates-and-provides-usage-contract-offer](https://simpl-programme.ec.europa.eu/book-page/73-provider-creates-and-provides-usage-contract-offer)
+- 7.4 → [74-consumer-reviews-usage-contract-offer](https://simpl-programme.ec.europa.eu/book-page/74-consumer-reviews-usage-contract-offer)
+- 7.5 → [75-consumer-signs-stores-and-provide-usage-contract-offer](https://simpl-programme.ec.europa.eu/book-page/75-consumer-signs-stores-and-provide-usage-contract-offer)
+- 7.6 → [76-provider-validates-signed-usage-contract-offer](https://simpl-programme.ec.europa.eu/book-page/76-provider-validates-signed-usage-contract-offer)
+- 7.7 → [77-provider-signs-stores-and-provides-usage-contract-consumer](https://simpl-programme.ec.europa.eu/book-page/77-provider-signs-stores-and-provides-usage-contract-consumer)
+- 7.8 → [78-consumer-validates-signed-usage-contract](https://simpl-programme.ec.europa.eu/book-page/78-consumer-validates-signed-usage-contract)
+
+## Outcomes
+
+- **Usage contract is established** — if all steps are completed successfully, the process is finalised and the usage contract is considered active. Both parties are notified of the successful completion of the process.
+- **No usage contract established** — if any step fails or is rejected, the process is terminated and no usage contract is established. Both parties are notified of the termination and the reason. This may occur in the following cases:
+  - Access policy restriction
+  - Existing usage contract
+  - Terms and conditions not accepted
+  - Usage contract not validated
+
+## Source page metadata
+
+- **Author:** Rick Marinus Johannes Santbergen
+- **Published:** 23 June 2025
+- **Status on source site:** Proposed
+- **Snapshot taken:** 28 April 2026
 
 ## Canonical source
 
