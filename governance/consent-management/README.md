@@ -17,4 +17,4 @@ Ensures that data subjects' consent preferences are properly captured, managed, 
 
 ## Planned business services
 
-- **Consent management** — captures, stores, and enforces data subjects' consent preferences in accordance with GDPR and privacy regulations. Maintains versioned consent records linked to specific data processing activities, enables consent revocation workflows, and provides audit trails. Integrates with policy management to ensure consent terms are enforced across data sharing operations.
+- [Consent management](consent-management/README.md) — captures, stores, and enforces data subjects' consent preferences in accordance with GDPR and privacy regulations. Maintains versioned consent records linked to specific data processing activities, enables consent revocation workflows, and provides audit trails. Integrates with policy management to ensure consent terms are enforced across data sharing operations. _(Roadmap: Aruba Consent Management.)_

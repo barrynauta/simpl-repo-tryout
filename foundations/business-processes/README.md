@@ -145,6 +145,7 @@ No card images exist on the public index page for the SA entries. Text-only link
 - [BP09A](./BP09A-consume-data-resource/README.md) — Consumer consumes a data resource from a Provider
 - [BP09B](./BP09B-consume-data-via-application/README.md) — Consumer receives a data processing service on a data resource via an application
 - [BP12B](./BP12B-single-node-logging-monitoring/README.md) — Single node logging & monitoring
+- [BP12D](./BP12D-governance-authority-audits-data-space-participants/README.md) — Governance Authority audits data space participants _(stub — upstream content auth-gated)_
 - [BP13](./BP13-it-administration/README.md) — IT administration
 
 ### Solution Architectures

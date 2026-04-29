@@ -16,3 +16,4 @@ Manages access and usage policy administration for the Simpl-Open data space, pr
 ## Business services
 
 - [Policy administration point](policy-administration-point/README.md) — stores and provides access to policy templates used by SD Tooling and the Contract Manager.
+- [Policy decision point](policy-decision-point/README.md) — evaluates policies against requests and emits permit/deny decisions. _(Roadmap: Rule Manager from Digital Enabler.)_

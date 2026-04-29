@@ -17,6 +17,6 @@ Allows participants to make applications and services available to others throug
 
 ## Planned business services
 
-- **Calculation algorithm** — exposes deterministic computational functions for remote execution.
-- **Machine Learning Model** — serves trained models with versioning, inference endpoints, and monitoring.
-- **Software apps (Rendering engine)** — hosts interactive applications and engines for domain-specific processing and visualisation.
+- **Calculation algorithm** — exposes deterministic computational functions for remote execution. _(Not yet implemented; no designated solution.)_
+- [Machine learning model](machine-learning-model/README.md) — serves trained models with versioning, inference endpoints, and monitoring. _(Roadmap: MLflow)_
+- [Software apps](software-apps/README.md) — hosts interactive applications and engines for domain-specific processing. _(Roadmap: Kubeless, Apache OpenWhisk)_

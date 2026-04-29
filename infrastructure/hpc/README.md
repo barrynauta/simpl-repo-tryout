@@ -17,4 +17,4 @@ Enables the execution of high-performance computing workloads where demanding an
 
 ## Planned business services
 
-- **HPC** — provides access to high-performance compute resources for large-scale simulations and AI workloads.
+- [HPC](hpc/README.md) — provides access to high-performance compute resources for large-scale simulations and AI workloads. _(Roadmap: OpenHPC.)_

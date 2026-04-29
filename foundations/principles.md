@@ -5,6 +5,22 @@ Architectural principles are the foundational design commitments that govern eve
 ![Architectural principles overview](./media/image20.png)
 *Figure: Overview of the ten Simpl-Open architectural principles.*
 
+## Architecture approach
+
+> Lifted from FTA §2.9.1 (lines 1824–1866 of the source, dated 2026-04-20). Upstream link: [FTA spec §2.9.1](https://code.europa.eu/simpl/simpl-open/architecture/-/blob/master/functional_and_technical_architecture_specifications/Functional-and-Technical-Architecture-Specifications.md?ref_type=heads#291-architecture-approach).
+
+The architecture of Simpl-Open is created using a layered approach inspired by the TOGAF methodology, which is reflected in the structure of the FTA document and of this catalogue:
+
+1. **Business Architecture** — describes how Simpl-Open should achieve its business goals and respond to the strategic drivers set out in the Architecture Vision. This layer was already defined in the preparatory study; the FTA only updates it on the functional capabilities (which have evolved since then) and revisited concepts of business processes.
+2. **Application Architecture** — develops the target application architecture that enables the business architecture and the architecture vision in a way that addresses the requirements. It identifies architecture components through Solution Views (business-process-based, both static and dynamic) and Deployment Views (agent-type-based, static only).
+3. **Data Architecture** — presents data entities and/or collections and how they are structured within the system.
+4. **Technology Architecture** — develops the target technology architecture that enables the application architecture, mapping each application building block to a technology that implements its capabilities. Like the application architecture, both Solution and Deployment Views are defined.
+5. **Security Architecture** — covers the security aspects of the architecture.
+
+The source of the ArchiMate diagrams used in the FTA is available as an [Archi](https://www.archimatetool.com/) model versioned in the [Simpl-Open architecture repository](https://code.europa.eu/simpl/simpl-open/architecture). Access details are documented [here](https://github.com/archimatetool/archi-modelrepository-plugin/wiki).
+
+The list of architecture principles to which Simpl-Open adheres is presented in the next section.
+
 ## Federation
 
 Federated systems describe autonomous entities, tied together by a specified set of standards, frameworks, and legal rules. Simpl-Open should federate data, infrastructure and applications. This principle is key to enable interoperability and information sharing among the different entities that will be part of Simpl, while giving maximum autonomy to service owners.

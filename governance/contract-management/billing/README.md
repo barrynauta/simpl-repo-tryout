@@ -1,0 +1,24 @@
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
+<hr/>
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../../../README.md">🏠 Home</a><br/>
+    <a href="../../README.md">Dimension: Governance</a><br/>
+        <a href="../README.md">Capability: Contract management</a><br/>
+            <strong>Service: Billing</strong><br/>
+</p>
+</div>
+
+# Billing
+
+Settlement, invoicing, and clearing for usage-based contracts. Roadmap.
+
+## Solutions
+
+- [eInvoicing](einvoicing/README.md) — see stub for FTA reference and MAPPING row.
+- [Eviden Partitum (Clearing House)](eviden-partitum/README.md) — see stub for FTA reference and MAPPING row.
+
+## Source
+
+Routed from [MAPPING.md](../../../MAPPING.md) rows 90, 93. FTA references vary per solution and are recorded inside each solution's stub README.

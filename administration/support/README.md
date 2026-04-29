@@ -17,6 +17,6 @@ Provides operational assistance to participants and end-users through service de
 
 ## Planned business services
 
-- **Service desk** — provides first-line assistance, triage, and knowledge-base guidance for participants and operators.
-- **Support page** — publishes status, FAQs, runbooks, and contact channels to streamline self-service support.
-- **Ticketing system** — orchestrates issue lifecycle with SLAs, prioritisation, and handoffs across resolver groups.
+- **Service desk** — provides first-line assistance, triage, and knowledge-base guidance for participants and operators. _(Not yet implemented; no designated solution.)_
+- **Support page** — publishes status, FAQs, runbooks, and contact channels to streamline self-service support. _(Not yet implemented; no designated solution.)_
+- [Ticketing system](ticketing-system/README.md) — orchestrates issue lifecycle with SLAs, prioritisation, and handoffs across resolver groups. _(Roadmap: UVdesk.)_

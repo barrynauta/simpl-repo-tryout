@@ -17,5 +17,5 @@ Provides coordinated incident detection, response, and resolution services. It e
 
 ## Planned business services
 
-- **Incident response** — coordinates detection, containment, eradication, and recovery with post-incident review.
-- **Threat monitoring** — continuously monitors for indicators of compromise and emerging vulnerabilities.
+- [Incident response](incident-response/README.md) — coordinates detection, containment, eradication, and recovery with post-incident review. _(Roadmap: TheHive.)_
+- [Threat monitoring](threat-monitoring/README.md) — continuously monitors for indicators of compromise and emerging vulnerabilities. _(Roadmap: MISP.)_

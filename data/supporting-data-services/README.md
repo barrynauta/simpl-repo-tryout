@@ -16,3 +16,4 @@ Data processing and workflow orchestration services that support data providers 
 ## Business services
 
 - [Data orchestration](data-orchestration/README.md) — workflow orchestration engine for executing data pipelines and processing jobs.
+- [Semantic mapping](semantic-mapping/README.md) — bridges schema and vocabulary differences between data sources during processing. _(Roadmap: Data Mashup Editor)_

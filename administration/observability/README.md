@@ -16,6 +16,10 @@ Provides visibility into the health, performance, and behaviour of all Simpl-Ope
 ## Business services
 
 - [Dashboarding](dashboarding/README.md) — primary placement for the Monitoring Service, which cross-cuts multiple observability business services.
+- [Logging](logging/README.md) — centralised log collection and search. _(Realised by ELK stack + Filebeat.)_
+- [Performance monitoring](performance-monitoring/README.md) — runtime metrics, traces, and health signals. _(Realised by Metricbeat + Heartbeat + custom Application Tracing; Prometheus on roadmap.)_
+- [QoS metrics and alerts](qos-metrics-and-alerts/README.md) — threshold-based alerting on QoS metrics. _(Realised by Alert Manager.)_
+- [Reporting](reporting/README.md) — audit and operational reports synthesised from observability data. _(Realised by a custom Reporting Application.)_
 
 ## Cross-cut references
 
