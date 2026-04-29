@@ -17,3 +17,7 @@ Provider-side tooling for creating, managing, and publishing self-descriptions o
 ## Solutions
 
 - [SD Tooling](sd-tooling/README.md) — SD Manager, SD Creation Tool, Policy Creator, Contract Template Editor, and Validation Backend for provider-side self-description management.
+
+## Detailed specification
+
+- [detailed-spec.md](detailed-spec.md) — full self-description ontology (GX-Trustframework), SHACL validation rules, JSON-LD signing model, and the bridge between self-descriptions, contracts, and policies (extracted from FTA §6.4.2).

@@ -17,3 +17,7 @@ Central repository of policy templates used as blueprints for defining access an
 ## Solutions
 
 - [Policy Template Datastore](policy-template-datastore/README.md) — stores policy templates accessible to SD Tooling and the Contract Manager (planned, Catalogue & Connector team).
+
+## Detailed specification
+
+- [detailed-spec.md](detailed-spec.md) — ODRL-based policy expression model, policy templates and parameters, and the contract-time / runtime enforcement points (extracted from FTA §6.4.3).

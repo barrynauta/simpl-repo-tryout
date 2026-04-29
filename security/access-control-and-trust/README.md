@@ -19,3 +19,7 @@ Two-tier identity, authentication, and authorisation (IAA) for Simpl-Open. Tier 
 - [Authorisation](authorisation/README.md) — Tier 1 (RBAC) and Tier 2 (ABAC) API gateway enforcement via Spring Cloud Gateway.
 - [Identity provider](identity-provider/README.md) — Governance Authority–managed identity federation and Tier 2 credential issuance.
 - [Security attribute provider federation](security-attribute-provider-federation/README.md) — management and assignment of identity attributes used for ABAC policy enforcement.
+
+## Detailed specification
+
+- [detailed-spec.md](detailed-spec.md) — full Tier 1 / Tier 2 component model, role catalogue, identity-attribute catalogue, credential formats, and encryption / integrity guarantees (extracted from FTA §6.4.1).
