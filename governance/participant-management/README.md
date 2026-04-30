@@ -17,3 +17,4 @@ Manages the lifecycle of participants in the Simpl-Open data space, from onboard
 
 - [Onboarding](onboarding/README.md) — participant application, verification, and credential provisioning.
 - [User roles](user-roles/README.md) — user and role management; Tier 1 identity attribute assignment.
+- [Offboarding](offboarding/README.md) — revokes access, archives evidence, and ensures controlled exit procedures. _(Not yet implemented; no designated solution.)_

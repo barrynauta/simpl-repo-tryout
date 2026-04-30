@@ -17,4 +17,4 @@ Provides transparency and verifiable evidence of compliance, supporting accounta
 
 ## Planned business services
 
-- **Audit** — collects immutable evidence, signatures, and trails to support compliance and assurance.
+- [Audit](audit/README.md) — collects immutable evidence, signatures, and trails to support compliance and assurance. _(Not yet implemented; no designated solution.)_
