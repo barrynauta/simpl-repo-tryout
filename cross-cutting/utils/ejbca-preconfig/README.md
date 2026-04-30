@@ -27,7 +27,7 @@ Provenance: built by Simpl. Source repository: `iaa/ejbca-preconfig`. Owner: IAA
 
 ## Used by
 
-- [Identity Provider](../../../security/access-control-and-trust/identity-provider/identity-provider/README.md) — the IdP relies on a fully configured EJBCA as its backing CA.
+- [Identity Provider](../../../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) — the IdP relies on a fully configured EJBCA as its backing CA.
 
 
 ## Documentation (imported from source)

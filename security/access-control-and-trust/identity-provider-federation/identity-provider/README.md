@@ -6,7 +6,7 @@
 <a href="../../../../README.md">🏠 Home</a><br/>
     <a href="../../../README.md">Dimension: Security</a><br/>
         <a href="../../README.md">Capability: Access Control And Trust</a><br/>
-            <a href="../README.md">Service: Identity Provider</a><br/>
+            <a href="../README.md">Service: Identity provider federation</a><br/>
                 <strong>Solution: Identity Provider</strong><br/>
 </p>
 </div>

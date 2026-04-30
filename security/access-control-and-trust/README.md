@@ -17,7 +17,7 @@ Two-tier identity, authentication, and authorisation (IAA) for Simpl-Open. Tier 
 
 - [Authentication provider federation](authentication-provider-federation/README.md) — Tier 1 (Keycloak) and Tier 2 (X.509 mTLS) authentication providers.
 - [Authorisation](authorisation/README.md) — Tier 1 (RBAC) and Tier 2 (ABAC) API gateway enforcement via Spring Cloud Gateway.
-- [Identity provider](identity-provider/README.md) — Governance Authority–managed identity federation and Tier 2 credential issuance.
+- [Identity provider federation](identity-provider-federation/README.md) — Governance Authority–managed identity federation and Tier 2 credential issuance.
 - [Security attribute provider federation](security-attribute-provider-federation/README.md) — management and assignment of identity attributes used for ABAC policy enforcement.
 - [Encryption](encryption/README.md) — cryptographic key and secret management underpinning every secure store and Tier 2 credential. _(Realised by HashiCorp Vault / OpenBao.)_
 - [Guaranteed authenticity and integrity](guaranteed-authenticity-integrity/README.md) — mTLS for every cross-participant call against the Tier 2 credential.

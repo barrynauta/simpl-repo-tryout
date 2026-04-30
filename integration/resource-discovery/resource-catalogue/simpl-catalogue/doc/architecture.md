@@ -153,7 +153,7 @@ Every self-description published to the Catalogue is signed by the provider's pr
 
 ### Secrets and credentials
 
-The Catalogue itself does not manage secrets directly; database credentials and service-account tokens are held by the platform secrets store (documented alongside the Identity & Access stack). Participant credentials used for authentication are issued and managed by the Identity Provider and Tier 2 Authentication Provider — see [Identity Provider](../../../../../security/access-control-and-trust/identity-provider/identity-provider/doc/architecture.md).
+The Catalogue itself does not manage secrets directly; database credentials and service-account tokens are held by the platform secrets store (documented alongside the Identity & Access stack). Participant credentials used for authentication are issued and managed by the Identity Provider and Tier 2 Authentication Provider — see [Identity Provider](../../../../../security/access-control-and-trust/identity-provider-federation/identity-provider/doc/architecture.md).
 
 ### Threat model
 

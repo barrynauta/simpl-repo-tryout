@@ -6,13 +6,15 @@
 <a href="../../../README.md">🏠 Home</a><br/>
     <a href="../../README.md">Dimension: Security</a><br/>
         <a href="../README.md">Capability: Access Control And Trust</a><br/>
-            <strong>Service: Identity Provider</strong><br/>
+            <strong>Service: Identity provider federation</strong><br/>
 </p>
 </div>
 
-# Identity provider
+# Identity provider federation
 
 Governance Authority–managed identity federation service. Issues and manages Tier 2 X.509 credentials for participant agents; acts as Certificate Authority for the data space.
+
+> **Naming note.** The capability map (FTA §2.8) lists this service as "Identity provider"; the surrounding architecture text refers to "Identity Provider Federation" as the operational concept. The folder is named `identity-provider-federation` for consistency with the sibling `-federation` services (Authentication provider federation, Security attribute provider federation).
 
 ## Solutions
 

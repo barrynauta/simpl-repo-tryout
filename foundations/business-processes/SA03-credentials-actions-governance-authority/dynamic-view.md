@@ -49,5 +49,5 @@ The Governance Authority updates the identity attributes assigned to a participa
 
 ## Participants
 
-- [identity-provider/](../../../security/access-control-and-trust/identity-provider/identity-provider/README.md) — Identity Provider (executes all credential lifecycle actions: revocation, suspension, reactivation, renewal)
+- [identity-provider/](../../../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) — Identity Provider (executes all credential lifecycle actions: revocation, suspension, reactivation, renewal)
 - [security-attributes-provider/](../../../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/README.md) — Security Attributes Provider (stores updated identity attributes when edited)

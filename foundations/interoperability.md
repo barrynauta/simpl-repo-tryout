@@ -87,7 +87,7 @@ The Simpl role table (FTA §4.5) defines the roles that govern who may do what a
 
 Standardised across every Simpl deployment so a participant onboarded in one data space follows the same procedure in another:
 
-- **[BP03A — Onboarding (Provider/Consumer)](business-processes/BP03A-onboarding-participant-providers/README.md)** — applicant request → GA review → Tier 2 credential issuance via [Identity Provider](../security/access-control-and-trust/identity-provider/identity-provider/README.md). Six well-defined steps, audited end-to-end.
+- **[BP03A — Onboarding (Provider/Consumer)](business-processes/BP03A-onboarding-participant-providers/README.md)** — applicant request → GA review → Tier 2 credential issuance via [Identity Provider](../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md). Six well-defined steps, audited end-to-end.
 - **[BP03B — End-User onboarding](business-processes/BP03B-onboarding-participant-end-user/README.md)** — within an already-onboarded participant, configure end-user identities and roles.
 - **[BP03C — End-User role request](business-processes/BP03C-end-user-role-request/README.md)** — self-service role-assignment workflow.
 - **[SA03 — Credentials actions by the Governance Authority](business-processes/SA03-credentials-actions-governance-authority/README.md)** — post-onboarding credential lifecycle (revoke, suspend, reactivate, renew, edit identity attributes).
@@ -158,7 +158,7 @@ Protocols, APIs, formats, identity, and transport — the standards that let two
 | **[OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc6749) + [PKCE (RFC 7636)](https://datatracker.ietf.org/doc/html/rfc7636)** | Keycloak frontend integrations | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md), [Catalogue Client Application](../integration/resource-discovery/search-engine/catalogue-client-application/README.md), [SD Tooling](../governance/resource-management/metadata-description/sd-tooling/README.md) |
 | **[JWT (RFC 7519)](https://datatracker.ietf.org/doc/html/rfc7519) / JOSE** | Tier 1 token format with custom Simpl claims (`participant_id`, `credential_id`, `identity_attributes`, `client-roles`) | [Tier 1 Authentication Provider](../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/README.md) authenticator plugin |
 | **[mTLS](https://datatracker.ietf.org/doc/html/rfc8705) (TLS 1.3 client auth, X.509)** | Agent-to-agent authenticity for all Tier 2 traffic | [Authorisation Tier 2 Gateway](../security/access-control-and-trust/authorisation/authorisation/README.md), [Tier 2 Authentication Provider](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) |
-| **[X.509 (RFC 5280)](https://datatracker.ietf.org/doc/html/rfc5280)** | Tier 2 credentials issued by EJBCA | [Identity Provider](../security/access-control-and-trust/identity-provider/identity-provider/README.md) |
+| **[X.509 (RFC 5280)](https://datatracker.ietf.org/doc/html/rfc5280)** | Tier 2 credentials issued by EJBCA | [Identity Provider](../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) |
 | **[CRL (RFC 5280)](https://datatracker.ietf.org/doc/html/rfc5280) / [OCSP (RFC 6960)](https://datatracker.ietf.org/doc/html/rfc6960)** | Revocation validation in the HTTP client | [simpl-http-client](../cross-cutting/libs/simpl-http-client/README.md) |
 | **[PKCS#12 (RFC 7292)](https://datatracker.ietf.org/doc/html/rfc7292)** | SuperAdmin and operator certificate distribution format | [Governance Authority Agent](../cross-cutting/agents/governance-authority-agent/deployment-guide.md) |
 | **[eIDAS](https://eur-lex.europa.eu/eli/reg/2024/1183/oj) / EUDI** | Demonstrated through the eIDAS Demo Node SPI | [eidas-demo-keycloak-extension](../cross-cutting/samples/eidas-demo-keycloak-extension/README.md), [eidas-demo-node-deploy](../cross-cutting/samples/eidas-demo-node-deploy/README.md) |
@@ -202,7 +202,7 @@ European Commission Connecting Europe Facility (CEF) Digital Building Blocks sla
 | **eDelivery** | Roadmap; hook in EDC connector exists; service stub | [`integration/data-sharing/simple-data-transfer/edelivery/`](../integration/data-sharing/README.md) |
 | **eSignature** | Roadmap | [`security/credential-management/signing/esignature/`](../security/credential-management/signing/README.md) |
 | **eInvoicing** | Roadmap | [`governance/contract-management/billing/einvoicing/`](../governance/contract-management/README.md) |
-| **eID** | Roadmap; eIDAS demo extension exists | [`security/access-control-and-trust/identity-provider/eid/`](../security/access-control-and-trust/identity-provider/README.md) |
+| **eID** | Roadmap; eIDAS demo extension exists | [`security/access-control-and-trust/identity-provider-federation/eid/`](../security/access-control-and-trust/identity-provider-federation/README.md) |
 
 ### Observability and monitoring
 

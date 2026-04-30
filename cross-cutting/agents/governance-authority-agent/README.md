@@ -20,7 +20,7 @@ Provenance: built by Simpl. Source repository: `agents/governance-authority`. Ow
 
 - [Onboarding](../../../governance/participant-management/onboarding/onboarding-service/README.md)
 - [Users & Roles](../../../governance/participant-management/user-roles/users-roles/README.md)
-- [Identity Provider](../../../security/access-control-and-trust/identity-provider/identity-provider/README.md)
+- [Identity Provider](../../../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md)
 - [Security Attributes Provider](../../../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/README.md)
 - [Authorisation](../../../security/access-control-and-trust/authorisation/authorisation/README.md)
 - [Simpl Catalogue (XFSC FC)](../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md)

@@ -11,7 +11,7 @@
 
 # eIDAS / EUDI integration
 
-How Simpl-Open's identity model maps onto the EU Digital Identity Framework — the eIDAS regulation, the EUDI Wallet, and the trust services that flow from them. This page is the reference for any solution that issues, validates, or consumes an eIDAS/EUDI credential, in particular the [identity-provider](../security/access-control-and-trust/identity-provider/README.md) and [credential-management](../security/credential-management/README.md) services.
+How Simpl-Open's identity model maps onto the EU Digital Identity Framework — the eIDAS regulation, the EUDI Wallet, and the trust services that flow from them. This page is the reference for any solution that issues, validates, or consumes an eIDAS/EUDI credential, in particular the [identity-provider-federation](../security/access-control-and-trust/identity-provider-federation/README.md) and [credential-management](../security/credential-management/README.md) services.
 
 ## Source
 
