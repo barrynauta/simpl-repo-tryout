@@ -310,8 +310,52 @@ See [foundations/non-functional-requirements/README.md](./foundations/non-functi
 
 Simpl-Open organises its functionality into six dimensions: Administration, Data, Governance, Infrastructure, Integration, and Security. Each dimension contains one or more capabilities, each capability contains one or more business services, and each business service is realised by one or more solutions. This four-level hierarchy — dimension → capability → business service → solution — is the organising principle of the entire repository tree. The map was defined in the Simpl-Open functional and technical architecture specification and governs how documentation folders are named, nested, and cross-referenced. Every solution folder in this catalogue sits at a path of the form `dimension/capability/business-service/solution/` that corresponds directly to a node in the map.
 
-![L1 Capability Map](./foundations/media/image16.png)
-*Figure: The six dimensions of Simpl and their capabilities.*
+<img src="./foundations/media/image16.png" usemap="#capmap-l1" alt="L1 Capability Map" width="801" height="621" />
+
+<map name="capmap-l1">
+  <!-- Dimension headers -->
+  <area shape="rect" coords="10,5,617,25" href="./governance/README.md" alt="Governance dimension" title="Governance dimension" />
+  <area shape="rect" coords="625,5,795,25" href="./security/README.md" alt="Security dimension" title="Security dimension" />
+  <area shape="rect" coords="5,210,300,230" href="./administration/README.md" alt="Administration dimension" title="Administration dimension" />
+  <area shape="rect" coords="320,210,617,230" href="./data/README.md" alt="Data dimension" title="Data dimension" />
+  <area shape="rect" coords="5,375,465,395" href="./integration/README.md" alt="Integration dimension" title="Integration dimension" />
+  <area shape="rect" coords="485,375,795,395" href="./infrastructure/README.md" alt="Infrastructure dimension" title="Infrastructure dimension" />
+  <!-- Governance capabilities -->
+  <area shape="rect" coords="20,30,150,95" href="./governance/policy-management/README.md" alt="Policy management" title="Policy management" />
+  <area shape="rect" coords="170,30,300,95" href="./governance/contract-management/README.md" alt="Contract management" title="Contract management" />
+  <area shape="rect" coords="320,30,450,95" href="./governance/consent-management/README.md" alt="Consent management" title="Consent management" />
+  <area shape="rect" coords="470,30,602,95" href="./governance/resource-management/README.md" alt="Resource management" title="Resource management" />
+  <area shape="rect" coords="20,110,150,175" href="./governance/participant-management/README.md" alt="Participant management" title="Participant management" />
+  <area shape="rect" coords="470,110,602,175" href="./governance/audit/README.md" alt="Audit" title="Audit" />
+  <!-- Security capabilities -->
+  <area shape="rect" coords="640,30,780,115" href="./security/access-control-and-trust/README.md" alt="Access control & Trust" title="Access control & Trust" />
+  <area shape="rect" coords="640,125,780,205" href="./security/credential-management/README.md" alt="Credential management" title="Credential management" />
+  <area shape="rect" coords="640,220,780,300" href="./security/csirt/README.md" alt="CSIRT" title="CSIRT" />
+  <!-- Administration capabilities -->
+  <area shape="rect" coords="20,240,150,295" href="./administration/observability/README.md" alt="Observability" title="Observability" />
+  <area shape="rect" coords="170,240,300,295" href="./administration/notification-and-messaging/README.md" alt="Notification and messaging" title="Notification and messaging" />
+  <area shape="rect" coords="20,315,150,360" href="./administration/support/README.md" alt="Support" title="Support" />
+  <!-- Data capabilities -->
+  <area shape="rect" coords="335,240,465,295" href="./data/data-governance/README.md" alt="Data governance" title="Data governance" />
+  <area shape="rect" coords="485,240,602,295" href="./data/supporting-data-services/README.md" alt="Supporting data services" title="Supporting data services" />
+  <area shape="rect" coords="335,315,465,365" href="./data/data-processing/README.md" alt="Data processing" title="Data processing" />
+  <area shape="rect" coords="485,315,602,365" href="./data/semantics-and-vocabulary/README.md" alt="Semantics & Vocabulary" title="Semantics & Vocabulary" />
+  <!-- Integration capabilities -->
+  <area shape="rect" coords="18,400,148,460" href="./integration/application-sharing/README.md" alt="Application sharing" title="Application sharing" />
+  <area shape="rect" coords="170,400,300,460" href="./integration/supporting-integration-services/README.md" alt="Supporting integration services" title="Supporting integration services" />
+  <area shape="rect" coords="320,400,450,460" href="./integration/contract-enforcement/README.md" alt="Contract enforcement" title="Contract enforcement" />
+  <area shape="rect" coords="18,470,148,530" href="./integration/data-sharing/README.md" alt="Data sharing" title="Data sharing" />
+  <area shape="rect" coords="170,470,300,530" href="./integration/federated-management/README.md" alt="Federation management" title="Federation management" />
+  <area shape="rect" coords="320,470,450,530" href="./integration/policy-enforcement/README.md" alt="Policy enforcement" title="Policy enforcement" />
+  <area shape="rect" coords="18,540,148,600" href="./integration/resource-discovery/README.md" alt="Resource discovery" title="Resource discovery" />
+  <area shape="rect" coords="170,540,300,600" href="./integration/resource-sharing/README.md" alt="Resource sharing" title="Resource sharing" />
+  <!-- Infrastructure capabilities -->
+  <area shape="rect" coords="500,400,628,460" href="./infrastructure/provisioning/README.md" alt="Provisioning" title="Provisioning" />
+  <area shape="rect" coords="648,400,780,460" href="./infrastructure/supporting-infrastructure-services/README.md" alt="Supporting infrastructure services" title="Supporting infrastructure services" />
+  <area shape="rect" coords="500,470,628,530" href="./infrastructure/hpc/README.md" alt="HPC" title="HPC" />
+</map>
+
+*Figure: The six dimensions of Simpl and their capabilities. Each region links to the corresponding folder where the renderer supports HTML image maps (e.g., Obsidian); the textual list below mirrors the same links for renderers that don't (e.g., github.com).*
 
 ### Dimensions
 
