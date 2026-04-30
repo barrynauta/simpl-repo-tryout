@@ -11,9 +11,11 @@
 
 # Supporting data services
 
-Data processing and workflow orchestration services that support data providers and consumers in transforming, preprocessing, and exchanging data assets.
+Foundational data services that enable efficient, scalable, and reliable management of data operations across the ecosystem, including orchestration and distributed execution.
 
 ## Business services
 
 - [Data orchestration](data-orchestration/README.md) — workflow orchestration engine for executing data pipelines and processing jobs.
-- [Semantic mapping](semantic-mapping/README.md) — bridges schema and vocabulary differences between data sources during processing. _(Roadmap: Data Mashup Editor)_
+- [Distributed execution](distributed-execution/README.md) — runs data jobs elastically across clusters with placement, scaling, and fault tolerance. _(Not yet implemented; no designated solution.)_
+
+> **Note.** Semantic mapping has moved to [semantics-and-vocabulary/semantic-mapping/](../semantics-and-vocabulary/semantic-mapping/README.md) for consistency with the capability map.

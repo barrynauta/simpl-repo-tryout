@@ -18,5 +18,5 @@ Ensures that data sharing adheres to defined quality, metadata, and governance s
 ## Planned business services
 
 - [Data lineage](data-lineage/README.md) — records end-to-end provenance to enable impact analysis, compliance evidence, and reproducibility. _(Roadmap: Marquez / OpenLineage)_
-- **Data profiling** — analyses datasets for structure, distributions, and anomalies to inform governance decisions. _(Not yet implemented; no designated solution.)_
+- [Data profiling](data-profiling/README.md) — analyses datasets for structure, distributions, and anomalies to inform governance decisions. _(Not yet implemented; no designated solution.)_
 - [Data quality rules](data-quality-rules/README.md) — defines and evaluates quality checks with reporting and remediation workflows. _(Roadmap: Great Expectations)_

@@ -16,4 +16,5 @@ Manages schemas, vocabularies, and ontologies used across the Simpl-Open data sp
 ## Business services
 
 - [Schema management](schema-management/README.md) — lifecycle management of schemas (SHACL) and their distribution to participant nodes.
+- [Semantic mapping](semantic-mapping/README.md) — discovers and documents schema/ontology mappings across domains; supports semantic interoperability and cross-domain discovery. _(Roadmap: Data Mashup Editor)_
 - [Vocabulary hub](vocabulary-hub/README.md) — management of ontologies and controlled vocabularies.
