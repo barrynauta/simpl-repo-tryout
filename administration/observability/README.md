@@ -20,6 +20,9 @@ Provides visibility into the health, performance, and behaviour of all Simpl-Ope
 - [Performance monitoring](performance-monitoring/README.md) — runtime metrics, traces, and health signals. _(Realised by Metricbeat + Heartbeat + custom Application Tracing; Prometheus on roadmap.)_
 - [QoS metrics and alerts](qos-metrics-and-alerts/README.md) — threshold-based alerting on QoS metrics. _(Realised by Alert Manager.)_
 - [Reporting](reporting/README.md) — audit and operational reports synthesised from observability data. _(Realised by a custom Reporting Application.)_
+- [Resource usage](resource-usage/README.md) — visibility into consumption of compute, storage, and network resources for capacity planning and chargeback. _(Not yet implemented; no designated solution.)_
+- [Energy metrics and alerts](energy-metrics-and-alerts/README.md) — captures energy usage KPIs and triggers notifications to optimise sustainability targets. _(Not yet implemented; no designated solution.)_
+- [Exporting](exporting/README.md) — scheduled or ad-hoc export of metrics and logs to external observability or compliance systems. _(Not yet implemented; no designated solution.)_
 
 ## Cross-cut references
 
