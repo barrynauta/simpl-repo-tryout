@@ -142,12 +142,10 @@ Legend:
 
 ## Cross-cutting development artefacts (→ cross-cutting/)
 
-Tests, utilities, libraries, and samples — they don't sit on the capability map and are mirrored from the PSO sheet's `supporting-services/` group.
+Utilities, libraries, and samples — they don't sit on the capability map and are mirrored from the PSO sheet's `supporting-services/` group.
 
 | Source repo | Target path |
 |-------------|-------------|
-| `iaa/test-automation` | [cross-cutting/tests/iaa-api-tests/](cross-cutting/tests/iaa-api-tests/README.md) |
-| `iaa/test-automation-ui` | [cross-cutting/tests/iaa-ui-tests/](cross-cutting/tests/iaa-ui-tests/README.md) |
 | `iaa/ejbca-preconfig` | [cross-cutting/utils/ejbca-preconfig/](cross-cutting/utils/ejbca-preconfig/README.md) |
 | `iaa/cli` *(archived)* | [cross-cutting/utils/iaa-cli/](cross-cutting/utils/iaa-cli/README.md) |
 | `data1/sdtooling-sd-schemas` (utility part) | [cross-cutting/utils/sd-schemas-util/](cross-cutting/utils/sd-schemas-util/README.md) |

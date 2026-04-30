@@ -10,11 +10,10 @@
 
 # Cross-cutting
 
-Components that don't belong to a single capability in the Simpl-Open capability map: shared libraries used across multiple services, command-line and one-shot utilities, automated test suites, and reference samples that demonstrate integration patterns. Mirrors the `supporting-services/` group used in the as-is → to-be repository mapping spreadsheet.
+Components that don't belong to a single capability in the Simpl-Open capability map: shared libraries used across multiple services, command-line and one-shot utilities, and reference samples that demonstrate integration patterns. Mirrors the `supporting-services/` group used in the as-is → to-be repository mapping spreadsheet.
 
 ## Sub-folders
 
-- [tests/](tests/README.md) — automated test suites that exercise multiple components together (API tests, UI tests).
 - [utils/](utils/README.md) — operational utilities and command-line tools used during deployment and pre-configuration of components.
 - [libs/](libs/README.md) — shared libraries (Java, Python, frontend) consumed by multiple solutions across the capability map.
 - [samples/](samples/README.md) — reference implementations and demo nodes — including microfrontend skeletons, the IAA echo service, and the eIDAS demo node — used as starting points or for integration testing.

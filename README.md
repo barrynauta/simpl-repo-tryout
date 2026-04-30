@@ -389,7 +389,6 @@ Supporting documents that establish the design vocabulary and governing commitme
 
 - [cross-cutting/](./cross-cutting/README.md) — components that don't map to a single capability
   - [agents/](./cross-cutting/agents/README.md) — actor-specific master Helm charts (Consumer, Data Provider, Governance Authority, etc.)
-  - [tests/](./cross-cutting/tests/README.md) — IAA API and UI test suites
   - [utils/](./cross-cutting/utils/README.md) — operational utilities (EJBCA preconfig, IAA CLI, SD-Schemas generator)
   - [libs/](./cross-cutting/libs/README.md) — shared Java/Python/Vue libraries
   - [samples/](./cross-cutting/samples/README.md) — eIDAS demo node, echo service, microfrontend skeleton
