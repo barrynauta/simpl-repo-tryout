@@ -17,4 +17,4 @@ Maintains persistent resource addresses across federated environments and integr
 
 ## Planned business services
 
-- **Resource address management** — manages the resolution and lifecycle of resource identifiers across the Data Space. Provides persistent addressing schemes that enable resources to be uniquely identified and located regardless of their physical location or deployment changes. Integrates with the Resource Catalogue service to maintain synchronised resource metadata and enable consumers to locate resources through both catalogue searches and direct URI-based addressing.
+- [Resource address management](resource-address-management/README.md) — manages the resolution and lifecycle of resource identifiers across the Data Space. Provides persistent addressing schemes that enable resources to be uniquely identified and located regardless of their physical location or deployment changes. Integrates with the Resource Catalogue service to maintain synchronised resource metadata and enable consumers to locate resources through both catalogue searches and direct URI-based addressing. _(Not yet implemented; no designated solution.)_

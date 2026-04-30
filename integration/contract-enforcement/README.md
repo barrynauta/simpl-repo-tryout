@@ -17,4 +17,4 @@ Validates and enforces contractual terms at integration points, connecting it to
 
 ## Planned business services
 
-- **Contract enforcement** — applies and monitors contractual terms programmatically across interactions.
+- [Contract enforcement](contract-enforcement/README.md) — applies and monitors contractual terms programmatically across interactions. _(Not yet implemented; no designated solution.)_

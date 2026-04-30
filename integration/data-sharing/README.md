@@ -21,5 +21,5 @@ Allows participants to exchange data with others through interoperable interface
   - **Implemented today** inside the [Connector](../resource-sharing/resource-sharing-runtime/connector/README.md) via its **MinIO S3 Object Storage Extension** (the connector's primary data-plane sink). MinIO itself is consumed as upstream OSS — no Simpl fork. PSO mapping target paths: `bulk-data-transfer/edc-s3-extension/` and `bulk-data-transfer/minio/` *(folders not yet created — placeholder source repos)*.
 - **Simple data transfer** — provides lightweight pull or push exchanges for small files and APIs.
   - **Roadmap item** (FTA §6.3.1 Technology Roadmap). Designated implementation: **eDelivery**. The hook exists in the Connector source today (one of its six Simpl extensions: *"triggers eDelivery transfer"*); the eDelivery service itself (`gaia-x-edc/edelivery`) is a stub repo. PSO mapping target path: `simple-data-transfer/edelivery/` *(folder not yet created — source is a stub)*.
-- **Data streaming** — publishes and subscribes to real-time event flows with ordering, retention, and replay.
+- [Data streaming](data-streaming/README.md) — publishes and subscribes to real-time event flows with ordering, retention, and replay.
   - **Not yet implemented.** No designated solution in the FTA spec or PSO mapping; pending future architecture work.

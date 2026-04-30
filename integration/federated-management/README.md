@@ -17,4 +17,4 @@ Manages identity federation, catalogue federation, trust anchoring, and cross-do
 
 ## Planned business services
 
-- **Federation orchestration** — coordinates cross-domain identity federation, trust framework establishment, and catalogue synchronisation across multiple autonomous data spaces. Manages trust anchors, maintains federation metadata, and orchestrates authentication and authorisation flows that span organisational boundaries. Enables seamless interoperability while preserving sovereignty of individual data space instances.
+- [Federation orchestration](federation-orchestration/README.md) — coordinates cross-domain identity federation, trust framework establishment, and catalogue synchronisation across multiple autonomous data spaces. Manages trust anchors, maintains federation metadata, and orchestrates authentication and authorisation flows that span organisational boundaries. Enables seamless interoperability while preserving sovereignty of individual data space instances. _(Not yet implemented; no designated solution.)_
