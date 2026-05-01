@@ -16,8 +16,6 @@ Centralised log collection and search. Realised by the ELK stack with Filebeat a
 
 ## Solutions
 
-- [ELK Stack (Elasticsearch, Logstash, Kibana)](elk-stack/README.md) — see stub for FTA reference and MAPPING row.
-- [Filebeat](filebeat/README.md) — see stub for FTA reference and MAPPING row.
 - [Common Logging (Java)](common-logging-java/README.md) — Simpl-built structured-logging library for Java services.
 - [Common Logging (Python)](common-logging-python/README.md) — format-compatible Python sibling of the Java library.
 
