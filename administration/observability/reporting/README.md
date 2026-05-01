@@ -12,12 +12,8 @@
 
 # Reporting
 
-Audit and operational reports synthesised from observability data. Realised by a Custom Reporting Application.
+Audit and operational reports synthesised from observability data. 
 
 ## Solutions
 
-- [Custom Reporting Application](custom-reporting-app/README.md) — see stub for FTA reference and MAPPING row.
-
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 68. FTA references vary per solution and are recorded inside each solution's stub README.
+None yet

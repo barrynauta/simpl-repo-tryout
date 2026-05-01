@@ -12,12 +12,8 @@
 
 # QoS metrics and alerts
 
-Threshold-based alerting on QoS metrics. Realised by Alert Manager.
+Threshold-based alerting on QoS metrics. 
 
 ## Solutions
 
-- [Alert Manager](alert-manager/README.md) — see stub for FTA reference and MAPPING row.
-
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 69. FTA references vary per solution and are recorded inside each solution's stub README.
+None yet
