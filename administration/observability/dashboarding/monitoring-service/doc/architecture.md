@@ -100,7 +100,7 @@ Implemented on the Elastic Cloud on Kubernetes (ECK) stack:
 - **Infrastructure Metrics Collection Agent** — Metricbeat / Elastic Agent.
 - **Health Checks** — Heartbeat (Elastic stack); periodically queries Simpl-Open component health endpoints and stores results in Elasticsearch.
 - **Application Tracing** — Elastic APM.
-- **Common Logging Library** — [`cross-cutting/libs/common-logging-java`](../../../../cross-cutting/libs/common-logging-java/README.md) (Java) and [`common-logging-python`](../../../../cross-cutting/libs/common-logging-python/README.md) (Python) — shared structured-logging libraries that emit log lines in the format consumed by this stack.
+- **Common Logging Library** — [`administration/observability/logging/common-logging-java`](../../../logging/common-logging-java/README.md) (Java) and [`common-logging-python`](../../../logging/common-logging-python/README.md) (Python) — shared structured-logging libraries that emit log lines in the format consumed by this stack.
 - **ECK Operator** — source repo `monitoring/eck-monitoring-operator` — manages ECK cluster lifecycle on Kubernetes (cluster creation, rolling upgrades, configuration changes).
 
 ### Sibling solution

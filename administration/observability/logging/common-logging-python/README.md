@@ -3,16 +3,17 @@
 <hr/>
 <p>
 📍 <strong>You are here</strong><br/>
-<a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Cross-Cutting</a><br/>
-        <a href="../README.md">Libs</a><br/>
-            <strong>Common Logging (Python)</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Administration</a><br/>
+        <a href="../../README.md">Capability: Observability</a><br/>
+            <a href="../README.md">Service: Logging</a><br/>
+                <strong>Solution: Common Logging (Python)</strong><br/>
 </p>
 </div>
 
 # Common Logging (Python)
 
-Python implementation of the [`common-logging-java`](../common-logging-java/README.md) library — same log format and field set so both Java and Python services produce a consistent stream into the [Monitoring Service](../../../administration/observability/dashboarding/monitoring-service/README.md).
+Python implementation of the [`common-logging-java`](../common-logging-java/README.md) library — same log format and field set so both Java and Python services produce a consistent stream into the [Monitoring Service](../../dashboarding/monitoring-service/README.md).
 
 ## Key features
 
@@ -23,7 +24,7 @@ Python implementation of the [`common-logging-java`](../common-logging-java/READ
 
 ## Used by
 
-- The Dagster code-locations under [Anonymisation and Pseudonymisation](../../../data/data-processing/anonymisation-and-pseudonymisation/README.md) and [Asset Orchestrator](../../../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md) callers — anywhere Python services need to feed the same Elastic stream as the Java services.
+- The Dagster code-locations under [Anonymisation and Pseudonymisation](../../../../data/data-processing/anonymisation-and-pseudonymisation/README.md) and [Asset Orchestrator](../../../../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md) callers — anywhere Python services need to feed the same Elastic stream as the Java services.
 
 Provenance: built by Simpl. Source repository: `contract-billing/common_logging_python`. Owner: Monitoring team. Licence: EUPL 1.2.
 

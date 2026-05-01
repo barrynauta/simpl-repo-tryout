@@ -3,16 +3,17 @@
 <hr/>
 <p>
 📍 <strong>You are here</strong><br/>
-<a href="../../../README.md">🏠 Home</a><br/>
-    <a href="../../README.md">Cross-Cutting</a><br/>
-        <a href="../README.md">Libs</a><br/>
-            <strong>Common Logging (Java)</strong><br/>
+<a href="../../../../README.md">🏠 Home</a><br/>
+    <a href="../../../README.md">Dimension: Administration</a><br/>
+        <a href="../../README.md">Capability: Observability</a><br/>
+            <a href="../README.md">Service: Logging</a><br/>
+                <strong>Solution: Common Logging (Java)</strong><br/>
 </p>
 </div>
 
 # Common Logging (Java)
 
-Structured-logging library used by Java services across Simpl-Open. Emits log lines in the format consumed by the [Monitoring Service](../../../administration/observability/dashboarding/monitoring-service/README.md) (ECK stack), with MDC propagation for correlation/tenant/participant IDs and message-type categorisation (REQUEST, REQUEST_ACK, RESPONSE, RESPONSE_ACK).
+Structured-logging library used by Java services across Simpl-Open. Emits log lines in the format consumed by the [Monitoring Service](../../dashboarding/monitoring-service/README.md) (ECK stack), with MDC propagation for correlation/tenant/participant IDs and message-type categorisation (REQUEST, REQUEST_ACK, RESPONSE, RESPONSE_ACK).
 
 A format-compatible Python sibling exists at [`common-logging-python/`](../common-logging-python/README.md).
 

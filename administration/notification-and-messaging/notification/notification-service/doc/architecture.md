@@ -44,7 +44,7 @@ Messages are serialised as JSON and published to the `notifications` Kafka topic
 - [Onboarding](../../../../../governance/participant-management/onboarding/onboarding-service/README.md) — sends status-change notifications (submitted / approved / rejected / ready) through this service.
 - [Contract Manager](../../../../../governance/contract-management/contract-establishment/contract-manager/README.md) — emits contract-lifecycle notifications.
 - Any Simpl-Open service that needs to notify participants can act as a Kafka producer to the `notifications` topic.
-- [Common Logging (Java)](../../../../../cross-cutting/libs/common-logging-java/README.md) — every published notification message is also logged in structured form, enabling end-to-end correlation across the Monitoring Service.
+- [Common Logging (Java)](../../../../observability/logging/common-logging-java/README.md) — every published notification message is also logged in structured form, enabling end-to-end correlation across the Monitoring Service.
 
 ## Technical view
 
