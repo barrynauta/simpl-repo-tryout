@@ -16,6 +16,11 @@ Deployment script management and execution, asynchronous provisioning of infrast
 
 ## Solutions
 
-- [Triggering Module](triggering-module/README.md) — receives provisioning requests from the EDC Connector triggering extension and dispatches jobs to the Infrastructure Provisioner over Kafka.
-- [Deployment Script & Template Management](deployment-script-and-template-management/README.md) — backend + frontend for authoring, storing, and versioning deployment scripts (Crossplane / OpenTofu / Terraform) in a Gitea-backed repository.
-- [Infrastructure Provisioner](infrastructure-provisioner/README.md) — Crossplane/ArgoCD-based executor that applies deployment scripts on the target Kubernetes cluster.
+- [Infrastructure BE](infrastructure-be/README.md) — backend service (currently bundles the Triggering Module logic; planned to split).
+- [Infrastructure FE](infrastructure-fe/README.md) — frontend UI for the infrastructure provisioning capability.
+- [Infrastructure Crossplane](infrastructure-crossplane/README.md) — Crossplane configuration / packages used by Simpl to declaratively provision cloud resources.
+- [Infrastructure Crossplane Dependences](infrastructure-crossplane-dependences/README.md) — Crossplane provider dependencies bundled with the Simpl Crossplane configuration.
+- [Infrastructure EDC](infrastructure-edc/README.md) — EDC integration component on the infrastructure provisioning side.
+- [Infrastructure Provisioner](infrastructure-provisioner/README.md) — Simpl-Open infrastructure provisioner (Crossplane-driven).
+- [Provider Infrastructure](provider-infrastructure/README.md) — provider-side infrastructure component.
+

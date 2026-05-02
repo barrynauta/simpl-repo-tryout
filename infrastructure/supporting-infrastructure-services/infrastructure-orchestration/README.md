@@ -21,6 +21,7 @@ Automates declarative deployment and day-2 operations of infrastructure resource
 - [Argo Events](argo-events/README.md) — see stub for FTA reference and MAPPING row.
 - [Kubernetes](kubernetes/README.md) — see stub for FTA reference and MAPPING row.
 - [OKD / OpenShift](okd/README.md) — see stub for FTA reference and MAPPING row.
+- [Application Deployer](application-deployer/README.md) — Simpl-Open application deployer for application/service workloads.
 
 ## Source
 

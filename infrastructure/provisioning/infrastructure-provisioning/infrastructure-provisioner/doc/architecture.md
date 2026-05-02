@@ -1,6 +1,6 @@
 Source: source repo `infrastructure/infrastructure-crossplane`. FTA spec, §4.3.1 (ACV Static — Infrastructure Provisioning Service), §4.3.2 (ACV Dynamic — BP 08), §6.1.2 (TCV Static — Infrastructure Provisioning Service), §6.5.2 (Infrastructure Provisioning).
 
-> **Scope of this document.** Earlier editions described the Triggering Module + Deployment-Script Management + Infrastructure Provisioner as one combined service. With the recent solution-folder split they are now three sibling solutions, each with its own architecture document. This document scopes specifically to the **Crossplane/ArgoCD executor**. For the inbound coordinator and the script catalogue, see [Triggering Module](../../triggering-module/doc/architecture.md) and [Deployment Script & Template Management](../../deployment-script-and-template-management/doc/architecture.md) respectively.
+> **Scope of this document.** This document scopes specifically to the **Crossplane/ArgoCD executor** part of the infrastructure provisioning service. The inbound-request coordinator (Triggering Module) is currently bundled with the [Infrastructure BE](../../infrastructure-be/README.md) project and shares its architecture document.
 
 # Infrastructure Provisioner — architecture
 
@@ -19,7 +19,7 @@ Capability-map placement: Infrastructure dimension → Provisioning capability �
 
 This component holds **no first-party persistent data**. Its inputs are:
 
-- The **deployment-script content** retrieved from the [Deployment Script & Template Management](../../deployment-script-and-template-management/doc/architecture.md) Gitea repository (Crossplane manifests, OpenTofu/Terraform configs).
+- The **deployment-script content** retrieved from the **Deployment Script & Template Management** (folder removed; concept lives upstream as part of the broader infrastructure provisioning effort) Gitea repository (Crossplane manifests, OpenTofu/Terraform configs).
 - The **provisioning request** (DeploymentScriptID, consumer email, parameter values) received over Kafka from the Triggering Module.
 
 Its outputs are:
@@ -52,7 +52,7 @@ This service is **not exposed via a public API**. The only way to drive it is th
 ### Key integrations
 
 - [Triggering Module](../../triggering-module/doc/architecture.md) — sole upstream caller; sends provisioning jobs and consumes the access-data response, both over Kafka.
-- [Deployment Script & Template Management](../../deployment-script-and-template-management/doc/architecture.md) — sibling solution; the Gitea repository it owns is the source of every script this component runs.
+- **Deployment Script & Template Management** (folder removed; concept lives upstream as part of the broader infrastructure provisioning effort) — sibling solution; the Gitea repository it owns is the source of every script this component runs.
 - **ArgoCD** (under [Infrastructure → Supporting Infrastructure Services → Infrastructure Orchestration](../../../../supporting-infrastructure-services/README.md)) — the GitOps deployment engine that applies Crossplane manifests on the target cluster.
 - **Crossplane** — the Kubernetes-native control-plane primitive that turns the manifests into actual cloud resources.
 

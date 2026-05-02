@@ -16,7 +16,6 @@ Manages multi-site topologies, synchronisation, and drift remediation. Roadmap.
 
 ## Solutions
 
-- [Fleet Management (K8s)](fleet-management/README.md) — see stub for FTA reference and MAPPING row.
 
 ## Source
 

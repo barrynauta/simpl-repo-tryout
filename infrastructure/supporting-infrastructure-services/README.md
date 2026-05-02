@@ -18,4 +18,4 @@ Provides underlying infrastructure-level services such as distribution and the m
 ## Planned business services
 
 - [Infrastructure orchestration](infrastructure-orchestration/README.md) — automates deployment and day-2 operations via declarative control and runbooks. _(Realised by Argo CD, Argo Workflows / Events, Kubernetes; OKD/OpenShift on roadmap.)_
-- [Distributed management](distributed-management/README.md) — manages multi-site topologies, synchronisation, and drift remediation. _(Roadmap: Fleet Management.)_
+- [Distributed management](distributed-management/README.md) — manages multi-site topologies, synchronisation, and drift remediation.

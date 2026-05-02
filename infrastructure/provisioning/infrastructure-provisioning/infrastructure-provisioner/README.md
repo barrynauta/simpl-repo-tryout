@@ -15,7 +15,7 @@
 
 Executes Crossplane / OpenTofu / Terraform deployment scripts to provision compute, storage, and network resources for data-space consumers. Receives provisioning jobs over Kafka from the [Triggering Module](../triggering-module/README.md) and applies them through ArgoCD + Crossplane on the target Kubernetes cluster.
 
-Capability-map placement: `infrastructure / provisioning / infrastructure-provisioning / infrastructure-provisioner`. Sits alongside the [Triggering Module](../triggering-module/README.md) and the [Deployment Script & Template Management](../deployment-script-and-template-management/README.md) solutions within the same business service.
+Capability-map placement: `infrastructure / provisioning / infrastructure-provisioning / infrastructure-provisioner`. Sibling solutions in this service include [Infrastructure BE](../infrastructure-be/README.md) (which now bundles the Triggering Module logic), [Infrastructure FE](../infrastructure-fe/README.md), [Infrastructure Crossplane](../infrastructure-crossplane/README.md), and [Provider Infrastructure](../provider-infrastructure/README.md).
 
 Provenance: built by Simpl. Source repository: `infrastructure/infrastructure-crossplane`. Licence: EUPL 1.2.
 
