@@ -1,6 +1,9 @@
-canonical_url: null
-status: roadmap
-last_synced: 2026-05-01
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/data1/simpl-files
+status: prototype-interim
+last_synced: 2026-05-02
 notes: |
-  Roadmap stub — no source repository on code.europa.eu yet.
-  xlsx note: Not yet existing
+  Interim implementation. The PSO mapping spreadsheet labels this app-service as
+  `contract-template-datastore-temporary` ("Workaround to make the SD Tooling work
+  while waiting for the real contract template datastore"). Currently realised by a
+  static NGINX server (data1/simpl-files) hosting contract and SLA template JSON
+  files. Replace with a dedicated datastore once that lands.

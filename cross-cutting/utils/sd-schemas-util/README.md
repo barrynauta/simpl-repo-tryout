@@ -14,7 +14,7 @@
 
 Python tool that generates ontology files and SHACL shape files from YAML definitions. The output feeds the **XFSC Federated Catalogue** so that self-descriptions can be validated against the correct schemas.
 
-Provenance: built by Simpl. Source repository: `data1/sdtooling-sd-schemas`. Owner: Data1 team. Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repository: `data1/sdtooling-sd-schemas`. Licence: EUPL 1.2.
 
 ## Key features
 

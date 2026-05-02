@@ -24,3 +24,5 @@ Data Space Protocol (DSP) contract negotiation and data exchange runtime. Manage
 - [Provider Gaia-X EDC](provider-gaia-x-edc/README.md) — Provider-side deployment variant of the Gaia-X EDC connector.
 - [Consumer Gaia-X EDC](consumer-gaiax-edc/README.md) — Consumer-side deployment variant of the Gaia-X EDC connector.
 
+- [Common](common/README.md) — shared libraries (e.g. `connector-model-common`) consumed across the resource-sharing-runtime services. Not deployable on their own.
+

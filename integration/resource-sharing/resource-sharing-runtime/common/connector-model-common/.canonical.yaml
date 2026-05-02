@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/data1/common-adapter
+status: prototype
+last_synced: 2026-05-02
+notes: Java library — EDC connector domain models (configuration, contract, resourceaddress, catalog, transfer). Source upstream still uses team-shaped naming.

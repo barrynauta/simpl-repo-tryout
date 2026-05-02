@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/data1/xfsc-advsearch-be
+status: prototype
+last_synced: 2026-05-02
+notes: XFSC Advanced Search REST microservice — keyword + advanced search over federated-catalogue self-descriptions. Communicates with QueryMapper Adapter via Tier 2. Source upstream still uses team-shaped naming.

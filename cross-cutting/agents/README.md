@@ -25,6 +25,7 @@ These compositions cross every dimension of the capability map (security, govern
 - [common-components/](common-components/README.md) — shared Helm chart bundle reused across the agents (Kafka, OpenBao, PostgreSQL).
 - [agent-iaa/](agent-iaa/README.md) — per-actor-type IAA configuration bundles (authority, consumer, participant, provider) consumed by the master Helm chart agents above.
 - [agent-contract-billing/](agent-contract-billing/README.md) — per-actor-type contract-billing deployment compositions (consumer, provider) bundling Contract Manager, Signer, VC Issuer, and test stubs.
+- [agent-resource-handling/](agent-resource-handling/README.md) — per-actor-type resource-handling deployment compositions (consumer, provider) bundling contract-consumption-be, edc-connector-adapter, schema-sync-adapter, validation backend, and advanced-search backend.
 
 ## Deployment composition overview
 

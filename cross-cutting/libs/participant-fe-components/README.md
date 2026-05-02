@@ -16,7 +16,7 @@ Vue.js implementation of the **SIMPL Open component library** — colour palette
 
 Built on **PrimeVue (unstyled mode)** with **TailwindCSS** for styling.
 
-Provenance: built by Simpl. Source repository: `data1/simpl-vue-components`. Owner: Data1 team. Licence: EUPL 1.2.
+Provenance: built by Simpl. Source repository: `data1/simpl-vue-components`. Licence: EUPL 1.2.
 
 ## Source code
 

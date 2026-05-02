@@ -111,9 +111,14 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 | `iaa/cli` *(archived)* | [cross-cutting/utils/iaa-cli/](cross-cutting/utils/iaa-cli/README.md) |
 | `data1/sdtooling-sd-schemas` (utility part) | [cross-cutting/utils/sd-schemas-util/](cross-cutting/utils/sd-schemas-util/README.md) |
 | `iaa/simpl-http-client` | [cross-cutting/libs/simpl-http-client/](cross-cutting/libs/simpl-http-client/README.md) |
-| `data1/common` | [cross-cutting/libs/participant-common/](cross-cutting/libs/participant-common/README.md) |
-| `data1/common-adapter` | [cross-cutting/libs/participant-common-adapter/](cross-cutting/libs/participant-common-adapter/README.md) |
-| `data1/common-tier2` | [cross-cutting/libs/participant-common-tier2/](cross-cutting/libs/participant-common-tier2/README.md) |
+| `data1/common` | _Skipped — god library that mixes HTTP/Feign plumbing, JWT auth, exceptions, ODRL contract models, schema-sync clients, and self-description utilities into one jar. Violates Simpl modularity. Re-catalogue per properly-scoped module once upstream splits the library._ |
+| `data1/common-adapter` | [integration/resource-sharing/resource-sharing-runtime/common/connector-model-common/](integration/resource-sharing/resource-sharing-runtime/common/connector-model-common/README.md) |
+| `data1/common-tier2` | [security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client/](security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client/README.md) |
+| `data1/consumer-data1` | [cross-cutting/agents/agent-resource-handling/consumer-resource-handling/](cross-cutting/agents/agent-resource-handling/consumer-resource-handling/README.md) |
+| `data1/provider-data1` | [cross-cutting/agents/agent-resource-handling/provider-resource-handling/](cross-cutting/agents/agent-resource-handling/provider-resource-handling/README.md) |
+| `data1/simpl-files` | [governance/contract-management/contract-establishment/contract-template-datastore/](governance/contract-management/contract-establishment/contract-template-datastore/README.md) (interim — pending dedicated datastore) |
+| `data1/simpl-mock-services` | _Skipped — empty upstream repo (LICENSE + README only, no source). Re-evaluate when content lands._ |
+| `data1/xfsc-advsearch-be` | [integration/resource-discovery/search-engine/xfsc-advanced-search/](integration/resource-discovery/search-engine/xfsc-advanced-search/README.md) |
 | `data1/simpl-vue-components` | [cross-cutting/libs/participant-fe-components/](cross-cutting/libs/participant-fe-components/README.md) |
 | `contract-billing/common` | [governance/contract-management/common/contract-billing-common/](governance/contract-management/common/contract-billing-common/README.md) |
 | `contract-billing/common_logging` | [administration/observability/logging/common-logging-java/](administration/observability/logging/common-logging-java/README.md) |

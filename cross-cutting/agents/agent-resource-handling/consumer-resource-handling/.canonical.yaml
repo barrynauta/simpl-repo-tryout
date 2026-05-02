@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/data1/consumer-data1
+status: prototype
+last_synced: 2026-05-02
+notes: Umbrella Helm/ArgoCD chart bundling contract-consumption-be + edc-connector-adapter + schema-sync-adapter + sd-creation-wizard + xfsc-advsearch-be for the Consumer agent. Source upstream still uses team-shaped naming.

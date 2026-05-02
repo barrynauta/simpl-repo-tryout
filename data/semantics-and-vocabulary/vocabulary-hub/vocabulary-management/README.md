@@ -17,7 +17,7 @@ Manages ontologies and controlled vocabularies used across the Simpl-Open data s
 
 Capability-map placement: `data / semantics-and-vocabulary / vocabulary-hub / vocabulary-management`. This solution implements part of the **Vocabulary hub** business service.
 
-Provenance: planned — Data1 team (no current source repository). Licence: EUPL 1.2.
+Provenance: planned (no current source repository). Licence: EUPL 1.2.
 
 ## Contents
 
@@ -26,8 +26,6 @@ Provenance: planned — Data1 team (no current source repository). Licence: EUPL
 
 ## Source code
 
-No current source repository. Planned for the Data1 team.
-
-## Roadmap
+No current source repository.## Roadmap
 
 Roadmap items live in the Simpl Notion "Roadmap items overview" page. Not duplicated here.

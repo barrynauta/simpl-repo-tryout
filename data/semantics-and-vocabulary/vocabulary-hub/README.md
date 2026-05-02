@@ -16,4 +16,4 @@ Management of ontologies and controlled vocabularies used for semantic consisten
 
 ## Solutions
 
-- [Vocabulary Management](vocabulary-management/README.md) — stub component for managing ontologies and controlled vocabularies (planned, Data1 team).
+- [Vocabulary Management](vocabulary-management/README.md) — stub component for managing ontologies and controlled vocabularies (planned).

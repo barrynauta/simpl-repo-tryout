@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/data1/common-tier2
+status: prototype
+last_synced: 2026-05-02
+notes: Java library — Tier 2 mTLS Feign clients for catalogue and federated-catalogue access. Source upstream still uses team-shaped naming.
