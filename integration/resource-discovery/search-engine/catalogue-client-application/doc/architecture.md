@@ -13,7 +13,7 @@ The Catalogue Client Application is deployed on Consumer and Provider nodes. It 
   - **Advanced Search UI** — schema-driven form, fields auto-generated from the active SHACL.
 
 - **Catalogue Client Application Backend** (`data1/xfsc-advsearch-be`):
-  - Sends policy-filtered queries to the Catalogue via the [Query Mapper Adapter](../../../resource-catalogue/query-mapper-adapter/doc/architecture.md).
+  - Sends policy-filtered queries to the Catalogue via the [Query Mapper Adapter](../../query-mapper-adapter/README.md).
   - Transforms the active schema definition into frontend form metadata.
 
 Capability-map placement: Integration dimension → Resource discovery capability → Search engine business service.
@@ -34,8 +34,8 @@ The following solutions used to be documented as sub-components here. They are n
 
 The Catalogue Client Application does not own a persistent data store. It fetches:
 
-- Schema definitions from the [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-management-service/doc/architecture.md) via the local schema cache populated by the [Schema Synch Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-synch-service/doc/architecture.md) — used to generate advanced search field definitions.
-- Self-description results from the [Simpl Catalogue](../../../resource-catalogue/simpl-catalogue/doc/architecture.md) via the [Query Mapper Adapter](../../../resource-catalogue/query-mapper-adapter/doc/architecture.md).
+- Schema definitions from the [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) via the local schema cache populated by the [Schema Sync Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/doc/architecture.md) — used to generate advanced search field definitions.
+- Self-description results from the [Simpl Catalogue](../../../resource-catalogue/simpl-catalogue/doc/architecture.md) via the [Query Mapper Adapter](../../query-mapper-adapter/README.md).
 - Contract-negotiation status from the [Contract Consumption Adapter](../contract-consumption-adapter/doc/architecture.md) (which in turn talks to the [Connector](../../../resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) via the [EDC Connector Adapter](../../../../resource-sharing/resource-sharing-runtime/edc-connector-adapter/doc/architecture.md)).
 
 ## Application view
@@ -58,8 +58,8 @@ Astro env vars (no trailing slashes):
 ### Key integrations
 
 - [Simpl Catalogue](../../../resource-catalogue/simpl-catalogue/doc/architecture.md) — query target.
-- [Query Mapper Adapter](../../../resource-catalogue/query-mapper-adapter/doc/architecture.md) — translates this client's queries into the Catalogue's native query language.
-- [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-management-service/doc/architecture.md) — source of the schemas used for advanced-search field generation.
+- [Query Mapper Adapter](../../query-mapper-adapter/README.md) — translates this client's queries into the Catalogue's native query language.
+- [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) — source of the schemas used for advanced-search field generation.
 - [Contract Consumption Adapter](../contract-consumption-adapter/doc/architecture.md) — kicks off contract negotiation and surfaces transfer status when the user picks a result.
 - [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — inbound traffic passes through the Tier 1 Gateway.
 
@@ -68,7 +68,7 @@ Astro env vars (no trailing slashes):
 - **Catalogue Client Application Backend** — Java 21 / Maven 3.9+ Spring Boot service (`data1/xfsc-advsearch-be`).
 - **Catalogue Client Application UI** — Astro frontend (`gaia-x-edc/simpl-catalogue-client`) served by the Tier 1 Gateway.
 
-The search stack is split into a consumer/provider part (this solution) and a centralised Governance Authority part (the [Simpl Catalogue](../../../resource-catalogue/simpl-catalogue/doc/architecture.md)). On the consumer/provider side, the local schema cache (populated by the Schema Synch Service) allows local validation of advanced-search parameters before sending to the Catalogue. The Tier 1 Gateway secures the connection towards the Governance Authority.
+The search stack is split into a consumer/provider part (this solution) and a centralised Governance Authority part (the [Simpl Catalogue](../../../resource-catalogue/simpl-catalogue/doc/architecture.md)). On the consumer/provider side, the local schema cache (populated by the Schema Sync Service) allows local validation of advanced-search parameters before sending to the Catalogue. The Tier 1 Gateway secures the connection towards the Governance Authority.
 
 ![TCV Static view — Catalogue Client Service](./media/image135.png)
 

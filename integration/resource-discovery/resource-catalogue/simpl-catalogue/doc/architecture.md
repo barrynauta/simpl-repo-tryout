@@ -83,9 +83,9 @@ Two adapter components described in §4.3.1 alongside the Catalogue cooperate wi
 The Catalogue interacts with, and is depended upon by, these other Simpl solutions (cross-references are relative to the documentation catalogue root):
 
 - [Catalogue Client Application](../../../search-engine/catalogue-client-application/doc/architecture.md) — consumer-side UI and backend that issue searches against the Catalogue.
-- [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — provider-side authoring tool that publishes signed self-descriptions to the Catalogue.
+- [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — provider-side authoring tool that publishes signed self-descriptions to the Catalogue.
 - [Signer Service](../../../../../security/credential-management/signing/signer-service/doc/architecture.md) — signs self-descriptions before publication.
-- [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-management-service/doc/architecture.md) — source of the schemas and vocabularies loaded into the Catalogue's Vocabulary Datastore.
+- [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) — source of the schemas and vocabularies loaded into the Catalogue's Vocabulary Datastore.
 - [Connector](../../../../resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — assets referenced from a self-description must be registered at the provider's Connector before the self-description can be published.
 - [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — inbound traffic to the Catalogue passes through the Tier 1 / Tier 2 gateway for RBAC/ABAC enforcement.
 - [Tier 1 Authentication Provider](../../../../../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/doc/architecture.md) — issues the JWT used to authenticate requests to the Catalogue REST API.

@@ -24,7 +24,7 @@ Provenance: forked from the upstream **Eclipse Dataspace Connector (EDC)** (Apac
 The fork extends the Eclipse EDC framework with:
 
 - **MinIO S3 Extension** — native MinIO S3 support for data transfers (Gaia-X implementation).
-- **Infrastructure provisioning capabilities** — bridges to the [Triggering Module](../../../../infrastructure/provisioning/infrastructure-provisioning/triggering-module/README.md) over Kafka.
+- **Infrastructure provisioning capabilities** — bridges to the [Triggering Module](../../../../infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/README.md) over Kafka.
 - **Contract management extensions** — enhanced contract lifecycle hooks integrating with the [Contract Manager](../../../../governance/contract-management/contract-establishment/contract-manager/README.md).
 - **Enhanced policy constraints and validation** — additional ODRL constraint types beyond stock EDC.
 - **OpenTelemetry integration** for observability — traces and metrics flow into the [Monitoring Service](../../../../administration/observability/dashboarding/monitoring-service/README.md).

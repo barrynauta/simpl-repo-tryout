@@ -16,7 +16,6 @@ Serves trained models with versioning, inference endpoints, and monitoring. Road
 
 ## Solutions
 
-- [MLflow](mlflow/README.md) — see stub for FTA reference and MAPPING row.
 
 ## Source
 

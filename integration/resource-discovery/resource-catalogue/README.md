@@ -17,4 +17,3 @@ Central publication point for signed self-descriptions in the Simpl-Open data sp
 ## Solutions
 
 - [Simpl Catalogue](simpl-catalogue/README.md) — XFSC Federated Catalogue fork implementing the Governance Authority's central self-description registry with Search Engine, Vocabulary Datastore, and Validation Services.
-- [Query Mapper Adapter](query-mapper-adapter/README.md) — bridge that maps Gaia-X EDC asset queries into the Simpl-Open Federated Catalogue and registers service offerings.

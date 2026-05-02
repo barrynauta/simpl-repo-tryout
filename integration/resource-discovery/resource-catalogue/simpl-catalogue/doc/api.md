@@ -29,12 +29,12 @@ From §4.5 interfaces table, row 9 (Catalogue):
 The Catalogue REST API is called by:
 
 - [Catalogue Client Application](../../../search-engine/catalogue-client-application/doc/architecture.md) — issues search requests (via Query Mapper Adapter) and retrieves full self-descriptions.
-- [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — publishes signed self-descriptions.
+- [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — publishes signed self-descriptions.
 - [Query Mapper Adapter](../doc/architecture.md#internal-decomposition) — forwards translated, policy-filtered queries on behalf of search clients.
 
 ## Asynchronous interfaces
 
-The Catalogue does not expose an asynchronous / event-driven API of its own in Release 3.0. Schema lifecycle events it reacts to are produced by the [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-management-service/doc/architecture.md) and dispatched by the Schema Synch Service; the Catalogue consumes schema updates from its Vocabulary Datastore rather than via a Kafka topic on its own perimeter.
+The Catalogue does not expose an asynchronous / event-driven API of its own in Release 3.0. Schema lifecycle events it reacts to are produced by the [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) and dispatched by the Schema Sync Service; the Catalogue consumes schema updates from its Vocabulary Datastore rather than via a Kafka topic on its own perimeter.
 
 ## Authentication
 

@@ -69,7 +69,7 @@ The DSP information model is described in §6.5.3. Key models: Contract Negotiat
 The fork extends Eclipse EDC with:
 
 - **MinIO S3 Extension** — native MinIO S3 support for data transfers (Gaia-X implementation; the **primary** data-plane storage).
-- **Infrastructure provisioning capabilities** — bridges to the [Triggering Module](../../../../infrastructure/provisioning/infrastructure-provisioning/triggering-module/doc/architecture.md) over Kafka.
+- **Infrastructure provisioning capabilities** — bridges to the [Triggering Module](../../../../infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/doc/architecture.md) over Kafka.
 - **Contract management extensions** — enhanced contract-lifecycle hooks integrating with the [Contract Manager](../../../../governance/contract-management/contract-establishment/contract-manager/doc/architecture.md).
 - **Enhanced policy constraints and validation** — additional ODRL constraint types beyond stock EDC.
 - **OpenTelemetry integration** for observability — traces and metrics flow into the [Monitoring Service](../../../../administration/observability/dashboarding/monitoring-service/doc/architecture.md).

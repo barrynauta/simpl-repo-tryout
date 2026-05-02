@@ -16,7 +16,7 @@ Capability-map placement: Integration dimension → Resource discovery capabilit
 
 ## Data view
 
-The Validation Backend is **stateless**. It reads from the local schema cache populated by the [Schema Synch Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-synch-service/doc/architecture.md) (TTL files on a shared persistent volume); validation results are returned synchronously to the caller and not persisted.
+The Validation Backend is **stateless**. It reads from the local schema cache populated by the [Schema Sync Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/doc/architecture.md) (TTL files on a shared persistent volume); validation results are returned synchronously to the caller and not persisted.
 
 ## Application view
 
@@ -34,14 +34,14 @@ The service is deliberately small and modular so that validation logic can be ex
 
 Deployed on **both the Provider Agent and the Consumer Agent**, with subtly different invocation patterns:
 
-- **Provider Agent**: invoked by [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) to validate a self-description before catalogue registration and publication. The first step of the SD Tooling publication flow (`enrichAndValidate`) is the entry into this service.
+- **Provider Agent**: invoked by [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) to validate a self-description before catalogue registration and publication. The first step of the SD Tooling publication flow (`enrichAndValidate`) is the entry into this service.
 - **Consumer Agent**: validates the **Destination Address** in a self-description — the endpoint where a transferred asset will be delivered. The [Contract Consumption Adapter](../contract-consumption-adapter/doc/architecture.md) calls this service before initiating a Transfer Process.
 
 ### Key integrations
 
-- [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — primary Provider-side caller (the `enrichAndValidate` step of its publication flow).
+- [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — primary Provider-side caller (the `enrichAndValidate` step of its publication flow).
 - [Contract Consumption Adapter](../contract-consumption-adapter/doc/architecture.md) — primary Consumer-side caller.
-- [Schema Synch Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-synch-service/doc/architecture.md) — provides the local TTL schema cache that this service reads on each validation request.
+- [Schema Sync Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/doc/architecture.md) — provides the local TTL schema cache that this service reads on each validation request.
 - [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — Tier-1 Gateway routes inbound calls.
 
 ## Technical view
@@ -49,13 +49,13 @@ Deployed on **both the Provider Agent and the Consumer Agent**, with subtly diff
 - **Source repo**: `data1/sdtooling-validation-api-be`.
 - **Language / runtime**: Java 21+, Maven 3.9+, Spring Boot.
 - **SHACL processing**: pulls TTL constraints from the local persistent-volume cache; validates JSON-LD documents against them.
-- **Connectivity prerequisites** (per source): SD-Tooling and Contract Consumption are the inbound clients; reads from the agent-local persistent volume populated by Schema Synch.
+- **Connectivity prerequisites** (per source): SD-Tooling and Contract Consumption are the inbound clients; reads from the agent-local persistent volume populated by Schema Sync.
 
 ## Security view
 
 - **No public ingress** — only Tier-1-Gateway-mediated traffic from the agent-local SD-Tooling and Contract Consumption services. There's no externally-callable validation endpoint.
 - **Stateless** — no persistent store to compromise; failure mode is "validation request denied", not "data leaked".
-- The service has **no write access** to anything outside its own JVM (logging excepted). It reads from the schema cache (which the [Schema Synch Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-synch-service/doc/architecture.md) keeps writable to itself only); a compromise here cannot poison schema content.
+- The service has **no write access** to anything outside its own JVM (logging excepted). It reads from the schema cache (which the [Schema Sync Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/doc/architecture.md) keeps writable to itself only); a compromise here cannot poison schema content.
 
 Threat model: not yet documented.
 

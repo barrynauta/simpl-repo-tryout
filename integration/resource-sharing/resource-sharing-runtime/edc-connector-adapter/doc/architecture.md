@@ -18,7 +18,7 @@ The EDC Connector Adapter is **stateless**. It carries no first-party persistent
 
 Spring Boot service exposing a unified REST API. Internally:
 
-- **Asset / policy registration façade** — exposes API methods for asset and policy registration on the EDC Connector, consumed by [SD Tooling](../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md). Translates each call into the equivalent EDC Management API request.
+- **Asset / policy registration façade** — exposes API methods for asset and policy registration on the EDC Connector, consumed by [SD Tooling](../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md). Translates each call into the equivalent EDC Management API request.
 - **Negotiation initiation façade** — exposes API methods for initiating Contract Negotiation and Transfer Process operations, consumed by the [Contract Consumption Adapter](../../../resource-discovery/search-engine/contract-consumption-adapter/doc/architecture.md). Calls into the EDC Control Plane via the DSP API.
 - **Translation layer** — request/response normalisation between Simpl-Open business calls and EDC protocol endpoints, including normalised error reporting.
 - **Extensibility hook** — the abstraction is designed so a future replacement for EDC could be plugged in by swapping the implementation behind the same façades, without changing any upper-layer caller. This is one of the load-bearing reasons this service exists.
@@ -27,7 +27,7 @@ Spring Boot service exposing a unified REST API. Internally:
 
 Deployed as an **internal cluster service** on both the Consumer Agent and the Provider Agent. It is *not* exposed through any public gateway — its callers are themselves agent-internal services.
 
-- **Provider Agent**: between [SD Tooling](../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) and the EDC **Provider** Connector. Handles asset registration and publication.
+- **Provider Agent**: between [SD Tooling](../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) and the EDC **Provider** Connector. Handles asset registration and publication.
 - **Consumer Agent**: between [Contract Consumption Adapter](../../../resource-discovery/search-engine/contract-consumption-adapter/doc/architecture.md) and the EDC **Consumer** Connector. Handles negotiation and transfer initiation.
 
 This dual deployment ensures consistent interaction patterns across both agents, promotes connector-agnostic integration, and supports long-term maintainability and interoperability.
@@ -35,7 +35,7 @@ This dual deployment ensures consistent interaction patterns across both agents,
 ### Key integrations
 
 - [Connector](../connector/doc/architecture.md) — sole downstream target. Every adapter call resolves to one or more EDC API calls.
-- [SD Tooling](../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — Provider-side caller for asset & policy registration.
+- [SD Tooling](../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — Provider-side caller for asset & policy registration.
 - [Contract Consumption Adapter](../../../resource-discovery/search-engine/contract-consumption-adapter/doc/architecture.md) — Consumer-side caller for Contract Negotiation / Transfer Process initiation.
 - **Apache Kafka** — used for event-driven status updates back to upstream callers.
 - **Security Vault** — credentials for talking to the EDC Connector.

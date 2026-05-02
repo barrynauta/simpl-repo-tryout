@@ -19,5 +19,6 @@ Consumer and provider-side search interface for discovering resources in the Cat
 - [Catalogue Client Application](catalogue-client-application/README.md) — search frontend and backend (Java + Angular) covering quick and advanced search.
 - [Contract Consumption Adapter](contract-consumption-adapter/README.md) — Consumer-side backend that initiates and tracks Contract Negotiation and Transfer Process workflows from the catalogue UI.
 - [Validation Backend](validation-backend/README.md) — syntactic validation of self-descriptions and resource-address parameters before catalogue publication and during data-exchange setup.
+- [Query Mapper Adapter](query-mapper-adapter/README.md) — bridges Gaia-X EDC asset queries into the Simpl Federated Catalogue and registers service offerings for downstream search.
 
 The EDC abstraction used by these clients lives at [`integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/`](../../resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md).
