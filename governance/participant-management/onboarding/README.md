@@ -16,4 +16,6 @@ Manages the end-to-end participant onboarding process — application submission
 
 ## Solutions
 
-- [Onboarding](onboarding-service/README.md) — full onboarding workflow including frontend (Angular), backend (Java), and integrations with the IAA stack.
+- [fe-onboarding](fe-onboarding/README.md) — Angular frontend for the Onboarding business service. The backend lives upstream at `iaa/onboarding` and is not yet represented as a dedicated catalogue folder.
+- [Document Validation Service](document-validation/README.md) — validates documents attached to onboarding requests against schema and content rules. _(Stub — see MAPPING row 61.)_
+

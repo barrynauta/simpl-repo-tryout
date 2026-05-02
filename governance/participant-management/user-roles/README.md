@@ -16,4 +16,5 @@ Application-layer user and role management on top of the Tier 1 Authentication P
 
 ## Solutions
 
-- [Users & Roles](users-roles/README.md) — user/role CRUD operations and Tier 1 identity attribute assignment.
+- [fe-users-roles](fe-users-roles/README.md) — Angular frontend for the User-roles business service. The backend lives upstream at `iaa/users-roles` and is not yet represented as a dedicated catalogue folder.
+
