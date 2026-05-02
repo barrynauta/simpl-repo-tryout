@@ -1,6 +1,4 @@
-canonical_url: null
-status: roadmap
-last_synced: 2026-05-01
-notes: |
-  Roadmap stub — no source repository on code.europa.eu yet.
-  Not in xlsx.
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-fc-service
+status: prototype
+last_synced: 2026-05-02
+notes: Eclipse XFSC Federated Catalogue Service (T-Systems origin). Java/Maven multi-module — fc-service-api, fc-service-core, fc-service-server. Reference implementation of Gaia-X Federation Services / Federated Catalogue. Source — code.europa.eu/simpl/simpl-open/development/gaia-x-edc.

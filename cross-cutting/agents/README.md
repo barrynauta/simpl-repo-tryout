@@ -26,6 +26,7 @@ These compositions cross every dimension of the capability map (security, govern
 - [agent-iaa/](agent-iaa/README.md) — per-actor-type IAA configuration bundles (authority, consumer, participant, provider) consumed by the master Helm chart agents above.
 - [agent-contract-billing/](agent-contract-billing/README.md) — per-actor-type contract-billing deployment compositions (consumer, provider) bundling Contract Manager, Signer, VC Issuer, and test stubs.
 - [agent-resource-handling/](agent-resource-handling/README.md) — per-actor-type resource-handling deployment compositions (consumer, provider) bundling contract-consumption-be, edc-connector-adapter, schema-sync-adapter, validation backend, and advanced-search backend.
+- [agent-monitoring/](agent-monitoring/README.md) — per-actor-type monitoring deployment compositions (authority, consumer, provider) wrapping the shared eck-monitoring chart.
 
 ## Deployment composition overview
 

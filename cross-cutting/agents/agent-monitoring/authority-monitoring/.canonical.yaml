@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/monitoring/authority-monitoring
+status: prototype
+last_synced: 2026-05-02
+notes: Thin umbrella Helm/ArgoCD chart wrapping eck-monitoring with governance authority-specific namespace tags and resource sizing. Source — code.europa.eu/simpl/simpl-open/development/monitoring.

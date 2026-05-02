@@ -119,6 +119,12 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 | `data1/simpl-files` | [governance/contract-management/contract-establishment/contract-template-datastore/](governance/contract-management/contract-establishment/contract-template-datastore/README.md) (interim — pending dedicated datastore) |
 | `data1/simpl-mock-services` | _Skipped — empty upstream repo (LICENSE + README only, no source). Re-evaluate when content lands._ |
 | `data1/xfsc-advsearch-be` | [integration/resource-discovery/search-engine/xfsc-advanced-search/](integration/resource-discovery/search-engine/xfsc-advanced-search/README.md) |
+| `gaia-x-edc/simpl-fc-service` | [integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/](integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/README.md) |
+| `gaia-x-edc/simpl-files` | _Skipped — sparse upstream repo (README states purpose is "to store commonly used helm charts"; only content is a postgres chart, which is already catalogued at `data/supporting-data-services/common/postgres-cluster/` via `common-components/postgres-cluster`). Re-evaluate if/when this repo gains distinctive content._ |
+| `gaia-x-edc/simpl-signer` | _Skipped — deployment-only repo (Helm charts + ArgoCD manifests wrapping upstream Eclipse XFSC TSA Signer images). No source. Status unclear — current Simpl agent compositions use `simpl-signing-service` (contract-billing/signing-service); not referenced from any active agent chart. Re-evaluate if/when an active deployment surfaces._ |
+| `monitoring/authority-monitoring` | [cross-cutting/agents/agent-monitoring/authority-monitoring/](cross-cutting/agents/agent-monitoring/authority-monitoring/README.md) |
+| `monitoring/consumer-monitoring` | [cross-cutting/agents/agent-monitoring/consumer-monitoring/](cross-cutting/agents/agent-monitoring/consumer-monitoring/README.md) |
+| `monitoring/provider-monitoring` | [cross-cutting/agents/agent-monitoring/provider-monitoring/](cross-cutting/agents/agent-monitoring/provider-monitoring/README.md) |
 | `data1/simpl-vue-components` | [cross-cutting/libs/participant-fe-components/](cross-cutting/libs/participant-fe-components/README.md) |
 | `contract-billing/common` | [governance/contract-management/common/contract-billing-common/](governance/contract-management/common/contract-billing-common/README.md) |
 | `contract-billing/common_logging` | [administration/observability/logging/common-logging-java/](administration/observability/logging/common-logging-java/README.md) |
