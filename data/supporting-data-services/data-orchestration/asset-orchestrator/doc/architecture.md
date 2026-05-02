@@ -40,7 +40,7 @@ Errors follow **RFC 7807 — Problem Details** (`application/problem+json`).
 
 - [Orchestration Platform](../../orchestration-platform/doc/architecture.md) — submits jobs to the Dagster GraphQL API; resolves run state from there.
 - [Connector](../../../../integration/resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — receives consumption events that trigger workflow execution.
-- [SD Tooling](../../../../governance/resource-management/metadata-description/sd-tooling/README.md) — Provider authors workflow associations through the same UI/API surface that authors self-descriptions.
+- [SD Tooling](../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — Provider authors workflow associations through the same UI/API surface that authors self-descriptions.
 - Dagster code-locations under [Anonymisation and Pseudonymisation](../../../data-processing/anonymisation-and-pseudonymisation/README.md) — typical workflow targets when the Provider wants pre-processing applied before delivery.
 
 ## Technical view

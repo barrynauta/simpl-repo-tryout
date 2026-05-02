@@ -7,12 +7,12 @@
     <a href="../../../README.md">Dimension: Data</a><br/>
         <a href="../../README.md">Capability: Supporting data services</a><br/>
             <a href="../README.md">Service: Data orchestration</a><br/>
-                <strong>Solution: Simpl Dagster deployment artefact</strong><br/>
+                <strong>Solution: Simpl Dagster local-development variant</strong><br/>
 </p>
 </div>
 
-# Simpl Dagster deployment artefact
+# Simpl Dagster local-development variant
 
-Simpl deployment packaging of the Dagster orchestration platform. Hosts the production data-orchestration runtime on Provider/Consumer Agents and loads anonymisation code-locations from `data-services/{dataframe-level-anonymisation, field-level-pseudo-anonymisation, ...}` as user-code containers.
+Local-development variant of the Simpl Dagster deployment. Provides a self-contained Dagster instance for developers iterating on code-locations before they are promoted to the production deployment.
 
 The production code lives at the canonical location — see [CANONICAL.md](CANONICAL.md). Machine-readable form: [`.canonical.yaml`](.canonical.yaml).

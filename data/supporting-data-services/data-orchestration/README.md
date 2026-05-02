@@ -18,3 +18,8 @@ Execution and management of data workflows, enabling providers and consumers to 
 
 - [Orchestration Platform](orchestration-platform/README.md) — Dagster-based workflow orchestration engine with CI/CD, version control, and Simpl-Open catalogue integration.
 - [Asset Orchestrator](asset-orchestrator/README.md) — bridge service between the Provider Connector and the Workflow Engine; binds catalogue assets to workflow definitions and tracks execution.
+- [Dagster](dagster/README.md) — Simpl deployment packaging of the Dagster orchestration platform.
+- [Dagster Dev Local](dagster-dev-local/README.md) — local-development variant of the Simpl Dagster deployment.
+- [Dagit](dagit/README.md) — Dagster web UI. _(External OSS.)_
+- [Apache Airflow](apache-airflow/README.md) — alternative orchestration engine. _(External OSS, roadmap.)_
+
