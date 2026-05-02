@@ -52,7 +52,7 @@ Each algorithmic op accepts an explicit configuration block: identifier columns,
 - [Orchestration Platform](../../../supporting-data-services/data-orchestration/orchestration-platform/doc/architecture.md) — Dagster engine that loads this code location, runs the jobs, and surfaces them in the Dagit UI.
 - [Asset Orchestrator](../../../supporting-data-services/data-orchestration/asset-orchestrator/README.md) — binds catalogue assets to anonymisation jobs so they fire automatically on Consumer access.
 - Object storage (MinIO / S3) — primary input/output sink; bound to the Agent at deploy time.
-- [Common Logging (Python)](../../../../cross-cutting/libs/common-logging-python/README.md) — structured-log emission into the Monitoring Service stream.
+- [Common Logging (Python)](../../../../../administration/observability/logging/common-logging-python/README.md) — structured-log emission into the Monitoring Service stream.
 
 ## Technical view
 

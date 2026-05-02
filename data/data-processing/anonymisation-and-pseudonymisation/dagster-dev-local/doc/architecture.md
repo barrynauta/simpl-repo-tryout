@@ -71,7 +71,7 @@ load_from:
 - **HashiCorp Vault** — key management for encrypted (reversible) transformations. The transit engine holds the keys; the code location requests encrypt/decrypt operations through Vault rather than handling raw key material.
 - [Asset Orchestrator](../../../supporting-data-services/data-orchestration/asset-orchestrator/README.md) — binds catalogue assets to pseudonymisation jobs.
 - spaCy models — bundled per language for unstructured PII detection (18+ languages: English, German, French, Spanish, …).
-- [Common Logging (Python)](../../../../cross-cutting/libs/common-logging-python/README.md) — structured logging.
+- [Common Logging (Python)](../../../../../administration/observability/logging/common-logging-python/README.md) — structured logging.
 
 ## Technical view
 

@@ -16,8 +16,5 @@ Charts and exploratory views to communicate insights and monitor KPIs. Roadmap; 
 
 ## Solutions
 
-- [Apache Superset](apache-superset/README.md) — see stub for FTA reference and MAPPING row.
+- [data-analytic-visualisation](data-analytic-visualisation/README.md) 
 
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 73. FTA references vary per solution and are recorded inside each solution's stub README.

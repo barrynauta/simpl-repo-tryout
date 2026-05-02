@@ -14,11 +14,6 @@
 
 Batch and interactive analytics for descriptive, diagnostic, and predictive insights. Roadmap.
 
-## Solutions
+Based on apache-jupter and apache-spark
 
-- [Apache Spark](apache-spark/README.md) — see stub for FTA reference and MAPPING row.
-- [Apache Jupyter](apache-jupyter/README.md) — see stub for FTA reference and MAPPING row.
-
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 96, 100. FTA references vary per solution and are recorded inside each solution's stub README.
+> **Status: Not yet implemented.** No solution has been realised under this service in the current catalogue. The description below is sourced from [foundations/capability-map.md](../../../foundations/capability-map.md) and represents the intended scope.

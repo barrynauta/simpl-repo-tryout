@@ -18,8 +18,11 @@ The service is realised as two Dagster code-locations that are integrated as opt
 
 ## Solutions
 
-- [dataframe-level-anonymisation/](dataframe-level-anonymisation/README.md) — anonymisation (k-anonymity, l-diversity, t-closeness) on pandas DataFrames; irreversible.
-- [field-level-pseudo-anonymisation/](field-level-pseudo-anonymisation/README.md) — column-wise pseudonymisation on structured data and PII pseudonymisation on unstructured text; reversible (paired depseudonymisation jobs).
+- [dagster/](dagster/README.md)
+- [dagster-dev/](dagster-dev/README.md)  
+
+— anonymisation (k-anonymity, l-diversity, t-closeness) on pandas DataFrames; irreversible.
+— column-wise pseudonymisation on structured data and PII pseudonymisation on unstructured text; reversible (paired depseudonymisation jobs).
 
 ## Realised by
 
