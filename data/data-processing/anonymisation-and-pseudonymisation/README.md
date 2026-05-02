@@ -14,15 +14,16 @@
 
 Helps Participants — both Providers and Consumers — protect personal data, business-critical information, confidential datasets, and other sensitive records by applying a range of data-protection techniques. **Pseudonymisation** is reversible (the original data can be recovered from a separately stored key); **anonymisation** is irreversible.
 
-The service is realised as two Dagster code-locations that are integrated as optional modules into the **Data Orchestration** runtime (the Dagster-based orchestration platform) on a Participant Agent. They run as part of the standard data-orchestration flow but conceptually belong to the Data Processing capability — the architecture spec lists "Anonymisation and pseudonymisation" as a service of the Data Processing capability and notes that the anonymisation services are "added to the ACV Static — Data Orchestration Service" deployment view.
+The service is realised as a set of Dagster code-locations and supporting utilities that are integrated as optional modules into the **Data Orchestration** runtime (the Dagster-based orchestration platform) on a Participant Agent. They run as part of the standard data-orchestration flow but conceptually belong to the Data Processing capability — the architecture spec lists "Anonymisation and pseudonymisation" as a service of the Data Processing capability and notes that the anonymisation services are "added to the ACV Static — Data Orchestration Service" deployment view.
 
 ## Solutions
 
-- [dagster/](dagster/README.md)
-- [dagster-dev/](dagster-dev/README.md)  
-
-— anonymisation (k-anonymity, l-diversity, t-closeness) on pandas DataFrames; irreversible.
-— column-wise pseudonymisation on structured data and PII pseudonymisation on unstructured text; reversible (paired depseudonymisation jobs).
+- [Dataframe-level anonymisation](dataframe-level-anonymisation/README.md) — k-anonymity, l-diversity, t-closeness on pandas DataFrames; irreversible.
+- [Field-level pseudo-anonymisation](field-level-pseudo-anonymisation/README.md) — column-wise pseudonymisation on structured data and PII pseudonymisation on unstructured text; reversible (paired depseudonymisation jobs).
+- [Data processing](data-processing/README.md) — supporting data-processing utilities used by anonymisation jobs.
+- [Semaphoreui deployer service](semaphoreui-deployer-service/README.md) — deployment helper for SemaphoreUI.
+- [Template code location](template-code-location/README.md) — reference template for new Dagster code-locations.
+- [Util services](util-services/README.md) — shared utility services consumed by anonymisation code-locations.
 
 ## Realised by
 

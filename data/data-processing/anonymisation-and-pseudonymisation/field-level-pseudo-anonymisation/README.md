@@ -5,8 +5,8 @@
 📍 <strong>You are here</strong><br/>
 <a href="../../../../README.md">🏠 Home</a><br/>
     <a href="../../../README.md">Dimension: Data</a><br/>
-        <a href="../../README.md">Capability: Data Processing</a><br/>
-            <a href="../README.md">Service: Anonymisation and Pseudonymisation</a><br/>
+        <a href="../../README.md">Capability: Data processing</a><br/>
+            <a href="../README.md">Service: Anonymisation and pseudonymisation</a><br/>
                 <strong>Solution: Field-Level Pseudo-Anonymisation</strong><br/>
 </p>
 </div>
