@@ -14,10 +14,4 @@
 
 Defines and evaluates quality checks with reporting and remediation workflows. Roadmap.
 
-## Solutions
-
-- [Great Expectations](great-expectations/README.md) — see stub for FTA reference and MAPPING row.
-
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 97. FTA references vary per solution and are recorded inside each solution's stub README.
+> **Status: Not yet implemented.** No solution has been realised under this service in the current catalogue. The description below is sourced from [foundations/capability-map.md](../../../foundations/capability-map.md) and represents the intended scope.
