@@ -31,7 +31,7 @@ Provenance: built by Simpl. Source repository: `agents/consumer`. Owner: Cross-t
 - [EDC Connector Adapter](../../../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md)
 - [Tier 1 Authentication Provider](../../../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/README.md)
 - [Tier 2 Authentication Provider](../../../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md)
-- [Authorisation](../../../security/access-control-and-trust/authorisation/authorisation/README.md)
+- [Authorisation](../../../security/access-control-and-trust/authorisation/README.md)
 - [Monitoring Service](../../../administration/observability/dashboarding/monitoring-service/README.md)
 - [Common Components](../common-components/README.md)
 

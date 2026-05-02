@@ -11,7 +11,7 @@
 
 # User interfaces
 
-Inventory and behavioural specification of the front-end applications shipped with Simpl-Open: the Catalogue Client Application, Participant Utility, Contract Template Editor, Policy Creator, Dagit, Kibana, Grafana, and the microfrontend framework that hosts them. Each UI here is also documented in its solution folder; this page is the cross-cut so a reader looking for "all the UIs" finds them in one place.
+Inventory and behavioural specification of the front-end applications shipped with Simpl-Open: the Catalogue Client Application, Contract Template Editor, Policy Creator, Dagit, Kibana, Grafana, and the microfrontend framework that hosts them. Each UI here is also documented in its solution folder; this page is the cross-cut so a reader looking for "all the UIs" finds them in one place.
 
 ## Source
 
@@ -108,7 +108,6 @@ Code of Conduct & Guidelines.
 </tr>
 <tr class="odd">
 <td>E</td>
-<td>Participant Utility</td>
 <td>Domain 1</td>
 <td>IAA frontend that allows the management of credentials Participant Agent. It allows a Participant Representative to generate Keypairs and install credentials to complete the onboarding process.</td>
 <td><ul>

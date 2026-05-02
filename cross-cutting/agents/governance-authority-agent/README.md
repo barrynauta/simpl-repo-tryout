@@ -18,16 +18,16 @@ Provenance: built by Simpl. Source repository: `agents/governance-authority`. Ow
 
 ## Modules composed (illustrative)
 
-- [Onboarding](../../../governance/participant-management/onboarding/onboarding-service/README.md)
-- [Users & Roles](../../../governance/participant-management/user-roles/users-roles/README.md)
+- [Onboarding](../../../governance/participant-management/onboarding/fe-onboarding/README.md)
+- [Users & Roles](../../../governance/participant-management/user-roles/fe-users-roles/README.md)
 - [Identity Provider](../../../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md)
 - [Security Attributes Provider](../../../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/README.md)
-- [Authorisation](../../../security/access-control-and-trust/authorisation/authorisation/README.md)
+- [Authorisation](../../../security/access-control-and-trust/authorisation/README.md)
 - [Simpl Catalogue (XFSC FC)](../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md)
-- [Schema Management Service](../../../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md)
+- [Schema Management Service](../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md)
 - [Signer Service](../../../security/credential-management/signing/signer-service/README.md)
 - [Monitoring Service](../../../administration/observability/dashboarding/monitoring-service/README.md)
-- [EJBCA Preconfig](../../utils/ejbca-preconfig/README.md) (init-container)
+- [EJBCA Preconfig](../../samples/ejbca-preconfig/README.md) (init-container)
 - [Common Components](../common-components/README.md)
 
 ## Documentation

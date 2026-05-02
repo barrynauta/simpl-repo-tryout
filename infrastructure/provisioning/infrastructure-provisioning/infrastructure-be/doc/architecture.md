@@ -45,7 +45,7 @@ Three submodules, all currently inside the `infrastructure-be` Spring Boot appli
 - [Connector](../../../../../integration/resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — Triggering Extension is the upstream caller.
 - [Infrastructure Provisioner](../../infrastructure-provisioner/doc/architecture.md) — async target of triggered provisioning jobs over Kafka.
 - **Deployment Script & Template Management** (folder removed; concept lives upstream as part of the broader infrastructure provisioning effort) — sibling solution; owns the script catalogue and Gitea repository this module reads from.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — Tier 1 Gateway routes inbound calls; the trigger endpoint is RBAC-gated to `INFRA_DEPLOYER`.
+- [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) — Tier 1 Gateway routes inbound calls; the trigger endpoint is RBAC-gated to `INFRA_DEPLOYER`.
 - [Notification Service](../../../../../administration/notification-and-messaging/notification/notification-service/doc/architecture.md) — alternative channel for access-data delivery (Spring Mail used today; Notification Service is the strategic target).
 
 ## Technical view

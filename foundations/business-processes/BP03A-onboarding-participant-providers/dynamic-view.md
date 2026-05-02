@@ -73,7 +73,7 @@ The participant installs the downloaded credential and previously generated keyp
 ## Participants
 
 - [tier-1-authentication-provider/](../../../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/README.md) — Tier 1 Authentication Provider (issues temporary credentials; stores Tier 1 user identities)
-- [users-roles/](../../../governance/participant-management/user-roles/users-roles/README.md) — Users & Roles (creates credentials in the Tier 1 provider; manages role assignment)
-- [onboarding/](../../../governance/participant-management/onboarding/onboarding-service/README.md) — Onboarding (manages request lifecycle; triggers credential creation)
+- [fe-users-roles/](../../../governance/participant-management/user-roles/fe-users-roles/README.md) — Users & Roles (creates credentials in the Tier 1 provider; manages role assignment)
+- [onboarding/](../../../governance/participant-management/onboarding/fe-onboarding/README.md) — Onboarding (manages request lifecycle; triggers credential creation)
 - [security-attributes-provider/](../../../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/README.md) — Security Attributes Provider (stores participant identity attributes on approval)
 - [identity-provider/](../../../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) — Identity Provider (issues the Tier 2 identity credential)

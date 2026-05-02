@@ -35,4 +35,4 @@ The end user can perform one of three actions:
 
 ## Participants
 
-- [schema-management-service/](../../../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) — Schema Management Service (enables Governance Authority to create, version, and revoke resource description schemas)
+- [simpl-schema-manager/](../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) — Schema Management Service (enables Governance Authority to create, version, and revoke resource description schemas)

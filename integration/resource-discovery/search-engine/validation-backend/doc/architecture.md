@@ -42,7 +42,7 @@ Deployed on **both the Provider Agent and the Consumer Agent**, with subtly diff
 - [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — primary Provider-side caller (the `enrichAndValidate` step of its publication flow).
 - [Contract Consumption Adapter](../contract-consumption-adapter/doc/architecture.md) — primary Consumer-side caller.
 - [Schema Sync Service](../../../../../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/doc/architecture.md) — provides the local TTL schema cache that this service reads on each validation request.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — Tier-1 Gateway routes inbound calls.
+- [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) — Tier-1 Gateway routes inbound calls.
 
 ## Technical view
 

@@ -24,7 +24,7 @@ Provenance: built by Simpl. Source repository: `agents/data-provider`. Owner: Cr
 
 ## Modules composed (illustrative)
 
-- [SD-Tooling](../../../governance/resource-management/metadata-description/sd-tooling/README.md)
+- [SD-Tooling](../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md)
 - [Connector (EDC)](../../../integration/resource-sharing/resource-sharing-runtime/connector/README.md)
 - [EDC Connector Adapter](../../../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md)
 - [Asset Orchestrator](../../../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md)

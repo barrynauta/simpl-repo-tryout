@@ -87,7 +87,7 @@ The Catalogue interacts with, and is depended upon by, these other Simpl solutio
 - [Signer Service](../../../../../security/credential-management/signing/signer-service/doc/architecture.md) — signs self-descriptions before publication.
 - [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) — source of the schemas and vocabularies loaded into the Catalogue's Vocabulary Datastore.
 - [Connector](../../../../resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — assets referenced from a self-description must be registered at the provider's Connector before the self-description can be published.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — inbound traffic to the Catalogue passes through the Tier 1 / Tier 2 gateway for RBAC/ABAC enforcement.
+- [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) — inbound traffic to the Catalogue passes through the Tier 1 / Tier 2 gateway for RBAC/ABAC enforcement.
 - [Tier 1 Authentication Provider](../../../../../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/doc/architecture.md) — issues the JWT used to authenticate requests to the Catalogue REST API.
 
 ### Provenance and upstream project
@@ -143,7 +143,7 @@ Roles relevant to the Catalogue, from the role table in §4.5:
 - `SD_PUBLISHER` — role for end users responsible for creating and publishing self-descriptions.
 - `SD_CONSUMER` — Tier-1 role for consumers.
 
-Inbound traffic reaches the Catalogue through the [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) gateway, which enforces RBAC (Tier 1) and ABAC (Tier 2) rules before a request hits the Catalogue.
+Inbound traffic reaches the Catalogue through the [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) gateway, which enforces RBAC (Tier 1) and ABAC (Tier 2) rules before a request hits the Catalogue.
 
 At query time, the Policy Filter Service dynamically enforces access policies on search queries by applying the access-control rules defined within each self-description. It is integrated in the Query Mapper Adapter and embeds policy-based filters into search queries before they are sent to the Catalogue. This ensures that all queries reflect the necessary governance controls, restricting access to authorised users and ensuring that sensitive information remains protected. The Policy Filter Service therefore acts as an invisible layer of security that ensures compliance while providing authorised access to the appropriate search results.
 

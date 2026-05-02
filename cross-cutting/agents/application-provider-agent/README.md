@@ -14,7 +14,7 @@
 
 Master Helm chart that deploys an **Application Provider** Simpl-Open Agent — the Provider variant that publishes application/processing services rather than data resources.
 
-> **Status: placeholder.** The source repository (`agents/application-provider`) currently contains only a LICENSE file; the master Helm chart and deployment guide have not yet landed. Once available, the module composition will mirror the [Data Provider Agent](../data-provider-agent/README.md) but with an emphasis on application sharing (Kubeless / Apache OpenWhisk and friends) and ML model sharing rather than data assets.
+> **Status: placeholder.** The source repository (`agents/application-provider`) currently contains only a LICENSE file; the master Helm chart and deployment guide have not yet landed. Once available, the module composition will mirror the [Data Provider Agent](../data-provider-agent/README.md) but with an emphasis on application sharing and ML model sharing rather than data assets.
 
 Provenance: built by Simpl. Source repository: `agents/application-provider`. Owner: Cross-team. Licence: EUPL 1.2.
 

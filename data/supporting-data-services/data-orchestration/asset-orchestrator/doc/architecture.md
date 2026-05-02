@@ -55,7 +55,7 @@ Errors follow **RFC 7807 — Problem Details** (`application/problem+json`).
 
 ## Security view
 
-- **No public ingress** — the Asset Orchestrator is an internal service; the only external entry to the Provider Agent is via the [Authorisation gateways](../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md). All authentication / authorisation for the orchestrator's APIs is handled by those gateways before the request reaches it.
+- **No public ingress** — the Asset Orchestrator is an internal service; the only external entry to the Provider Agent is via the [Authorisation gateways](../../../../security/access-control-and-trust/authorisation/README.md). All authentication / authorisation for the orchestrator's APIs is handled by those gateways before the request reaches it.
 - **mTLS / Service Mesh** for east-west traffic between the orchestrator, Dagster, and the connector.
 - **Configuration validation** before execution prevents invalid or malicious configurations from being persisted or submitted to Dagster.
 - **Audit trail** — every association change and every execution submission is recorded in PostgreSQL with the originating identity (resolved from the gateway's auth context).

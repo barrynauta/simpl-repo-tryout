@@ -22,11 +22,11 @@ Provenance: built by Simpl. Source repository: `data1/sdtooling-sd-schemas`. Own
 - Two generation modes:
   - **ontology-generation** — emits ontology and SHACL shapes from a CSV/YAML source. The `contract` directory in YAML input is ignored for ontology generation.
   - Schema/vocabulary CLI commands.
-- Output consumed by the [Schema Management Service](../../../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) and the [Simpl Catalogue](../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md).
+- Output consumed by the [Schema Management Service](../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) and the [Simpl Catalogue](../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md).
 
 ## Note
 
-The PSO mapping spreadsheet flags this utility for *extraction* from the as-is repo — a clean home is `cross-cutting/utils/sd-schemas-util/` (here). Sample/default schemas produced by it live at [`cross-cutting/samples/sd-schemas/`](../../samples/sd-schemas/README.md).
+The PSO mapping spreadsheet flags this utility for *extraction* from the as-is repo. Sample/default schemas produced by it now live at [`data/semantics-and-vocabulary/schema-management/sdtooling-sd-schemas/`](../../../data/semantics-and-vocabulary/schema-management/sdtooling-sd-schemas/README.md).
 
 ## Source code
 

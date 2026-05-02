@@ -204,17 +204,17 @@ Extracted verbatim from `Functional-and-Technical-Architecture-Specifications.md
 -   Added "ACV Dynamic - BP 02C - Manage resource description schemas"
 
 -   Updated "CDM - Domain 2 - Publish and consume resources" to include
-    the Schema Synch Service
+    the Schema Sync Service
 
 -   Updated "LDM - Domain 2 - Publish and consume resources" to include
-    the Schema Synch Service
+    the Schema Sync Service
 
 -   Updated "PDM - Domain 2 - Publish and consume resources" to include
-    the Schema Synch Service
+    the Schema Sync Service
 
--   Added "ACV Static - Schema Synch Service"
+-   Added "ACV Static - Schema Sync Service"
 
--   Added "TCV Static - Schema Synch Service"
+-   Added "TCV Static - Schema Sync Service"
 
 -   Added Schema Management to "Detailed Technical Specifications"
 

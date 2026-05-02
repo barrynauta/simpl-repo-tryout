@@ -23,6 +23,7 @@ These compositions cross every dimension of the capability map (security, govern
 - [infrastructure-provider-agent/](infrastructure-provider-agent/README.md) — Provider variant for infrastructure resources. Currently a placeholder.
 - [governance-authority-agent/](governance-authority-agent/README.md) — bundles the modules deployed inside the Governance Authority (onboarding, identity provider, EJBCA, signer, federated catalogue, schema management).
 - [common-components/](common-components/README.md) — shared Helm chart bundle reused across the agents (Kafka, OpenBao, PostgreSQL).
+- [agent-iaa/](agent-iaa/README.md) — per-actor-type IAA configuration bundles (authority, consumer, participant, provider) consumed by the master Helm chart agents above.
 
 ## Deployment composition overview
 
@@ -39,39 +40,38 @@ A consumer node is what an end-user organisation deploys to **discover, contract
 | K8s workload (per image159) | Module in this catalogue |
 |---|---|
 | Simpl FE Participant | (frontend bundled into the agent) |
-| User & Roles | [governance/participant-management/user-roles/users-roles/](../../governance/participant-management/user-roles/users-roles/README.md) |
+| User & Roles | [governance/participant-management/user-roles/fe-users-roles/](../../governance/participant-management/user-roles/fe-users-roles/README.md) |
 | Tier 2 Authentication Provider | [security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/](../../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) |
-| Keycloak (StatefulSet) | [security/access-control-and-trust/identity-provider-federation/keycloak/](../../security/access-control-and-trust/identity-provider-federation/keycloak/README.md) |
-| Simpl Cloud Gateway (Tier 1) | [security/access-control-and-trust/authorisation/spring-cloud-gateway/](../../security/access-control-and-trust/authorisation/spring-cloud-gateway/README.md) |
+| Keycloak (StatefulSet) | [security/access-control-and-trust/identity-provider-federation/](../../security/access-control-and-trust/identity-provider-federation/README.md) |
+| Simpl Cloud Gateway (Tier 1) | [security/access-control-and-trust/authorisation/](../../security/access-control-and-trust/authorisation/README.md) |
 | TLS Gateway (Tier 2) | [security/access-control-and-trust/authorisation/authorisation-tier-2/](../../security/access-control-and-trust/authorisation/authorisation-tier-2/README.md) |
 | Signer Service | [security/credential-management/signing/signer-service/](../../security/credential-management/signing/signer-service/README.md) |
 | Catalogue Client Application (UI + backend) | [integration/resource-discovery/search-engine/catalogue-client-application/](../../integration/resource-discovery/search-engine/catalogue-client-application/README.md) |
-| Schema Synch | [data/semantics-and-vocabulary/schema-management/schema-synch-service/](../../data/semantics-and-vocabulary/schema-management/schema-synch-service/README.md) |
+| Schema Sync | [data/semantics-and-vocabulary/schema-management/schema-sync-service/](../../data/semantics-and-vocabulary/schema-management/schema-sync-service/README.md) |
 | EDC + EDC Connector Adapter | [integration/resource-sharing/resource-sharing-runtime/connector/](../../integration/resource-sharing/resource-sharing-runtime/connector/README.md), [edc-connector-adapter/](../../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md) |
 | Contract Manager (Orchestrator + Backend) | [governance/contract-management/contract-establishment/contract-manager/](../../governance/contract-management/contract-establishment/contract-manager/README.md) |
 | Validation Backend | [integration/resource-discovery/search-engine/validation-backend/](../../integration/resource-discovery/search-engine/validation-backend/README.md) |
 
 ### Provider Agent
 
-The Provider role has three flavours — Data, Application, and Infrastructure — that share the same IAA / catalogue / connector baseline as the Consumer (Simpl FE, User & Roles, Tier 2 Auth, Keycloak, Cloud Gateway, TLS Gateway, Signer Service, Catalogue Client, Schema Synch, EDC + EDC Adapter, Contract Manager) and add per-flavour modules on top. Per FTA §6.2 the diagram covers Data and Infrastructure today; Application Provider is a placeholder.
+The Provider role has three flavours — Data, Application, and Infrastructure — that share the same IAA / catalogue / connector baseline as the Consumer (Simpl FE, User & Roles, Tier 2 Auth, Keycloak, Cloud Gateway, TLS Gateway, Signer Service, Catalogue Client, Schema Sync, EDC + EDC Adapter, Contract Manager) and add per-flavour modules on top. Per FTA §6.2 the diagram covers Data and Infrastructure today; Application Provider is a placeholder.
 
 **Data Provider** — adds the data-resource publication and orchestration stack. See [`data-provider-agent/`](data-provider-agent/README.md).
 
 | K8s workload (per image159) | Module in this catalogue |
 |---|---|
 | Asset Orchestrator | [data/supporting-data-services/data-orchestration/asset-orchestrator/](../../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md) |
-| Orchestration Platform (Dagit / daemon / webserver / code-locations) | [data/supporting-data-services/data-orchestration/orchestration-platform/](../../data/supporting-data-services/data-orchestration/orchestration-platform/README.md), [dagster/](../../data/supporting-data-services/data-orchestration/dagster/README.md), [dagit/](../../data/supporting-data-services/data-orchestration/dagit/README.md) |
+| Orchestration Platform (Dagit / daemon / webserver / code-locations) | [data/supporting-data-services/data-orchestration/orchestration-platform/](../../data/supporting-data-services/data-orchestration/orchestration-platform/README.md) |
 | Anonymisation / Pseudonymisation (optional code-locations) | [data/data-processing/anonymisation-and-pseudonymisation/](../../data/data-processing/anonymisation-and-pseudonymisation/README.md) |
 
 **Infrastructure Provider** — adds the SD-Tooling stack and the infrastructure provisioning back-end / front-end. See [`infrastructure-provider-agent/`](infrastructure-provider-agent/README.md).
 
 | K8s workload (per image159) | Module in this catalogue |
 |---|---|
-| SD Tooling UI / Backend / Manager / Validation BE / Creation Wizard | [governance/resource-management/metadata-description/sd-tooling/](../../governance/resource-management/metadata-description/sd-tooling/README.md), [sd-manager/](../../governance/resource-management/metadata-description/sd-manager/README.md), [validation-backend/](../../governance/resource-management/metadata-description/validation-backend/README.md) |
+| SD Tooling UI / Backend / Manager / Validation BE / Creation Wizard | [sd-tooling-api/](../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md), [sd-manager/](../../governance/resource-management/metadata-description/sd-manager/README.md), [validation-backend/](../../governance/resource-management/metadata-description/validation-backend/README.md) |
 | Infrastructure Frontend | [infrastructure/provisioning/infrastructure-provisioning/](../../infrastructure/provisioning/infrastructure-provisioning/README.md) |
 | Infrastructure Backend (Argo CD) | [infrastructure/supporting-infrastructure-services/infrastructure-orchestration/argo-cd/](../../infrastructure/supporting-infrastructure-services/infrastructure-orchestration/argo-cd/README.md) |
-| Triggering Module | [infrastructure/provisioning/infrastructure-provisioning/triggering-module/](../../infrastructure/provisioning/infrastructure-provisioning/triggering-module/README.md) |
-| Deployment Script & Template Management | [infrastructure/provisioning/infrastructure-provisioning/deployment-script-and-template-management/](../../infrastructure/provisioning/infrastructure-provisioning/deployment-script-and-template-management/README.md) |
+| Triggering Module | [infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/](../../infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/README.md) |
 
 **Application Provider** — placeholder; the source repo currently ships a LICENSE only. Once delivered, the composition is expected to mirror the Provider baseline plus [application-sharing](../../integration/application-sharing/README.md) modules ([machine-learning-model/](../../integration/application-sharing/machine-learning-model/README.md), [software-apps/](../../integration/application-sharing/software-apps/README.md)). See [`application-provider-agent/`](application-provider-agent/README.md).
 
@@ -82,18 +82,18 @@ The GA namespace hosts the **central / federated services** that no Provider or 
 | K8s workload (per image159) | Module in this catalogue |
 |---|---|
 | Simpl FE Onboarding / Participant / SAP | (frontends bundled into the agent) |
-| Onboarding (Manager) | [governance/participant-management/onboarding/onboarding-service/](../../governance/participant-management/onboarding/onboarding-service/README.md) |
-| User & Roles | [governance/participant-management/user-roles/users-roles/](../../governance/participant-management/user-roles/users-roles/README.md) |
-| Keycloak (StatefulSet) | [security/access-control-and-trust/identity-provider-federation/keycloak/](../../security/access-control-and-trust/identity-provider-federation/keycloak/README.md) |
+| Onboarding (Manager) | [governance/participant-management/onboarding/fe-onboarding/](../../governance/participant-management/onboarding/fe-onboarding/README.md) |
+| User & Roles | [governance/participant-management/user-roles/fe-users-roles/](../../governance/participant-management/user-roles/fe-users-roles/README.md) |
+| Keycloak (StatefulSet) | [security/access-control-and-trust/identity-provider-federation/](../../security/access-control-and-trust/identity-provider-federation/README.md) |
 | Simpl Cloud Gateway (Tier 1) / TLS Gateway (Tier 2) | [security/access-control-and-trust/authorisation/](../../security/access-control-and-trust/authorisation/README.md) |
 | Tier 2 Authentication Provider | [security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/](../../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) |
-| Identity Provider (EJBCA-backed) | [security/access-control-and-trust/identity-provider-federation/identity-provider/](../../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md), [ejbca/](../../security/access-control-and-trust/identity-provider-federation/ejbca/README.md) |
+| Identity Provider (EJBCA-backed) | [security/access-control-and-trust/identity-provider-federation/identity-provider/](../../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md), (EJBCA — folder removed) |
 | Credential Management / Verification | [security/credential-management/](../../security/credential-management/README.md) |
 | Security Attributes Provider (Attributes Management) | [security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/](../../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/README.md) |
-| Schema Management Service (+ Apache Jena Fuseki) | [data/semantics-and-vocabulary/schema-management/schema-management-service/](../../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md), [apache-jena-fuseki/](../../data/semantics-and-vocabulary/schema-management/apache-jena-fuseki/README.md) |
+| Schema Management Service (+ Apache Jena Fuseki) | [data/semantics-and-vocabulary/schema-management/simpl-schema-manager/](../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md), [apache-jena-fuseki/](../../data/semantics-and-vocabulary/schema-management/apache-jena-fuseki/README.md) |
 | Signer Service | [security/credential-management/signing/signer-service/](../../security/credential-management/signing/signer-service/README.md) |
-| XFSC Federated Catalogue (+ Query Mapper Adapter) | [integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/](../../integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/README.md), [simpl-catalogue/](../../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md), [query-mapper-adapter/](../../integration/resource-discovery/resource-catalogue/query-mapper-adapter/README.md) |
-| EJBCA Preconfig (init-container) | [cross-cutting/utils/ejbca-preconfig/](../utils/ejbca-preconfig/README.md) |
+| XFSC Federated Catalogue (+ Query Mapper Adapter) | [integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/](../../integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/README.md), [simpl-catalogue/](../../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md), [query-mapper-adapter/](../../integration/resource-discovery/search-engine/query-mapper-adapter/README.md) |
+| EJBCA Preconfig (init-container) | [cross-cutting/samples/ejbca-preconfig/](../samples/ejbca-preconfig/README.md) |
 
 ### Common Components
 
@@ -103,7 +103,7 @@ The `common` namespace contains the shared infrastructure that every agent depen
 |---|---|
 | StatefulSet PostgreSQL (Onboarding / User / User & Roles / Credential / Attributes / Identity DBs) | [foundations/data-architecture/postgresql/](../../foundations/data-architecture/postgresql/README.md) |
 | StatefulSet Redis | [foundations/data-architecture/redis/](../../foundations/data-architecture/redis/README.md) |
-| StatefulSet HashiCorp Vault | [security/access-control-and-trust/encryption/openbao/](../../security/access-control-and-trust/encryption/openbao/README.md) |
+| StatefulSet HashiCorp Vault | [security/access-control-and-trust/encryption/](../../security/access-control-and-trust/encryption/README.md) |
 | StatefulSet Kafka Broker / Controller | [administration/notification-and-messaging/notification/apache-kafka/](../../administration/notification-and-messaging/notification/apache-kafka/README.md) |
 | Elastic Operator + Elasticsearch + Kibana + Logstash | [administration/observability/logging/elk-stack/](../../administration/observability/logging/elk-stack/README.md) |
 | DaemonSet Filebeat | [administration/observability/logging/filebeat/](../../administration/observability/logging/filebeat/README.md) |

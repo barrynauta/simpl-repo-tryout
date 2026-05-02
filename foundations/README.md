@@ -22,7 +22,7 @@ This folder contains foundational artefacts describing what Simpl is and should 
 - [business-processes/architecture-overview.md](business-processes/architecture-overview.md) — cross-BP synthesis: how the functional components interact end-to-end across every business process (FTA §3.2)
 - [non-functional-requirements/README.md](non-functional-requirements/README.md) — non-functional requirements catalogue: 15 NFRs covering availability, security, modularity, and more, each with measurable thresholds (where published) and cross-references
 - [api-catalogue.md](api-catalogue.md) — index of all 42 OpenAPI/AsyncAPI specifications imported from the implementation source, organised by dimension, by kind, and by tier
-- [user-interfaces.md](user-interfaces.md) — inventory of every user interface shipped with Simpl-Open (Catalogue Client, Participant Utility, Contract Template Editor, Policy Creator, Dagit, Kibana, Grafana, microfrontend framework)
+- [user-interfaces.md](user-interfaces.md) — inventory of every user interface shipped with Simpl-Open (Catalogue Client, Contract Template Editor, Policy Creator, Dagit, Kibana, Grafana, microfrontend framework)
 
 ## Concepts and design vocabulary
 

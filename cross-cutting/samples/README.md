@@ -21,3 +21,5 @@ Reference implementations, demo nodes, and integration-test scaffolds. These are
 - [echo-backend/](echo-backend/README.md) — sample Java service demonstrating the Tier 1/Tier 2 IAA integration pattern.
 - [echo-frontend/](echo-frontend/README.md) — sample frontend pairing with `echo-backend`.
 - [microfrontend-framework/](microfrontend-framework/README.md) — Webpack Module Federation skeleton with shell + Angular/React/Vue remotes.
+- [ejbca-preconfig/](ejbca-preconfig/README.md) — Dockerised EJBCA bootstrap script for Governance Authority Agents (development/testing only).
+- [edelivery/](edelivery/README.md) — sample/placeholder for the eDelivery (CEF Building Block) integration triggered by the Simpl Connector.

@@ -37,5 +37,5 @@ An administrator reviews all pending role requests. They can either approve the 
 
 ## Participants
 
-- [users-roles/](../../../governance/participant-management/user-roles/users-roles/README.md) — Users & Roles (receives role requests; enables administrator review and approval/rejection)
+- [fe-users-roles/](../../../governance/participant-management/user-roles/fe-users-roles/README.md) — Users & Roles (receives role requests; enables administrator review and approval/rejection)
 - [notification-service/](../../../administration/notification-and-messaging/notification/notification-service/README.md) — Notification Service (notifies administrator of new request; notifies end user of decision)

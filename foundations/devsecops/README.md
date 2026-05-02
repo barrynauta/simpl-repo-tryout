@@ -11,7 +11,7 @@
 
 # DevSecOps approach
 
-The complete DevSecOps approach for Simpl-Open: cluster planning and provisioning, environment onboarding, security and access control, security checks, GitOps and continuous deployment, testing, monitoring and logging, backup/restore, and environment deprovisioning. This is the operations counterpart to the [security architecture](security-architecture.md) chapter — together they cover everything from "how is the cluster provisioned" through "how does a deployment land in it" to "how is it deprovisioned." Tools named here (Gitea, GitLab, Helm, Trivy, Fortify, SonarQube, Argo CD, Ansible, Spring Cloud Config, etc.) each have a solution folder; this page is the unified workflow reference.
+The complete DevSecOps approach for Simpl-Open: cluster planning and provisioning, environment onboarding, security and access control, security checks, GitOps and continuous deployment, testing, monitoring and logging, backup/restore, and environment deprovisioning. This is the operations counterpart to the [security architecture](security-architecture.md) chapter — together they cover everything from "how is the cluster provisioned" through "how does a deployment land in it" to "how is it deprovisioned." Tools named here (GitLab, Helm, Trivy, Fortify, SonarQube, Argo CD, Ansible, Spring Cloud Config, etc.) each have a solution folder; this page is the unified workflow reference.
 
 ## Contents (FTA §8 sub-section anchors)
 

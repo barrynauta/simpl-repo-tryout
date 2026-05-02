@@ -34,7 +34,7 @@ Spring Boot service exposing a REST API consumed by the Catalogue Client UI thro
 - [Catalogue Client Application](../catalogue-client-application/doc/architecture.md) — sole upstream UI consumer.
 - [EDC Connector Adapter](../../../resource-sharing/resource-sharing-runtime/edc-connector-adapter/doc/architecture.md) — the abstraction this service uses to drive the Connector. All actual EDC interaction routes through the adapter.
 - [Connector](../../../resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — the eventual target of every negotiation and transfer call.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — exposed through the Tier-1 Gateway; only authorised frontend clients or services can initiate or query operations.
+- [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) — exposed through the Tier-1 Gateway; only authorised frontend clients or services can initiate or query operations.
 - **Apache Kafka** — used for asynchronous coordination with the Connector and for status updates.
 
 ## Technical view

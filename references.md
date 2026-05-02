@@ -54,8 +54,6 @@ All external links from Simpl-Open documentation, grouped by topic. Internal rel
 ## Orchestration and infrastructure
 
 - Dagster (Orchestration Platform) — referenced via source code; no upstream docs URL in architecture spec.
-- Apache Superset API — https://superset.apache.org/docs/api
-- Apache Superset dashboard guide — https://superset.apache.org/docs/using-superset/creating-your-first-dashboard
 
 ## Architecture modelling
 

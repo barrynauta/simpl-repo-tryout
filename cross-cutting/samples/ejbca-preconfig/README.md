@@ -5,18 +5,18 @@
 📍 <strong>You are here</strong><br/>
 <a href="../../../README.md">🏠 Home</a><br/>
     <a href="../../README.md">Cross-Cutting</a><br/>
-        <a href="../README.md">Utils</a><br/>
+        <a href="../README.md">Samples</a><br/>
             <strong>EJBCA Preconfig</strong><br/>
 </p>
 </div>
 
 # EJBCA Preconfig
 
-Dockerised script that bootstraps a fresh EJBCA instance inside a Governance Authority Agent: creates Certification Authorities, enables the REST API, configures end-entity profiles, and obtains SuperAdmin certificates. Designed to run as a Kubernetes **initContainer** alongside the EJBCA pod; the script is idempotent and is a no-op once EJBCA is already configured.
+> ⚠️ The configuration script provided in this repository is intended for **development and testing only** and is not suited to be used in production.
 
-> ⚠️ Intended for **development and testing only** — not suited for production deployments.
+This repository contains a script designed to automate the deployment and configuration of an EJBCA component within a Governance Authority Agent. It streamlines key setup tasks such as creating CAs, enabling the REST API, configuring end-entity profiles, and obtaining SuperAdmin certificates, all based on EJBCA's official configuration guides. The script is parameterised, packaged in a Docker container, and ensures that EJBCA starts up fully configured. The Docker container can be integrated into Helm-chart installations, and executed via Kubernetes `initContainers` to eliminate manual intervention.
 
-Provenance: built by Simpl. Source repository: `iaa/ejbca-preconfig`. Owner: IAA team. Licence: EUPL 1.2.
+The production code lives at the canonical location — see [CANONICAL.md](CANONICAL.md). Machine-readable form: [`.canonical.yaml`](.canonical.yaml).
 
 ## Key features
 
@@ -28,12 +28,3 @@ Provenance: built by Simpl. Source repository: `iaa/ejbca-preconfig`. Owner: IAA
 ## Used by
 
 - [Identity Provider](../../../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) — the IdP relies on a fully configured EJBCA as its backing CA.
-
-
-## Documentation (imported from source)
-
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `iaa-2.11.x/` (1 file).
-
-## Source code
-
-- <https://code.europa.eu/simpl/simpl-open/development/iaa/ejbca-preconfig>

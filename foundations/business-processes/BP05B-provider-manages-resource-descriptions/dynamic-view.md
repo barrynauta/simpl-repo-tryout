@@ -28,7 +28,7 @@ BP05B covers four sub-flows that a Provider uses to manage self-descriptions (SD
 
 This flow describes how a provider creates and publishes a self-description in the Catalogue. Resources referenced by the SD (e.g., deployment scripts for infrastructure offerings) must be created first.
 
-1. **Schema Synchronisation** — The SD Tooling component on the Provider node requests schema definitions from its local Schema Registry, which is kept in sync with the Governance Authority's Schema Registry. Retrieved schemas are stored locally for quick access.
+1. **Schema Syncronisation** — The SD Tooling component on the Provider node requests schema definitions from its local Schema Registry, which is kept in sync with the Governance Authority's Schema Registry. Retrieved schemas are stored locally for quick access.
 2. **Create Self-Description** — The Provider creates a new SD or modifies an existing one via the SD Manager user interface.
 3. **Syntax Validation** — The Syntax Validation component within SD Tooling checks the SD's structure and format. If issues are found, the Provider is prompted to correct them.
 4. **Registering Self-Description** — The validated SD is sent to the Connector, where it is registered as an asset and linked to a connector instance for controlled consumer access.
@@ -68,9 +68,9 @@ A Provider changes a published SD's status to revoked, removing it from active c
 
 ## Participants
 
-- [sd-tooling/](../../../governance/resource-management/metadata-description/sd-tooling/README.md) — SD Tooling / SD Manager (self-description creation, syntax validation, signing, publication)
-- [schema-management-service/](../../../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) — Schema Management Service / Schema Registry (provides schema definitions for SD creation and validation)
-- [schema-synch-service/](../../../data/semantics-and-vocabulary/schema-management/schema-synch-service/README.md) — Schema Synch Service (keeps Provider-side schema registry in sync with Governance Authority)
+- [sd-tooling/](../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — SD Tooling / SD Manager (self-description creation, syntax validation, signing, publication)
+- [simpl-schema-manager/](../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) — Schema Management Service / Schema Registry (provides schema definitions for SD creation and validation)
+- [schema-sync-service/](../../../data/semantics-and-vocabulary/schema-management/schema-sync-service/README.md) — Schema Sync Service (keeps Provider-side schema registry in sync with Governance Authority)
 - [connector/](../../../integration/resource-sharing/resource-sharing-runtime/connector/README.md) — Connector (registers the SD as an asset for controlled consumer access)
 - [simpl-catalogue/](../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md) — Simpl Catalogue (semantic validation, quality checks, SD storage and discoverability)
 - [signer-service/](../../../security/credential-management/signing/signer-service/README.md) — Signer Service (signs the SD with the Provider's private key before publication)

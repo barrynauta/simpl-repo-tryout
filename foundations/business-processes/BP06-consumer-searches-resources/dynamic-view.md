@@ -39,6 +39,6 @@ A Consumer end user searches for resources (datasets, applications, or infrastru
 ## Participants
 
 - [catalogue-client-application/](../../../integration/resource-discovery/search-engine/catalogue-client-application/README.md) — Catalogue Client Application / Search Client (UI for search input and result display)
-- [schema-management-service/](../../../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) — Schema Registry (drives advanced search form fields; provides schema definitions)
+- [simpl-schema-manager/](../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) — Schema Registry (drives advanced search form fields; provides schema definitions)
 - [simpl-catalogue/](../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md) — Simpl Catalogue (executes search queries; returns filtered results)
 - Policy Filter Service / Query Mapper Adapter — unmatched — verify (no dedicated solution folder found; these components may be embedded within the Catalogue or a separate module not yet documented)

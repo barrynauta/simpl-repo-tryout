@@ -63,12 +63,12 @@ Per [DSSC Functional Overview](https://dssc.eu/space/BVE/357075035/Functional+Ov
 |---|---|
 | **Participant Agent** | The agent compositions in [`cross-cutting/agents/`](../cross-cutting/agents/README.md): Consumer, Data Provider, Application Provider, Infrastructure Provider, Governance Authority. |
 | **Shared Services** | Services deployed only on the Governance Authority Agent: Onboarding, Identity Provider, Catalogue, Schema Management. |
-| **Control plane** | Implemented in the Connector's Control Plane (DSP contract negotiation) plus [Contract Manager](../governance/contract-management/contract-establishment/contract-manager/README.md), [SD Tooling](../governance/resource-management/metadata-description/sd-tooling/README.md), and the IAA stack. |
+| **Control plane** | Implemented in the Connector's Control Plane (DSP contract negotiation) plus [Contract Manager](../governance/contract-management/contract-establishment/contract-manager/README.md), [SD Tooling](../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md), and the IAA stack. |
 | **Data plane** | Implemented in the Connector's Data Plane via the MinIO S3 Object Storage Extension (and roadmap eDelivery extension). See [`integration/data-sharing/`](../integration/data-sharing/README.md). |
 
 ### Role taxonomy
 
-The Simpl role table (FTA §4.5) defines the roles that govern who may do what across the data space. The Tier 1 Gateway and Tier 2 Gateway enforce these as RBAC rules; the [Authorisation](../security/access-control-and-trust/authorisation/authorisation/README.md) solution holds the runtime mapping.
+The Simpl role table (FTA §4.5) defines the roles that govern who may do what across the data space. The Tier 1 Gateway and Tier 2 Gateway enforce these as RBAC rules; the [Authorisation](../security/access-control-and-trust/authorisation/README.md) solution holds the runtime mapping.
 
 | Role | Code | Operated by | Purpose |
 |---|---|---|---|
@@ -101,7 +101,7 @@ NFRs in [`foundations/non-functional-requirements/`](non-functional-requirements
 
 Cross-data-space interoperability is one of Simpl-Open's distinguishing architectural goals: as multiple data spaces incorporate Simpl-Open, they become connected through:
 
-- **Federated catalogue queries** routed via the [Query Mapper Adapter](../integration/resource-discovery/resource-catalogue/query-mapper-adapter/README.md).
+- **Federated catalogue queries** routed via the [Query Mapper Adapter](../integration/resource-discovery/search-engine/query-mapper-adapter/README.md).
 - **Shared identity-attribute schemas** between Governance Authorities so that an attribute issued in space A can be evaluated in space B.
 - **Common contract templates** shared via the [Contract Template Datastore](../governance/contract-management/contract-establishment/contract-template-datastore/README.md) (target design).
 - **Federated authentication** through the [Authentication Provider Federation](../security/access-control-and-trust/authentication-provider-federation/README.md) capability.
@@ -114,25 +114,25 @@ Shared vocabularies and ontologies that ensure participants interpret exchanged 
 
 | Standard / vocabulary | Purpose | Where used in Simpl-Open |
 |---|---|---|
-| **[Gaia-X Trust Framework](https://gaia-x.eu/wp-content/uploads/2022/05/Gaia-x-Trust-Framework-22.04.pdf)** | Self-description structure, trust labels, participant attestation | [SD Tooling](../governance/resource-management/metadata-description/sd-tooling/README.md), [Simpl Catalogue](../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md) |
-| **[SHACL (W3C)](https://www.w3.org/TR/shacl/)** | Constraint language for self-description schemas; validation server-side and client-side | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md), [Validation Backend](../integration/resource-discovery/search-engine/validation-backend/README.md) |
-| **[ODRL (W3C, Open Digital Rights Language)](https://www.w3.org/TR/odrl-model/)** | Encoding of access and usage policies attached to self-descriptions and contracts | [SD Tooling Policy Creator](../governance/resource-management/metadata-description/sd-tooling/README.md), [Connector Policy Engine](../integration/resource-sharing/resource-sharing-runtime/connector/README.md), [Contract Manager](../governance/contract-management/contract-establishment/contract-manager/README.md) |
+| **[Gaia-X Trust Framework](https://gaia-x.eu/wp-content/uploads/2022/05/Gaia-x-Trust-Framework-22.04.pdf)** | Self-description structure, trust labels, participant attestation | [SD Tooling](../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md), [Simpl Catalogue](../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md) |
+| **[SHACL (W3C)](https://www.w3.org/TR/shacl/)** | Constraint language for self-description schemas; validation server-side and client-side | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md), [Validation Backend](../integration/resource-discovery/search-engine/validation-backend/README.md) |
+| **[ODRL (W3C, Open Digital Rights Language)](https://www.w3.org/TR/odrl-model/)** | Encoding of access and usage policies attached to self-descriptions and contracts | [SD Tooling Policy Creator](../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md), [Connector Policy Engine](../integration/resource-sharing/resource-sharing-runtime/connector/README.md), [Contract Manager](../governance/contract-management/contract-establishment/contract-manager/README.md) |
 | **[DCAT (W3C Data Catalog Vocabulary)](https://www.w3.org/TR/vocab-dcat/) + DCAT-AP** | Catalogue metadata model — datasets, distributions, services, agents | [Simpl Catalogue](../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md), federated catalogue interoperability |
-| **[Dublin Core (DCT)](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/)** | Schema metadata properties (`dct:title`, `dct:description`, `dct:creator`, `dct:created`, `dct:isPartOf`) | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) |
-| **[OWL (W3C Web Ontology Language)](https://www.w3.org/TR/owl2-overview/)** | Versioning (`owl:versionInfo`) and ontology relationships | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) |
+| **[Dublin Core (DCT)](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/)** | Schema metadata properties (`dct:title`, `dct:description`, `dct:creator`, `dct:created`, `dct:isPartOf`) | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) |
+| **[OWL (W3C Web Ontology Language)](https://www.w3.org/TR/owl2-overview/)** | Versioning (`owl:versionInfo`) and ontology relationships | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) |
 | **[SKOS](https://www.w3.org/TR/skos-reference/)** | Thesauri, controlled vocabularies, taxonomies | Vocabulary Datastore inside [Simpl Catalogue](../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md); planned [Vocabulary Management](../data/semantics-and-vocabulary/vocabulary-hub/vocabulary-management/README.md) |
 | **[PROV-O (W3C Provenance Ontology)](https://www.w3.org/TR/prov-o/)** | Lineage and provenance of self-descriptions and credentials | Implicit in audit trails; explicit alignment a roadmap item |
 | **[IDS Information Model](https://github.com/International-Data-Spaces-Association/InformationModel)** | IDSA's data-space-native vocabulary for assets, contracts, transfer processes | Inside the [Connector (Eclipse EDC)](../integration/resource-sharing/resource-sharing-runtime/connector/README.md), inherited from upstream |
 | **[W3C Verifiable Credentials Data Model 2.0](https://www.w3.org/TR/vc-data-model-2.0/)** | Credential structure for participant attestations and contract VCs | [VC Issuer](../security/credential-management/vc-issuance-verification/vc-issuer/README.md) (planned), [Wallet](../security/credential-management/wallet/wallet/README.md) (planned) |
 | **[W3C Decentralized Identifiers (DIDs)](https://www.w3.org/TR/did-1.0/)** | DID-based addressing for participants and assets | Used inside Verifiable Credentials issued by the VC Issuer |
-| **Custom SIMPL namespace** | `simpl:Schema`, `simpl:SchemaVersion`, `simpl:status`, `simpl:resourceType`, `simpl:latestVersion`, `simpl:changelog` | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) — extends the standard vocabularies above with Simpl-specific lifecycle terms |
+| **Custom SIMPL namespace** | `simpl:Schema`, `simpl:SchemaVersion`, `simpl:status`, `simpl:resourceType`, `simpl:latestVersion`, `simpl:changelog` | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) — extends the standard vocabularies above with Simpl-specific lifecycle terms |
 
 ### Format-level semantics
 
 Beyond vocabularies, Simpl pins to specific serialisation formats so the *shape* of every payload is predictable across implementations:
 
 - **[JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)** — wire format for self-descriptions and verifiable credentials.
-- **[Turtle (TTL)](https://www.w3.org/TR/turtle/)** — storage format for SHACL constraints and ontologies in the Schema Management Service and Schema Synch Service.
+- **[Turtle (TTL)](https://www.w3.org/TR/turtle/)** — storage format for SHACL constraints and ontologies in the Schema Management Service and Schema Sync Service.
 - **[RDF 1.1](https://www.w3.org/TR/rdf11-concepts/)** — underlying graph data model for all of the above.
 - **[SPARQL 1.1](https://www.w3.org/TR/sparql11-overview/)** — query language for the catalogue's RDF triple store (Apache Jena Fuseki / Neo4j with neosemantics).
 
@@ -155,9 +155,9 @@ Protocols, APIs, formats, identity, and transport — the standards that let two
 | Standard | Implementation | Solution(s) |
 |---|---|---|
 | **[OpenID Connect (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html)** | Keycloak | [Tier 1 Authentication Provider](../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/README.md) |
-| **[OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc6749) + [PKCE (RFC 7636)](https://datatracker.ietf.org/doc/html/rfc7636)** | Keycloak frontend integrations | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md), [Catalogue Client Application](../integration/resource-discovery/search-engine/catalogue-client-application/README.md), [SD Tooling](../governance/resource-management/metadata-description/sd-tooling/README.md) |
+| **[OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc6749) + [PKCE (RFC 7636)](https://datatracker.ietf.org/doc/html/rfc7636)** | Keycloak frontend integrations | [Schema Management Service](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md), [Catalogue Client Application](../integration/resource-discovery/search-engine/catalogue-client-application/README.md), [SD Tooling](../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) |
 | **[JWT (RFC 7519)](https://datatracker.ietf.org/doc/html/rfc7519) / JOSE** | Tier 1 token format with custom Simpl claims (`participant_id`, `credential_id`, `identity_attributes`, `client-roles`) | [Tier 1 Authentication Provider](../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/README.md) authenticator plugin |
-| **[mTLS](https://datatracker.ietf.org/doc/html/rfc8705) (TLS 1.3 client auth, X.509)** | Agent-to-agent authenticity for all Tier 2 traffic | [Authorisation Tier 2 Gateway](../security/access-control-and-trust/authorisation/authorisation/README.md), [Tier 2 Authentication Provider](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) |
+| **[mTLS](https://datatracker.ietf.org/doc/html/rfc8705) (TLS 1.3 client auth, X.509)** | Agent-to-agent authenticity for all Tier 2 traffic | [Authorisation Tier 2 Gateway](../security/access-control-and-trust/authorisation/README.md), [Tier 2 Authentication Provider](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) |
 | **[X.509 (RFC 5280)](https://datatracker.ietf.org/doc/html/rfc5280)** | Tier 2 credentials issued by EJBCA | [Identity Provider](../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) |
 | **[CRL (RFC 5280)](https://datatracker.ietf.org/doc/html/rfc5280) / [OCSP (RFC 6960)](https://datatracker.ietf.org/doc/html/rfc6960)** | Revocation validation in the HTTP client | [simpl-http-client](../cross-cutting/libs/simpl-http-client/README.md) |
 | **[PKCS#12 (RFC 7292)](https://datatracker.ietf.org/doc/html/rfc7292)** | SuperAdmin and operator certificate distribution format | [Governance Authority Agent](../cross-cutting/agents/governance-authority-agent/deployment-guide.md) |
@@ -177,7 +177,7 @@ Protocols, APIs, formats, identity, and transport — the standards that let two
 
 | Standard | Implementation | Solution(s) |
 |---|---|---|
-| **[Apache Kafka protocol](https://kafka.apache.org/protocol)** | Pervasive async coordination bus; SASL-secured (`KAFKA_SASL_ENABLED=true`) | [Notification Service](../administration/notification-and-messaging/notification/notification-service/README.md), [Contract Manager](../governance/contract-management/contract-establishment/contract-manager/README.md), [Triggering Module](../infrastructure/provisioning/infrastructure-provisioning/triggering-module/README.md), [Asset Orchestrator](../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md) |
+| **[Apache Kafka protocol](https://kafka.apache.org/protocol)** | Pervasive async coordination bus; SASL-secured (`KAFKA_SASL_ENABLED=true`) | [Notification Service](../administration/notification-and-messaging/notification/notification-service/README.md), [Contract Manager](../governance/contract-management/contract-establishment/contract-manager/README.md), [Triggering Module](../infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/README.md), [Asset Orchestrator](../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md) |
 | **[Amazon S3 API](https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html) (MinIO-compatible)** | Primary data-plane object storage | [Connector](../integration/resource-sharing/resource-sharing-runtime/connector/README.md) (MinIO S3 extension) |
 | **PostgreSQL wire protocol** | Pervasive persistence | All Java services with state |
 | **HashiCorp Vault HTTP API** | Secrets and key management; ed25519 transit engine for signing | [Signer Service](../security/credential-management/signing/signer-service/README.md), every agent |
@@ -199,17 +199,14 @@ European Commission Connecting Europe Facility (CEF) Digital Building Blocks sla
 
 | Building block | Status | Solution slot |
 |---|---|---|
-| **eDelivery** | Roadmap; hook in EDC connector exists; service stub | [`integration/data-sharing/simple-data-transfer/edelivery/`](../integration/data-sharing/README.md) |
 | **eSignature** | Roadmap | [`security/credential-management/signing/esignature/`](../security/credential-management/signing/README.md) |
-| **eInvoicing** | Roadmap | [`governance/contract-management/billing/einvoicing/`](../governance/contract-management/README.md) |
-| **eID** | Roadmap; eIDAS demo extension exists | [`security/access-control-and-trust/identity-provider-federation/eid/`](../security/access-control-and-trust/identity-provider-federation/README.md) |
 
 ### Observability and monitoring
 
 | Standard | Implementation | Solution(s) |
 |---|---|---|
 | **[OpenTelemetry](https://opentelemetry.io/docs/specs/otel/)** | Tracing inside the Connector | [Connector](../integration/resource-sharing/resource-sharing-runtime/connector/README.md) |
-| **Elastic Common Schema (ECS)** | Log shape consumed by ECK; emitted by [Common Logging](../cross-cutting/libs/common-logging-java/README.md) | [Monitoring Service](../administration/observability/dashboarding/monitoring-service/README.md) |
+| **Elastic Common Schema (ECS)** | Log shape consumed by ECK; emitted by [Common Logging](../administration/observability/logging/common-logging-java/README.md) | [Monitoring Service](../administration/observability/dashboarding/monitoring-service/README.md) |
 | **[Prometheus exposition format](https://prometheus.io/docs/instrumenting/exposition_formats/)** | Metrics endpoints | All Spring Boot services (via Micrometer) |
 
 ---

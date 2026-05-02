@@ -61,7 +61,7 @@ Astro env vars (no trailing slashes):
 - [Query Mapper Adapter](../../query-mapper-adapter/README.md) — translates this client's queries into the Catalogue's native query language.
 - [Schema Management Service](../../../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) — source of the schemas used for advanced-search field generation.
 - [Contract Consumption Adapter](../contract-consumption-adapter/doc/architecture.md) — kicks off contract negotiation and surfaces transfer status when the user picks a result.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — inbound traffic passes through the Tier 1 Gateway.
+- [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) — inbound traffic passes through the Tier 1 Gateway.
 
 ## Technical view
 

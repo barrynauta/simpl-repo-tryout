@@ -41,5 +41,5 @@ Administrators create end users directly within Simpl-Open or connect existing u
 
 ## Participants
 
-- [users-roles/](../../../governance/participant-management/user-roles/users-roles/README.md) — Users & Roles (role configuration, user creation, role assignment)
+- [fe-users-roles/](../../../governance/participant-management/user-roles/fe-users-roles/README.md) — Users & Roles (role configuration, user creation, role assignment)
 - [tier-1-authentication-provider/](../../../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/README.md) — Tier 1 Authentication Provider (federated with local IdP; verifies end-user identities)

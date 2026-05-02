@@ -14,7 +14,7 @@
 
 Master Helm chart that deploys an **Infrastructure Provider** Simpl-Open Agent — the Provider variant that publishes compute / storage / network infrastructure resources.
 
-> **Status: placeholder.** The source repository (`agents/infrastructure-provider`) currently contains only a LICENSE file; the master Helm chart and deployment guide have not yet landed. Once available, the composition will pair the Provider IAA client stack with the [Triggering Module](../../../infrastructure/provisioning/infrastructure-provisioning/triggering-module/README.md), [Deployment Script & Template Management](../../../infrastructure/provisioning/infrastructure-provisioning/deployment-script-and-template-management/README.md), and the [Infrastructure Provisioner](../../../infrastructure/provisioning/infrastructure-provisioning/infrastructure-provisioner/README.md).
+> **Status: placeholder.** The source repository (`agents/infrastructure-provider`) currently contains only a LICENSE file; the master Helm chart and deployment guide have not yet landed. Once available, the composition will pair the Provider IAA client stack with the [Infrastructure BE](../../../infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/README.md) (which currently bundles the Triggering Module) and the [Infrastructure Provisioner](../../../infrastructure/provisioning/infrastructure-provisioning/infrastructure-provisioner/README.md).
 
 Provenance: built by Simpl. Source repository: `agents/infrastructure-provider`. Owner: Infra team. Licence: EUPL 1.2.
 

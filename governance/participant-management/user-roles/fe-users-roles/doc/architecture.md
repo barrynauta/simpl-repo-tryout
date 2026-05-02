@@ -48,7 +48,7 @@ Data model diagrams:
 
 - [Tier 1 Authentication Provider](../../../../../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider/doc/architecture.md) — User & Roles is the application-layer interface in front of Keycloak; all user and role operations are performed through Keycloak APIs.
 - [Onboarding](../../../onboarding/fe-onboarding/doc/architecture.md) — User & Roles creates temporary Tier 1 credentials when called by the Onboarding component at the start of an onboarding request.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — inbound traffic is routed through the Tier 1 Gateway.
+- [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) — inbound traffic is routed through the Tier 1 Gateway.
 
 ## Technical view
 

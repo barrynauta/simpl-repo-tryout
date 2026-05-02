@@ -38,7 +38,7 @@ The Catalogue does not expose an asynchronous / event-driven API of its own in R
 
 ## Authentication
 
-All calls require a JWT issued by the Tier 1 Authentication Provider (Keycloak). RBAC and ABAC enforcement happen in the [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) gateway that fronts the Catalogue. See also `doc/architecture.md` → Security view.
+All calls require a JWT issued by the Tier 1 Authentication Provider (Keycloak). RBAC and ABAC enforcement happen in the [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) gateway that fronts the Catalogue. See also `doc/architecture.md` → Security view.
 
 ## API guidelines compliance
 

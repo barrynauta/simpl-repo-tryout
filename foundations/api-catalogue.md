@@ -46,20 +46,20 @@ The capability map is the canonical organising structure of this catalogue; APIs
 
 ### data
 
-**[schema-management-service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md)** — `semantics-and-vocabulary / schema-management`  →  [api/](../data/semantics-and-vocabulary/schema-management/schema-management-service/api/README.md)
+**[simpl-schema-manager](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md)** — `semantics-and-vocabulary / schema-management`  →  [api/](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/api/README.md)
 
 | File | Kind | Title | API version | Tier | Endpoints |
 |------|------|-------|------|------|----------|
-| [`resolver-interface.openapi.yaml`](../data/semantics-and-vocabulary/schema-management/schema-management-service/api/resolver-interface.openapi.yaml) | openapi 3.0.3 | Schema Management Service — Resolver Interface | `0.0.0-stub` | — |  |
-| [`schema-management-api.openapi.yaml`](../data/semantics-and-vocabulary/schema-management/schema-management-service/api/schema-management-api.openapi.yaml) | openapi 3.0.3 | Schema Management Service — Management API | `0.0.0-stub` | — |  |
-| [`schema_openapi.yaml`](../data/semantics-and-vocabulary/schema-management/schema-management-service/api/schema_openapi.yaml) | openapi 3.0.1 | Schema Management API | `1.0.0` | — | 9 paths |
+| [`resolver-interface.openapi.yaml`](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/api/resolver-interface.openapi.yaml) | openapi 3.0.3 | Schema Management Service — Resolver Interface | `0.0.0-stub` | — |  |
+| [`schema-management-api.openapi.yaml`](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/api/schema-management-api.openapi.yaml) | openapi 3.0.3 | Schema Management Service — Management API | `0.0.0-stub` | — |  |
+| [`schema_openapi.yaml`](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/api/schema_openapi.yaml) | openapi 3.0.1 | Schema Management API | `1.0.0` | — | 9 paths |
 
-**[schema-synch-service](../data/semantics-and-vocabulary/schema-management/schema-synch-service/README.md)** — `semantics-and-vocabulary / schema-management`  →  [api/](../data/semantics-and-vocabulary/schema-management/schema-synch-service/api/README.md)
+**[schema-sync-adapter](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/README.md)** — `semantics-and-vocabulary / schema-management`  →  [api/](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/api/README.md)
 
 | File | Kind | Title | API version | Tier | Endpoints |
 |------|------|-------|------|------|----------|
-| [`openapi-schema-sync-adapter-tier2-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-synch-service/api/openapi-schema-sync-adapter-tier2-v1.yaml) | openapi 3.0.1 | Schema Sync Adapter API | `1.0` | Tier 2 | 1 paths |
-| [`openapi-schema-sync-adapter-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-synch-service/api/openapi-schema-sync-adapter-v1.yaml) | openapi 3.0.1 | Schema Sync Adapter API | `1.0` | — | 1 paths |
+| [`openapi-schema-sync-adapter-tier2-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/api/openapi-schema-sync-adapter-tier2-v1.yaml) | openapi 3.0.1 | Schema Sync Adapter API | `1.0` | Tier 2 | 1 paths |
+| [`openapi-schema-sync-adapter-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/api/openapi-schema-sync-adapter-v1.yaml) | openapi 3.0.1 | Schema Sync Adapter API | `1.0` | — | 1 paths |
 
 **[asset-orchestrator](../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md)** — `supporting-data-services / data-orchestration`  →  [api/](../data/supporting-data-services/data-orchestration/asset-orchestrator/api/README.md)
 
@@ -76,47 +76,41 @@ The capability map is the canonical organising structure of this catalogue; APIs
 |------|------|-------|------|------|----------|
 | [`openapi3-v1.yaml`](../governance/contract-management/contract-establishment/contract-manager/api/openapi3-v1.yaml) | openapi 3.0.3 | Contract Manager | `1.1` | — | 8 paths |
 
-**[onboarding-service](../governance/participant-management/onboarding/onboarding-service/README.md)** — `participant-management / onboarding`  →  [api/](../governance/participant-management/onboarding/onboarding-service/api/README.md)
+**[onboarding-service](../governance/participant-management/onboarding/fe-onboarding/README.md)** — `participant-management / onboarding`  →  [api/](../governance/participant-management/onboarding/fe-onboarding/api/README.md)
 
 | File | Kind | Title | API version | Tier | Endpoints |
 |------|------|-------|------|------|----------|
-| [`asyncapi-v1.yaml`](../governance/participant-management/onboarding/onboarding-service/api/asyncapi-v1.yaml) | asyncapi 3.0.0 | Onboarding Async API | `1.3.0` | — | 1 channels |
-| [`onboarding-tier1-v2.yaml`](../governance/participant-management/onboarding/onboarding-service/api/onboarding-tier1-v2.yaml) | openapi 3.0.1 | Onboarding Tier 1 | `2.0.1` | Tier 1 | 2 paths |
-| [`onboarding-v1.yaml`](../governance/participant-management/onboarding/onboarding-service/api/onboarding-v1.yaml) | openapi 3.0.1 | Onboarding | `1.6.0` | — | 25 paths |
+| [`asyncapi-v1.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/asyncapi-v1.yaml) | asyncapi 3.0.0 | Onboarding Async API | `1.3.0` | — | 1 channels |
+| [`onboarding-tier1-v2.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/onboarding-tier1-v2.yaml) | openapi 3.0.1 | Onboarding Tier 1 | `2.0.1` | Tier 1 | 2 paths |
+| [`onboarding-v1.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/onboarding-v1.yaml) | openapi 3.0.1 | Onboarding | `1.6.0` | — | 25 paths |
 
-**[users-roles](../governance/participant-management/user-roles/users-roles/README.md)** — `participant-management / user-roles`  →  [api/](../governance/participant-management/user-roles/users-roles/api/README.md)
-
-| File | Kind | Title | API version | Tier | Endpoints |
-|------|------|-------|------|------|----------|
-| [`asyncapi-v1.yaml`](../governance/participant-management/user-roles/users-roles/api/asyncapi-v1.yaml) | asyncapi 3.0.0 | Users and Roles Async API | `1.3.0` | — | 3 channels |
-| [`usersroles-tier1-v2.yaml`](../governance/participant-management/user-roles/users-roles/api/usersroles-tier1-v2.yaml) | openapi 3.0.1 | User and Roles Tier 1 | `2.0.0` | Tier 1 | 12 paths |
-| [`usersroles-v1.yaml`](../governance/participant-management/user-roles/users-roles/api/usersroles-v1.yaml) | openapi 3.0.1 | User and Roles | `1.5.0` | — | 9 paths |
-
-**[sd-tooling](../governance/resource-management/metadata-description/sd-tooling/README.md)** — `resource-management / metadata-description`  →  [api/](../governance/resource-management/metadata-description/sd-tooling/api/README.md)
+**[users-roles](../governance/participant-management/user-roles/fe-users-roles/README.md)** — `participant-management / user-roles`  →  [api/](../governance/participant-management/user-roles/fe-users-roles/api/README.md)
 
 | File | Kind | Title | API version | Tier | Endpoints |
 |------|------|-------|------|------|----------|
-| [`openapi-sdtooling-tier1-v1.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v1.yaml) | openapi 3.0.1 | SD Tooling API | `1.0` | Tier 1 | 16 paths |
-| [`openapi-sdtooling-tier1-v2.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v2.yaml) | openapi 3.0.1 | SD Tooling API | `1.0` | Tier 1 | 4 paths |
-| [`openapi-sdtooling-tier1-v3.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v3.yaml) | openapi 3.0.1 | SD Tooling API | `1.0` | Tier 1 | 1 paths |
+| [`asyncapi-v1.yaml`](../governance/participant-management/user-roles/fe-users-roles/api/asyncapi-v1.yaml) | asyncapi 3.0.0 | Users and Roles Async API | `1.3.0` | — | 3 channels |
+| [`usersroles-tier1-v2.yaml`](../governance/participant-management/user-roles/fe-users-roles/api/usersroles-tier1-v2.yaml) | openapi 3.0.1 | User and Roles Tier 1 | `2.0.0` | Tier 1 | 12 paths |
+| [`usersroles-v1.yaml`](../governance/participant-management/user-roles/fe-users-roles/api/usersroles-v1.yaml) | openapi 3.0.1 | User and Roles | `1.5.0` | — | 9 paths |
+
+
+| File | Kind | Title | API version | Tier | Endpoints |
+|------|------|-------|------|------|----------|
 
 
 ### infrastructure
 
-**[deployment-script-and-template-management](../infrastructure/provisioning/infrastructure-provisioning/deployment-script-and-template-management/README.md)** — `provisioning / infrastructure-provisioning`  →  [api/](../infrastructure/provisioning/infrastructure-provisioning/deployment-script-and-template-management/api/README.md)
 
 | File | Kind | Title | API version | Tier | Endpoints |
 |------|------|-------|------|------|----------|
-| [`infrastructure-provisioning-api.yaml`](../infrastructure/provisioning/infrastructure-provisioning/deployment-script-and-template-management/api/infrastructure-provisioning-api.yaml) | openapi 3.0.1 | Infrastructure Provisioning OpenApi | `1.9.0` | — | 19 paths |
 
 
 ### integration
 
-**[query-mapper-adapter](../integration/resource-discovery/resource-catalogue/query-mapper-adapter/README.md)** — `resource-discovery / resource-catalogue`  →  [api/](../integration/resource-discovery/resource-catalogue/query-mapper-adapter/api/README.md)
+**[query-mapper-adapter](../integration/resource-discovery/search-engine/query-mapper-adapter/README.md)** — `resource-discovery / resource-catalogue`  →  [api/](../integration/resource-discovery/search-engine/query-mapper-adapter/api/README.md)
 
 | File | Kind | Title | API version | Tier | Endpoints |
 |------|------|-------|------|------|----------|
-| [`adapter_openapi.yaml`](../integration/resource-discovery/resource-catalogue/query-mapper-adapter/api/adapter_openapi.yaml) | openapi 3.0.1 | Query Mapper Adapter API | `1.0.0` | — | 5 paths |
+| [`adapter_openapi.yaml`](../integration/resource-discovery/search-engine/query-mapper-adapter/api/adapter_openapi.yaml) | openapi 3.0.1 | Query Mapper Adapter API | `1.0.0` | — | 5 paths |
 
 **[simpl-catalogue](../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md)** — `resource-discovery / resource-catalogue`  →  [api/](../integration/resource-discovery/resource-catalogue/simpl-catalogue/api/README.md)
 
@@ -163,12 +157,12 @@ The capability map is the canonical organising structure of this catalogue; APIs
 | [`authenticationprovider-tier2-v2.yaml`](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/api/authenticationprovider-tier2-v2.yaml) | openapi 3.0.1 | Authentication Provider Tier 2 | `2.0.0` | Tier 2 | 2 paths |
 | [`authenticationprovider-v1.yaml`](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/api/authenticationprovider-v1.yaml) | openapi 3.0.1 | Authentication Provider | `1.5.0` | — | 16 paths |
 
-**[authorisation](../security/access-control-and-trust/authorisation/authorisation/README.md)** — `access-control-and-trust / authorisation`  →  [api/](../security/access-control-and-trust/authorisation/authorisation/api/README.md)
+**[authorisation](../security/access-control-and-trust/authorisation/README.md)** — `access-control-and-trust / authorisation`  →  [api/](../security/access-control-and-trust/authorisation/api/README.md)
 
 | File | Kind | Title | API version | Tier | Endpoints |
 |------|------|-------|------|------|----------|
-| [`asyncapi-v1.yaml`](../security/access-control-and-trust/authorisation/authorisation/api/asyncapi-v1.yaml) | asyncapi 3.0.0 | Tier 2 Gateway Async API | `1.3.0` | — | 1 channels |
-| [`tier1gateway-v1.yaml`](../security/access-control-and-trust/authorisation/authorisation/api/tier1gateway-v1.yaml) | openapi 3.0.1 | Tier 1 Gateway | `1.5.0` | — | 1 paths |
+| [`asyncapi-v1.yaml`](../security/access-control-and-trust/authorisation/api/asyncapi-v1.yaml) | asyncapi 3.0.0 | Tier 2 Gateway Async API | `1.3.0` | — | 1 channels |
+| [`tier1gateway-v1.yaml`](../security/access-control-and-trust/authorisation/api/tier1gateway-v1.yaml) | openapi 3.0.1 | Tier 1 Gateway | `1.5.0` | — | 1 paths |
 
 **[identity-provider](../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md)** — `access-control-and-trust / identity-provider`  →  [api/](../security/access-control-and-trust/identity-provider-federation/identity-provider/api/README.md)
 
@@ -209,22 +203,18 @@ REST API contracts. View locally with [editor.swagger.io](https://editor.swagger
 
 | Solution | File | Title | Tier | Paths |
 |----------|------|-------|------|-------|
-| [schema-management-service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) | [`resolver-interface.openapi.yaml`](../data/semantics-and-vocabulary/schema-management/schema-management-service/api/resolver-interface.openapi.yaml) | Schema Management Service — Resolver Interface | — | — |
-| [schema-management-service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) | [`schema-management-api.openapi.yaml`](../data/semantics-and-vocabulary/schema-management/schema-management-service/api/schema-management-api.openapi.yaml) | Schema Management Service — Management API | — | — |
-| [schema-management-service](../data/semantics-and-vocabulary/schema-management/schema-management-service/README.md) | [`schema_openapi.yaml`](../data/semantics-and-vocabulary/schema-management/schema-management-service/api/schema_openapi.yaml) | Schema Management API | — | 9 |
-| [schema-synch-service](../data/semantics-and-vocabulary/schema-management/schema-synch-service/README.md) | [`openapi-schema-sync-adapter-tier2-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-synch-service/api/openapi-schema-sync-adapter-tier2-v1.yaml) | Schema Sync Adapter API | Tier 2 | 1 |
-| [schema-synch-service](../data/semantics-and-vocabulary/schema-management/schema-synch-service/README.md) | [`openapi-schema-sync-adapter-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-synch-service/api/openapi-schema-sync-adapter-v1.yaml) | Schema Sync Adapter API | — | 1 |
+| [simpl-schema-manager](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) | [`resolver-interface.openapi.yaml`](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/api/resolver-interface.openapi.yaml) | Schema Management Service — Resolver Interface | — | — |
+| [simpl-schema-manager](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) | [`schema-management-api.openapi.yaml`](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/api/schema-management-api.openapi.yaml) | Schema Management Service — Management API | — | — |
+| [simpl-schema-manager](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/README.md) | [`schema_openapi.yaml`](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager/api/schema_openapi.yaml) | Schema Management API | — | 9 |
+| [schema-sync-adapter](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/README.md) | [`openapi-schema-sync-adapter-tier2-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/api/openapi-schema-sync-adapter-tier2-v1.yaml) | Schema Sync Adapter API | Tier 2 | 1 |
+| [schema-sync-adapter](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/README.md) | [`openapi-schema-sync-adapter-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/api/openapi-schema-sync-adapter-v1.yaml) | Schema Sync Adapter API | — | 1 |
 | [asset-orchestrator](../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md) | [`openapi-asset-orchestrator-v1.yaml`](../data/supporting-data-services/data-orchestration/asset-orchestrator/api/openapi-asset-orchestrator-v1.yaml) | Asset Orchestrator API | — | 6 |
 | [contract-manager](../governance/contract-management/contract-establishment/contract-manager/README.md) | [`openapi3-v1.yaml`](../governance/contract-management/contract-establishment/contract-manager/api/openapi3-v1.yaml) | Contract Manager | — | 8 |
-| [onboarding-service](../governance/participant-management/onboarding/onboarding-service/README.md) | [`onboarding-tier1-v2.yaml`](../governance/participant-management/onboarding/onboarding-service/api/onboarding-tier1-v2.yaml) | Onboarding Tier 1 | Tier 1 | 2 |
-| [onboarding-service](../governance/participant-management/onboarding/onboarding-service/README.md) | [`onboarding-v1.yaml`](../governance/participant-management/onboarding/onboarding-service/api/onboarding-v1.yaml) | Onboarding | — | 25 |
-| [users-roles](../governance/participant-management/user-roles/users-roles/README.md) | [`usersroles-tier1-v2.yaml`](../governance/participant-management/user-roles/users-roles/api/usersroles-tier1-v2.yaml) | User and Roles Tier 1 | Tier 1 | 12 |
-| [users-roles](../governance/participant-management/user-roles/users-roles/README.md) | [`usersroles-v1.yaml`](../governance/participant-management/user-roles/users-roles/api/usersroles-v1.yaml) | User and Roles | — | 9 |
-| [sd-tooling](../governance/resource-management/metadata-description/sd-tooling/README.md) | [`openapi-sdtooling-tier1-v1.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v1.yaml) | SD Tooling API | Tier 1 | 16 |
-| [sd-tooling](../governance/resource-management/metadata-description/sd-tooling/README.md) | [`openapi-sdtooling-tier1-v2.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v2.yaml) | SD Tooling API | Tier 1 | 4 |
-| [sd-tooling](../governance/resource-management/metadata-description/sd-tooling/README.md) | [`openapi-sdtooling-tier1-v3.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v3.yaml) | SD Tooling API | Tier 1 | 1 |
-| [deployment-script-and-template-management](../infrastructure/provisioning/infrastructure-provisioning/deployment-script-and-template-management/README.md) | [`infrastructure-provisioning-api.yaml`](../infrastructure/provisioning/infrastructure-provisioning/deployment-script-and-template-management/api/infrastructure-provisioning-api.yaml) | Infrastructure Provisioning OpenApi | — | 19 |
-| [query-mapper-adapter](../integration/resource-discovery/resource-catalogue/query-mapper-adapter/README.md) | [`adapter_openapi.yaml`](../integration/resource-discovery/resource-catalogue/query-mapper-adapter/api/adapter_openapi.yaml) | Query Mapper Adapter API | — | 5 |
+| [onboarding-service](../governance/participant-management/onboarding/fe-onboarding/README.md) | [`onboarding-tier1-v2.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/onboarding-tier1-v2.yaml) | Onboarding Tier 1 | Tier 1 | 2 |
+| [onboarding-service](../governance/participant-management/onboarding/fe-onboarding/README.md) | [`onboarding-v1.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/onboarding-v1.yaml) | Onboarding | — | 25 |
+| [users-roles](../governance/participant-management/user-roles/fe-users-roles/README.md) | [`usersroles-tier1-v2.yaml`](../governance/participant-management/user-roles/fe-users-roles/api/usersroles-tier1-v2.yaml) | User and Roles Tier 1 | Tier 1 | 12 |
+| [users-roles](../governance/participant-management/user-roles/fe-users-roles/README.md) | [`usersroles-v1.yaml`](../governance/participant-management/user-roles/fe-users-roles/api/usersroles-v1.yaml) | User and Roles | — | 9 |
+| [query-mapper-adapter](../integration/resource-discovery/search-engine/query-mapper-adapter/README.md) | [`adapter_openapi.yaml`](../integration/resource-discovery/search-engine/query-mapper-adapter/api/adapter_openapi.yaml) | Query Mapper Adapter API | — | 5 |
 | [simpl-catalogue](../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md) | [`fc_openapi-itb.yaml`](../integration/resource-discovery/resource-catalogue/simpl-catalogue/api/fc_openapi-itb.yaml) | Eclipse XFSC Federated Catalogue | — | 21 |
 | [simpl-catalogue](../integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md) | [`fc_openapi.yaml`](../integration/resource-discovery/resource-catalogue/simpl-catalogue/api/fc_openapi.yaml) | Eclipse XFSC Federated Catalogue | — | 21 |
 | [catalogue-client-application](../integration/resource-discovery/search-engine/catalogue-client-application/README.md) | [`openapi-xfscadvsearch-tier1-v1.yaml`](../integration/resource-discovery/search-engine/catalogue-client-application/api/openapi-xfscadvsearch-tier1-v1.yaml) | Catalog Search API | Tier 1 | 3 |
@@ -236,7 +226,7 @@ REST API contracts. View locally with [editor.swagger.io](https://editor.swagger
 | [tier-2-authentication-provider](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) | [`authenticationprovider-tier1-v2.yaml`](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/api/authenticationprovider-tier1-v2.yaml) | Authentication Provider Tier 1 | Tier 1 | 24 |
 | [tier-2-authentication-provider](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) | [`authenticationprovider-tier2-v2.yaml`](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/api/authenticationprovider-tier2-v2.yaml) | Authentication Provider Tier 2 | Tier 2 | 2 |
 | [tier-2-authentication-provider](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) | [`authenticationprovider-v1.yaml`](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/api/authenticationprovider-v1.yaml) | Authentication Provider | — | 16 |
-| [authorisation](../security/access-control-and-trust/authorisation/authorisation/README.md) | [`tier1gateway-v1.yaml`](../security/access-control-and-trust/authorisation/authorisation/api/tier1gateway-v1.yaml) | Tier 1 Gateway | — | 1 |
+| [authorisation](../security/access-control-and-trust/authorisation/README.md) | [`tier1gateway-v1.yaml`](../security/access-control-and-trust/authorisation/api/tier1gateway-v1.yaml) | Tier 1 Gateway | — | 1 |
 | [identity-provider](../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) | [`identityprovider-tier1-v2.yaml`](../security/access-control-and-trust/identity-provider-federation/identity-provider/api/identityprovider-tier1-v2.yaml) | Identity Provider Tier 1 | Tier 1 | 8 |
 | [identity-provider](../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) | [`identityprovider-tier2-v2.yaml`](../security/access-control-and-trust/identity-provider-federation/identity-provider/api/identityprovider-tier2-v2.yaml) | Identity Provider Tier 2 | Tier 2 | 8 |
 | [identity-provider](../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) | [`identityprovider-v1.yaml`](../security/access-control-and-trust/identity-provider-federation/identity-provider/api/identityprovider-v1.yaml) | Identity Provider | — | 11 |
@@ -254,10 +244,10 @@ Kafka-topic message contracts (publishers / subscribers / payload schemas). View
 |----------|------|-------|----------|
 | [notification-service](../administration/notification-and-messaging/notification/notification-service/README.md) | [`asyncapi-v1.yaml`](../administration/notification-and-messaging/notification/notification-service/api/asyncapi-v1.yaml) | Notification Service API | 1 |
 | [notification-service](../administration/notification-and-messaging/notification/notification-service/README.md) | [`asyncapi.yaml`](../administration/notification-and-messaging/notification/notification-service/api/asyncapi.yaml) | Notification Service API | 1 |
-| [onboarding-service](../governance/participant-management/onboarding/onboarding-service/README.md) | [`asyncapi-v1.yaml`](../governance/participant-management/onboarding/onboarding-service/api/asyncapi-v1.yaml) | Onboarding Async API | 1 |
-| [users-roles](../governance/participant-management/user-roles/users-roles/README.md) | [`asyncapi-v1.yaml`](../governance/participant-management/user-roles/users-roles/api/asyncapi-v1.yaml) | Users and Roles Async API | 3 |
+| [onboarding-service](../governance/participant-management/onboarding/fe-onboarding/README.md) | [`asyncapi-v1.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/asyncapi-v1.yaml) | Onboarding Async API | 1 |
+| [users-roles](../governance/participant-management/user-roles/fe-users-roles/README.md) | [`asyncapi-v1.yaml`](../governance/participant-management/user-roles/fe-users-roles/api/asyncapi-v1.yaml) | Users and Roles Async API | 3 |
 | [tier-2-authentication-provider](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) | [`asyncapi-v1.yaml`](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/api/asyncapi-v1.yaml) | Authentication Provider Async API | 2 |
-| [authorisation](../security/access-control-and-trust/authorisation/authorisation/README.md) | [`asyncapi-v1.yaml`](../security/access-control-and-trust/authorisation/authorisation/api/asyncapi-v1.yaml) | Tier 2 Gateway Async API | 1 |
+| [authorisation](../security/access-control-and-trust/authorisation/README.md) | [`asyncapi-v1.yaml`](../security/access-control-and-trust/authorisation/api/asyncapi-v1.yaml) | Tier 2 Gateway Async API | 1 |
 
 ---
 
@@ -273,11 +263,8 @@ The IAA two-tier architecture means most services expose distinct API surfaces d
 
 | Solution | File | Title |
 |----------|------|-------|
-| [onboarding-service](../governance/participant-management/onboarding/onboarding-service/README.md) | [`onboarding-tier1-v2.yaml`](../governance/participant-management/onboarding/onboarding-service/api/onboarding-tier1-v2.yaml) | Onboarding Tier 1 |
-| [users-roles](../governance/participant-management/user-roles/users-roles/README.md) | [`usersroles-tier1-v2.yaml`](../governance/participant-management/user-roles/users-roles/api/usersroles-tier1-v2.yaml) | User and Roles Tier 1 |
-| [sd-tooling](../governance/resource-management/metadata-description/sd-tooling/README.md) | [`openapi-sdtooling-tier1-v1.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v1.yaml) | SD Tooling API |
-| [sd-tooling](../governance/resource-management/metadata-description/sd-tooling/README.md) | [`openapi-sdtooling-tier1-v2.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v2.yaml) | SD Tooling API |
-| [sd-tooling](../governance/resource-management/metadata-description/sd-tooling/README.md) | [`openapi-sdtooling-tier1-v3.yaml`](../governance/resource-management/metadata-description/sd-tooling/api/openapi-sdtooling-tier1-v3.yaml) | SD Tooling API |
+| [onboarding-service](../governance/participant-management/onboarding/fe-onboarding/README.md) | [`onboarding-tier1-v2.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/onboarding-tier1-v2.yaml) | Onboarding Tier 1 |
+| [users-roles](../governance/participant-management/user-roles/fe-users-roles/README.md) | [`usersroles-tier1-v2.yaml`](../governance/participant-management/user-roles/fe-users-roles/api/usersroles-tier1-v2.yaml) | User and Roles Tier 1 |
 | [catalogue-client-application](../integration/resource-discovery/search-engine/catalogue-client-application/README.md) | [`openapi-xfscadvsearch-tier1-v1.yaml`](../integration/resource-discovery/search-engine/catalogue-client-application/api/openapi-xfscadvsearch-tier1-v1.yaml) | Catalog Search API |
 | [catalogue-client-application](../integration/resource-discovery/search-engine/catalogue-client-application/README.md) | [`openapi-xfscadvsearch-tier1-v2.yaml`](../integration/resource-discovery/search-engine/catalogue-client-application/api/openapi-xfscadvsearch-tier1-v2.yaml) | Catalog Search API |
 | [contract-consumption-adapter](../integration/resource-discovery/search-engine/contract-consumption-adapter/README.md) | [`openapi-contract-consumption-be-tier1-v1.yaml`](../integration/resource-discovery/search-engine/contract-consumption-adapter/api/openapi-contract-consumption-be-tier1-v1.yaml) | Contract Consumption API |
@@ -289,7 +276,7 @@ The IAA two-tier architecture means most services expose distinct API surfaces d
 
 | Solution | File | Title |
 |----------|------|-------|
-| [schema-synch-service](../data/semantics-and-vocabulary/schema-management/schema-synch-service/README.md) | [`openapi-schema-sync-adapter-tier2-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-synch-service/api/openapi-schema-sync-adapter-tier2-v1.yaml) | Schema Sync Adapter API |
+| [schema-sync-adapter](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/README.md) | [`openapi-schema-sync-adapter-tier2-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/api/openapi-schema-sync-adapter-tier2-v1.yaml) | Schema Sync Adapter API |
 | [tier-2-authentication-provider](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/README.md) | [`authenticationprovider-tier2-v2.yaml`](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider/api/authenticationprovider-tier2-v2.yaml) | Authentication Provider Tier 2 |
 | [identity-provider](../security/access-control-and-trust/identity-provider-federation/identity-provider/README.md) | [`identityprovider-tier2-v2.yaml`](../security/access-control-and-trust/identity-provider-federation/identity-provider/api/identityprovider-tier2-v2.yaml) | Identity Provider Tier 2 |
 | [security-attributes-provider](../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/README.md) | [`securityattributesprovider-tier2-v2.yaml`](../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/api/securityattributesprovider-tier2-v2.yaml) | Security Attributes Provider Tier 2 |

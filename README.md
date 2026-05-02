@@ -345,7 +345,7 @@ Simpl-Open organises its functionality into six dimensions: Administration, Data
   <area shape="rect" coords="170,400,300,460" href="./integration/supporting-integration-services/README.md" alt="Supporting integration services" title="Supporting integration services" />
   <area shape="rect" coords="320,400,450,460" href="./integration/contract-enforcement/README.md" alt="Contract enforcement" title="Contract enforcement" />
   <area shape="rect" coords="18,470,148,530" href="./integration/data-sharing/README.md" alt="Data sharing" title="Data sharing" />
-  <area shape="rect" coords="170,470,300,530" href="./integration/federated-management/README.md" alt="Federation management" title="Federation management" />
+  <area shape="rect" coords="170,470,300,530" href="./integration/federation/README.md" alt="Federation" title="Federation" />
   <area shape="rect" coords="320,470,450,530" href="./integration/policy-enforcement/README.md" alt="Policy enforcement" title="Policy enforcement" />
   <area shape="rect" coords="18,540,148,600" href="./integration/resource-discovery/README.md" alt="Resource discovery" title="Resource discovery" />
   <area shape="rect" coords="170,540,300,600" href="./integration/resource-sharing/README.md" alt="Resource sharing" title="Resource sharing" />
@@ -383,7 +383,7 @@ Simpl-Open organises its functionality into six dimensions: Administration, Data
 - [integration/](./integration/README.md) — integration services connecting data space participants for resource discovery, catalogue publication, and resource sharing
   - [data-sharing/](./integration/data-sharing/README.md) (bulk transfer implemented inside the Connector; simple transfer and streaming are roadmap)
   - [application-sharing/](./integration/application-sharing/README.md) (Not yet implemented)
-  - [federated-management/](./integration/federated-management/README.md) (Not yet implemented)
+  - [federation/](./integration/federation/README.md) (Not yet implemented)
   - [resource-discovery/](./integration/resource-discovery/README.md)
   - [policy-enforcement/](./integration/policy-enforcement/README.md) (Not yet implemented)
   - [contract-enforcement/](./integration/contract-enforcement/README.md) (Not yet implemented)

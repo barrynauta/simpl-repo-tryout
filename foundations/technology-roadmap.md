@@ -158,8 +158,6 @@ as preliminary stages.
 <td>To create customisable, private cloud environments. The modular architecture provides flexibility and control over cloud resources, enabling tailored cloud solutions, reducing costs, and avoiding vendor lock-in.</td>
 </tr>
 <tr class="even">
-<td>Kubeless</td>
-<td>Kubeless is a serverless framework for Kubernetes, enabling function-as-a-service (FaaS).</td>
 <td>Serverless application development over Kubernetes. Simplifies event-driven, microservices-based architectures, providing rapid scaling and efficient resource utilisation, perfect for modern application workloads. Suitable for providers who are already running Kubernetes.</td>
 </tr>
 <tr class="odd">
@@ -168,10 +166,6 @@ as preliminary stages.
 <td>To build and manage high-performance computing clusters. OpenHPC simplifies the integration of HPC software components, ensuring optimised performance for scientific and computational workloads.</td>
 </tr>
 <tr class="even">
-<td>OpenWhisk</td>
-<td><p>OpenWhisk is an open-source serverless platform with support for multiple programming languages.</p>
-<p><a href="https://openwhisk.apache.org/">https://openwhisk.apache.org/</a></p></td>
-<td>Serverless capabilities for flexible, event-driven application development. OpenWhisk's language-agnostic approach simplifies serverless computing, facilitating faster development and deployment of cloud-native functions.</td>
 </tr>
 <tr class="odd">
 <td>eDelivery</td>
@@ -184,8 +178,6 @@ as preliminary stages.
 <td>Part of Digital Building Blocks from European Commission.</td>
 </tr>
 <tr class="odd">
-<td>eInvoicing</td>
-<td>The eInvoicing Building Block aims to promote the successful uptake of electronic invoicing in Europe, respecting the European standard on electronic invoicing and Directive 2014/55/EU on electronic invoicing in public procurement.</td>
 <td>Part of Digital Building Blocks from European Commission.</td>
 </tr>
 <tr class="even">
@@ -206,9 +198,6 @@ as preliminary stages.
 <td>The reference implementation of organisational Federated Catalogue supporting SD according to the Gaia-X Trustmodel.</td>
 </tr>
 <tr class="odd">
-<td>piveau</td>
-<td><p>piveau is a data management ecosystem for the public sector.</p>
-<p><a href="https://www.piveau.de/en/">https://www.piveau.de/en/</a></p></td>
 <td>It provides components and tools to support the entire data processing chain from harvesting, aggregation, provision, and use. It is highly extensible, focuses on open standards and is designed for use in the cloud and reacts reliably and quickly to unforeseen access peaks.</td>
 </tr>
 <tr class="even">
@@ -242,10 +231,6 @@ as preliminary stages.
 <td>OpenLineage contains an open standard for lineage data collection, a metadata repository reference implementation (Marquez), libraries for common languages, and integrations with data pipeline tools.</td>
 </tr>
 <tr class="odd">
-<td>MLflow</td>
-<td><p>MLflow is an open-source platform to manage the ML lifecycle, including experimentation, reproducibility, deployment, and a central model registry.</p>
-<p><a href="https://mlflow.org/">https://mlflow.org/</a></p></td>
-<td>MLflow offers several key components to access, evaluate, process and deploy Large Language Models (LLM).</td>
 </tr>
 <tr class="even">
 <td>Apache Jupyter</td>
@@ -255,7 +240,6 @@ as preliminary stages.
 </tr>
 <tr class="odd">
 <td>Superset</td>
-<td><p>Apache Superset is an open-source modern data exploration and visualisation platform.</p>
 <p><a href="https://superset.apache.org/">https://superset.apache.org/</a></p></td>
 <td>Superset is fast, lightweight, intuitive, and loaded with options that make it easy for users of all skill sets to explore and visualise their data, from simple line charts to highly detailed geospatial charts. It supports a wide range of data bases.</td>
 </tr>
@@ -292,7 +276,7 @@ as preliminary stages.
 <td>A common Application Shell will be implemented, that dynamically loads the several autonomous Front End modules. Each module can be mapped to a specific micro-service and developed independently by the same Team that is in charge of it, increasing the speed of development of distributed and scalable applications.</td>
 </tr>
 <tr class="even">
-<td>Aruba Consent Management</td>
+<td>Consent Management</td>
 <td>Consent management service.</td>
 <td>It manages consent given by Data Providers to the Consumers. It binds consents to specific versions of a legal text. Data Providers can revoke their consent at any time. Specific events are raised for every notable change in the system, that can be easily reviewed and audited.</td>
 </tr>

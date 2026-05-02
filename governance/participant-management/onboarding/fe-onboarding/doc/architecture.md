@@ -69,7 +69,7 @@ Data classification: onboarding data contains personal and organisational identi
 - [Users & Roles](../../../user-roles/fe-users-roles/doc/architecture.md) — creates temporary Tier 1 applicant credentials at the start of the onboarding process.
 - [Identity Provider](../../../../../security/access-control-and-trust/identity-provider-federation/identity-provider/doc/architecture.md) — triggers Tier 2 credential creation after request approval.
 - [Security Attributes Provider](../../../../../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider/doc/architecture.md) — fetches available identity attributes and saves approved participant attribute assignments.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — Tier 1 Gateway routes all inbound traffic to the Onboarding component.
+- [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) — Tier 1 Gateway routes all inbound traffic to the Onboarding component.
 - [Notification Service](../../../../../administration/notification-and-messaging/notification/notification-service/doc/architecture.md) — emits status-change emails on the four onboarding transitions (`submitted`, `approved`, `rejected`, `ready`).
 
 ## Technical view

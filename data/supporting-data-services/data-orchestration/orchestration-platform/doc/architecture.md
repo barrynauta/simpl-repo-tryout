@@ -48,7 +48,7 @@ The Provider's Dagster instance loads these code locations alongside any Provide
 - [Connector](../../../../../integration/resource-sharing/resource-sharing-runtime/connector/doc/architecture.md) — the Orchestration Platform is described as a Connector extension/data plane bridge for data workflow execution.
 - [Asset Orchestrator](../../asset-orchestrator/doc/architecture.md) — sibling Java service that submits jobs into this engine in response to consumer-access events from the Connector.
 - [Simpl Catalogue](../../../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md) — catalogue offerings ↔ workflows are linked via the Asset Orchestrator.
-- [Authorisation](../../../../../security/access-control-and-trust/authorisation/authorisation/doc/architecture.md) — the Auth Proxy integrates with the IAA stack for authentication.
+- [Authorisation](../../../../../security/access-control-and-trust/authorisation/README.md) — the Auth Proxy integrates with the IAA stack for authentication.
 
 ## Technical view
 
