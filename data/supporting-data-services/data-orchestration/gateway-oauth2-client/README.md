@@ -5,14 +5,14 @@
 📍 <strong>You are here</strong><br/>
 <a href="../../../../README.md">🏠 Home</a><br/>
     <a href="../../../README.md">Dimension: Data</a><br/>
-        <a href="../../README.md">Capability: Data processing</a><br/>
-            <a href="../README.md">Service: Data visualisation</a><br/>
-                <strong>Solution: Data Analytic Visualisation</strong><br/>
+        <a href="../../README.md">Capability: Supporting data services</a><br/>
+            <a href="../README.md">Service: Data orchestration</a><br/>
+                <strong>Solution: Gateway OAuth2 Client</strong><br/>
 </p>
 </div>
 
-# Data Analytic Visualisation
+# Gateway OAuth2 Client
 
-Designated implementation of the **Data visualisation** business service. Provides charts and exploratory views to communicate insights and monitor KPIs over data accessible to a Participant Agent.
+OAuth2 client used by the orchestration-platform gateway to authenticate with the Simpl IAA stack.
 
 The production code lives at the canonical location — see [CANONICAL.md](CANONICAL.md). Machine-readable form: [`.canonical.yaml`](.canonical.yaml).

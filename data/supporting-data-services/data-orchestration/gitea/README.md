@@ -5,14 +5,14 @@
 📍 <strong>You are here</strong><br/>
 <a href="../../../../README.md">🏠 Home</a><br/>
     <a href="../../../README.md">Dimension: Data</a><br/>
-        <a href="../../README.md">Capability: Data processing</a><br/>
-            <a href="../README.md">Service: Data visualisation</a><br/>
-                <strong>Solution: Data Analytic Visualisation</strong><br/>
+        <a href="../../README.md">Capability: Supporting data services</a><br/>
+            <a href="../README.md">Service: Data orchestration</a><br/>
+                <strong>Solution: Gitea (orchestration platform)</strong><br/>
 </p>
 </div>
 
-# Data Analytic Visualisation
+# Gitea (orchestration platform)
 
-Designated implementation of the **Data visualisation** business service. Provides charts and exploratory views to communicate insights and monitor KPIs over data accessible to a Participant Agent.
+Gitea instance dedicated to the orchestration platform — hosts Dagster code-location source and supporting repositories used by the data-orchestration runtime.
 
 The production code lives at the canonical location — see [CANONICAL.md](CANONICAL.md). Machine-readable form: [`.canonical.yaml`](.canonical.yaml).

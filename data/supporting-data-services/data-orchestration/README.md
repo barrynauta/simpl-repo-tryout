@@ -20,6 +20,6 @@ Execution and management of data workflows, enabling providers and consumers to 
 - [Asset Orchestrator](asset-orchestrator/README.md) — bridge service between the Provider Connector and the Workflow Engine; binds catalogue assets to workflow definitions and tracks execution.
 - [Dagster](dagster/README.md) — Simpl deployment packaging of the Dagster orchestration platform.
 - [Dagster Dev Local](dagster-dev-local/README.md) — local-development variant of the Simpl Dagster deployment.
-- [Dagit](dagit/README.md) — Dagster web UI. _(External OSS.)_
-- [Apache Airflow](apache-airflow/README.md) — alternative orchestration engine. _(External OSS, roadmap.)_
+- [Gateway OAuth2 Client](gateway-oauth2-client/README.md) — OAuth2 client for the orchestration-platform gateway.
+- [Gitea](gitea/README.md) — Gitea instance dedicated to the orchestration platform.
 

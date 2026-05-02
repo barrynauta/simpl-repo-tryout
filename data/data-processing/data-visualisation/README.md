@@ -12,9 +12,9 @@
 
 # Data visualisation
 
-Charts and exploratory views to communicate insights and monitor KPIs. Roadmap; designated implementation is Apache Superset.
+Charts and exploratory views to communicate insights and monitor KPIs. Designated implementation: [Data Analytic Visualisation](data-analytic-visualisation/README.md).
 
 ## Solutions
 
-- [data-analytic-visualisation](data-analytic-visualisation/README.md) 
+- [Data Analytic Visualisation](data-analytic-visualisation/README.md) — designated implementation of the Data visualisation service. 
 

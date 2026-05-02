@@ -17,7 +17,7 @@ Provides the means to transform, aggregate, anonymise, and visualise datasets ac
 
 - [Anonymisation and pseudonymisation](anonymisation-and-pseudonymisation/README.md) — applies masking, pseudonymisation, and irreversible anonymisation patterns to protect personal and sensitive data. Realised by two Dagster code-locations integrated into the Data Orchestration runtime.
 - [Data analytics](data-analytics/README.md) — batch and interactive analytics for descriptive, diagnostic, and predictive insights. _(Roadmap: Apache Spark, Apache Jupyter)_
-- [Data visualisation](data-visualisation/README.md) — charts and exploratory views to communicate insights and monitor KPIs. _(Roadmap: Apache Superset)_
+- [Data visualisation](data-visualisation/README.md) — charts and exploratory views to communicate insights and monitor KPIs.
 
 ## Notes
 
