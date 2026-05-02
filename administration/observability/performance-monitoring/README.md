@@ -14,4 +14,7 @@
 
 Captures runtime metrics, traces, and health signals from every Simpl-Open component. Realised by Metricbeat + Heartbeat + custom Application Tracing; Prometheus is a roadmap candidate.
 
+## Solutions
+
+- [eck-monitoring](eck-monitoring/README.md) — Elastic Cloud on Kubernetes (ECK) operator deployment that manages the Elasticsearch + Kibana cluster backing both the metrics pipeline and the logging stack.
 

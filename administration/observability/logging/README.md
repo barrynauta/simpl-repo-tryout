@@ -19,3 +19,6 @@ Centralised log collection and search. Realised by the ELK stack with Filebeat a
 - [Common Logging (Java)](common-logging-java/README.md) — Simpl-built structured-logging library for Java services.
 - [Common Logging (Python)](common-logging-python/README.md) — format-compatible Python sibling of the Java library.
 
+## Cross-service references
+
+- [eck-monitoring](eck-monitoring/README.md) — reference stub. The Elasticsearch cluster that backs the ELK stack is managed by ECK, but its canonical solution folder lives under the [Performance monitoring](../performance-monitoring/eck-monitoring/README.md) service to avoid duplicating the metrics/logs split.
