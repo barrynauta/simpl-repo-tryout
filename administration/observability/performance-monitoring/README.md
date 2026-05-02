@@ -14,13 +14,4 @@
 
 Captures runtime metrics, traces, and health signals from every Simpl-Open component. Realised by Metricbeat + Heartbeat + custom Application Tracing; Prometheus is a roadmap candidate.
 
-## Solutions
 
-- [Metricbeat](metricbeat/README.md) — see stub for FTA reference and MAPPING row.
-- [Heartbeat (health checks)](heartbeat/README.md) — see stub for FTA reference and MAPPING row.
-- [Application Tracing](application-tracing/README.md) — see stub for FTA reference and MAPPING row.
-- [Prometheus](prometheus/README.md) — see stub for FTA reference and MAPPING row.
-
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 65, 66, 70, 71. FTA references vary per solution and are recorded inside each solution's stub README.
