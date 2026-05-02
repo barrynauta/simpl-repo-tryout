@@ -16,8 +16,6 @@ Hosts interactive applications and engines for domain-specific processing. Roadm
 
 ## Solutions
 
-- [Kubeless (FaaS)](kubeless/README.md) — see stub for FTA reference and MAPPING row.
-- [Apache OpenWhisk](openwhisk/README.md) — see stub for FTA reference and MAPPING row.
 
 ## Source
 

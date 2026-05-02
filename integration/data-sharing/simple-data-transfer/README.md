@@ -16,7 +16,6 @@ Lightweight pull or push exchanges for small files and APIs. Roadmap item; desig
 
 ## Solutions
 
-- [eDelivery](edelivery/README.md) — see stub for FTA reference and MAPPING row.
 
 ## Source
 

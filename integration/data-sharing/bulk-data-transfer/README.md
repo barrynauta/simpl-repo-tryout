@@ -16,8 +16,6 @@ Moves large datasets reliably between participants with checkpointing, integrity
 
 ## Solutions
 
-- [EDC S3 Object Storage Extension](edc-s3-extension/README.md) — see stub for FTA reference and MAPPING row.
-- [MinIO](minio/README.md) — see stub for FTA reference and MAPPING row.
 
 ## Source
 

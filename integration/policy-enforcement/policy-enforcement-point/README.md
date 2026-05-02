@@ -16,7 +16,6 @@ Runtime enforcement of access and usage policies during data-space interactions.
 
 ## Solutions
 
-- [EDC Policy Engine](edc-policy-engine/README.md) — policy engine inside the EDC connector that evaluates ODRL policies during contract negotiation and transfer (FTA §4.3.1, §6.1.2, MAPPING row 111).
 
 ## Source
 
