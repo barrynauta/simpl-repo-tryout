@@ -18,10 +18,13 @@ Provenance: built by Simpl. Source repository: `agents/common_components`. Backs
 
 ## Sub-bundles
 
-- **Kafka** — `common-components/kafka` — message broker used pervasively for async coordination.
-- **OpenBao** — `common-components/openbao` plus `openbao-init` — Vault-compatible secrets store; init scripts seed the per-component KV paths.
-- **PostgreSQL** — `common-components/postgres-cluster` — pervasive persistence layer (Keycloak, EJBCA, identity/onboarding/users-roles, catalogue metadata, infrastructure provider storage).
-- **Shared specs** — `common-components/shared-specs` — OpenAPI/AsyncAPI specifications shared across services.
+Each sub-bundle has its own capability-aligned folder; this rollup remains because the bundle is published as a single artefact (`agents/common_components`).
+
+- **Kafka** → [administration/notification-and-messaging/messaging/kafka](../../../administration/notification-and-messaging/messaging/kafka/README.md) — message broker used pervasively for async coordination.
+- **OpenBao** → [security/access-control-and-trust/encryption/openbao](../../../security/access-control-and-trust/encryption/openbao/README.md) (with companion [openbao-init](../../../security/access-control-and-trust/encryption/openbao/openbao-init/README.md)) — Vault-compatible secrets store; init scripts seed the per-component KV paths.
+- **Vault** → [security/access-control-and-trust/encryption/vault](../../../security/access-control-and-trust/encryption/vault/README.md) — HashiCorp Vault realisation of the encryption capability; functionally interchangeable with OpenBao.
+- **PostgreSQL** → [data/supporting-data-services/common/postgres-cluster](../../../data/supporting-data-services/common/postgres-cluster/README.md) — pervasive persistence layer.
+- **Shared specs** — `common-components/shared-specs` — _Not catalogued. The shared-specs repo is a cross-service spec dump that violates the principle of services owning their own contracts; it is intentionally not given a structural home in the capability map._
 
 
 ## Documentation (imported from source)

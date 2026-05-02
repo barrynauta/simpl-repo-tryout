@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/contract-billing/consumer-contract-billing
+status: prototype
+last_synced: 2026-05-02
+notes: Umbrella Helm/ArgoCD chart bundling Contract Manager + Signer + VC Issuer + test stubs for the Consumer agent. Source — code.europa.eu/simpl/simpl-open/development/contract-billing.

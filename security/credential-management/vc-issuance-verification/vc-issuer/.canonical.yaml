@@ -1,6 +1,4 @@
-canonical_url: null
-status: roadmap
-last_synced: 2026-05-01
-notes: |
-  Roadmap stub — no source repository on code.europa.eu yet.
-  xlsx note: Not yet existing
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/contract-billing/vc-issuer-service
+status: prototype
+last_synced: 2026-05-02
+notes: Java/Maven service. Vault-integrated. Issues verifiable credentials; DID-aware. Helm release name simpl-vc-issuer-service. Source — code.europa.eu/simpl/simpl-open/development/contract-billing.

@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/contract-billing/provider-contract-billing
+status: prototype
+last_synced: 2026-05-02
+notes: Umbrella Helm/ArgoCD chart bundling Contract Manager + Signer + VC Issuer + test stubs for the Provider (data flavour by default; reused across application/infrastructure) agent. Source — code.europa.eu/simpl/simpl-open/development/contract-billing.

@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/common-components/postgres-cluster
+status: prototype
+last_synced: 2026-05-02
+notes: Helm chart for shared PostgreSQL cluster. Source — code.europa.eu/simpl/simpl-open/development/common-components.

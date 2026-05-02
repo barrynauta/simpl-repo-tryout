@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/common-components/vault
+status: prototype
+last_synced: 2026-05-02
+notes: Helm chart for HashiCorp Vault. Source — code.europa.eu/simpl/simpl-open/development/common-components.

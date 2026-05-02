@@ -22,4 +22,5 @@ Reference implementations, demo nodes, and integration-test scaffolds. These are
 - [echo-frontend/](echo-frontend/README.md) — sample frontend pairing with `echo-backend`.
 - [microfrontend-framework/](microfrontend-framework/README.md) — Webpack Module Federation skeleton with shell + Angular/React/Vue remotes.
 - [ejbca-preconfig/](ejbca-preconfig/README.md) — Dockerised EJBCA bootstrap script for Governance Authority Agents (development/testing only).
+- [contract-billing-stubs/](contract-billing-stubs/README.md) — stub/mock backend (`simpl-stubs`) used by the contract-billing agent compositions in non-prod environments.
 - [edelivery/](edelivery/README.md) — sample/placeholder for the eDelivery (CEF Building Block) integration triggered by the Simpl Connector.

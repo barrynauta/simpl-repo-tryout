@@ -17,5 +17,6 @@ Foundational data services that enable efficient, scalable, and reliable managem
 
 - [Data orchestration](data-orchestration/README.md) — workflow orchestration engine for executing data pipelines and processing jobs.
 - [Distributed execution](distributed-execution/README.md) — runs data jobs elastically across clusters with placement, scaling, and fault tolerance. _(Not yet implemented; no designated solution.)_
+- [Common](common/README.md) — auxiliary shared infrastructure (e.g. `postgres-cluster`) consumed by stateful services across the platform. Not deployable on its own.
 
 > **Note.** Semantic mapping has moved to [semantics-and-vocabulary/semantic-mapping/](../semantics-and-vocabulary/semantic-mapping/README.md) for consistency with the capability map.

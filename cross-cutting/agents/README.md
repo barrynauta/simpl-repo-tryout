@@ -24,6 +24,7 @@ These compositions cross every dimension of the capability map (security, govern
 - [governance-authority-agent/](governance-authority-agent/README.md) — bundles the modules deployed inside the Governance Authority (onboarding, identity provider, EJBCA, signer, federated catalogue, schema management).
 - [common-components/](common-components/README.md) — shared Helm chart bundle reused across the agents (Kafka, OpenBao, PostgreSQL).
 - [agent-iaa/](agent-iaa/README.md) — per-actor-type IAA configuration bundles (authority, consumer, participant, provider) consumed by the master Helm chart agents above.
+- [agent-contract-billing/](agent-contract-billing/README.md) — per-actor-type contract-billing deployment compositions (consumer, provider) bundling Contract Manager, Signer, VC Issuer, and test stubs.
 
 ## Deployment composition overview
 

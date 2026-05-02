@@ -16,6 +16,8 @@ Cryptographic key and secret management underpinning every secure store and Tier
 
 ## Solutions
 
+- [vault](vault/README.md) — Helm chart for HashiCorp Vault.
+- [openbao](openbao/README.md) — Helm chart for OpenBao, the OSS-licensed Vault fork (functionally interchangeable). Includes a companion `openbao-init` chart that seeds per-component KV paths.
 
 ## Source
 

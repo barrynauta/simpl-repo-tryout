@@ -1,0 +1,4 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/contract-billing/stubs
+status: prototype
+last_synced: 2026-05-02
+notes: Stub/mock backend (Helm release simpl-stubs) used by the agent-contract-billing compositions in non-prod envs. Source — code.europa.eu/simpl/simpl-open/development/contract-billing.

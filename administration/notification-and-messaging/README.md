@@ -16,3 +16,4 @@ Asynchronous notification delivery to data space participants in response to pla
 ## Business services
 
 - [Notification](notification/README.md) — Kafka-based notification dispatch; other services publish messages that this capability delivers to recipients.
+- [Messaging](messaging/README.md) — message-broker substrate (Kafka) underpinning notification and other async flows.

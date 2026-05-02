@@ -199,7 +199,6 @@ European Commission Connecting Europe Facility (CEF) Digital Building Blocks sla
 
 | Building block | Status | Solution slot |
 |---|---|---|
-| **eSignature** | Roadmap | [`security/credential-management/signing/esignature/`](../security/credential-management/signing/README.md) |
 
 ### Observability and monitoring
 
