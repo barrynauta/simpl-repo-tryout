@@ -17,4 +17,6 @@ Contract negotiation, issuance, and template management. Covers the Simpl-specif
 ## Solutions
 
 - [Contract Manager](contract-manager/README.md) — orchestrates contract issuance in coordination with the VC Issuer, Signer, Wallet, and Connector.
+- [Contract Manager UI](contract-manager-ui/README.md) — frontend for the Contract Manager, used by operators to author, review, and finalise contracts.
 - [Contract Template Datastore](contract-template-datastore/README.md) — stores contract templates for consistent application of contract terms during resource negotiation.
+

@@ -28,7 +28,7 @@ The Contract Template Datastore is a simple storage component. No further decomp
 
 ### Key integrations
 
-- [SD Tooling](../../../../resource-management/metadata-description/sd-tooling/doc/architecture.md) — the Contract Template Editor (sub-component of SD Tooling) creates and stores contract templates in the Contract Template Datastore.
+- [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — the Contract Template Editor (sub-component of SD Tooling) creates and stores contract templates in the Contract Template Datastore.
 - [Contract Manager](../../contract-manager/doc/architecture.md) — retrieves contract templates during contract establishment flows.
 
 ## Technical view

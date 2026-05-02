@@ -16,6 +16,6 @@ Manages the full lifecycle of usage contracts in the Simpl-Open data space, from
 ## Business services
 
 - [Contract establishment](contract-establishment/README.md) — contract orchestration, issuance, and contract template storage.
-- [Billing](billing/README.md) — settlement, invoicing, and clearing for usage-based contracts. _(Roadmap: eInvoicing, Eviden Partitum.)_
+- [Billing](billing/README.md) — settlement, invoicing, and clearing for usage-based contracts. _(Roadmap: Partitum.)_
 - [SLA management](sla-management/README.md) — tracks service commitments and penalties with evidence and notifications. _(Not yet implemented; no designated solution.)_
 - [License asset management](license-asset-management/README.md) — manages software and content licences, entitlements, and renewals. _(Not yet implemented; no designated solution.)_
