@@ -12,12 +12,6 @@
 
 # Semantic mapping
 
-Discovers and documents schema/ontology mappings across domains. Supports semantic interoperability and cross-domain discovery. Roadmap.
+Discovers and documents schema/ontology mappings across domains. Supports semantic interoperability and cross-domain discovery. 
 
-## Solutions
-
-- [Data Mashup Editor (Eng OS)](data-mashup-editor/README.md) — see stub for FTA reference and MAPPING row.
-
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 102. FTA references vary per solution and are recorded inside each solution's stub README.
+Not yet implemented
