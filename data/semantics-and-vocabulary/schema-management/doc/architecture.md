@@ -4,7 +4,7 @@ Source: functional-and-technical-architecture-specifications.md, sections 4.3.1 
 
 ## Business view
 
-The Schema Management Service (SMS) is the definitive source of truth and lifecycle manager for all schemas and vocabularies within the Simpl-Open data space. It enables the Governance Authority to define the structure of self-descriptions — establishing properties, data types, constraints, and controlled vocabularies that apply across resource types (datasets, applications, infrastructure). Schema configurations are automatically transformed into semantic files and propagated to Provider Nodes via the Schema Synch Service, ensuring providers always have access to current schema standards.
+The Schema Management Service (SMS) is the definitive source of truth and lifecycle manager for all schemas and vocabularies within the Simpl-Open data space. It enables the Governance Authority to define the structure of self-descriptions — establishing properties, data types, constraints, and controlled vocabularies that apply across resource types (datasets, applications, infrastructure). Schema configurations are automatically transformed into semantic files and propagated to Provider Nodes via the Schema Sync Service, ensuring providers always have access to current schema standards.
 
 The SMS exposes its functionality via a Management API (private, authenticated), a Resolver Interface (public, read-only), and an event publisher that notifies subscribed downstream services of schema lifecycle changes (SchemaPublished, SchemaRevoked events).
 
@@ -58,9 +58,9 @@ The SMS uses Apache Jena Fuseki with a TDB2 backend (SPARQL-compliant RDF triple
 
 ### Key integrations
 
-- [Schema Synch Service](../../schema-synch-service/doc/architecture.md) — subscribes to SMS lifecycle events and distributes updated schemas to Provider Node NFS storage for use by SD Tooling.
+- [Schema Sync Service](../../schema-sync-service/doc/architecture.md) — subscribes to SMS lifecycle events and distributes updated schemas to Provider Node NFS storage for use by SD Tooling.
 - [Simpl Catalogue](../../../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md) — subscribes to SMS events to maintain a local registry of published schemas; uses the Vocabulary Datastore for semantic validation during self-description publication.
-- [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — reads schemas from the Provider Node's local schema cache (populated by Schema Synch Service) for self-description creation and validation.
+- [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — reads schemas from the Provider Node's local schema cache (populated by Schema Sync Service) for self-description creation and validation.
 - [Catalogue Client Application](../../../../../integration/resource-discovery/search-engine/catalogue-client-application/doc/architecture.md) — uses schema to define search fields for advanced search; schema cache enables local parameter validation without real-time SMS queries.
 
 ## Technical view

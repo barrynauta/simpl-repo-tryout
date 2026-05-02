@@ -1,18 +1,18 @@
-Source: source repo `data1/schema-sync-adapter` (README.md). FTA spec, §4.3.1 (ACV Static — Schema Synch Service), §6.1.2 (TCV Static — Schema Management Service, Schema Synch Service).
+Source: source repo `data1/schema-sync-adapter` (README.md). FTA spec, §4.3.1 (ACV Static — Schema Sync Service), §6.1.2 (TCV Static — Schema Management Service, Schema Sync Service).
 
-# Schema Synch Service — architecture
+# Schema Sync Service — architecture
 
 ## Business view
 
-The Schema Synch Service keeps Provider and Consumer agents aligned with the schemas published by the [Schema Management Service](../../schema-management-service/doc/architecture.md). It subscribes to lifecycle events from the SMS and mirrors the published schema set into a **shared persistent volume** local to each agent, in **Turtle (TTL)** format. Dependent components — SD Tooling, the Catalogue Client Application, and the Validation Backend — read from the local volume rather than calling the SMS API on every operation, which keeps the SMS off the hot path of normal agent operations and lets dependent components keep working briefly even if the SMS is unreachable.
+The Schema Sync Service keeps Provider and Consumer agents aligned with the schemas published by the [Schema Management Service](../../simpl-schema-manager/README.md). It subscribes to lifecycle events from the SMS and mirrors the published schema set into a **shared persistent volume** local to each agent, in **Turtle (TTL)** format. Dependent components — SD Tooling, the Catalogue Client Application, and the Validation Backend — read from the local volume rather than calling the SMS API on every operation, which keeps the SMS off the hot path of normal agent operations and lets dependent components keep working briefly even if the SMS is unreachable.
 
 Capability-map placement: Data dimension → Semantics and vocabulary capability → Schema management business service.
 
 **Business processes supported:**
 - [BP05B Provider manages resource descriptions](../../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/README.md) — providers create self-descriptions against locally cached SHACL constraints.
 
-![ACV Static view — Schema Synch Service](./media/image54.png)
-![TCV Dynamic — Schema Synchronization flow](./media/image148.png)
+![ACV Static view — Schema Sync Service](./media/image54.png)
+![TCV Dynamic — Schema Syncronization flow](./media/image148.png)
 
 ## Data view
 
@@ -31,13 +31,13 @@ The service is a single Java/Spring component in source — `data1/schema-sync-a
 
 - **Initial-sync routine** — runs once at startup. Calls the SMS Resolver Interface (`GET /schemas/...`) for each published schema and writes the TTL to the volume.
 - **Event-subscription registration** — registers a webhook endpoint with the SMS so that subsequent `SchemaPublished` and `SchemaRevoked` events are pushed to it in real time.
-- **Webhook receiver (Schema Synch Adapter API)** — receives lifecycle events from the SMS.
+- **Webhook receiver (Schema Sync Adapter API)** — receives lifecycle events from the SMS.
 - **Sync engine** — on each event, fetches the schema TTL (publish) or deletes the local file (revoke), with logging and audit on every step.
 
 ### Key integrations
 
-- [Schema Management Service](../../schema-management-service/doc/architecture.md) — source of schema content and lifecycle events; the Synch Service is one of its event subscribers.
-- [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — reads SHACL constraints from the local volume during self-description creation/validation.
+- [Schema Management Service](../../simpl-schema-manager/README.md) — source of schema content and lifecycle events; the Synch Service is one of its event subscribers.
+- [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — reads SHACL constraints from the local volume during self-description creation/validation.
 - [Catalogue Client Application](../../../../../integration/resource-discovery/search-engine/catalogue-client-application/doc/architecture.md) — reads the local cache to populate advanced-search fields.
 - [Validation Backend](../../../../../integration/resource-discovery/search-engine/validation-backend/README.md) — reads the local cache to validate self-descriptions against the active SHACL.
 
@@ -48,7 +48,7 @@ The service is a single Java/Spring component in source — `data1/schema-sync-a
 - **Format**: TTL files, one per schema version, named after the version's dereferenceable URI.
 - **Deployment**: typically a sidecar or co-deployed service on each Provider and Consumer Agent; the volume is mounted into SD Tooling, Catalogue Client, and Validation Backend pods.
 
-![TCV Static view — Schema Management / Schema Synch Service](./media/image144.png)
+![TCV Static view — Schema Management / Schema Sync Service](./media/image144.png)
 
 ## Security view
 

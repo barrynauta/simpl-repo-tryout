@@ -7,17 +7,11 @@
     <a href="../../../README.md">Dimension: Data</a><br/>
         <a href="../../README.md">Capability: Semantics And Vocabulary</a><br/>
             <a href="../README.md">Service: Schema Management</a><br/>
-                <strong>Solution: Schema Synch Service</strong><br/>
+                <strong>Solution: Schema Sync Service</strong><br/>
 </p>
 </div>
 
-# Schema Synch Service
-
-Distributes schema and vocabulary updates from the [Schema Management Service](../schema-management-service/README.md) to Provider and Consumer agents, keeping dependent components ([SD Tooling](../../../../governance/resource-management/metadata-description/sd-tooling/README.md), [Catalogue Client Application](../../../../integration/resource-discovery/search-engine/catalogue-client-application/README.md), [Validation Backend](../../../../integration/resource-discovery/search-engine/validation-backend/README.md)) aligned with the latest published schemas — without each component having to call the Schema Manager API directly.
-
-Capability-map placement: `data / semantics-and-vocabulary / schema-management / schema-synch-service`. This solution implements part of the **Schema management** business service.
-
-Provenance: built by Simpl. Source repository: `data1/schema-sync-adapter` — earlier entries in MAPPING.md predate this discovery and listed it as "no standalone source"; the adapter is in fact a separate repo. Licence: EUPL 1.2.
+# Schema Sync Service
 
 ## How it works
 

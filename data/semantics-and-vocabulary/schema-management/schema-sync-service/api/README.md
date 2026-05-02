@@ -4,12 +4,12 @@
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../../README.md">🏠 Home</a> &nbsp;»&nbsp;
-<a href="../README.md">schema-synch-service</a> &nbsp;»&nbsp;
+<a href="../README.md">schema-sync-service</a> &nbsp;»&nbsp;
 <strong>API specifications</strong>
 </p>
 </div>
 
-# API specifications — schema-synch-service
+# API specifications — schema-sync-service
 
 Specifications imported verbatim from the source repository. Last imported: 2026-04-28.
 
