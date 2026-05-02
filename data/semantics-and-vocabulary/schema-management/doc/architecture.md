@@ -58,7 +58,7 @@ The SMS uses Apache Jena Fuseki with a TDB2 backend (SPARQL-compliant RDF triple
 
 ### Key integrations
 
-- [Schema Sync Service](../../schema-sync-service/doc/architecture.md) — subscribes to SMS lifecycle events and distributes updated schemas to Provider Node NFS storage for use by SD Tooling.
+- [Schema Sync Service](../schema-sync-adapter/doc/architecture.md) — subscribes to SMS lifecycle events and distributes updated schemas to Provider Node NFS storage for use by SD Tooling.
 - [Simpl Catalogue](../../../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md) — subscribes to SMS events to maintain a local registry of published schemas; uses the Vocabulary Datastore for semantic validation during self-description publication.
 - [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — reads schemas from the Provider Node's local schema cache (populated by Schema Sync Service) for self-description creation and validation.
 - [Catalogue Client Application](../../../../../integration/resource-discovery/search-engine/catalogue-client-application/doc/architecture.md) — uses schema to define search fields for advanced search; schema cache enables local parameter validation without real-time SMS queries.

@@ -32,7 +32,7 @@ Status: not yet documented. The TCV notes that the Vocabulary Management Backend
 
 ### Key integrations
 
-- [Schema Management Service](../../../schema-management/schema-management-service/doc/architecture.md) — vocabularies managed here may be referenced by schemas in the SMS; the relationship between vocabulary lifecycle and schema validation is not yet fully documented.
+- [Schema Management Service](../../../schema-management/simpl-schema-manager/README.md) — vocabularies managed here may be referenced by schemas in the SMS; the relationship between vocabulary lifecycle and schema validation is not yet fully documented.
 - [Simpl Catalogue](../../../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md) — the Catalogue's Vocabulary Datastore contains loaded ontologies and schemas used for semantic validation of self-descriptions.
 
 ## Technical view
