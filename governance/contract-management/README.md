@@ -19,3 +19,5 @@ Manages the full lifecycle of usage contracts in the Simpl-Open data space, from
 - [Billing](billing/README.md) — settlement, invoicing, and clearing for usage-based contracts. _(Roadmap: Partitum.)_
 - [SLA management](sla-management/README.md) — tracks service commitments and penalties with evidence and notifications. _(Not yet implemented; no designated solution.)_
 - [License asset management](license-asset-management/README.md) — manages software and content licences, entitlements, and renewals. _(Not yet implemented; no designated solution.)_
+
+- [Common](common/README.md) — shared libraries (e.g. `contract-billing-common`) consumed across the contract-management services. Not deployable on its own.

@@ -117,7 +117,7 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 | `data1/common-adapter` | [cross-cutting/libs/participant-common-adapter/](cross-cutting/libs/participant-common-adapter/README.md) |
 | `data1/common-tier2` | [cross-cutting/libs/participant-common-tier2/](cross-cutting/libs/participant-common-tier2/README.md) |
 | `data1/simpl-vue-components` | [cross-cutting/libs/participant-fe-components/](cross-cutting/libs/participant-fe-components/README.md) |
-| `contract-billing/common` | [cross-cutting/libs/contract-billing-common/](cross-cutting/libs/contract-billing-common/README.md) |
+| `contract-billing/common` | [governance/contract-management/common/contract-billing-common/](governance/contract-management/common/contract-billing-common/README.md) |
 | `contract-billing/common_logging` | [administration/observability/logging/common-logging-java/](administration/observability/logging/common-logging-java/README.md) |
 | `contract-billing/common_logging_python` | [administration/observability/logging/common-logging-python/](administration/observability/logging/common-logging-python/README.md) |
 | `iaa/eidas-demo-keycloak-extension` | [cross-cutting/samples/eidas-demo-keycloak-extension/](cross-cutting/samples/eidas-demo-keycloak-extension/README.md) |

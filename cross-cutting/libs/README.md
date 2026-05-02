@@ -19,7 +19,6 @@ Shared libraries consumed by multiple solutions across the capability map. Java,
 - [participant-common/](participant-common/README.md) — shared utilities for participant-side microservices.
 - [participant-common-adapter/](participant-common-adapter/README.md) — adapter helpers used by participant-side services.
 - [participant-common-tier2/](participant-common-tier2/README.md) — Tier 2 specific shared utilities for participant-side services.
-- [contract-billing-common/](contract-billing-common/README.md) — shared cross-cutting utilities (error handling, security, auth, external comms) for contract-billing services.
 
 ## Frontend
 
