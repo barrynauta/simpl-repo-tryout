@@ -12,11 +12,11 @@
 
 # Consent management
 
-Captures, stores, and enforces data subjects' consent preferences. Roadmap; designated implementation is Aruba Consent Management.
+Captures, stores, and enforces data subjects' consent preferences. Roadmap; designated implementation is Consent Management.
 
 ## Solutions
 
-- [Aruba Consent Management](aruba-consent-management/README.md) — see stub for FTA reference and MAPPING row.
+- [Consent Management](consent-management/README.md) — see stub for FTA reference and MAPPING row.
 
 ## Source
 

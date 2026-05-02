@@ -7,11 +7,11 @@
     <a href="../../../README.md">Dimension: Governance</a><br/>
         <a href="../../README.md">Capability: Consent management</a><br/>
             <a href="../README.md">Service: Consent management</a><br/>
-                <strong>Aruba Consent Management</strong><br/>
+                <strong>Consent Management</strong><br/>
 </p>
 </div>
 
-# Aruba Consent Management
+# Consent Management
 
 > Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 104. FTA reference: §6.3.1 Technology Roadmap.
 >
