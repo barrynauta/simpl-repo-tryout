@@ -36,9 +36,9 @@ Data classification: user identity data; access restricted to Simpl-Open adminis
 
 ### Key integrations
 
-- [User & Roles](../../../../../governance/participant-management/user-roles/users-roles/doc/architecture.md) — the application-layer interface in front of Keycloak; all user/role CRUD operations come through User & Roles.
-- [Authorisation](../../../authorisation/authorisation/doc/architecture.md) — the Tier 1 Gateway validates Tier 1 JWT tokens issued by this component to enforce RBAC.
-- [Onboarding](../../../../../governance/participant-management/onboarding/onboarding-service/doc/architecture.md) — applicant temporary credentials are created in Keycloak during the onboarding process.
+- [User & Roles](../../../../../governance/participant-management/user-roles/fe-users-roles/doc/architecture.md) — the application-layer interface in front of Keycloak; all user/role CRUD operations come through User & Roles.
+- [Authorisation](../../../authorisation/README.md) — the Tier 1 Gateway validates Tier 1 JWT tokens issued by this component to enforce RBAC.
+- [Onboarding](../../../../../governance/participant-management/onboarding/fe-onboarding/doc/architecture.md) — applicant temporary credentials are created in Keycloak during the onboarding process.
 
 ## Technical view
 

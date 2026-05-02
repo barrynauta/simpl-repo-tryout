@@ -13,6 +13,9 @@
 
 # Tier 2 Authentication Provider
 
+> **Upstream cross-reference.** This repository is also represented at [`cross-cutting/agents/agent-iaa/provider-iaa/`](../../../../cross-cutting/agents/agent-iaa/provider-iaa/README.md) as the *agent-IAA bundle for provider agents*. Same upstream code, two capability-map placements (Tier 2 authentication on the security side; agent-IAA bundle on the cross-cutting side).
+
+
 Centralises **Tier 2 authentication** for a Simpl-Open Agent. Manages Tier 2 security credentials (**x.509 keypairs**), validates Tier 2 credentials (ephemeral proof + security credentials) on agent-to-agent traffic, and keeps a local copy of the dataspace identity attributes and participant organisation details so other Simpl components can resolve them without round-tripping to the Governance Authority on every call.
 
 Capability-map placement: `security / access-control-and-trust / authentication-provider-federation / tier-2-authentication-provider`. This solution and `tier-1-authentication-provider` together implement the **Authentication provider federation** business service (flag d-2 in step 3 checkpoint).

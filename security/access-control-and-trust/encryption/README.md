@@ -16,7 +16,6 @@ Cryptographic key and secret management underpinning every secure store and Tier
 
 ## Solutions
 
-- [HashiCorp Vault / OpenBao](openbao/README.md) — see stub for FTA reference and MAPPING row.
 
 ## Source
 

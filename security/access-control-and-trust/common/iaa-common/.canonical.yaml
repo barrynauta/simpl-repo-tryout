@@ -1,0 +1,6 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/common
+status: prototype
+last_synced: 2026-05-02
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/common.
+  Shared Java library + simpl-api-iaa submodule (OpenAPI/AsyncAPI specs) used across the IAA stack.

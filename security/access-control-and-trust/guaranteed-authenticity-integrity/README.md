@@ -16,7 +16,6 @@ Mutual TLS for agent-to-agent communication: every cross-participant call is mTL
 
 ## Solutions
 
-- [mTLS (agent-to-agent secured communication)](mtls/README.md) — see stub for FTA reference and MAPPING row.
 
 ## Source
 

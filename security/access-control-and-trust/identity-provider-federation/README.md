@@ -19,3 +19,4 @@ Governance Authority–managed identity federation service. Issues and manages T
 ## Solutions
 
 - [Identity Provider](identity-provider/README.md) — EJBCA-based CA for Tier 2 credential issuance, renewal, and revocation; integrated with the Onboarding workflow.
+- [fe-identity-provider](fe-identity-provider/README.md) — Angular frontend for participant and credential management; UI counterpart to the Identity Provider backend.

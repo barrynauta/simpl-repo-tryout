@@ -1,0 +1,7 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator
+status: prototype
+last_synced: 2026-05-02
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator.
+  Local folder name `tier-1-authentication-provider` (capability-map naming); upstream repo name `keycloak-authenticator`.
+  Distinct from `iaa/keycloak-authenticator-plugin` which is documented at identity-provider-federation/keycloak-authenticator-plugin/.

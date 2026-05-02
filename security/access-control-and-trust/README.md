@@ -22,6 +22,8 @@ Two-tier identity, authentication, and authorisation (IAA) for Simpl-Open. Tier 
 - [Encryption](encryption/README.md) — cryptographic key and secret management underpinning every secure store and Tier 2 credential. _(Realised by HashiCorp Vault / OpenBao.)_
 - [Guaranteed authenticity and integrity](guaranteed-authenticity-integrity/README.md) — mTLS for every cross-participant call against the Tier 2 credential.
 
+- [Common](common/README.md) — shared libraries (e.g. `iaa-common`) consumed by every Access-Control-and-Trust service. Not deployable on its own.
+
 ## Detailed specification
 
 - [detailed-spec.md](detailed-spec.md) — full Tier 1 / Tier 2 component model, role catalogue, identity-attribute catalogue, credential formats, and encryption / integrity guarantees (extracted from FTA §6.4.1).

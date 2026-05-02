@@ -18,3 +18,4 @@ Tier 1 and Tier 2 authentication providers for Simpl-Open participant agents. Ti
 
 - [Tier 1 Authentication Provider](tier-1-authentication-provider/README.md) — Keycloak-based OIDC identity provider with Simpl-Open custom authenticator plugin.
 - [Tier 2 Authentication Provider](tier-2-authentication-provider/README.md) — X.509 mTLS credential holder and validator for agent-to-agent communication.
+- [fe-authentication-provider](fe-authentication-provider/README.md) — Angular frontend for credential management, security settings, and Tier 2 connectivity testing across both auth tiers.

@@ -13,7 +13,7 @@
 
 # Security Attributes Provider
 
-Source of truth for **identity attributes** in the data space — roles, permissions, and security metadata used for access control and participant classification. Deployed in the Governance Authority Agent. Invoked by [Onboarding](../../../../governance/participant-management/onboarding/onboarding-service/README.md) on participant approval to associate the right attributes with the participant; consumed by other IAA components to drive ABAC enforcement across agents.
+Source of truth for **identity attributes** in the data space — roles, permissions, and security metadata used for access control and participant classification. Deployed in the Governance Authority Agent. Invoked by [Onboarding](../../../../governance/participant-management/onboarding/fe-onboarding/README.md) on participant approval to associate the right attributes with the participant; consumed by other IAA components to drive ABAC enforcement across agents.
 
 Capability-map placement: `security / access-control-and-trust / security-attribute-provider-federation / security-attributes-provider`. This solution implements the **Security attribute provider federation** business service.
 

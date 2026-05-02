@@ -23,14 +23,14 @@ Cryptographic key material lives **in HashiCorp Vault** (transit engine, `ed2551
 ### Internal decomposition
 
 **Signer Service** (upstream Eclipse XFSC TSA Signer running inside the Simpl deployment wrapper):
-- Receives signing requests from callers ([SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md), [VC Issuer](../../../vc-issuance-verification/vc-issuer/doc/architecture.md)).
+- Receives signing requests from callers ([SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md), [VC Issuer](../../../vc-issuance-verification/vc-issuer/doc/architecture.md)).
 - Forwards signing operations to **HashiCorp Vault's transit engine** (ed25519); Vault performs the cryptographic operation and returns the signature.
 - Returns signed artefacts (self-descriptions, contracts) to the requestor.
 - Provides non-repudiation and authenticity guarantees.
 
 ### Key integrations
 
-- [SD Tooling](../../../../../governance/resource-management/metadata-description/sd-tooling/doc/architecture.md) — `signing` is the second of three sequential calls in SD Tooling's publication flow (`enrichAndValidate → signing → publishing`).
+- [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — `signing` is the second of three sequential calls in SD Tooling's publication flow (`enrichAndValidate → signing → publishing`).
 - [VC Issuer](../../../vc-issuance-verification/vc-issuer/doc/architecture.md) — applies cryptographic signatures to usage contracts.
 - [Simpl Catalogue](../../../../../integration/resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md) — receives signed self-descriptions; validates signature integrity at publication time.
 

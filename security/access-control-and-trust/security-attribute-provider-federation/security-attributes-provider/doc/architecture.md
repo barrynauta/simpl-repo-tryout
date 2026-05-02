@@ -39,8 +39,8 @@ Data classification: security identity attribute data is sensitive; it controls 
 
 ### Key integrations
 
-- [Onboarding](../../../../../governance/participant-management/onboarding/onboarding-service/doc/architecture.md) — calls the Security Attributes Provider to fetch available identity attributes during form rendering (step 1 of BP 03A) and to assign identity attributes to an approved participant (step 3).
-- [Authorisation](../../../authorisation/authorisation/doc/architecture.md) — the Tier 2 ABAC gateway uses identity attributes stored in the Security Attributes Provider to enforce access control rules in agent-to-agent communication.
+- [Onboarding](../../../../../governance/participant-management/onboarding/fe-onboarding/doc/architecture.md) — calls the Security Attributes Provider to fetch available identity attributes during form rendering (step 1 of BP 03A) and to assign identity attributes to an approved participant (step 3).
+- [Authorisation](../../../authorisation/README.md) — the Tier 2 ABAC gateway uses identity attributes stored in the Security Attributes Provider to enforce access control rules in agent-to-agent communication.
 
 ## Technical view
 

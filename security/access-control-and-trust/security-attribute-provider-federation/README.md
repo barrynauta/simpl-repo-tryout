@@ -17,3 +17,4 @@ Manages identity attributes assigned to data space participants by the Governanc
 ## Solutions
 
 - [Security Attributes Provider](security-attributes-provider/README.md) — identity attribute management (create, delete, modify) and participant attribute assignment; generates ephemeral proofs for ABAC enforcement.
+- [fe-security-attribute-provider](fe-security-attribute-provider/README.md) — Angular frontend for the Governance Authority to manage identity attributes and assign them to participants.
