@@ -71,7 +71,7 @@ Notes:
 | data1 | sdtooling-validation-api-be | `governance/resource-management/metadata-description/validation-backend` | placed | ✅ |
 | data1 | sdtooling-validation-api-be | `integration/resource-discovery/search-engine/validation-backend` | placed | ✅ |
 | data1 | simpl-files | `governance/contract-management/contract-establishment/contract-template-datastore` | placed | ❌ |
-| data1 | simpl-mock-services | — | pending | ⚠️ |
+| data1 | simpl-mock-services | — | pending | ⚠️ defunct |
 | data1 | simpl-vue-components | — | pending | ⚠️ |
 | data1 | xfsc-advsearch-be | `integration/resource-discovery/search-engine/xfsc-advanced-search` | placed | ✅ |
 | data-services | dataframe-level-anonymisation | `data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation` | placed | ✅ |
@@ -89,7 +89,7 @@ Notes:
 | Gaia-X-EDC | PoC-gaia-edc | `integration/resource-discovery/search-engine/query-mapper-adapter` | placed | ✅ |
 | Gaia-X-EDC | provider-gaia-x-edc | `integration/resource-sharing/resource-sharing-runtime/provider-gaia-x-edc` | placed | ✅ |
 | Gaia-X-EDC | simpl-catalogue-client | `integration/resource-discovery/search-engine/catalogue-client-application` | placed | ✅ |
-| Gaia-X-EDC | simpl-contract-negotiation-mockuop | — | pending | ⚠️ |
+| Gaia-X-EDC | simpl-contract-negotiation-mockuop | — | pending | ⚠️ Does have code, but untouched since a year. Defunct? |
 | Gaia-X-EDC | simpl-edc | `integration/resource-sharing/resource-sharing-runtime/connector` | placed | ✅ |
 | Gaia-X-EDC | simpl-fc-service | `integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue` | placed | ✅ |
 | Gaia-X-EDC | simpl-files | — | pending | ⚠️ |
