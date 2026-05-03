@@ -35,28 +35,28 @@ Notes:
 | Common-components | openbao | `security/access-control-and-trust/encryption/openbao` | placed | ✅ |
 | Common-components | open-bao-init | `security/access-control-and-trust/encryption/openbao/openbao-init` | placed | ✅ |
 | Common-components | postgres-cluster | `data/supporting-data-services/common/postgres-cluster` | placed | ✅ |
-| Common-components | shared-specs | — | pending | ⚠️ |
+| Common-components | shared-specs | — | pending | ⚠️ Seems defunct |
 | Common-components | vault | `security/access-control-and-trust/encryption/vault` | placed | ✅ |
-| Contract-billing | actors | — | pending | ⚠️ |
-| Contract-billing | billing | — | pending | ⚠️ |
-| Contract-billing | billing-common | — | pending | ⚠️ |
+| Contract-billing | actors | — | pending | ⚠️ One year ago an initial commit - seems defunct |
+| Contract-billing | billing | — | pending | ⚠️ One year ago an initial commit - seems defunct |
+| Contract-billing | billing-common | — | pending | ⚠️ One year ago an initial commit - seems defunct |
 | Contract-billing | common | — | pending | ⚠️ |
 | Contract-billing | common_logging | `administration/observability/logging/common-logging-java` | placed | ✅ |
 | Contract-billing | common_logging_python | `administration/observability/logging/common-logging-python` | placed | ✅ |
 | Contract-billing | consumer-contract-billing | `cross-cutting/agents/agent-contract-billing/consumer-contract-billing` | placed | ✅ |
 | Contract-billing | contract | — | pending | ⚠️ |
 | Contract-billing | contract-ui | `governance/contract-management/contract-establishment/contract-manager-ui` | placed | ✅ |
-| Contract-billing | invoicing | — | pending | ⚠️ |
+| Contract-billing | invoicing | — | pending | ⚠️ defunct |
 | Contract-billing | notification-service | `administration/notification-and-messaging/notification/notification-service` | placed | ✅ |
 | Contract-billing | provider-contract-billing | `cross-cutting/agents/agent-contract-billing/provider-contract-billing` | placed | ✅ |
-| Contract-billing | settlement | — | pending | ⚠️ |
+| Contract-billing | settlement | — | pending | ⚠️ defunct |
 | Contract-billing | signing-service | `security/credential-management/signing/signer-service` | placed | ✅ |
-| Contract-billing | simpl-issuance | — | pending | ⚠️ |
-| Contract-billing | simpl-storage | — | pending | ⚠️ |
+| Contract-billing | simpl-issuance | — | pending | ⚠️ defunct |
+| Contract-billing | simpl-storage | — | pending | ⚠️ defunct |
 | Contract-billing | stubs | `cross-cutting/samples/contract-billing-stubs` | placed | ✅ |
 | Contract-billing | vc-issuer-service | `security/credential-management/vc-issuance-verification/vc-issuer` | placed | ✅ |
-| Contract-billing | wallet-service | — | pending | ⚠️ |
-| data1 | Charts | — | pending | ⚠️ |
+| Contract-billing | wallet-service | — | pending | ⚠️ defunct |
+| data1 | Charts | — | pending | ⚠️ 1 year old - are these used?|
 | data1 | common | — | pending | ⚠️ |
 | data1 | common-adapter | `integration/resource-sharing/resource-sharing-runtime/common/connector-model-common` | placed | ✅ |
 | data1 | common-tier2 | `security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client` | placed | ✅ |
