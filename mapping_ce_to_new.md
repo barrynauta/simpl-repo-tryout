@@ -128,7 +128,7 @@ Notes:
 | Monitoring | consumer-monitoring | `cross-cutting/agents/agent-monitoring/consumer-monitoring` | placed | |
 | Monitoring | eck-monitoring | `administration/observability/performance-monitoring/eck-monitoring` | placed | |
 | Monitoring | eck-monitoring-operator | — | pending | |
-| Monitoring | infrastructure-consumption-monitoring-service |  |`administration/observability/dashboarding/infrastructure-consumption-monitoring-service` | placed | |
+| Monitoring | infrastructure-consumption-monitoring-service |`administration/observability/dashboarding/infrastructure-consumption-monitoring-service` | placed | |
 | Monitoring | monitoring-proxy | — | pending | |
 | Monitoring | monitoring-reporting-fe | — | pending | |
 | Monitoring | provider-monitoring | `cross-cutting/agents/agent-monitoring/provider-monitoring` | placed | |
