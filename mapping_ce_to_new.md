@@ -21,6 +21,7 @@ Notes:
 * Gaia-X-EDC / authority-gaia-x-edc - under agents?
 * We need to scan for empty and/or obsolete repositories
 * ⚠️ We need naming convenstions fe- or ui- or -ui, sometimes different projects, sometimes subdirectories. Idem for be (backend), sometimes a -service extension
+* Are the identity-provider and the identity-provider-service one and the same?
 
 | CE Team | CE Solution | New Path | Status | Check BN Caconical |
 |---|---|---|---|---|
