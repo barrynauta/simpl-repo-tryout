@@ -47,6 +47,7 @@ This folder contains foundational artefacts describing what Simpl is and should 
 - [agent-composition.md](agent-composition.md) — which solutions each role-based agent bundles (Consumer, Data Provider, Governance Authority, etc.); rolled up from the per-agent `Modules composed` sections.
 - [shared-libraries.md](shared-libraries.md) — inventory of the `*-common` libraries placed in the catalogue (iaa-common, data-services-common, contract-billing-common, simpl-http-client, simpl-vue-components, …) with hosting dimension, scope, and modularity health flags.
 - [conformance.md](conformance.md) — standards-conformance matrix (DSP/IDSA, Gaia-X, DSSC, eIDAS, W3C VC). Currently a placeholder — per-solution data collection tracked as a TODO in Notion.
+- [architecture-models/](architecture-models/README.md) — catalogue placement of the upstream Archi / ArchiMate models that drive every architectural diagram in this repository. Includes the coArchi collaborative-editing procedure; the `.archimate` source files live in the upstream `code.europa.eu/simpl/simpl-open/architecture` repo.
 
 ## Deployment, operations, security
 

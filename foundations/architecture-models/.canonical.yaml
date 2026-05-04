@@ -1,0 +1,12 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/architecture/-/tree/master/model?ref_type=heads
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/architecture (master branch, model/
+  subtree). ArchiMate models maintained collaboratively via the Archi coArchi
+  plugin. The model is the source for every architectural diagram referenced
+  across this catalogue; the upstream repository also hosts the FTA
+  specification document whose content is distributed across foundations/ and
+  per-solution READMEs in this catalogue. Model files (*.archimate, business/,
+  technology/, relations/, diagrams/, other/) are not mirrored here — clone
+  upstream via coArchi to view or edit. See README.md for the procedure.
