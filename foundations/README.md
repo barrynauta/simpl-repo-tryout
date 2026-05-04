@@ -42,6 +42,12 @@ This folder contains foundational artefacts describing what Simpl is and should 
 - [mapping-ce-to-new.md](mapping-ce-to-new.md) — every CE source repo → catalogue path (CE-side ledger; grouped by CE team, with placement status and review column)
 - [changelog.md](changelog.md) — version-by-version delta of the FTA document (FTA §1.3)
 
+## Cross-cutting views
+
+- [agent-composition.md](agent-composition.md) — which solutions each role-based agent bundles (Consumer, Data Provider, Governance Authority, etc.); rolled up from the per-agent `Modules composed` sections.
+- [shared-libraries.md](shared-libraries.md) — inventory of the `*-common` libraries placed in the catalogue (iaa-common, data-services-common, contract-billing-common, simpl-http-client, simpl-vue-components, …) with hosting dimension, scope, and modularity health flags.
+- [conformance.md](conformance.md) — standards-conformance matrix (DSP/IDSA, Gaia-X, DSSC, eIDAS, W3C VC). Currently a placeholder — per-solution data collection tracked as a TODO in Notion.
+
 ## Deployment, operations, security
 
 - [deployment-model.md](deployment-model.md) — logical (agent-and-cluster) and technical (Kubernetes-and-cloud) deployment views

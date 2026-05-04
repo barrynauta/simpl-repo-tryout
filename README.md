@@ -4,6 +4,8 @@
 
 # Simpl Documentation Catalogue
 
+> **What this repository is.** This repository is two things at once: today, it is the **structural blueprint** of Simpl-Open — every architectural dimension, capability, business service, and solution mapped onto a single navigable tree, with FTA-spec content imported and cross-referenced. Tomorrow, it is the **target tree of the upcoming repository consolidation**: every solution folder will host both its documentation *and* its source code, replacing today's 142 separate `code.europa.eu/simpl/simpl-open/development/...` repositories. The two mapping ledgers under [foundations/mapping-ce-to-new.md](./foundations/mapping-ce-to-new.md) and [foundations/mapping-new-to-canonical.md](./foundations/mapping-new-to-canonical.md) are the migration trail.
+
 Main sources:
  - [Simpl website](https://simpl-programme.ec.europa.eu/)
  - [https://code.europa.eu/simpl](https://code.europa.eu/simpl)
