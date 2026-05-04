@@ -14,10 +14,11 @@ Components that don't belong to a single capability in the Simpl-Open capability
 
 ## Sub-folders
 
-- [utils/](utils/README.md) — operational utilities and command-line tools used during deployment and pre-configuration of components.
+- [agents/](agents/README.md) — actor-specific master Helm charts that compose modules from across the capability map into deployable Simpl-Open Agents (Consumer, Data Provider, Governance Authority, etc.).
+- [documentation/](documentation/README.md) — **agent / product-level guides** for installing and using a complete Simpl-Open deployment (D1.6.1 Installation Guide, User Manual). Distinct from per-component docs which live alongside each solution under the capability map.
 - [libs/](libs/README.md) — shared libraries (Java, Python, frontend) consumed by multiple solutions across the capability map.
 - [samples/](samples/README.md) — reference implementations and demo nodes — including microfrontend skeletons, the IAA echo service, and the eIDAS demo node — used as starting points or for integration testing.
-- [agents/](agents/README.md) — actor-specific master Helm charts that compose modules from across the capability map into deployable Simpl-Open Agents (Consumer, Data Provider, Governance Authority, etc.).
+- [utils/](utils/README.md) — operational utilities and command-line tools used during deployment and pre-configuration of components.
 
 ## Why this folder exists
 

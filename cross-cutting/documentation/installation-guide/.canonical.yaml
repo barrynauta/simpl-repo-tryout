@@ -1,0 +1,9 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/documentation/installation-guide
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/documentation/installation-guide.
+  D1.6.1 Simpl-Open Installation Guide — SC1 deliverable. Agent / product
+  level installation procedure for Simpl-Open as a whole; NOT per-component.
+  Markdown source + generated PDFs under documents/ in the upstream repo;
+  not mirrored to this catalogue.

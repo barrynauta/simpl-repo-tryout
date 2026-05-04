@@ -23,6 +23,7 @@ Method:
 
 - [How to use this documentation](#how-to-use-this-documentation)
 - [What is Simpl](#what-is-simpl)
+- [Installing and using Simpl-Open (product-level)](#installing-and-using-simpl-open-product-level)
 - [Business Processes](#business-processes)
 - [Supporting Activities](#supporting-activities)
 - [Non-Functional Requirements](#non-functional-requirements)
@@ -64,6 +65,19 @@ The programme's primary technical output is Simpl-Open: an open-source, multi-ve
 Participants join a data space by deploying a Simpl-Open Agent — a set of integrated software components that acts as a local gateway for data and service interactions. The Agent spans across actor types (Governance Authorities, Providers, Consumers, and their end-users), enabling asset sharing between them. Each actor requiring a distinct role in the data space deploys their own agent instance. Agents are deployment compositions of Simpl-Open modules and are separate from the modular solutions described in this catalogue's capability map.
 
 Simpl-Open not only enables operation within a single data space but creates interoperability between data spaces. As multiple data spaces incorporate Simpl-Open, they become more connected, allowing services and assets to cross data space boundaries. This cross-space interoperability is one of Simpl-Open's distinguishing architectural goals: it is not a standalone platform but a shared backbone for the emerging European data economy. Simpl-Open aligns with and builds upon adjacent EU and international initiatives including Gaia-X (trust model and self-description standards) and the Data Spaces Support Centre (DSSC) interoperability definitions.
+
+---
+
+## Installing and using Simpl-Open (product-level)
+
+> **Agent / product level — not per-component.** The two guides below cover Simpl-Open as a complete deployed system. For component-specific deployment, configuration, or upgrade docs, navigate via the capability map to the relevant solution folder and look in its `doc/installation-guide/` or `doc/user-manual/` sub-folders. The product-level guides sit one level above the components: how do I install Simpl-Open as a whole, and how do I, as a participant, use a running data space?
+
+- 📘 **[Installation Guide](./cross-cutting/documentation/installation-guide/README.md)** — *D1.6.1 Simpl-Open Installation Guide* (SC1 deliverable). End-to-end procedure for deploying agents (Governance Authority, Data Provider, Consumer, Application Provider, Infrastructure Provider) into a target environment, with prerequisites, common-components bootstrap, and troubleshooting reference.
+- 📗 **[User Manual](./cross-cutting/documentation/user-manual/README.md)** — *Simpl-Open User Manual* (SC1 deliverable). How participants use a running Simpl-Open system: onboarding flows, credential lifecycle, resource publication and consumption, contract negotiation, day-to-day operations from each actor's perspective.
+
+Both guides are referenced from this catalogue but maintained in dedicated upstream repositories under `code.europa.eu/simpl/simpl-open/documentation/`. The catalogue placements at [cross-cutting/documentation/](./cross-cutting/documentation/README.md) carry the canonical pointers and a concise overview; the authoritative documents live upstream.
+
+> **Looking for a component's own docs instead?** Each solution under the capability map (e.g. [contract-manager](./governance/contract-management/contract-establishment/contract-manager/README.md), [simpl-catalogue](./integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md), [identity-provider](./security/access-control-and-trust/identity-provider-federation/identity-provider/README.md)) has its own `doc/` sub-folder with installation, configuration, and upgrade guides specific to that component.
 
 ---
 
