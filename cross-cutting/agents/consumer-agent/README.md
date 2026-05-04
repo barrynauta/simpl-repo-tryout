@@ -42,7 +42,7 @@ Provenance: built by Simpl. Source repository: `agents/consumer`. Owner: Cross-t
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (1 file).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (1 file).
 
 ## Source code
 

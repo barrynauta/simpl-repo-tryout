@@ -29,7 +29,7 @@ Each sub-bundle has its own capability-aligned folder; this rollup remains becau
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (2 files), `user-manual/` (3 files).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `iaa-2.11.x/` (2 files), `user-manual/` (3 files).
 
 ## Source code
 
