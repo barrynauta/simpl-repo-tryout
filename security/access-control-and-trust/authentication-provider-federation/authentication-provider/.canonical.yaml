@@ -1,0 +1,8 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/authentication-provider
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/authentication-provider.
+  Central authentication backend microservice for the SIMPL/IAA ecosystem.
+  Java 21 / Maven 3.9+ Spring Boot service, deployed per-agent via the
+  agent-IAA Helm umbrellas (cross-cutting/agents/agent-iaa/*).

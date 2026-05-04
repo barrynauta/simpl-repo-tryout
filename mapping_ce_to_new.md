@@ -35,27 +35,27 @@ Notes:
 | Common-components | [openbao](https://code.europa.eu/simpl/simpl-open/development/common-components/openbao) | [`security/access-control-and-trust/encryption/openbao`](./security/access-control-and-trust/encryption/openbao) | placed | ✅ |
 | Common-components | [open-bao-init](https://code.europa.eu/simpl/simpl-open/development/common-components/openbao-init) | [`security/access-control-and-trust/encryption/openbao/openbao-init`](./security/access-control-and-trust/encryption/openbao/openbao-init) | placed | ✅ |
 | Common-components | [postgres-cluster](https://code.europa.eu/simpl/simpl-open/development/common-components/postgres-cluster) | [`data/supporting-data-services/common/postgres-cluster`](./data/supporting-data-services/common/postgres-cluster) | placed | ✅ |
-| Common-components | shared-specs | — | pending | ⚠️ Seems defunct |
+| Common-components | shared-specs | — | pending | 🚧 Seems defunct |
 | Common-components | [vault](https://code.europa.eu/simpl/simpl-open/development/common-components/vault) | [`security/access-control-and-trust/encryption/vault`](./security/access-control-and-trust/encryption/vault) | placed | ✅ |
-| Contract-billing | actors | — | pending | ⚠️ One year ago an initial commit - seems defunct |
-| Contract-billing | billing | — | pending | ⚠️ One year ago an initial commit - seems defunct |
-| Contract-billing | billing-common | — | pending | ⚠️ One year ago an initial commit - seems defunct |
+| Contract-billing | actors | — | pending | 🚧 One year ago an initial commit - seems defunct |
+| Contract-billing | billing | — | pending | 🚧 One year ago an initial commit - seems defunct |
+| Contract-billing | billing-common | — | pending | 🚧 One year ago an initial commit - seems defunct |
 | Contract-billing | [common](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common) | [`governance/contract-management/common/contract-billing-common`](./governance/contract-management/common/contract-billing-common) | placed | ⚠️ Aggregates 5 cross-cutting concerns (exceptions, security, HTTP, error DTOs, utils) — candidate for upstream modularisation, see solution README |
 | Contract-billing | [common_logging](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common_logging) | [`administration/observability/logging/common-logging-java`](./administration/observability/logging/common-logging-java) | placed | ✅ |
 | Contract-billing | [common_logging_python](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common_logging_python) | [`administration/observability/logging/common-logging-python`](./administration/observability/logging/common-logging-python) | placed | ✅ |
 | Contract-billing | [consumer-contract-billing](https://code.europa.eu/simpl/simpl-open/development/contract-billing/consumer-contract-billing) | [`cross-cutting/agents/agent-contract-billing/consumer-contract-billing`](./cross-cutting/agents/agent-contract-billing/consumer-contract-billing) | placed | ✅ |
 | Contract-billing | [contract](https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract) | [`governance/contract-management/contract-establishment/contract-manager`](./governance/contract-management/contract-establishment/contract-manager) | placed | ✅ |
 | Contract-billing | [contract-ui](https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract-ui) | [`governance/contract-management/contract-establishment/contract-manager-ui`](./governance/contract-management/contract-establishment/contract-manager-ui) | placed | ✅ |
-| Contract-billing | invoicing | — | pending | ⚠️ defunct |
+| Contract-billing | invoicing | — | pending | 🚧 defunct |
 | Contract-billing | [notification-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/notification-service) | [`administration/notification-and-messaging/notification/notification-service`](./administration/notification-and-messaging/notification/notification-service) | placed | ✅ |
 | Contract-billing | [provider-contract-billing](https://code.europa.eu/simpl/simpl-open/development/contract-billing/provider-contract-billing) | [`cross-cutting/agents/agent-contract-billing/provider-contract-billing`](./cross-cutting/agents/agent-contract-billing/provider-contract-billing) | placed | ✅ |
-| Contract-billing | settlement | — | pending | ⚠️ defunct |
+| Contract-billing | settlement | — | pending | 🚧 defunct |
 | Contract-billing | [signing-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/signing-service) | [`security/credential-management/signing/signer-service`](./security/credential-management/signing/signer-service) | placed | ✅ |
-| Contract-billing | simpl-issuance | — | pending | ⚠️ defunct |
-| Contract-billing | simpl-storage | — | pending | ⚠️ defunct |
+| Contract-billing | simpl-issuance | — | pending | 🚧 defunct |
+| Contract-billing | simpl-storage | — | pending | 🚧 defunct |
 | Contract-billing | [stubs](https://code.europa.eu/simpl/simpl-open/development/contract-billing/stubs) | [`cross-cutting/samples/contract-billing-stubs`](./cross-cutting/samples/contract-billing-stubs) | placed | ✅ |
 | Contract-billing | [vc-issuer-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/vc-issuer-service) | [`security/credential-management/vc-issuance-verification/vc-issuer`](./security/credential-management/vc-issuance-verification/vc-issuer) | placed | ✅ |
-| Contract-billing | wallet-service | — | pending | ⚠️ defunct |
+| Contract-billing | wallet-service | — | pending | 🚧 defunct |
 | data1 | Charts | — | pending | ⚠️ 1 year old - are these used?|
 | data1 | [common](https://code.europa.eu/simpl/simpl-open/development/data1/common) | [`data/supporting-data-services/common/data-services-common`](./data/supporting-data-services/common/data-services-common) | placed | ⚠️ Aggregates 15 unrelated packages — candidate for upstream modularisation, see solution README |
 | data1 | [common-adapter](https://code.europa.eu/simpl/simpl-open/development/data1/common-adapter) | [`integration/resource-sharing/resource-sharing-runtime/common/connector-model-common`](./integration/resource-sharing/resource-sharing-runtime/common/connector-model-common) | placed | ✅ |
@@ -71,7 +71,7 @@ Notes:
 | data1 | [sdtooling-validation-api-be](https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be) | [`governance/resource-management/metadata-description/validation-backend`](./governance/resource-management/metadata-description/validation-backend) | placed | ✅ |
 | data1 | [sdtooling-validation-api-be](https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be) | [`integration/resource-discovery/search-engine/validation-backend`](./integration/resource-discovery/search-engine/validation-backend) | placed | ✅ |
 | data1 | [simpl-files](https://code.europa.eu/simpl/simpl-open/development/data1/simpl-files) | [`governance/contract-management/contract-establishment/contract-template-datastore`](./governance/contract-management/contract-establishment/contract-template-datastore) | placed | ⚠️ Interim — static NGINX hosting contract/SLA templates; PSO labels it `contract-template-datastore-temporary`. Re-point when the dedicated datastore lands. |
-| data1 | simpl-mock-services | — | pending | ⚠️ defunct |
+| data1 | simpl-mock-services | — | pending | 🚧 defunct |
 | data1 | [simpl-vue-components](https://code.europa.eu/simpl/simpl-open/development/data1/simpl-vue-components) | [`cross-cutting/libs/simpl-vue-components`](./cross-cutting/libs/simpl-vue-components) | placed | ✅ Vue 3 design-system library used by every Simpl-Open frontend |
 | data1 | [xfsc-advsearch-be](https://code.europa.eu/simpl/simpl-open/development/data1/xfsc-advsearch-be) | [`integration/resource-discovery/search-engine/xfsc-advanced-search`](./integration/resource-discovery/search-engine/xfsc-advanced-search) | placed | ✅ |
 | data-services | [dataframe-level-anonymisation](https://code.europa.eu/simpl/simpl-open/development/data-services/dataframe-level-anonymisation) | [`data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation`](./data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation) | placed | ✅ |
@@ -89,7 +89,7 @@ Notes:
 | Gaia-X-EDC | [PoC-gaia-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/poc-gaia-edc) | [`integration/resource-discovery/search-engine/query-mapper-adapter`](./integration/resource-discovery/search-engine/query-mapper-adapter) | placed | ✅ |
 | Gaia-X-EDC | [provider-gaia-x-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/provider-gaia-x-edc) | [`integration/resource-sharing/resource-sharing-runtime/provider-gaia-x-edc`](./integration/resource-sharing/resource-sharing-runtime/provider-gaia-x-edc) | placed | ✅ |
 | Gaia-X-EDC | [simpl-catalogue-client](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-catalogue-client) | [`integration/resource-discovery/search-engine/catalogue-client-application`](./integration/resource-discovery/search-engine/catalogue-client-application) | placed | ✅ |
-| Gaia-X-EDC | simpl-contract-negotiation-mockuop | — | pending | ⚠️ Does have code, but untouched since a year. Defunct? |
+| Gaia-X-EDC | simpl-contract-negotiation-mockuop | — | pending | 🚧 Does have code, but untouched since a year. Defunct? |
 | Gaia-X-EDC | [simpl-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-edc) | [`integration/resource-sharing/resource-sharing-runtime/connector`](./integration/resource-sharing/resource-sharing-runtime/connector) | placed | ✅ |
 | Gaia-X-EDC | [simpl-fc-service](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-fc-service) | [`integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue`](./integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue) | placed | ✅ |
 | Gaia-X-EDC | [simpl-files](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-files) | [`data/supporting-data-services/common/postgres-deployment-values`](./data/supporting-data-services/common/postgres-deployment-values) | placed | ⚠️ Helm values overrides for fc-service / EDC provider / EDC consumer Postgres; upstream repo name is a misnomer (no files, no charts — just values) |
@@ -104,9 +104,9 @@ Notes:
 | IAA | [agent-iaa/participant-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/participant-iaa) | [`cross-cutting/agents/agent-iaa/participant-iaa`](./cross-cutting/agents/agent-iaa/participant-iaa) | placed | ✅ |
 | IAA | [agent-iaa/provider-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/provider-iaa) | [`cross-cutting/agents/agent-iaa/provider-iaa`](./cross-cutting/agents/agent-iaa/provider-iaa) | placed | ✅ |
 | IAA | [agent-iaa/provider-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/provider-iaa) | [`security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider`](./security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider) | placed | ✅ |
-| IAA | authentication provider | — | pending | ⚠️ |
-| IAA | charts | — | pending | ⚠️ |
-| IAA | cli | — | pending | ⚠️ |
+| IAA | [authentication-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/authentication-provider) | [`security/access-control-and-trust/authentication-provider-federation/authentication-provider`](./security/access-control-and-trust/authentication-provider-federation/authentication-provider) | placed | ✅ Central authentication backend microservice; deployed per-agent via the agent-IAA Helm umbrellas |
+| IAA | [charts](https://code.europa.eu/simpl/simpl-open/development/iaa/charts) | — | pending | 🚧 Archived upstream  |
+| IAA | [cli](https://code.europa.eu/simpl/simpl-open/development/iaa/cli) | [`cross-cutting/utils/iaa-cli`](./cross-cutting/utils/iaa-cli) | placed | 🚧 Archived upstream  |
 | IAA | [common](https://code.europa.eu/simpl/simpl-open/development/iaa/common) | [`security/access-control-and-trust/common/iaa-common`](./security/access-control-and-trust/common/iaa-common) | placed | ✅ |
 | IAA | documentation | — | pending | ⚠️ |
 | IAA | [echo-backend](https://code.europa.eu/simpl/simpl-open/development/iaa/echo-backend) | [`cross-cutting/samples/echo-backend`](./cross-cutting/samples/echo-backend) | placed | ✅ |
@@ -117,7 +117,7 @@ Notes:
 | IAA | [fe-authentication-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-authentication-provider) | [`security/access-control-and-trust/authentication-provider-federation/fe-authentication-provider`](./security/access-control-and-trust/authentication-provider-federation/fe-authentication-provider) | placed | ✅ |
 | IAA | [fe-identity-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-identity-provider) | [`security/access-control-and-trust/identity-provider-federation/fe-identity-provider`](./security/access-control-and-trust/identity-provider-federation/fe-identity-provider) | placed | ✅ |
 | IAA | [fe-onboarding](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-onboarding) | [`governance/participant-management/onboarding/fe-onboarding`](./governance/participant-management/onboarding/fe-onboarding) | placed | ✅ |
-| IAA | fe-openapi-clients | — | pending | ⚠️ |
+| IAA | [fe-openapi-clients](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-openapi-clients) | [`cross-cutting/samples/fe-openapi-clients`](./cross-cutting/samples/fe-openapi-clients) | placed | ⚠️ Sparse upstream — REST API definitions used as input to a client-generation pipeline (typed/mocks). Treat as reference, not a deployable service. |
 | IAA | [fe-security-attribute-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-security-attribute-provider) | [`security/access-control-and-trust/security-attribute-provider-federation/fe-security-attribute-provider`](./security/access-control-and-trust/security-attribute-provider-federation/fe-security-attribute-provider) | placed | ✅ |
 | IAA | [fe-users-and-roles](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-users-and-roles) | [`governance/participant-management/user-roles/fe-users-roles`](./governance/participant-management/user-roles/fe-users-roles) | placed | ✅ |
 | IAA | [Identity provider](https://code.europa.eu/simpl/simpl-open/development/iaa/identity-provider) | [`security/access-control-and-trust/identity-provider-federation/identity-provider`](./security/access-control-and-trust/identity-provider-federation/identity-provider) | placed | ✅ |

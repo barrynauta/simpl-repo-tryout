@@ -1,0 +1,10 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/cli
+status: archived
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/cli.
+  Archived upstream — README explicitly says "no longer maintained" and "do not
+  install components using this repository". Originally a Kubernetes-job-driven
+  Java/Maven CLI for IAA component initialisation (authority/participant agent
+  bootstrap, Keycloak client configuration). Kept in the catalogue as a
+  configuration-pattern reference.

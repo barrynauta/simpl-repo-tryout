@@ -109,6 +109,9 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 |-------------|-------------|
 | `iaa/ejbca-preconfig` | [cross-cutting/samples/ejbca-preconfig/](cross-cutting/samples/ejbca-preconfig/README.md) |
 | `iaa/cli` *(archived)* | [cross-cutting/utils/iaa-cli/](cross-cutting/utils/iaa-cli/README.md) |
+| `iaa/authentication-provider` | [security/access-control-and-trust/authentication-provider-federation/authentication-provider/](security/access-control-and-trust/authentication-provider-federation/authentication-provider/README.md) |
+| `iaa/fe-openapi-clients` | [cross-cutting/samples/fe-openapi-clients/](cross-cutting/samples/fe-openapi-clients/README.md) |
+| `iaa/charts` *(archived)* | _Skipped — README explicitly says "do not install components using this repository"; superseded by per-component charts. Documentation moved to iaa/documentation._ |
 | `data1/sdtooling-sd-schemas` (utility part) | [cross-cutting/utils/sd-schemas-util/](cross-cutting/utils/sd-schemas-util/README.md) |
 | `iaa/simpl-http-client` | [cross-cutting/libs/simpl-http-client/](cross-cutting/libs/simpl-http-client/README.md) |
 | [`data1/common`](https://code.europa.eu/simpl/simpl-open/development/data1/common) | [data/supporting-data-services/common/data-services-common/](data/supporting-data-services/common/data-services-common/README.md) (placed; aggregates multiple concerns, candidate for upstream modularisation — see README) |
