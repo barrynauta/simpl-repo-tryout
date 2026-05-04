@@ -125,7 +125,7 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 | `monitoring/authority-monitoring` | [cross-cutting/agents/agent-monitoring/authority-monitoring/](cross-cutting/agents/agent-monitoring/authority-monitoring/README.md) |
 | `monitoring/consumer-monitoring` | [cross-cutting/agents/agent-monitoring/consumer-monitoring/](cross-cutting/agents/agent-monitoring/consumer-monitoring/README.md) |
 | `monitoring/provider-monitoring` | [cross-cutting/agents/agent-monitoring/provider-monitoring/](cross-cutting/agents/agent-monitoring/provider-monitoring/README.md) |
-| `data1/simpl-vue-components` | [cross-cutting/libs/participant-fe-components/](cross-cutting/libs/participant-fe-components/README.md) |
+| `data1/simpl-vue-components` | [cross-cutting/libs/simpl-vue-components/](cross-cutting/libs/simpl-vue-components/README.md) |
 | `contract-billing/common` | [governance/contract-management/common/contract-billing-common/](governance/contract-management/common/contract-billing-common/README.md) |
 | `contract-billing/common_logging` | [administration/observability/logging/common-logging-java/](administration/observability/logging/common-logging-java/README.md) |
 | `contract-billing/common_logging_python` | [administration/observability/logging/common-logging-python/](administration/observability/logging/common-logging-python/README.md) |

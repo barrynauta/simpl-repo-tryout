@@ -1,0 +1,7 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/echo-frontend
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/echo-frontend.
+  Sample frontend pairing with echo-backend; demonstrates Tier 1 / Tier 2 IAA
+  authentication flow integration. Starting template for new Simpl-Open frontends.

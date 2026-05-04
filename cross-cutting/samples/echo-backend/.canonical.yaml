@@ -1,0 +1,8 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/echo-backend
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/echo-backend.
+  Sample Java service demonstrating the Tier 1 / Tier 2 IAA integration pattern
+  (keystore config, client-cert handshake, token validation, HTTP-client setup)
+  used as a starting template for new Simpl-Open backend microservices.

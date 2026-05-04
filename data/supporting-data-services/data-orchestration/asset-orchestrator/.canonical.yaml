@@ -1,6 +1,8 @@
-canonical_url: null
-status: roadmap
-last_synced: 2026-05-01
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/asset-orchestrator
+status: prototype
+last_synced: 2026-05-04
 notes: |
-  Roadmap stub — no source repository on code.europa.eu yet.
-  xlsx note: Not yet existing
+  Source — code.europa.eu/simpl/simpl-open/development/orchestration-platform/asset-orchestrator.
+  Java/Maven service bridging the Provider Connector and the Workflow Engine
+  (Dagster). Exposes REST APIs to register, validate, and execute workflows
+  associated with catalogue assets. Owned by the orchestration-platform team.

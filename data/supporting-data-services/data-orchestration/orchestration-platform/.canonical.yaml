@@ -1,6 +1,10 @@
-canonical_url: null
-status: roadmap
-last_synced: 2026-05-01
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/provider-orchestration-platform
+status: prototype
+last_synced: 2026-05-04
 notes: |
-  Roadmap stub — no source repository on code.europa.eu yet.
-  Not in xlsx.
+  Source — code.europa.eu/simpl/simpl-open/development/orchestration-platform/provider-orchestration-platform.
+  Provider-side deployment composition for the orchestration platform — ArgoCD
+  application manifest + Helm umbrella chart that bundles the dagster fork and
+  asset-orchestrator sub-charts with per-environment app-values. Catalogued under
+  the data-orchestration capability rather than cross-cutting/agents/ because
+  the orchestration capability is dimension-specific (data), not cross-cutting.

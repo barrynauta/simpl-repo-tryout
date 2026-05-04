@@ -28,9 +28,15 @@ Sorted by new path. Status values: `prototype` = active CE repo; `prototype-inte
 | `cross-cutting/agents/data-provider-agent` | Data Provider Agent | https://code.europa.eu/simpl/simpl-open/development/agents/data-provider | Agents | data-provider | prototype |
 | `cross-cutting/agents/governance-authority-agent` | Governance Authority Agent | https://code.europa.eu/simpl/simpl-open/development/agents/governance-authority | Agents | governance-authority | prototype |
 | `cross-cutting/agents/infrastructure-provider-agent` | Infrastructure Provider Agent | https://code.europa.eu/simpl/simpl-open/development/agents/infrastructure-provider | Agents | infrastructure-provider | prototype |
+| `cross-cutting/libs/simpl-vue-components` | simpl-vue-components | https://code.europa.eu/simpl/simpl-open/development/data1/simpl-vue-components | data1 | simpl-vue-components | prototype |
 | `cross-cutting/samples/contract-billing-stubs` | contract-billing-stubs | https://code.europa.eu/simpl/simpl-open/development/contract-billing/stubs | Contract-billing | stubs | prototype |
+| `cross-cutting/samples/echo-backend` | echo-backend | https://code.europa.eu/simpl/simpl-open/development/iaa/echo-backend | IAA | echo-backend | prototype |
+| `cross-cutting/samples/echo-frontend` | echo-frontend | https://code.europa.eu/simpl/simpl-open/development/iaa/echo-frontend | IAA | echo-frontend | prototype |
 | `cross-cutting/samples/edelivery` | eDelivery | https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/edelivery | Gaia-X-EDC | edelivery | prototype |
+| `cross-cutting/samples/eidas-demo-keycloak-extension` | eidas-demo-keycloak-extension | https://code.europa.eu/simpl/simpl-open/development/iaa/eidas-demo-keycloak-extension | IAA | eidas-demo-keycloak-extension | prototype |
+| `cross-cutting/samples/eidas-demo-node-deploy` | eidas-demo-node-deploy | https://code.europa.eu/simpl/simpl-open/development/iaa/eidas-demo-node-deploy | IAA | eidas-demo-node-deploy | prototype |
 | `cross-cutting/samples/ejbca-preconfig` | EJBCA Preconfig | https://code.europa.eu/simpl/simpl-open/development/iaa/ejbca-preconfig | IAA | ejbca-preconfig | prototype |
+| `cross-cutting/samples/microfrontend-framework` | microfrontend-framework | https://code.europa.eu/simpl/simpl-open/development/iaa/microfrontend-framework | IAA | microfrontend-framework | prototype |
 | `data/data-processing/anonymisation-and-pseudonymisation/data-processing` | data-processing | https://code.europa.eu/simpl/simpl-open/development/data-services/data-processing | data-services | data-processing | prototype |
 | `data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation` | Dataframe-Level Anonymisation | https://code.europa.eu/simpl/simpl-open/development/data-services/dataframe-level-anonymisation | data-services | dataframe-level-anonymisation | prototype |
 | `data/data-processing/anonymisation-and-pseudonymisation/field-level-pseudo-anonymisation` | Field-Level Pseudo-Anonymisation | https://code.europa.eu/simpl/simpl-open/development/data-services/field-level-pseudo-anonymisation | data-services | field-level-pseudonimysation | prototype |
@@ -49,12 +55,12 @@ Sorted by new path. Status values: `prototype` = active CE repo; `prototype-inte
 | `data/semantics-and-vocabulary/vocabulary-hub/vocabulary-management` | Vocabulary Management | — | — | — | roadmap |
 | `data/supporting-data-services/common/data-services-common` | data-services-common | https://code.europa.eu/simpl/simpl-open/development/data1/common | data1 | common | prototype |
 | `data/supporting-data-services/common/postgres-cluster` | postgres-cluster | https://code.europa.eu/simpl/simpl-open/development/common-components/postgres-cluster | Common-components | postgres-cluster | prototype |
-| `data/supporting-data-services/data-orchestration/asset-orchestrator` | Asset Orchestrator | — | — | — | roadmap |
+| `data/supporting-data-services/data-orchestration/asset-orchestrator` | asset-orchestrator | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/asset-orchestrator | orchestration-platform | asset-orchestrator | prototype |
 | `data/supporting-data-services/data-orchestration/dagster` | Simpl Dagster deployment artefact | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/dagster | orchestration-platform | dagster | prototype |
 | `data/supporting-data-services/data-orchestration/dagster-dev-local` | Simpl Dagster local-development variant | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/dagster-dev-local | orchestration-platform | dagster-dev-local | prototype |
 | `data/supporting-data-services/data-orchestration/gateway-oauth2-client` | Gateway OAuth2 Client | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/gateway-oauth2-client | orchestration-platform | gateway-oauth2-client | prototype |
 | `data/supporting-data-services/data-orchestration/gitea` | Gitea (orchestration platform) | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/gitea | orchestration-platform | gitea | prototype |
-| `data/supporting-data-services/data-orchestration/orchestration-platform` | Orchestration Platform | — | — | — | roadmap |
+| `data/supporting-data-services/data-orchestration/orchestration-platform` | provider-orchestration-platform | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/provider-orchestration-platform | orchestration-platform | provider-orchestration-platform | prototype |
 | `governance/consent-management/consent-management/consent-management` | Consent Management | — | — | — | roadmap |
 | `governance/contract-management/common/contract-billing-common` | contract-billing-common | https://code.europa.eu/simpl/simpl-open/development/contract-billing/common | Contract-billing | common | prototype |
 | `governance/contract-management/contract-establishment/contract-manager` | Contract Manager | — | — | — | roadmap |

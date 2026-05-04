@@ -193,7 +193,7 @@ After reconciliation, **18 xlsx categories remain without a catalogue solution f
 - `access-control-trust/common` — 2 repo(s): java-common, js-commons
 - `external-dependencies` — 3 repo(s): kafka, openbao, postgresql
 - `observability/logging` — 1 repo(s): logger
-- `supporting-services/libs` — 5 repo(s): simpl-http-client, participant-fe-components
+- `supporting-services/libs` — 5 repo(s): simpl-http-client, simpl-vue-components
 - `supporting-services/samples` — 4 repo(s): sd-schemas, eidas-demo-keycloak-extension, echo-backend, echo-frontend
 - `supporting-services/tests` — 2 repo(s): iaa-api-tests, iaa-ui-tests
 - `supporting-services/utils` — 3 repo(s): ejbca-preconfig, iaa-cli, sd-schemas-util

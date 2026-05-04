@@ -1,0 +1,8 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/eidas-demo-keycloak-extension
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/eidas-demo-keycloak-extension.
+  Custom Keycloak SPI that lets a realm authenticate end-users via an eIDAS
+  Demo Node as an external IdP. Demo / development purposes only — pairs with
+  eidas-demo-node-deploy.

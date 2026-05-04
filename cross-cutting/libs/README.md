@@ -19,4 +19,4 @@ Shared libraries consumed by multiple solutions across the capability map. Java,
 
 ## Frontend
 
-- [participant-fe-components/](participant-fe-components/README.md) — Vue.js component library aligned to the Simpl Figma design system.
+- [simpl-vue-components/](simpl-vue-components/README.md) — Vue 3 design-system library (`@simpl/vue-components`) — Tailwind theme, PrimeVue (unstyled) components, typography, icons. Used by every Simpl-Open frontend.

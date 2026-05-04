@@ -1,0 +1,8 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/microfrontend-framework
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/microfrontend-framework.
+  Reference Webpack Module Federation skeleton — one Angular shell plus three
+  framework remotes (Angular, React, Vue). Demonstrates the runtime-loaded
+  microfrontend pattern adopted by Simpl-Open UIs.
