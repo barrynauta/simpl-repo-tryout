@@ -1,0 +1,11 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-files
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-files.
+  Three Helm values.yaml overrides for the upstream Bitnami PostgreSQL chart,
+  customised for the Postgres instances backing the EDC/catalogue stack
+  (fc-service, EDC provider, EDC consumer). Despite the upstream repo name
+  ("simpl-files") and its top-level README claim ("helm chart store"), the
+  repo contains values, not charts. See solution README for the consumer-mapping
+  table and the naming-misnomer note.

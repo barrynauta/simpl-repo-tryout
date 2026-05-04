@@ -55,6 +55,7 @@ Sorted by new path. Status values: `prototype` = active CE repo; `prototype-inte
 | `data/semantics-and-vocabulary/vocabulary-hub/vocabulary-management` | Vocabulary Management | — | — | — | roadmap |
 | `data/supporting-data-services/common/data-services-common` | data-services-common | https://code.europa.eu/simpl/simpl-open/development/data1/common | data1 | common | prototype |
 | `data/supporting-data-services/common/postgres-cluster` | postgres-cluster | https://code.europa.eu/simpl/simpl-open/development/common-components/postgres-cluster | Common-components | postgres-cluster | prototype |
+| `data/supporting-data-services/common/postgres-deployment-values` | postgres-deployment-values | https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-files | Gaia-X-EDC | simpl-files | prototype |
 | `data/supporting-data-services/data-orchestration/asset-orchestrator` | asset-orchestrator | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/asset-orchestrator | orchestration-platform | asset-orchestrator | prototype |
 | `data/supporting-data-services/data-orchestration/dagster` | Simpl Dagster deployment artefact | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/dagster | orchestration-platform | dagster | prototype |
 | `data/supporting-data-services/data-orchestration/dagster-dev-local` | Simpl Dagster local-development variant | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/dagster-dev-local | orchestration-platform | dagster-dev-local | prototype |

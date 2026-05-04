@@ -120,7 +120,7 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 | `data1/simpl-mock-services` | _Skipped — empty upstream repo (LICENSE + README only, no source). Re-evaluate when content lands._ |
 | `data1/xfsc-advsearch-be` | [integration/resource-discovery/search-engine/xfsc-advanced-search/](integration/resource-discovery/search-engine/xfsc-advanced-search/README.md) |
 | `gaia-x-edc/simpl-fc-service` | [integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/](integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/README.md) |
-| `gaia-x-edc/simpl-files` | _Skipped — sparse upstream repo (README states purpose is "to store commonly used helm charts"; only content is a postgres chart, which is already catalogued at `data/supporting-data-services/common/postgres-cluster/` via `common-components/postgres-cluster`). Re-evaluate if/when this repo gains distinctive content._ |
+| `gaia-x-edc/simpl-files` | [data/supporting-data-services/common/postgres-deployment-values/](data/supporting-data-services/common/postgres-deployment-values/README.md) (Helm values overrides for fc-service, EDC provider, EDC consumer Postgres instances; not a chart despite the upstream README claim) |
 | `gaia-x-edc/simpl-signer` | _Skipped — deployment-only repo (Helm charts + ArgoCD manifests wrapping upstream Eclipse XFSC TSA Signer images). No source. Status unclear — current Simpl agent compositions use `simpl-signing-service` (contract-billing/signing-service); not referenced from any active agent chart. Re-evaluate if/when an active deployment surfaces._ |
 | `monitoring/authority-monitoring` | [cross-cutting/agents/agent-monitoring/authority-monitoring/](cross-cutting/agents/agent-monitoring/authority-monitoring/README.md) |
 | `monitoring/consumer-monitoring` | [cross-cutting/agents/agent-monitoring/consumer-monitoring/](cross-cutting/agents/agent-monitoring/consumer-monitoring/README.md) |
@@ -164,7 +164,6 @@ These exist in the source group but contain only stub READMEs or empty files; th
 |-------------|--------|-------|
 | `gaia-x-edc/edc-extensions` | stub README only | Reserved for custom EDC extensions; no implementation yet. |
 | `gaia-x-edc/Connector` | empty README | Capital-C duplicate / placeholder; the real EDC fork is `simpl-edc` mapped to `integration/resource-sharing/resource-sharing-runtime/connector/`. |
-| `gaia-x-edc/simpl-files` | one-line README | "Helm chart store"; partially referenced from [contract-template-datastore](governance/contract-management/contract-establishment/contract-template-datastore/README.md) as the interim datastore. |
 | `gaia-x-edc/simpl-schema-versioning` | stub README only | Likely a schema-versioning utility for the schema management service. |
 | `gaia-x-edc/simpl-contract-negotiation-mockup` | stub README only | Mock used in early development of contract negotiation. |
 | `gaia-x-edc/authority-gaia-x-edc` | stub README only | Authority-specific EDC composition placeholder; superseded by [governance-authority-agent](cross-cutting/agents/governance-authority-agent/README.md). |
