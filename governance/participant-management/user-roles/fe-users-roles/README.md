@@ -15,7 +15,7 @@
 
 Frontend (Angular) for the **User-roles** business service. UI used by Provider/Consumer operators and applicants to manage end-user roles, request roles, map identity attributes, and create applicant accounts during onboarding.
 
-> **Scope note.** This folder represents the frontend solution. Most documentation under `doc/`, `api/`, and `documents/` was originally bundled with the backend repository (`iaa/users-roles`) and is preserved here for reference until a dedicated backend solution folder is added — see [Source code](#source-code) below for the upstream backend repository.
+> **Scope note.** This folder represents the frontend solution. Most documentation under `doc/` and `api/` was originally bundled with the backend repository (`iaa/users-roles`) and is preserved here for reference until a dedicated backend solution folder is added — see [Source code](#source-code) below for the upstream backend repository.
 
 Capability-map placement: `governance / participant-management / user-roles / fe-users-roles`. This solution implements the frontend half of the **User-roles** business service.
 
@@ -48,7 +48,7 @@ Provenance: built by Simpl. Source repositories: `iaa/users-roles` (backend, Jav
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (4 files), `iaa-2.11.x/` (1 file), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (4 files), `iaa-2.11.x/` (1 file), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
 
 ## Source code
 

@@ -27,7 +27,7 @@ Provenance: planned — no dedicated source repository yet. **Interim implementa
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (1 file).
 
 ## Source code
 

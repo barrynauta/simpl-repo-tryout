@@ -16,8 +16,4 @@ Provides access to high-performance compute resources for large-scale simulation
 
 ## Solutions
 
-- [OpenHPC](openhpc/README.md) — see stub for FTA reference and MAPPING row.
-
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 86. FTA references vary per solution and are recorded inside each solution's stub README.
+_None placed yet — capability slot reserved for future HPC solutions._

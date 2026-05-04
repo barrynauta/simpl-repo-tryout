@@ -106,7 +106,7 @@ Notes:
 | IAA | [agent-iaa/provider-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/provider-iaa) | [`security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider`](./security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider) | placed | ✅ |
 | IAA | [authentication-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/authentication-provider) | [`security/access-control-and-trust/authentication-provider-federation/authentication-provider`](./security/access-control-and-trust/authentication-provider-federation/authentication-provider) | placed | ✅  |
 | IAA | [charts](https://code.europa.eu/simpl/simpl-open/development/iaa/charts) | — | pending | 🚧 Archived upstream  |
-| IAA | [cli](https://code.europa.eu/simpl/simpl-open/development/iaa/cli) | [`cross-cutting/utils/iaa-cli`](./cross-cutting/utils/iaa-cli) | placed | 🚧 Archived upstream  |
+| IAA | [cli](https://code.europa.eu/simpl/simpl-open/development/iaa/cli) | — | pending | 🚧 Archived upstream — removed from catalogue (was at cross-cutting/utils/iaa-cli) |
 | IAA | [common](https://code.europa.eu/simpl/simpl-open/development/iaa/common) | [`security/access-control-and-trust/common/iaa-common`](./security/access-control-and-trust/common/iaa-common) | placed | ✅ |
 | IAA | documentation | — | pending | 🚧 Archived upstream |
 | IAA | [echo-backend](https://code.europa.eu/simpl/simpl-open/development/iaa/echo-backend) | [`cross-cutting/samples/echo-backend`](./cross-cutting/samples/echo-backend) | placed | ✅ |

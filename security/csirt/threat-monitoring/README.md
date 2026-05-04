@@ -16,8 +16,4 @@ Continuously monitors for indicators of compromise and emerging vulnerabilities.
 
 ## Solutions
 
-- [MISP](misp/README.md) — see stub for FTA reference and MAPPING row.
-
-## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 107. FTA references vary per solution and are recorded inside each solution's stub README.
+_None placed yet — capability slot reserved for future threat-monitoring tooling._

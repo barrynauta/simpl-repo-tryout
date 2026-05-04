@@ -29,7 +29,7 @@ Note: the architecture spec frames this component both as a Connector extension/
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (6 files).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-manual/` (6 files).
 
 ## Source code
 

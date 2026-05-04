@@ -30,7 +30,7 @@ This library bundles five small but distinct concerns into a single jar: `except
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-guide/` (1 file).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `installation-guide/` (1 file), `upgrade-guide/` (1 file), `user-guide/` (1 file).
 
 ## Source
 

@@ -15,7 +15,7 @@
 
 Frontend (Angular) for the **Onboarding** business service. UI used by applicants to submit onboarding requests and by the Governance Authority to review, approve, or reject them.
 
-> **Scope note.** This folder represents the frontend solution. Most documentation under `doc/`, `api/`, and `documents/` was originally bundled with the backend repository (`iaa/onboarding`) and is preserved here for reference until a dedicated backend solution folder is added — see [Source code](#source-code) below for the upstream backend repository.
+> **Scope note.** This folder represents the frontend solution. Most documentation under `doc/` and `api/` was originally bundled with the backend repository (`iaa/onboarding`) and is preserved here for reference until a dedicated backend solution folder is added — see [Source code](#source-code) below for the upstream backend repository.
 
 ## Underlying business process
 
@@ -50,7 +50,7 @@ Provenance: built by Simpl. Source repository (this folder, frontend): `iaa/fe-o
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (4 files), `iaa-2.11.x/` (6 files), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (4 files), `iaa-2.11.x/` (6 files), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
 
 ## Source code
 

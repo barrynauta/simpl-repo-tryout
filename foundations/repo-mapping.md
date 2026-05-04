@@ -196,7 +196,7 @@ After reconciliation, **18 xlsx categories remain without a catalogue solution f
 - `supporting-services/libs` — 5 repo(s): simpl-http-client, simpl-vue-components
 - `supporting-services/samples` — 4 repo(s): sd-schemas, eidas-demo-keycloak-extension, echo-backend, echo-frontend
 - `supporting-services/tests` — 2 repo(s): iaa-api-tests, iaa-ui-tests
-- `supporting-services/utils` — 3 repo(s): ejbca-preconfig, iaa-cli, sd-schemas-util
+- `supporting-services/utils` — 3 repo(s): ejbca-preconfig, sd-schemas-util
 
 ## Updating this mapping
 

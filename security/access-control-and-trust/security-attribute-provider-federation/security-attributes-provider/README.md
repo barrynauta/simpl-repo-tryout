@@ -46,7 +46,7 @@ Note on naming: the capability in the capmap uses the singular `security-attribu
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (4 files), `iaa-2.11.x/` (2 files), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (4 files), `iaa-2.11.x/` (2 files), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
 
 ## Source code
 

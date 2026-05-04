@@ -52,7 +52,7 @@ Provenance: built by Simpl. Java/Maven service deployed as part of the Provider 
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), 1 top-level markdown file.
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file), 1 top-level markdown file.
 
 ## Source code
 

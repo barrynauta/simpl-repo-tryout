@@ -44,7 +44,7 @@ Provenance: built by Simpl. Source repositories: `iaa/identity-provider` (backen
 
 ## Documentation (imported from source)
 
-[`documents/`](documents/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (6 files), `iaa-2.11.x/` (1 file), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
+[`doc/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `frontend/` (6 files), `iaa-2.11.x/` (1 file), `installation-guide/` (2 files), `upgrade-guide/` (1 file), `user-manual/` (1 file).
 
 ## Source code
 

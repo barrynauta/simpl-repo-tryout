@@ -41,7 +41,6 @@ Sorted by new path. Status values: `prototype` = active CE repo; `prototype-inte
 | `cross-cutting/samples/ejbca-preconfig` | EJBCA Preconfig | https://code.europa.eu/simpl/simpl-open/development/iaa/ejbca-preconfig | IAA | ejbca-preconfig | prototype |
 | `cross-cutting/samples/fe-openapi-clients` | fe-openapi-clients | https://code.europa.eu/simpl/simpl-open/development/iaa/fe-openapi-clients | IAA | fe-openapi-clients | prototype |
 | `cross-cutting/samples/microfrontend-framework` | microfrontend-framework | https://code.europa.eu/simpl/simpl-open/development/iaa/microfrontend-framework | IAA | microfrontend-framework | prototype |
-| `cross-cutting/utils/iaa-cli` | iaa-cli | https://code.europa.eu/simpl/simpl-open/development/iaa/cli | IAA | cli | archived |
 | `data/data-processing/anonymisation-and-pseudonymisation/data-processing` | data-processing | https://code.europa.eu/simpl/simpl-open/development/data-services/data-processing | data-services | data-processing | prototype |
 | `data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation` | Dataframe-Level Anonymisation | https://code.europa.eu/simpl/simpl-open/development/data-services/dataframe-level-anonymisation | data-services | dataframe-level-anonymisation | prototype |
 | `data/data-processing/anonymisation-and-pseudonymisation/field-level-pseudo-anonymisation` | Field-Level Pseudo-Anonymisation | https://code.europa.eu/simpl/simpl-open/development/data-services/field-level-pseudo-anonymisation | data-services | field-level-pseudonimysation | prototype |
@@ -83,7 +82,6 @@ Sorted by new path. Status values: `prototype` = active CE repo; `prototype-inte
 | `governance/resource-management/metadata-description/sd-manager` | SD Manager | — | — | — | roadmap |
 | `governance/resource-management/metadata-description/validation-backend` | Validation Backend (SD syntax + address) | https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be | data1 | sdtooling-validation-api-be | prototype |
 | `governance/resource-management/metadata-description/xfsc-sd-tooling` | XFSC SD Tooling | — | — | — | roadmap |
-| `infrastructure/hpc/hpc/openhpc` | OpenHPC | — | — | — | external-oss |
 | `infrastructure/provisioning/infrastructure-provisioning/infrastructure-be` | infrastructure-be | https://code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-be | Infrastructure | infrastructure-be | prototype |
 | `infrastructure/provisioning/infrastructure-provisioning/infrastructure-crossplane` | infrastructure-crossplane | https://code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-crossplane | Infrastructure | infrastructure-crossplane | prototype |
 | `infrastructure/provisioning/infrastructure-provisioning/infrastructure-crossplane-dependences` | infrastructure-crossplane-dependences | https://code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-crossplane-dependences | Infrastructure | infrastructure-crossplane-dependences | prototype |
@@ -133,7 +131,3 @@ Sorted by new path. Status values: `prototype` = active CE repo; `prototype-inte
 | `security/credential-management/signing/signer-service` | Signer Service | https://code.europa.eu/simpl/simpl-open/development/contract-billing/signing-service | Contract-billing | signing-service | prototype |
 | `security/credential-management/vc-issuance-verification/vc-issuer` | VC Issuer | https://code.europa.eu/simpl/simpl-open/development/contract-billing/vc-issuer-service | Contract-billing | vc-issuer-service | prototype |
 | `security/credential-management/wallet/wallet` | Wallet | — | — | — | roadmap |
-| `security/credential-management/wallet/xfsc-ocm` | XFSC Organisational Credential Manager (OCM) | — | — | — | roadmap |
-| `security/credential-management/wallet/xfsc-pcm` | XFSC PCM (Personal Credential Manager) | — | — | — | roadmap |
-| `security/csirt/incident-response/thehive` | TheHive | — | — | — | external-oss |
-| `security/csirt/threat-monitoring/misp` | MISP | — | — | — | external-oss |

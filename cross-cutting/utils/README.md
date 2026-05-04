@@ -15,5 +15,4 @@ Operational utilities and command-line tools used during deployment, bootstrap, 
 
 ## Utilities
 
-- [iaa-cli/](iaa-cli/README.md) — Kubernetes-job-driven CLI for IAA component initialisation. **Archived** — examples only.
 - [sd-schema-util/](sd-schema-util/README.md) — Python tool that generates ontology and SHACL shape files from YAML definitions for the XFSC Federated Catalogue.
