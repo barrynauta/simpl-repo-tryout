@@ -145,4 +145,4 @@ Notes:
 | orchestration-platform | [data-analytic-visualisation](https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/data-analytic-visualisation) | [`data/data-processing/data-visualisation/data-analytic-visualisation`](./data/data-processing/data-visualisation/data-analytic-visualisation) | placed | ✅ |
 | orchestration-platform | [gateway-oauth2-client](https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/gateway-oauth2-client) | [`data/supporting-data-services/data-orchestration/gateway-oauth2-client`](./data/supporting-data-services/data-orchestration/gateway-oauth2-client) | placed | ✅ |
 | orchestration-platform | [gitea](https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/gitea) | [`data/supporting-data-services/data-orchestration/gitea`](./data/supporting-data-services/data-orchestration/gitea) | placed | ✅ |
-| orchestration-platform | provider-orchestration-platform | — | pending | ✅ |
+| orchestration-platform | provider-orchestration-platform | — | pending | ⚠️ |

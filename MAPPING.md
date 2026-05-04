@@ -111,7 +111,7 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 | `iaa/cli` *(archived)* | [cross-cutting/utils/iaa-cli/](cross-cutting/utils/iaa-cli/README.md) |
 | `data1/sdtooling-sd-schemas` (utility part) | [cross-cutting/utils/sd-schemas-util/](cross-cutting/utils/sd-schemas-util/README.md) |
 | `iaa/simpl-http-client` | [cross-cutting/libs/simpl-http-client/](cross-cutting/libs/simpl-http-client/README.md) |
-| `data1/common` | _Skipped — god library that mixes HTTP/Feign plumbing, JWT auth, exceptions, ODRL contract models, schema-sync clients, and self-description utilities into one jar. Violates Simpl modularity. Re-catalogue per properly-scoped module once upstream splits the library._ |
+| [`data1/common`](https://code.europa.eu/simpl/simpl-open/development/data1/common) | [data/supporting-data-services/common/data-services-common/](data/supporting-data-services/common/data-services-common/README.md) (placed; aggregates multiple concerns, candidate for upstream modularisation — see README) |
 | `data1/common-adapter` | [integration/resource-sharing/resource-sharing-runtime/common/connector-model-common/](integration/resource-sharing/resource-sharing-runtime/common/connector-model-common/README.md) |
 | `data1/common-tier2` | [security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client/](security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client/README.md) |
 | `data1/consumer-data1` | [cross-cutting/agents/agent-resource-handling/consumer-resource-handling/](cross-cutting/agents/agent-resource-handling/consumer-resource-handling/README.md) |
