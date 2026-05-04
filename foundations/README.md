@@ -39,6 +39,8 @@ This folder contains foundational artefacts describing what Simpl is and should 
 
 - [assumptions-and-decisions.md](assumptions-and-decisions.md) — architectural assumptions and the Architecture Decision Records (ADRs) that constrain the design
 - [functional-traceability.md](functional-traceability.md) — end-to-end mapping from functional requirements to implementing components (FTA §4.6 + Annex 1)
+- [mapping-new-to-canonical.md](mapping-new-to-canonical.md) — every catalogue path → CE source repo URL (canonical-side ledger; sorted by new path; source of truth for `CANONICAL.md` / `.canonical.yaml` generation)
+- [mapping-ce-to-new.md](mapping-ce-to-new.md) — every CE source repo → catalogue path (CE-side ledger; grouped by CE team, with placement status and review column)
 - [changelog.md](changelog.md) — version-by-version delta of the FTA document (FTA §1.3)
 
 ## Deployment, operations, security

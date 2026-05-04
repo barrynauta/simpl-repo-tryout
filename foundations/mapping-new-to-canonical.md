@@ -1,6 +1,59 @@
 # Mapping: New Repo Structure → Canonical
 
-Sorted by new path. Status values: `prototype` = active CE repo; `prototype-interim` = temporary stand-in; `roadmap` = slot reserved, no CE source yet; `external-oss` = third-party OSS, no CE repo.
+This page maps each *catalogue path* to the repository (or repositories) that implement it on `code.europa.eu/simpl/simpl-open/development`. It is the source of truth used to generate `CANONICAL.md` and `.canonical.yaml` files inside each solution folder.
+
+## Sources of truth
+
+- **Catalogue side:** every solution folder under the dimension trees in this repository (`administration/`, `cross-cutting/`, `data/`, `governance/`, `infrastructure/`, `integration/`, `security/`).
+- **Repository side:** the spreadsheet `Repository_reorganisation_-_mapping_as-is_and_to-be_BN.xlsx`, first tab *Repository mapping AS IS-TO PSO* — the working ledger used by the PSO during the repo-reorganisation exercise.
+
+## How to read
+
+- The catalogue uses a `dimension/capability/business-service/solution/` hierarchy. The xlsx uses `capability/business-service/app-service/repository/` — there is no dimension level, and many names differ. The mapping below was reconciled by hand.
+- Each catalogue solution maps to **one or more repositories** in the xlsx. When the count is greater than one, all canonical URLs are listed; the solution as a whole has no single URL.
+- Where a catalogue solution has *no* xlsx counterpart, status is `roadmap` (no source repo yet) or `external-oss` (third-party OSS, no CE repo).
+- For the **inverse view** (CE-source-repo → catalogue path, grouped by CE team, with status + review column), see [mapping-ce-to-new.md](mapping-ce-to-new.md).
+
+## Status values
+
+| Value | Meaning |
+|---|---|
+| `prototype` | Active CE repo with real source code; folder reflects current implementation. |
+| `prototype-interim` | Temporary stand-in (a different repo fills the slot until a dedicated one lands). |
+| `archived` | Upstream repo archived / no longer maintained; folder kept as reference. |
+| `external-oss` | Third-party open-source product, no CE-side source. |
+| `roadmap` | Slot reserved in the capability map, no source code yet. |
+
+## Multi-repo solutions
+
+Some catalogue solutions map to multiple xlsx repositories — typically a `*-backend` and `*-frontend` pair, sometimes with adapters or alternative tier implementations. The CANONICAL files generated from this mapping must list all URLs for these solutions; pointing at only one would mis-represent the implementation.
+
+Notable examples:
+
+- `data/supporting-data-services/data-orchestration/orchestration-platform` — multi-repo (Dagster fork + asset orchestrator + provider deployment composition).
+- `integration/resource-discovery/search-engine/catalogue-client-application` — backend + frontend + contract-consumption + validation backend.
+- `security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider` — backend + frontend.
+- `security/access-control-and-trust/identity-provider-federation/identity-provider` — backend + frontend.
+- `security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider` — backend + frontend (plus business-service mismatch with xlsx, which places it under identity-provider-federation).
+
+## Naming reconciliations
+
+The catalogue has renamed several xlsx names for clarity. Notable cases:
+
+| xlsx name | Catalogue name | Reason |
+|---|---|---|
+| `tier1-authentication-service` / `tier2-authentication-service` | `tier-1-authentication-provider` / `tier-2-authentication-provider` | Catalogue prefers hyphenated `tier-N`; "provider" matches the FTA wording. |
+| `data-sharing/data-sharing-runtime/connector-service` | `integration/resource-sharing/resource-sharing-runtime/connector` | Capability mismatch: xlsx places the EDC connector under `data-sharing/`; catalogue places it under `resource-sharing/` (FTA wording). |
+| `identity-provider-federation/identity-attributes-service` | `security-attribute-provider-federation/security-attributes-provider` | Business-service mismatch: catalogue gives the security-attribute provider its own bsvc; xlsx folds it under identity-provider-federation. Same component. |
+| `data-orchestration-service` | `orchestration-platform` (+ sibling `asset-orchestrator`) | Catalogue splits the xlsx single-asvc into platform vs. orchestrator. |
+| `contract-service` | `contract-manager` | Plain rename (FTA wording). |
+| `catalogue-service` | `simpl-catalogue` | Plain rename. |
+| `catalogue-client-service` | `catalogue-client-application` | Plain rename. |
+| `infrastructure-provisioning-service` | `infrastructure-provisioner` | Catalogue restructured into multiple peer solutions (infrastructure-be, infrastructure-fe, infrastructure-crossplane, infrastructure-provisioner, provider-infrastructure). |
+
+## Mapping table
+
+Sorted by new path. Status values per the table above.
 
 | New Path | Canonical Name | Repository URL | CE Team | CE Solution | Status |
 |---|---|---|---|---|---|

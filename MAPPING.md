@@ -95,87 +95,16 @@ Legend:
 | 124 | Validation Backend | [integration](integration/README.md) | [resource-discovery](integration/resource-discovery/README.md) | [search-engine](integration/resource-discovery/search-engine/README.md) | [integration/resource-discovery/search-engine/validation-backend/](integration/resource-discovery/search-engine/validation-backend/README.md) | §4.3.1, §6.1.2 — syntactic validation of self-descriptions and resource-address parameters |
 | 125 | Infrastructure Consumption Monitoring Service | [administration](administration/README.md) | [observability](administration/observability/README.md) | [dashboarding](administration/observability/dashboarding/README.md) | [administration/observability/dashboarding/infrastructure-consumption-monitoring-service/](administration/observability/dashboarding/infrastructure-consumption-monitoring-service/README.md) | §6.1.3 TCV Static — Monitoring Service (cloud-consumption ingestion sub-component) |
 | 126 | Triggering Module | [infrastructure](infrastructure/README.md) | [provisioning](infrastructure/provisioning/README.md) | [infrastructure-provisioning](infrastructure/provisioning/infrastructure-provisioning/README.md) | [infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/](infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/README.md) | §4.3.1 ACV Static — Infrastructure Provisioning Service; PSO split of `infrastructure-be` |
-
-## Cross-cutting development artefacts (→ cross-cutting/)
-
-Utilities, libraries, and samples — they don't sit on the capability map and are mirrored from the PSO sheet's `supporting-services/` group.
-
-| Source repo | Target path |
-|-------------|-------------|
-| `iaa/ejbca-preconfig` | [cross-cutting/samples/ejbca-preconfig/](cross-cutting/samples/ejbca-preconfig/README.md) |
-| `iaa/cli` *(archived)* | _Skipped — archived upstream, removed from catalogue. Was previously placed at cross-cutting/utils/iaa-cli; removed 2026-05-04._ |
-| `iaa/authentication-provider` | [security/access-control-and-trust/authentication-provider-federation/authentication-provider/](security/access-control-and-trust/authentication-provider-federation/authentication-provider/README.md) |
-| `iaa/fe-openapi-clients` | [cross-cutting/samples/fe-openapi-clients/](cross-cutting/samples/fe-openapi-clients/README.md) |
-| `iaa/charts` *(archived)* | _Skipped — README explicitly says "do not install components using this repository"; superseded by per-component charts. Documentation moved to iaa/documentation._ |
-| `monitoring/eck-monitoring-operator` | [administration/observability/performance-monitoring/eck-monitoring-operator/](administration/observability/performance-monitoring/eck-monitoring-operator/README.md) |
-| `monitoring/monitoring-proxy` | [administration/observability/performance-monitoring/monitoring-proxy/](administration/observability/performance-monitoring/monitoring-proxy/README.md) |
-| `monitoring/monitoring-reporting-fe` | [administration/observability/dashboarding/monitoring-reporting-fe/](administration/observability/dashboarding/monitoring-reporting-fe/README.md) |
-| `data1/sdtooling-sd-schemas` (utility part) | [cross-cutting/utils/sd-schemas-util/](cross-cutting/utils/sd-schemas-util/README.md) |
-| `iaa/simpl-http-client` | [cross-cutting/libs/simpl-http-client/](cross-cutting/libs/simpl-http-client/README.md) |
-| [`data1/common`](https://code.europa.eu/simpl/simpl-open/development/data1/common) | [data/supporting-data-services/common/data-services-common/](data/supporting-data-services/common/data-services-common/README.md) (placed; aggregates multiple concerns, candidate for upstream modularisation — see README) |
-| `data1/common-adapter` | [integration/resource-sharing/resource-sharing-runtime/common/connector-model-common/](integration/resource-sharing/resource-sharing-runtime/common/connector-model-common/README.md) |
-| `data1/common-tier2` | [security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client/](security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client/README.md) |
-| `data1/consumer-data1` | [cross-cutting/agents/agent-resource-handling/consumer-resource-handling/](cross-cutting/agents/agent-resource-handling/consumer-resource-handling/README.md) |
-| `data1/provider-data1` | [cross-cutting/agents/agent-resource-handling/provider-resource-handling/](cross-cutting/agents/agent-resource-handling/provider-resource-handling/README.md) |
-| `data1/simpl-files` | [governance/contract-management/contract-establishment/contract-template-datastore/](governance/contract-management/contract-establishment/contract-template-datastore/README.md) (interim — pending dedicated datastore) |
-| `data1/simpl-mock-services` | _Skipped — empty upstream repo (LICENSE + README only, no source). Re-evaluate when content lands._ |
-| `data1/xfsc-advsearch-be` | [integration/resource-discovery/search-engine/xfsc-advanced-search/](integration/resource-discovery/search-engine/xfsc-advanced-search/README.md) |
-| `gaia-x-edc/simpl-fc-service` | [integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/](integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/README.md) |
-| `gaia-x-edc/simpl-files` | [data/supporting-data-services/common/postgres-deployment-values/](data/supporting-data-services/common/postgres-deployment-values/README.md) (Helm values overrides for fc-service, EDC provider, EDC consumer Postgres instances; not a chart despite the upstream README claim) |
-| `gaia-x-edc/simpl-signer` | [security/credential-management/signing/signer-service/](security/credential-management/signing/signer-service/README.md) (Eclipse XFSC TSA Signer deployment wrapper; folder also catalogues `contract-billing/signing-service` — dual-upstream conflation, follow-up review needed) |
-| `monitoring/authority-monitoring` | [cross-cutting/agents/agent-monitoring/authority-monitoring/](cross-cutting/agents/agent-monitoring/authority-monitoring/README.md) |
-| `monitoring/consumer-monitoring` | [cross-cutting/agents/agent-monitoring/consumer-monitoring/](cross-cutting/agents/agent-monitoring/consumer-monitoring/README.md) |
-| `monitoring/provider-monitoring` | [cross-cutting/agents/agent-monitoring/provider-monitoring/](cross-cutting/agents/agent-monitoring/provider-monitoring/README.md) |
-| `data1/simpl-vue-components` | [cross-cutting/libs/simpl-vue-components/](cross-cutting/libs/simpl-vue-components/README.md) |
-| `contract-billing/common` | [governance/contract-management/common/contract-billing-common/](governance/contract-management/common/contract-billing-common/README.md) |
-| `contract-billing/common_logging` | [administration/observability/logging/common-logging-java/](administration/observability/logging/common-logging-java/README.md) |
-| `contract-billing/common_logging_python` | [administration/observability/logging/common-logging-python/](administration/observability/logging/common-logging-python/README.md) |
-| `iaa/eidas-demo-keycloak-extension` | [cross-cutting/samples/eidas-demo-keycloak-extension/](cross-cutting/samples/eidas-demo-keycloak-extension/README.md) |
-| `iaa/eidas-demo-node-deploy` | [cross-cutting/samples/eidas-demo-node-deploy/](cross-cutting/samples/eidas-demo-node-deploy/README.md) |
-| `iaa/echo-backend` | [cross-cutting/samples/echo-backend/](cross-cutting/samples/echo-backend/README.md) |
-| `iaa/echo-frontend` | [cross-cutting/samples/echo-frontend/](cross-cutting/samples/echo-frontend/README.md) |
-| `iaa/microfrontend-framework/angular-shell` | [cross-cutting/samples/microfrontend-framework/angular-shell/](cross-cutting/samples/microfrontend-framework/angular-shell/README.md) |
-| `iaa/microfrontend-framework/angular-remote` | [cross-cutting/samples/microfrontend-framework/angular-remote/](cross-cutting/samples/microfrontend-framework/angular-remote/README.md) |
-| `iaa/microfrontend-framework/react-remote` | [cross-cutting/samples/microfrontend-framework/react-remote/](cross-cutting/samples/microfrontend-framework/react-remote/README.md) |
-| `iaa/microfrontend-framework/vue-remote` | [cross-cutting/samples/microfrontend-framework/vue-remote/](cross-cutting/samples/microfrontend-framework/vue-remote/README.md) |
-| `agents/consumer` | [cross-cutting/agents/consumer-agent/](cross-cutting/agents/consumer-agent/README.md) |
-| `agents/data-provider` | [cross-cutting/agents/data-provider-agent/](cross-cutting/agents/data-provider-agent/README.md) |
-| `agents/governance-authority` | [cross-cutting/agents/governance-authority-agent/](cross-cutting/agents/governance-authority-agent/README.md) |
-| `agents/application-provider` *(placeholder)* | [cross-cutting/agents/application-provider-agent/](cross-cutting/agents/application-provider-agent/README.md) |
-| `agents/infrastructure-provider` *(placeholder)* | [cross-cutting/agents/infrastructure-provider-agent/](cross-cutting/agents/infrastructure-provider-agent/README.md) |
-| `agents/common_components` | [cross-cutting/agents/common-components/](cross-cutting/agents/common-components/README.md) |
-| `contract-billing/consumer-contract-billing` | [cross-cutting/agents/agent-contract-billing/consumer-contract-billing/](cross-cutting/agents/agent-contract-billing/consumer-contract-billing/README.md) |
-| `contract-billing/provider-contract-billing` | [cross-cutting/agents/agent-contract-billing/provider-contract-billing/](cross-cutting/agents/agent-contract-billing/provider-contract-billing/README.md) |
-| `contract-billing/signing-service` | [security/credential-management/signing/signer-service/](security/credential-management/signing/signer-service/README.md) |
-| `contract-billing/vc-issuer-service` | [security/credential-management/vc-issuance-verification/vc-issuer/](security/credential-management/vc-issuance-verification/vc-issuer/README.md) |
-| `contract-billing/stubs` | [cross-cutting/samples/contract-billing-stubs/](cross-cutting/samples/contract-billing-stubs/README.md) |
-| `contract-billing/simpl-issuance` | _Skipped — empty upstream repo (LICENSE + default gitlab README only, created 28 Apr 2026, never populated). Re-evaluate when source code lands._ |
-| `contract-billing/simpl-storage` | _Skipped — empty upstream repo (LICENSE + default gitlab README only, created 28 Apr 2026, never populated). Re-evaluate when source code lands._ |
-| `common-components/kafka` | [administration/notification-and-messaging/messaging/kafka/](administration/notification-and-messaging/messaging/kafka/README.md) |
-| `common-components/postgres-cluster` | [data/supporting-data-services/common/postgres-cluster/](data/supporting-data-services/common/postgres-cluster/README.md) |
-| `common-components/vault` | [security/access-control-and-trust/encryption/vault/](security/access-control-and-trust/encryption/vault/README.md) |
-| `common-components/openbao` | [security/access-control-and-trust/encryption/openbao/](security/access-control-and-trust/encryption/openbao/README.md) |
-| `common-components/openbao-init` | [security/access-control-and-trust/encryption/openbao/openbao-init/](security/access-control-and-trust/encryption/openbao/openbao-init/README.md) |
-
-### Source repos that are placeholders / stubs (no folder created)
-
-These exist in the source group but contain only stub READMEs or empty files; they're flagged here so a future sweep can pick them up if/when content lands. Do not create catalogue folders for them yet.
-
-| Source repo | Status | Notes |
-|-------------|--------|-------|
-| `gaia-x-edc/edc-extensions` | stub README only | Reserved for custom EDC extensions; no implementation yet. |
-| `gaia-x-edc/Connector` | empty README | Capital-C duplicate / placeholder; the real EDC fork is `simpl-edc` mapped to `integration/resource-sharing/resource-sharing-runtime/connector/`. |
-| `gaia-x-edc/simpl-schema-versioning` | stub README only | Likely a schema-versioning utility for the schema management service. |
-| `gaia-x-edc/simpl-contract-negotiation-mockup` | stub README only | Mock used in early development of contract negotiation. |
-| `gaia-x-edc/authority-gaia-x-edc` | stub README only | Authority-specific EDC composition placeholder; superseded by [governance-authority-agent](cross-cutting/agents/governance-authority-agent/README.md). |
-| `gaia-x-edc/consumer-gaia-x-edc` | stub README only | Superseded by [consumer-agent](cross-cutting/agents/consumer-agent/README.md). |
-| `gaia-x-edc/provider-gaia-x-edc` | stub README only | Superseded by [data-provider-agent](cross-cutting/agents/data-provider-agent/README.md) / [application-provider-agent](cross-cutting/agents/application-provider-agent/README.md). |
-
-### Newly added solution rows beyond the cross-cutting table
-
-| # | Solution | Dimension | Capability | Service | Target path | Source sections |
-|---|----------|-----------|------------|---------|-------------|-----------------|
 | 128 | Query Mapper Adapter (poc-gaia-edc) | [integration](integration/README.md) | [resource-discovery](integration/resource-discovery/README.md) | [resource-catalogue](integration/resource-discovery/resource-catalogue/README.md) | [integration/resource-discovery/search-engine/query-mapper-adapter/](integration/resource-discovery/search-engine/query-mapper-adapter/README.md) | §4.3.1, §6.1.2 — bridge mapping Gaia-X EDC queries into the Federated Catalogue |
+
+## Source-repo → catalogue path
+
+The CE-source-repo to catalogue-path mapping (every Simpl-Open `code.europa.eu` repo and where it lands in this tree, including skipped/archived rationales) lives in:
+
+- [foundations/mapping-ce-to-new.md](foundations/mapping-ce-to-new.md) — grouped by CE team, with status + review column.
+- [foundations/mapping-new-to-canonical.md](foundations/mapping-new-to-canonical.md) — sorted by catalogue path, with canonical URLs.
+
+Use those as the working ledgers when adding/removing/relocating source repos; this `MAPPING.md` is reserved for FTA spec-section traceability and the cross-cutting-content notes below.
 
 ## Cross-cutting content (→ foundations/)
 
