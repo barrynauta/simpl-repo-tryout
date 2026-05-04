@@ -57,7 +57,7 @@ Notes:
 | Contract-billing | [vc-issuer-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/vc-issuer-service) | [`security/credential-management/vc-issuance-verification/vc-issuer`](./security/credential-management/vc-issuance-verification/vc-issuer) | placed | ✅ |
 | Contract-billing | wallet-service | — | pending | ⚠️ defunct |
 | data1 | Charts | — | pending | ⚠️ 1 year old - are these used?|
-| data1 | common | — | pending | ⚠️ |
+| data1 | [common](https://code.europa.eu/simpl/simpl-open/development/data1/common) | [`data/supporting-data-services/common/data-services-common`](./data/supporting-data-services/common/data-services-common) | placed | ⚠️ Aggregates 15 unrelated packages — candidate for upstream modularisation, see solution README |
 | data1 | [common-adapter](https://code.europa.eu/simpl/simpl-open/development/data1/common-adapter) | [`integration/resource-sharing/resource-sharing-runtime/common/connector-model-common`](./integration/resource-sharing/resource-sharing-runtime/common/connector-model-common) | placed | ✅ |
 | data1 | [common-tier2](https://code.europa.eu/simpl/simpl-open/development/data1/common-tier2) | [`security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client`](./security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client) | placed | ✅ |
 | data1 | [consumer-data1](https://code.europa.eu/simpl/simpl-open/development/data1/consumer-data1) | [`cross-cutting/agents/agent-resource-handling/consumer-resource-handling`](./cross-cutting/agents/agent-resource-handling/consumer-resource-handling) | placed | ✅ |
