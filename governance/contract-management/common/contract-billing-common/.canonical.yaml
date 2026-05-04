@@ -1,0 +1,8 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/contract-billing/common
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/contract-billing/common.
+  Shared Java library aggregating error-handling, API-key security, an HTTP
+  client, error DTOs, and utility classes. Consumed by contract-manager and
+  notification-service. Candidate for upstream modularisation; see README.

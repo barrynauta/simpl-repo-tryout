@@ -56,6 +56,7 @@ Sorted by new path. Status values: `prototype` = active CE repo; `prototype-inte
 | `data/supporting-data-services/data-orchestration/gitea` | Gitea (orchestration platform) | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/gitea | orchestration-platform | gitea | prototype |
 | `data/supporting-data-services/data-orchestration/orchestration-platform` | Orchestration Platform | — | — | — | roadmap |
 | `governance/consent-management/consent-management/consent-management` | Consent Management | — | — | — | roadmap |
+| `governance/contract-management/common/contract-billing-common` | contract-billing-common | https://code.europa.eu/simpl/simpl-open/development/contract-billing/common | Contract-billing | common | prototype |
 | `governance/contract-management/contract-establishment/contract-manager` | Contract Manager | — | — | — | roadmap |
 | `governance/contract-management/contract-establishment/contract-manager-ui` | contract-manager-ui | https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract-ui | Contract-billing | contract-ui | prototype |
 | `governance/contract-management/contract-establishment/contract-template-datastore` | Contract Template Datastore | https://code.europa.eu/simpl/simpl-open/development/data1/simpl-files | data1 | simpl-files | prototype-interim |

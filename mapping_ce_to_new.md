@@ -40,11 +40,11 @@ Notes:
 | Contract-billing | actors | — | pending | ⚠️ One year ago an initial commit - seems defunct |
 | Contract-billing | billing | — | pending | ⚠️ One year ago an initial commit - seems defunct |
 | Contract-billing | billing-common | — | pending | ⚠️ One year ago an initial commit - seems defunct |
-| Contract-billing | common | — | pending | ⚠️ |
+| Contract-billing | [common](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common) | [`governance/contract-management/common/contract-billing-common`](./governance/contract-management/common/contract-billing-common) | placed | ⚠️ Aggregates 5 cross-cutting concerns (exceptions, security, HTTP, error DTOs, utils) — candidate for upstream modularisation, see solution README |
 | Contract-billing | [common_logging](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common_logging) | [`administration/observability/logging/common-logging-java`](./administration/observability/logging/common-logging-java) | placed | ✅ |
 | Contract-billing | [common_logging_python](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common_logging_python) | [`administration/observability/logging/common-logging-python`](./administration/observability/logging/common-logging-python) | placed | ✅ |
 | Contract-billing | [consumer-contract-billing](https://code.europa.eu/simpl/simpl-open/development/contract-billing/consumer-contract-billing) | [`cross-cutting/agents/agent-contract-billing/consumer-contract-billing`](./cross-cutting/agents/agent-contract-billing/consumer-contract-billing) | placed | ✅ |
-| Contract-billing | contract | — | pending | ⚠️ |
+| Contract-billing | contract](https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract) | [`governance/contract-management/contract-establishment/contract-manager`](./governance/contract-management/contract-establishment/contract-manager) | placed | ✅ |
 | Contract-billing | [contract-ui](https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract-ui) | [`governance/contract-management/contract-establishment/contract-manager-ui`](./governance/contract-management/contract-establishment/contract-manager-ui) | placed | ✅ |
 | Contract-billing | invoicing | — | pending | ⚠️ defunct |
 | Contract-billing | [notification-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/notification-service) | [`administration/notification-and-messaging/notification/notification-service`](./administration/notification-and-messaging/notification/notification-service) | placed | ✅ |
