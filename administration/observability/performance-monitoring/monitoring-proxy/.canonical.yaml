@@ -1,0 +1,8 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/monitoring/monitoring-proxy
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/monitoring/monitoring-proxy.
+  NGINX-based reverse proxy fronting the Simpl monitoring stack. Early stage —
+  upstream currently ships NGINX configuration only. Sits in front of
+  eck-monitoring as the single ingress entry point.

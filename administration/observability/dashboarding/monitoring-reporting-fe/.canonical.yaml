@@ -1,0 +1,8 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/monitoring/monitoring-reporting-fe
+status: prototype
+last_synced: 2026-05-04
+notes: |
+  Source — code.europa.eu/simpl/simpl-open/development/monitoring/monitoring-reporting-fe.
+  Frontend for monitoring reports and dashboards. UI scaffolding only at present —
+  initial commit ≈ April 2026 lays down project skeleton; no business logic or
+  dashboards yet. Catalogued so the slot exists as the UI matures.

@@ -112,6 +112,9 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 | `iaa/authentication-provider` | [security/access-control-and-trust/authentication-provider-federation/authentication-provider/](security/access-control-and-trust/authentication-provider-federation/authentication-provider/README.md) |
 | `iaa/fe-openapi-clients` | [cross-cutting/samples/fe-openapi-clients/](cross-cutting/samples/fe-openapi-clients/README.md) |
 | `iaa/charts` *(archived)* | _Skipped — README explicitly says "do not install components using this repository"; superseded by per-component charts. Documentation moved to iaa/documentation._ |
+| `monitoring/eck-monitoring-operator` | [administration/observability/performance-monitoring/eck-monitoring-operator/](administration/observability/performance-monitoring/eck-monitoring-operator/README.md) |
+| `monitoring/monitoring-proxy` | [administration/observability/performance-monitoring/monitoring-proxy/](administration/observability/performance-monitoring/monitoring-proxy/README.md) |
+| `monitoring/monitoring-reporting-fe` | [administration/observability/dashboarding/monitoring-reporting-fe/](administration/observability/dashboarding/monitoring-reporting-fe/README.md) |
 | `data1/sdtooling-sd-schemas` (utility part) | [cross-cutting/utils/sd-schemas-util/](cross-cutting/utils/sd-schemas-util/README.md) |
 | `iaa/simpl-http-client` | [cross-cutting/libs/simpl-http-client/](cross-cutting/libs/simpl-http-client/README.md) |
 | [`data1/common`](https://code.europa.eu/simpl/simpl-open/development/data1/common) | [data/supporting-data-services/common/data-services-common/](data/supporting-data-services/common/data-services-common/README.md) (placed; aggregates multiple concerns, candidate for upstream modularisation — see README) |
@@ -124,7 +127,7 @@ Utilities, libraries, and samples — they don't sit on the capability map and a
 | `data1/xfsc-advsearch-be` | [integration/resource-discovery/search-engine/xfsc-advanced-search/](integration/resource-discovery/search-engine/xfsc-advanced-search/README.md) |
 | `gaia-x-edc/simpl-fc-service` | [integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/](integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue/README.md) |
 | `gaia-x-edc/simpl-files` | [data/supporting-data-services/common/postgres-deployment-values/](data/supporting-data-services/common/postgres-deployment-values/README.md) (Helm values overrides for fc-service, EDC provider, EDC consumer Postgres instances; not a chart despite the upstream README claim) |
-| `gaia-x-edc/simpl-signer` | _Skipped — deployment-only repo (Helm charts + ArgoCD manifests wrapping upstream Eclipse XFSC TSA Signer images). No source. Status unclear — current Simpl agent compositions use `simpl-signing-service` (contract-billing/signing-service); not referenced from any active agent chart. Re-evaluate if/when an active deployment surfaces._ |
+| `gaia-x-edc/simpl-signer` | [security/credential-management/signing/signer-service/](security/credential-management/signing/signer-service/README.md) (Eclipse XFSC TSA Signer deployment wrapper; folder also catalogues `contract-billing/signing-service` — dual-upstream conflation, follow-up review needed) |
 | `monitoring/authority-monitoring` | [cross-cutting/agents/agent-monitoring/authority-monitoring/](cross-cutting/agents/agent-monitoring/authority-monitoring/README.md) |
 | `monitoring/consumer-monitoring` | [cross-cutting/agents/agent-monitoring/consumer-monitoring/](cross-cutting/agents/agent-monitoring/consumer-monitoring/README.md) |
 | `monitoring/provider-monitoring` | [cross-cutting/agents/agent-monitoring/provider-monitoring/](cross-cutting/agents/agent-monitoring/provider-monitoring/README.md) |
