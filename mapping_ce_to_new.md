@@ -108,7 +108,7 @@ Notes:
 | IAA | [charts](https://code.europa.eu/simpl/simpl-open/development/iaa/charts) | — | pending | 🚧 Archived upstream  |
 | IAA | [cli](https://code.europa.eu/simpl/simpl-open/development/iaa/cli) | [`cross-cutting/utils/iaa-cli`](./cross-cutting/utils/iaa-cli) | placed | 🚧 Archived upstream  |
 | IAA | [common](https://code.europa.eu/simpl/simpl-open/development/iaa/common) | [`security/access-control-and-trust/common/iaa-common`](./security/access-control-and-trust/common/iaa-common) | placed | ✅ |
-| IAA | documentation | — | pending | ⚠️ |
+| IAA | documentation | — | pending | 🚧 Archived upstream |
 | IAA | [echo-backend](https://code.europa.eu/simpl/simpl-open/development/iaa/echo-backend) | [`cross-cutting/samples/echo-backend`](./cross-cutting/samples/echo-backend) | placed | ✅ |
 | IAA | [echo-frontend](https://code.europa.eu/simpl/simpl-open/development/iaa/echo-frontend) | [`cross-cutting/samples/echo-frontend`](./cross-cutting/samples/echo-frontend) | placed | ✅ |
 | IAA | [eidas-demo-keycloak-extension](https://code.europa.eu/simpl/simpl-open/development/iaa/eidas-demo-keycloak-extension) | [`cross-cutting/samples/eidas-demo-keycloak-extension`](./cross-cutting/samples/eidas-demo-keycloak-extension) | placed | ✅ |
