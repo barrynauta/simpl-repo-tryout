@@ -410,7 +410,6 @@ Supporting documents that establish the design vocabulary and governing commitme
 
 - [Actors](./foundations/actors.md) — the five canonical Simpl-Open actor types (Application Provider, Data Provider, Infrastructure Provider, Consumer, Governance Authority) and the business processes each one touches.
 - [Data space concepts](./foundations/dataspace-concepts.md) — Tier I/Tier II model, agents, anatomy of a Simpl-Open service, built-in vs access-through services.
-- [High-level architecture](./foundations/high-level-architecture.md) — layered building-block view that bridges the data-space concepts with the capability map.
 - [Connector protocol](./foundations/connector-protocol.md) — Data Space Protocol (DSP / IDSA) concepts used across every agent.
 - [eIDAS / EUDI integration](./foundations/eidas-integration.md) — how the Simpl identity model maps onto the EU Digital Identity Framework.
 - [Architectural principles](./foundations/principles.md) — high-level design commitments informing every architecture decision across Simpl-Open, sourced from the functional and technical architecture document.

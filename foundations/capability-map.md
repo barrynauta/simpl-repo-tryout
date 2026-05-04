@@ -1,10 +1,50 @@
-Source: `functional-and-technical-architecture-specifications.md`, §2.7 (Capabilities — Level 1), §2.8 (Services — Level 2) including §2.8.1 Deployment model and §2.8.2 Scope covered by Release 3.0.
+<div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+<p>
+📍 <strong>You are here</strong><br/>
+<a href="../README.md">🏠 Home</a><br/>
+    <a href="README.md">Foundations</a><br/>
+        <strong>Simpl-Open capability map</strong><br/>
+</p>
+</div>
 
 # Simpl-Open capability map
 
-Simpl-Open organises its functionality into **dimensions → capabilities → business services**. This file captures the Level 1 (capabilities) and Level 2 (business services) views as published in the architecture specification, along with the deployment and release-scope diagrams from §2.8.
+Simpl-Open organises its functionality into **dimensions → capabilities → business services**. This file is the structural spine of the system: it bridges the abstract data-space concepts with the concrete folder structure of this repository. It contains:
 
-Solution folders in this repository mirror this hierarchy: `dimension/capability/business-service/solution/`.
+- the **layered building-block view** that introduces the six architectural dimensions (FTA §2.6 *High-Level Architecture*);
+- the **Level 1** map of capabilities per dimension (FTA §2.7);
+- the **Level 2** map of business services per capability (FTA §2.8);
+- the **deployment model** and **Release 3.0 scope** (FTA §2.8.1, §2.8.2).
+
+Solution folders in this repository mirror the hierarchy: `dimension/capability/business-service/solution/`.
+
+## Source
+
+Extracted verbatim from `Functional-and-Technical-Architecture-Specifications.md`, sections **2.6 High-Level Architecture**, **2.7 Capabilities (Level 1)**, and **2.8 Services (Level 2)** including §2.8.1 Deployment model and §2.8.2 Scope covered by Release 3.0 (source dated 2026-04-20). Upstream link: [FTA spec](https://code.europa.eu/simpl/simpl-open/architecture/-/blob/master/functional_and_technical_architecture_specifications/Functional-and-Technical-Architecture-Specifications.md?ref_type=heads).
+
+---
+
+## Background — high-level architecture
+
+The high-level architecture lays out the capabilities of Simpl-Open as a whole; the Level 1 / Level 2 sections that follow then enumerate them in detail and the implementation sections of the FTA describe how each capability is realised.
+
+The concepts in this section have been, for a large part, already developed in the [Architecture Vision Document](https://ec.europa.eu/newsroom/dae/redirection/document/86241) of the Simpl Preparatory Study. They are taken over here and updated/complemented to stay current with Simpl-Open developments.
+
+Six architectural dimensions describe Simpl-Open: the **integration**, **data**, **infrastructure**, **administration**, **governance**, and **security** dimensions.
+
+1. The **integration dimension** contains the capabilities that enable participants to integrate with each other in a secured and trusted manner. This is required for the well-functioning of a Data Space integrating Simpl-Open. These capabilities regard security, access control and trust and federation management.
+
+2. The **data dimension** focuses on semantic interoperability, data models, data quality and governance of data. It ensures that data can be understood, processed, and exchanged consistently across participants through standardized vocabularies and quality management.
+
+3. The **infrastructure dimension** allows end users to utilise and manage infrastructure resources offered by infrastructure providers. Simpl-Open can connect to third-party infrastructure resources, enabling end users to execute applications and manage workloads.
+
+4. The **administration dimension** provides supporting capabilities for the well-functioning of the other dimensions as well as administration of Simpl-Open. The administration layer allows actors to operate their components in the Data Space.
+
+5. The **governance dimension** establishes and enforces policies, manages risks, oversees compliance and provides audit and assurance for the entire ecosystem. It supports the implementation of legal and organisational interoperability through policy management, contract management, participant lifecycle, and audit capabilities.
+
+6. The **security dimension** ensures that all interactions and data exchanges across the Simpl-Open ecosystem are confidential, authentic, and tamper-resistant. It focuses on safeguarding communications, assets, and operations through technical and procedural resilience measures.
+
+Each of these six dimensions is further detailed below — first as a Level 1 map of capabilities, then drilled into Level 2 business services.
 
 ---
 

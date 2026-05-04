@@ -27,7 +27,6 @@ This folder contains foundational artefacts describing what Simpl is and should 
 ## Concepts and design vocabulary
 
 - [dataspace-concepts.md](dataspace-concepts.md) — actors, agents, Tier I / Tier II split, anatomy of a Simpl-Open service, built-in vs access-through services, Echo Service template
-- [high-level-architecture.md](high-level-architecture.md) — layered building-block view that bridges the data-space concepts with the capability map
 - [connector-protocol.md](connector-protocol.md) — Data Space Protocol (DSP / IDSA) concepts as used by every Simpl-Open agent
 - [eidas-integration.md](eidas-integration.md) — how the Simpl identity model maps onto eIDAS and the EUDI framework
 - [principles.md](principles.md) — the foundational architectural principles of Simpl-Open
