@@ -27,9 +27,7 @@ and operate data space processes and activities such as onboarding and securing
 communications between data space Participants, as well as enabling the publication
 and discovery of Resource Descriptions by Providers and Consumers.
 
-> **Note:** This business process will be revisited and extended when topics such
-> as the Simpl-Open helpdesk, ticketing system, auditing tools, CSIRT and security
-> tools are covered.
+> **Note:** This business process will be revisited and extended when auditing tools and security tooling are covered.
 
 ## Actors
 

@@ -17,3 +17,4 @@ Publication, search, and retrieval of self-descriptions for data space resources
 
 - [Resource catalogue](resource-catalogue/README.md) — central publication point for signed self-descriptions; search engine and validation services.
 - [Search engine](search-engine/README.md) — consumer-side search frontend and backend with policy-filtered queries against the Catalogue.
+- [Marketplace](marketplace/README.md) — governed commercial exchange environment where providers publish resources with pricing, licensing, and usage terms, and consumers discover, compare, and procure offerings.

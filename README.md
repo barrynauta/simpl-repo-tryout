@@ -346,11 +346,9 @@ Simpl-Open organises its functionality into six dimensions: Administration, Data
   <!-- Security capabilities -->
   <area shape="rect" coords="640,30,780,115" href="./security/access-control-and-trust/README.md" alt="Access control & Trust" title="Access control & Trust" />
   <area shape="rect" coords="640,125,780,205" href="./security/credential-management/README.md" alt="Credential management" title="Credential management" />
-  <area shape="rect" coords="640,220,780,300" href="./security/csirt/README.md" alt="CSIRT" title="CSIRT" />
   <!-- Administration capabilities -->
   <area shape="rect" coords="20,240,150,295" href="./administration/observability/README.md" alt="Observability" title="Observability" />
   <area shape="rect" coords="170,240,300,295" href="./administration/notification-and-messaging/README.md" alt="Notification and messaging" title="Notification and messaging" />
-  <area shape="rect" coords="20,315,150,360" href="./administration/support/README.md" alt="Support" title="Support" />
   <!-- Data capabilities -->
   <area shape="rect" coords="335,240,465,295" href="./data/data-governance/README.md" alt="Data governance" title="Data governance" />
   <area shape="rect" coords="485,240,602,295" href="./data/supporting-data-services/README.md" alt="Supporting data services" title="Supporting data services" />
@@ -377,7 +375,6 @@ Simpl-Open organises its functionality into six dimensions: Administration, Data
 
 - [administration/](./administration/README.md) — platform management and operational services for a Simpl-Open agent node, covering observability and notification and messaging
   - [observability/](./administration/observability/README.md)
-  - [support/](./administration/support/README.md) (Not yet implemented)
   - [notification-and-messaging/](./administration/notification-and-messaging/README.md)
 - [data/](./data/README.md) — data-related platform services covering schema and vocabulary governance, data workflow orchestration, and supporting data services
   - [data-governance/](./data/data-governance/README.md) (Not yet implemented)
@@ -407,7 +404,6 @@ Simpl-Open organises its functionality into six dimensions: Administration, Data
   - [resource-sharing/](./integration/resource-sharing/README.md)
 - [security/](./security/README.md) — identity, authentication, authorisation, and credential management services implementing a two-tier IAA architecture
   - [credential-management/](./security/credential-management/README.md)
-  - [csirt/](./security/csirt/README.md) (Not yet implemented)
   - [access-control-and-trust/](./security/access-control-and-trust/README.md)
 
 See [foundations/capability-map.md](./foundations/capability-map.md) for the full L1 + L2 map with all business services.

@@ -52,17 +52,17 @@ Each of these six dimensions is further detailed below — first as a Level 1 ma
 
 ![Level 1 capability map of Simpl-Open (six dimensions)](./media/image16.png)
 
-In the **Administration dimension**, the **Observability** capability monitors system health, usage, and performance across the data space, providing insights and dashboards for operational oversight. The **Support** capability provides operational assistance to participants and end-users through service desk services, ticketing systems, and status pages. It enables troubleshooting, issue tracking, and knowledge sharing to ensure smooth installation, configuration, and ongoing use of Simpl-Open components. The **Notification and messaging** capability provides asynchronous, event-driven notifications to users and admins for key workflows like onboarding requests and governance actions.
+In the **Administration dimension**, the **Observability** capability monitors system health, usage, and performance across the data space, providing insights and dashboards for operational oversight. The **Notification and messaging** capability provides asynchronous, event-driven communication to users and admins: the **Notification** service delivers event-driven alerts for key workflows such as onboarding requests and governance actions, while the **Messaging** service provides the durable, asynchronous message-broker substrate that underpins notification dispatch and other platform-wide event flows.
 
 In the **Data dimension**, the **Data governance** capability ensures that data sharing adheres to defined quality, metadata, and governance standards. It provides services like data lineage, data profiling and data quality rules. The **Data processing** capability provides the means to transform, aggregate and visualise datasets across multiple sources. The **Supporting data services** capability provides the foundational data services that enable efficient, scalable, and reliable management of data operations across the ecosystem, including orchestration and distributed execution. The **Semantics & Vocabulary** ensures semantic interoperability across the Data Space by providing standardized vocabularies, ontologies, and schema management. It enables participants to understand and interpret shared data consistently through formal knowledge representation and mapping services.
 
-In the **Integration dimension** the **Data sharing** capability allows participants to exchange data with others through interoperable interfaces, where the **Application sharing** capability allows participants to make applications and services available to others through interoperable interfaces, as well as provide algorithms and models for AI-based processing. The **Federation** capability manages identity federation, catalogue federation, trust anchoring, and cross-domain access across multiple data spaces. The **Resource discovery** capability supports consumers in finding available resources securely and efficiently through catalogues. The **Policy enforcement** capability enforces access and usage policies at runtime integration points where policy decisions are applied. The **Contract enforcement** capability clarifies its role in validating and enforcing contractual terms at integration points, connecting it to policy management and billing. The **Supporting Integration Services** emphasizes its supporting role in maintaining persistent resource addresses across federated environments and integration endpoints. The **Resource sharing** capability will embed all services related to generic resource sharing, specifically focused on the implementation of the connector protocol.
+In the **Integration dimension** the **Data sharing** capability allows participants to exchange data with others through interoperable interfaces, where the **Application sharing** capability allows participants to make applications and services available to others through interoperable interfaces, as well as provide algorithms and models for AI-based processing. The **Federation** capability manages identity federation, catalogue federation, trust anchoring, and cross-domain access across multiple data spaces. The **Resource discovery** capability supports consumers in finding and acquiring available resources securely and efficiently through catalogues and a governed marketplace. The **Policy enforcement** capability enforces access and usage policies at runtime integration points where policy decisions are applied. The **Contract enforcement** capability clarifies its role in validating and enforcing contractual terms at integration points, connecting it to policy management and billing. The **Supporting Integration Services** emphasizes its supporting role in maintaining persistent resource addresses across federated environments and integration endpoints. The **Resource sharing** capability will embed all services related to generic resource sharing, specifically focused on the implementation of the connector protocol.
 
 In the **Infrastructure dimension**, the **Provisioning** capability handles allocation, lifecycle, and orchestration of infrastructure resources required by participants and data services. The **Supporting infrastructure services** capability provides underlying infrastructure-level services such as distribution and the management of distributed resources. The **HPC** capability enables the execution of high-performance computing workloads where demanding analytical or AI-driven computations are needed, leveraging shared or external infrastructure resources.
 
 In the **Governance dimension**, the **Consent management** capability ensures that data subjects' consent preferences are properly captured, managed, and respected throughout data processing activities. The **Contract management** capability governs the lifecycle of contractual agreements between participants, ensuring that terms and obligations are traceable and enforceable. The **Policy management** capability enables the lifecycle, the definition and distribution of access and usage policies across the Data Space. The **Audit** capability provides transparency and verifiable evidence of compliance, supporting accountability and continuous assurance. The **Participant management** capability handles onboarding, identity validation, and lifecycle management including offboarding of all participants in the ecosystem.
 
-In the **Security dimension**, the **Credential management** capability covers the implementation of digital signatures to guarantee data confidentiality, integrity, and authenticity, along with the storage of these credentials and signatures in the digital wallet. The **CSIRT** capability provides coordinated incident detection, response, and resolution services. It ensures operational readiness against threats, manages vulnerability disclosures, and leads recovery activities in case of security incidents. The **Access control and trust** capability enables secure and trusted collaboration between participants within the Data Space. It ensures that only authenticated and authorised entities can access shared data, services, and applications, while maintaining interoperability across different trust domains.
+In the **Security dimension**, the **Credential management** capability covers the implementation of digital signatures to guarantee data confidentiality, integrity, and authenticity, along with the storage of these credentials and signatures in the digital wallet. The **Access control and trust** capability enables secure and trusted collaboration between participants within the Data Space. It ensures that only authenticated and authorised entities can access shared data, services, and applications, while maintaining interoperability across different trust domains.
 
 ---
 
@@ -83,15 +83,10 @@ The **Observability** capability has the following services: Resource usage, QoS
 - The **Energy Metrics & Alerts** service: captures energy usage KPIs and triggers notifications to optimise sustainability targets.
 - The **Reporting** service: generates scheduled and on-demand reports aggregating operational data, compliance evidence, and business metrics. Supports customisable report templates, multi-format exports (PDF, CSV, JSON), and role-based access to reporting views. Enables stakeholders to track resource consumption, policy adherence, SLA compliance, and data space activity over time.
 
-The **Support** capability has the following services: Service desk, Support page, Ticketing system:
+The **Notification and messaging** capability has the following services: Notification, Messaging.
 
-- The **Service desk** service: provides first-line assistance, triage, and knowledge-base guidance for participants and operators.
-- The **Support page** service: publishes status, FAQs, runbooks, and contact channels to streamline self-service support.
-- The **Ticketing system** service: orchestrates issue lifecycle with SLAs, prioritisation, and handoffs across resolver groups.
-
-The **Notification and messaging** capability has the following services:
-
-- **Notification** service: enables timely, reliable communication of critical business events to participants across federated data spaces.
+- The **Notification** service: enables timely, reliable communication of critical business events to participants across federated data spaces.
+- The **Messaging** service: provides the durable, asynchronous message-broker substrate underpinning notification dispatch and other platform-wide event flows across Simpl-Open components.
 
 ### Data Dimension
 
@@ -140,10 +135,11 @@ The **Federation** capability has the following services: Federation orchestrati
 
 - The **Federation orchestration** service: coordinates cross-domain identity federation, trust framework establishment, and catalogue synchronisation across multiple autonomous data spaces. Manages trust anchors, maintains federation metadata, and orchestrates authentication and authorisation flows that span organisational boundaries. Enables seamless interoperability while preserving sovereignty of individual data space instances.
 
-The **Resource discovery** capability has the following services: Resource catalogue, Search engine.
+The **Resource discovery** capability has the following services: Resource catalogue, Search engine, Marketplace.
 
 - The **Resource catalogue** service: publishes registries of datasets, services, and apps with federation support.
 - The **Search engine** service: indexes and queries resources with fine-grained policy-aware filtering.
+- The **Marketplace** service: provides a governed commercial exchange environment where providers publish resources with pricing models, licensing terms, and usage conditions, and where consumers discover, compare, and procure offerings. The marketplace layer adds commercial and governance context above the technical resource catalogue, enabling trusted exchange within and across data space ecosystems.
 
 The **Policy Enforcement** capability has the following services: Policy Enforcement Point service.
 
@@ -206,11 +202,6 @@ The **Participant management** capability has the following services: Onboarding
 - The **Offboarding** service: revokes access, archives evidence, and ensures controlled exit procedures.
 
 ### Security Dimension
-
-The **CSIRT** capability has the following services: Incident response, Threat monitoring.
-
-- The **Incident response** service: coordinates detection, containment, eradication, and recovery with post-incident review.
-- The **Threat monitoring** service: continuously monitors for indicators of compromise and emerging vulnerabilities.
 
 The **Access control and trust** capability has the following services: Identity provider, Authentication provider federation, Authorisation, Security attribute provider federation, Encryption, Guaranteed Authenticity / Integrity.
 
