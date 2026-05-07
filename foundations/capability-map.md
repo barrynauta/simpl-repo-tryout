@@ -52,7 +52,7 @@ Each of these six dimensions is further detailed below — first as a Level 1 ma
 
 ![Level 1 capability map of Simpl-Open (six dimensions)](./media/image16.png)
 
-In the **Administration dimension**, the **Observability** capability monitors system health, usage, and performance across the data space, providing insights and dashboards for operational oversight. The **Notification and messaging** capability provides asynchronous, event-driven communication to users and admins: the **Notification** service delivers event-driven alerts for key workflows such as onboarding requests and governance actions, while the **Messaging** service provides the durable, asynchronous message-broker substrate that underpins notification dispatch and other platform-wide event flows.
+In the **Administration dimension**, the **Observability** capability monitors system health, usage, and performance across the data space, providing insights and dashboards for operational oversight. The **Notification and messaging** capability provides asynchronous, event-driven communication to users and admins for key platform workflows and operations.
 
 In the **Data dimension**, the **Data governance** capability ensures that data sharing adheres to defined quality, metadata, and governance standards. It provides services like data lineage, data profiling and data quality rules. The **Data processing** capability provides the means to transform, aggregate and visualise datasets across multiple sources. The **Supporting data services** capability provides the foundational data services that enable efficient, scalable, and reliable management of data operations across the ecosystem, including orchestration and distributed execution. The **Semantics & Vocabulary** ensures semantic interoperability across the Data Space by providing standardized vocabularies, ontologies, and schema management. It enables participants to understand and interpret shared data consistently through formal knowledge representation and mapping services.
 
@@ -176,7 +176,7 @@ The **Consent management** capability has the following services: Consent manage
 
 The **Contract management** capability has the following services: Contract lifecycle management, Billing, SLA Management.
 
-- The **Contract lifecycle management** service: governs the full lifecycle of contractual agreements between participants — from template authoring and contract offer creation through negotiation, mutual signing, and activation to monitoring, renewal, and termination. Maintains immutable contract instances, tracks active contract state that drives SLA measurement and billing triggers, and handles contract invalidation and revocation.
+- The **Contract lifecycle management** service: governs the full lifecycle of contractual agreements between participants, from contract offer creation through negotiation, mutual signing, and activation to monitoring, renewal, and termination. Maintains immutable contract instances, tracks active contract state that drives SLA measurement and billing triggers, and handles contract invalidation and revocation.
 - The **Billing** service: calculates and issues invoices based on usage, entitlements, or fixed agreements.
 - The **SLA Management** service: tracks service commitments and penalties with evidence and notifications.
 
