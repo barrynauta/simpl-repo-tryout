@@ -6,14 +6,14 @@
 <a href="../../../../README.md">🏠 Home</a><br/>
     <a href="../../../README.md">Dimension: Governance</a><br/>
         <a href="../../README.md">Capability: Contract management</a><br/>
-            <a href="../README.md">Service: Contract establishment</a><br/>
+            <a href="../README.md">Service: Contract lifecycle management</a><br/>
                 <strong>Solution: contract-manager-ui</strong><br/>
 </p>
 </div>
 
 # contract-manager-ui
 
-Frontend for the [Contract Manager](../contract-manager/README.md) — Vue/Angular UI used by Provider and Consumer operators to author, review, and finalise contracts as part of the contract-establishment flow.
+Frontend for the [Contract Manager](../contract-manager/README.md) — Vue/Angular UI used by Provider and Consumer operators to author, review, and finalise contracts as part of the contract lifecycle management flow.
 
 The production code lives at the canonical location — see [CANONICAL.md](CANONICAL.md). Machine-readable form: [`.canonical.yaml`](.canonical.yaml).
 

@@ -26,7 +26,7 @@ The datastore holds policy templates. Each template describes a policy type (acc
 ### Key integrations
 
 - [SD Tooling](../../../../../data/semantics-and-vocabulary/schema-management/sd-tooling-api/README.md) — the Policy Creator sub-component of SD Tooling draws on policy templates when building policies embedded in self-descriptions.
-- [Contract Manager](../../../../contract-management/contract-establishment/contract-manager/doc/architecture.md) — accesses policy templates during contract establishment to anchor agreed policies to contracts.
+- [Contract Manager](../../../../contract-management/contract-lifecycle-management/contract-manager/doc/architecture.md) — accesses policy templates during contract establishment to anchor agreed policies to contracts.
 
 ## Technical view
 

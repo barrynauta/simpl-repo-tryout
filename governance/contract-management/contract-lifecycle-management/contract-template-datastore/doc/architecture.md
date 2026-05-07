@@ -10,7 +10,7 @@ The Contract Template Datastore stores contract templates to ensure consistent a
 
 This is a thin planned component. Its primary consumer is the SD Tooling, which uses contract templates when providers define self-descriptions for their resources (via the Contract Template Editor sub-component).
 
-Capability-map placement: Governance dimension → Contract management capability → Contract establishment business service.
+Capability-map placement: Governance dimension → Contract management capability → Contract lifecycle management business service.
 
 Note from step 2 component inventory: the spec has very little detail on this component; it may be deployable as a sub-component of the Contract Manager. This documentation retains it as a separate solution folder per the step 3 mapping decision.
 

@@ -19,7 +19,7 @@ The production code lives at the canonical location — see [CANONICAL.md](CANON
 
 Imported as a Maven dependency by:
 
-- [Contract Manager](../../contract-establishment/contract-manager/README.md)
+- [Contract Manager](../../contract-lifecycle-management/contract-manager/README.md)
 - [Notification Service](../../../../administration/notification-and-messaging/notification/notification-service/README.md)
 
 The notification service sits in a different dimension; the dependency is incidental — the library is built for and named after the contract-billing family.

@@ -8,7 +8,7 @@ The Contract Manager coordinates with the Verifiable Credentials Issuer (VC Issu
 
 Note from the architecture spec: currently, interactions with the VC Issuer, Signer, and Wallet are streamlined through a single stub interface. Additionally, contract storage and Wallet emulation are consolidated into a single database, simplifying the initial implementation.
 
-Capability-map placement: Governance dimension → Contract management capability → Contract establishment business service.
+Capability-map placement: Governance dimension → Contract management capability → Contract lifecycle management business service.
 
 **Business process — BP 07 (Consumer and Provider establish a usage contract):** The Contract Manager orchestrates the contract establishment flow, coordinating with the Connector (for DSP contract negotiation), the Signer (for cryptographic signing), the VC Issuer (for verifiable credential issuance), and the Wallet (for credential storage).
 

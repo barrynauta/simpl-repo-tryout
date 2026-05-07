@@ -32,7 +32,7 @@ Deployment is operator-driven — three `helm install` invocations against `bitn
 The upstream repo is named `simpl-files` and its top-level README states the purpose is *"to store commonly used helm charts"*. Both labels are misleading:
 
 - The repo doesn't ship any chart — only Helm values overrides.
-- A separate `data1/simpl-files` exists and legitimately serves files (NGINX hosting contract templates, catalogued at [contract-template-datastore](../../../../governance/contract-management/contract-establishment/contract-template-datastore/README.md)). The two repos share a name but do unrelated things.
+- A separate `data1/simpl-files` exists and legitimately serves files (NGINX hosting contract templates, catalogued at [contract-template-datastore](../../../../governance/contract-management/contract-lifecycle-management/contract-template-datastore/README.md)). The two repos share a name but do unrelated things.
 
 Worth flagging upstream as a rename + README-fix candidate.
 

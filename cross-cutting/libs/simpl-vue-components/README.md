@@ -20,7 +20,7 @@ Imported as an npm dependency (`@simpl/vue-components`) by every Simpl-Open Vue/
 
 - [simpl-sd-ui](../../../data/semantics-and-vocabulary/schema-management/simpl-sd-ui/README.md)
 - [simpl-schema-manager-ui](../../../data/semantics-and-vocabulary/schema-management/simpl-schema-manager-ui/README.md)
-- [contract-manager-ui](../../../governance/contract-management/contract-establishment/contract-manager-ui/README.md)
+- [contract-manager-ui](../../../governance/contract-management/contract-lifecycle-management/contract-manager-ui/README.md)
 - [simpl-catalogue-client](../../../integration/resource-discovery/search-engine/simpl-catalogue-client/README.md)
 
 A Storybook instance ships with the library for component preview during development (`npm run dev` → `:6006`).

@@ -28,7 +28,7 @@ Note: the architecture spec notes that contract storage and Wallet emulation are
 
 ### Key integrations
 
-- [Contract Manager](../../../../../governance/contract-management/contract-establishment/contract-manager/doc/architecture.md) — the Contract Manager coordinates with the VC Issuer at contract finalisation to validate and issue verifiable credentials.
+- [Contract Manager](../../../../../governance/contract-management/contract-lifecycle-management/contract-manager/doc/architecture.md) — the Contract Manager coordinates with the VC Issuer at contract finalisation to validate and issue verifiable credentials.
 - [Signer Service](../../../signing/signer-service/doc/architecture.md) — provides cryptographic signing capabilities; the VC Issuer delegates signature operations to the Signer.
 - [Wallet](../../../wallet/wallet/doc/architecture.md) — secure storage for signed verifiable credentials issued by the VC Issuer.
 

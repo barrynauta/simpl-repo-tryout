@@ -77,7 +77,7 @@ Simpl-Open not only enables operation within a single data space but creates int
 
 Both guides are referenced from this catalogue but maintained in dedicated upstream repositories under `code.europa.eu/simpl/simpl-open/documentation/`. The catalogue placements at [cross-cutting/documentation/](./cross-cutting/documentation/README.md) carry the canonical pointers and a concise overview; the authoritative documents live upstream.
 
-> **Looking for a component's own docs instead?** Each solution under the capability map (e.g. [contract-manager](./governance/contract-management/contract-establishment/contract-manager/README.md), [simpl-catalogue](./integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md), [identity-provider](./security/access-control-and-trust/identity-provider-federation/identity-provider/README.md)) has its own `doc/` sub-folder with installation, configuration, and upgrade guides specific to that component.
+> **Looking for a component's own docs instead?** Each solution under the capability map (e.g. [contract-manager](./governance/contract-management/contract-lifecycle-management/contract-manager/README.md), [simpl-catalogue](./integration/resource-discovery/resource-catalogue/simpl-catalogue/README.md), [identity-provider](./security/access-control-and-trust/identity-provider-federation/identity-provider/README.md)) has its own `doc/` sub-folder with installation, configuration, and upgrade guides specific to that component.
 
 ---
 

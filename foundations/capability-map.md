@@ -174,12 +174,11 @@ The **Consent management** capability has the following services: Consent manage
 
 - The **Consent management** service: captures, stores, and enforces data subjects' consent preferences in accordance with GDPR and privacy regulations. Maintains versioned consent records linked to specific data processing activities, enables consent revocation workflows, and provides audit trails. Integrates with policy management to ensure consent terms are enforced across data sharing operations.
 
-The **Contract management** capability has the following services: Billing, SLA Management, License asset, Contract establishment.
+The **Contract management** capability has the following services: Contract lifecycle management, Billing, SLA Management.
 
+- The **Contract lifecycle management** service: governs the full lifecycle of contractual agreements between participants — from template authoring and contract offer creation through negotiation, mutual signing, and activation to monitoring, renewal, and termination. Maintains immutable contract instances, tracks active contract state that drives SLA measurement and billing triggers, and handles contract invalidation and revocation.
 - The **Billing** service: calculates and issues invoices based on usage, entitlements, or fixed agreements.
 - The **SLA Management** service: tracks service commitments and penalties with evidence and notifications.
-- The **License asset** service: manages software and content licences, entitlements, and renewals.
-- The **Contract establishment** service: establishes (and invalidates) contract agreements.
 
 The **Policy management** capability has the following services: Policy decision point service and policy administration point service.
 

@@ -11,7 +11,7 @@
 
 **Product-level documentation for Simpl-Open as a deployed system.** The two guides under this folder describe how to **install** and **use** a complete Simpl-Open deployment — that is, the integrated set of agents (Consumer, Data Provider, Governance Authority, etc.) running together. They are **not** per-component guides.
 
-> **Scope reminder.** For component-specific deployment, configuration, or upgrade docs, navigate to the relevant solution folder under the capability map (e.g. `governance/contract-management/contract-establishment/contract-manager/doc/`). The guides here sit *one level above* the components — at the agent / product level.
+> **Scope reminder.** For component-specific deployment, configuration, or upgrade docs, navigate to the relevant solution folder under the capability map (e.g. `governance/contract-management/contract-lifecycle-management/contract-manager/doc/`). The guides here sit *one level above* the components — at the agent / product level.
 
 ## Guides
 

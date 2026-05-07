@@ -56,7 +56,7 @@ The DSP information model is described in §6.5.3. Key models: Contract Negotiat
 - [Simpl Catalogue](../../../../resource-discovery/resource-catalogue/simpl-catalogue/doc/architecture.md) — resource offerings (assets) must be registered in the Connector before a self-description can be published to the Catalogue. The contract-negotiation ID produced by the Connector is embedded in the self-description.
 - [Catalogue Client Application](../../../../resource-discovery/search-engine/catalogue-client-application/doc/architecture.md) — the EDC Connector Adapter (sub-component of CCA) registers resource offerings and retrieves contract negotiation references.
 - [Infrastructure Provisioner](../../../../../infrastructure/provisioning/infrastructure-provisioning/infrastructure-provisioner/doc/architecture.md) — the Triggering Extension calls the Infrastructure Triggering Module to initiate infrastructure provisioning on contract finalisation.
-- [Contract Manager](../../../../../governance/contract-management/contract-establishment/contract-manager/doc/architecture.md) — the Connector interacts with the Contract Manager for contract issuance and storage.
+- [Contract Manager](../../../../../governance/contract-management/contract-lifecycle-management/contract-manager/doc/architecture.md) — the Connector interacts with the Contract Manager for contract issuance and storage.
 - [Orchestration Platform](../../../../../data/supporting-data-services/data-orchestration/orchestration-platform/doc/architecture.md) — acts as a data plane bridge for data/application bundle transfers.
 
 ## Technical view
@@ -70,7 +70,7 @@ The fork extends Eclipse EDC with:
 
 - **MinIO S3 Extension** — native MinIO S3 support for data transfers (Gaia-X implementation; the **primary** data-plane storage).
 - **Infrastructure provisioning capabilities** — bridges to the [Triggering Module](../../../../infrastructure/provisioning/infrastructure-provisioning/infrastructure-be/doc/architecture.md) over Kafka.
-- **Contract management extensions** — enhanced contract-lifecycle hooks integrating with the [Contract Manager](../../../../governance/contract-management/contract-establishment/contract-manager/doc/architecture.md).
+- **Contract management extensions** — enhanced contract-lifecycle hooks integrating with the [Contract Manager](../../../../governance/contract-management/contract-lifecycle-management/contract-manager/doc/architecture.md).
 - **Enhanced policy constraints and validation** — additional ODRL constraint types beyond stock EDC.
 - **OpenTelemetry integration** for observability — traces and metrics flow into the [Monitoring Service](../../../../administration/observability/dashboarding/monitoring-service/doc/architecture.md).
 - **eDelivery extension** — triggers eDelivery transfer.

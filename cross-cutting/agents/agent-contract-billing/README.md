@@ -25,7 +25,7 @@ Same shape as [`agent-iaa/`](../agent-iaa/README.md): variant-specific deploymen
 
 | Sub-service in chart | Catalogue location |
 |---|---|
-| `simpl-contract` | [governance/contract-management/contract-establishment/contract-manager/](../../../governance/contract-management/contract-establishment/contract-manager/README.md) |
+| `simpl-contract` | [governance/contract-management/contract-lifecycle-management/contract-manager/](../../../governance/contract-management/contract-lifecycle-management/contract-manager/README.md) |
 | `simpl-signing-service` | [security/credential-management/signing/signer-service/](../../../security/credential-management/signing/signer-service/README.md) |
 | `simpl-vc-issuer-service` | [security/credential-management/vc-issuance-verification/vc-issuer/](../../../security/credential-management/vc-issuance-verification/vc-issuer/README.md) |
 | `simpl-stubs` | [cross-cutting/samples/contract-billing-stubs/](../../samples/contract-billing-stubs/README.md) |

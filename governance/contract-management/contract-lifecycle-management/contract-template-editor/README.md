@@ -6,7 +6,7 @@
 <a href="../../../../README.md">🏠 Home</a><br/>
     <a href="../../../README.md">Dimension: Governance</a><br/>
         <a href="../../README.md">Capability: Contract management</a><br/>
-            <a href="../README.md">Service: Contract establishment</a><br/>
+            <a href="../README.md">Service: Contract lifecycle management</a><br/>
                 <strong>Contract Template Editor</strong><br/>
 </p>
 </div>

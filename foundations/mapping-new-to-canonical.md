@@ -121,10 +121,10 @@ Sorted by new path. Status values per the table above.
 | `data/supporting-data-services/data-orchestration/orchestration-platform` | provider-orchestration-platform | https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/provider-orchestration-platform | orchestration-platform | provider-orchestration-platform | prototype |
 | `governance/consent-management/consent-management/consent-management` | Consent Management | — | — | — | roadmap |
 | `governance/contract-management/common/contract-billing-common` | contract-billing-common | https://code.europa.eu/simpl/simpl-open/development/contract-billing/common | Contract-billing | common | prototype |
-| `governance/contract-management/contract-establishment/contract-manager` | Contract Manager | — | — | — | roadmap |
-| `governance/contract-management/contract-establishment/contract-manager-ui` | contract-manager-ui | https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract-ui | Contract-billing | contract-ui | prototype |
-| `governance/contract-management/contract-establishment/contract-template-datastore` | Contract Template Datastore | https://code.europa.eu/simpl/simpl-open/development/data1/simpl-files | data1 | simpl-files | prototype-interim |
-| `governance/contract-management/contract-establishment/contract-template-editor` | Contract Template Editor | — | — | — | roadmap |
+| `governance/contract-management/contract-lifecycle-management/contract-manager` | Contract Manager | — | — | — | roadmap |
+| `governance/contract-management/contract-lifecycle-management/contract-manager-ui` | contract-manager-ui | https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract-ui | Contract-billing | contract-ui | prototype |
+| `governance/contract-management/contract-lifecycle-management/contract-template-datastore` | Contract Template Datastore | https://code.europa.eu/simpl/simpl-open/development/data1/simpl-files | data1 | simpl-files | prototype-interim |
+| `governance/contract-management/contract-lifecycle-management/contract-template-editor` | Contract Template Editor | — | — | — | roadmap |
 | `governance/participant-management/onboarding/document-validation` | Document Validation Service | — | — | — | roadmap |
 | `governance/participant-management/onboarding/fe-onboarding` | fe-onboarding | https://code.europa.eu/simpl/simpl-open/development/iaa/fe-onboarding | IAA | fe-onboarding | prototype |
 | `governance/participant-management/onboarding/onboarding-service` | Onboarding Service | — | — | — | roadmap |

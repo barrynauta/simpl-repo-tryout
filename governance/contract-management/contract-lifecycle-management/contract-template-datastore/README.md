@@ -15,7 +15,7 @@
 
 Stores contract templates to ensure consistent application of contract terms. Templates are accessible to consumers during resource negotiation and access stages.
 
-Capability-map placement: `governance / contract-management / contract-establishment / contract-template-datastore`. This solution implements the **Contract establishment** business service (alongside the Contract Manager).
+Capability-map placement: `governance / contract-management / contract-lifecycle-management / contract-template-datastore`. This solution implements the **Contract lifecycle management** business service (alongside the Contract Manager).
 
 Provenance: planned — no dedicated source repository yet. **Interim implementation:** the SD Tooling currently reads templates from `data1/simpl-files`, a generic-file store re-used as a placeholder. The PSO mapping spreadsheet labels this app-service as `contract-template-datastore-temporary` and notes it as "Workaround to make the SD Tooling work while waiting for the real contract template datastore." Licence: EUPL 1.2.
 

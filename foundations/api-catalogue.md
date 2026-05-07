@@ -70,11 +70,11 @@ The capability map is the canonical organising structure of this catalogue; APIs
 
 ### governance
 
-**[contract-manager](../governance/contract-management/contract-establishment/contract-manager/README.md)** — `contract-management / contract-establishment`  →  [api/](../governance/contract-management/contract-establishment/contract-manager/api/README.md)
+**[contract-manager](../governance/contract-management/contract-lifecycle-management/contract-manager/README.md)** — `contract-management / contract-lifecycle-management`  →  [api/](../governance/contract-management/contract-lifecycle-management/contract-manager/api/README.md)
 
 | File | Kind | Title | API version | Tier | Endpoints |
 |------|------|-------|------|------|----------|
-| [`openapi3-v1.yaml`](../governance/contract-management/contract-establishment/contract-manager/api/openapi3-v1.yaml) | openapi 3.0.3 | Contract Manager | `1.1` | — | 8 paths |
+| [`openapi3-v1.yaml`](../governance/contract-management/contract-lifecycle-management/contract-manager/api/openapi3-v1.yaml) | openapi 3.0.3 | Contract Manager | `1.1` | — | 8 paths |
 
 **[onboarding-service](../governance/participant-management/onboarding/fe-onboarding/README.md)** — `participant-management / onboarding`  →  [api/](../governance/participant-management/onboarding/fe-onboarding/api/README.md)
 
@@ -209,7 +209,7 @@ REST API contracts. View locally with [editor.swagger.io](https://editor.swagger
 | [schema-sync-adapter](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/README.md) | [`openapi-schema-sync-adapter-tier2-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/api/openapi-schema-sync-adapter-tier2-v1.yaml) | Schema Sync Adapter API | Tier 2 | 1 |
 | [schema-sync-adapter](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/README.md) | [`openapi-schema-sync-adapter-v1.yaml`](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter/api/openapi-schema-sync-adapter-v1.yaml) | Schema Sync Adapter API | — | 1 |
 | [asset-orchestrator](../data/supporting-data-services/data-orchestration/asset-orchestrator/README.md) | [`openapi-asset-orchestrator-v1.yaml`](../data/supporting-data-services/data-orchestration/asset-orchestrator/api/openapi-asset-orchestrator-v1.yaml) | Asset Orchestrator API | — | 6 |
-| [contract-manager](../governance/contract-management/contract-establishment/contract-manager/README.md) | [`openapi3-v1.yaml`](../governance/contract-management/contract-establishment/contract-manager/api/openapi3-v1.yaml) | Contract Manager | — | 8 |
+| [contract-manager](../governance/contract-management/contract-lifecycle-management/contract-manager/README.md) | [`openapi3-v1.yaml`](../governance/contract-management/contract-lifecycle-management/contract-manager/api/openapi3-v1.yaml) | Contract Manager | — | 8 |
 | [onboarding-service](../governance/participant-management/onboarding/fe-onboarding/README.md) | [`onboarding-tier1-v2.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/onboarding-tier1-v2.yaml) | Onboarding Tier 1 | Tier 1 | 2 |
 | [onboarding-service](../governance/participant-management/onboarding/fe-onboarding/README.md) | [`onboarding-v1.yaml`](../governance/participant-management/onboarding/fe-onboarding/api/onboarding-v1.yaml) | Onboarding | — | 25 |
 | [users-roles](../governance/participant-management/user-roles/fe-users-roles/README.md) | [`usersroles-tier1-v2.yaml`](../governance/participant-management/user-roles/fe-users-roles/api/usersroles-tier1-v2.yaml) | User and Roles Tier 1 | Tier 1 | 12 |

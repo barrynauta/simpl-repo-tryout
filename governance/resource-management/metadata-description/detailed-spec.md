@@ -13,7 +13,7 @@
 
 # Detailed technical specification — Self-Descriptions
 
-This page reproduces the Self-Descriptions section of the functional and technical architecture specification (FTA §6.4.2). It is the canonical reference for the structure, syntax, and validation rules of resource self-descriptions — the GX-Trustframework-derived ontology, the SHACL shapes used by the Federated Catalogue to validate submissions, the JSON-LD signing model, and the bridge between Self-Descriptions and the [contract](../../../contract-management/contract-establishment/README.md) and [policy](../../../policy-management/policy-administration-point/README.md) flows.
+This page reproduces the Self-Descriptions section of the functional and technical architecture specification (FTA §6.4.2). It is the canonical reference for the structure, syntax, and validation rules of resource self-descriptions — the GX-Trustframework-derived ontology, the SHACL shapes used by the Federated Catalogue to validate submissions, the JSON-LD signing model, and the bridge between Self-Descriptions and the [contract](../../../contract-management/contract-lifecycle-management/README.md) and [policy](../../../policy-management/policy-administration-point/README.md) flows.
 
 The components that implement this specification — [SD Manager, SD Tooling, Validation Backend](README.md) — sit under this service folder. The Gaia-X Trust Framework that this ontology derives from is referenced in [foundations/interoperability.md](../../../foundations/interoperability.md).
 

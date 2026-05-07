@@ -30,7 +30,7 @@ The Wallet stores verifiable credentials received from the VC Issuer. Credential
 ### Key integrations
 
 - [VC Issuer](../../../vc-issuance-verification/vc-issuer/doc/architecture.md) — issues verifiable credentials that are forwarded to the Wallet for secure storage.
-- [Contract Manager](../../../../../governance/contract-management/contract-establishment/contract-manager/doc/architecture.md) — coordinates with the Wallet (via the VC Issuer integration) to store and retrieve contract-linked verifiable credentials.
+- [Contract Manager](../../../../../governance/contract-management/contract-lifecycle-management/contract-manager/doc/architecture.md) — coordinates with the Wallet (via the VC Issuer integration) to store and retrieve contract-linked verifiable credentials.
 
 ## Technical view
 

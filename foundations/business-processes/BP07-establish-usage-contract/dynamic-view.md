@@ -44,7 +44,7 @@ This dynamic view describes the interactions between Consumer, Connector, Provid
 ## Participants
 
 - [connector/](../../../integration/resource-sharing/resource-sharing-runtime/connector/README.md) — Connector (contract negotiation control plane on both Consumer and Provider sides)
-- [contract-manager/](../../../governance/contract-management/contract-establishment/contract-manager/README.md) — Contract Manager (manages the contract lifecycle, offer templates and agreement persistence)
+- [contract-manager/](../../../governance/contract-management/contract-lifecycle-management/contract-manager/README.md) — Contract Manager (manages the contract lifecycle, offer templates and agreement persistence)
 - [vc-issuer/](../../../security/credential-management/vc-issuance-verification/vc-issuer/README.md) — VC Issuer (issues Verifiable Credentials for Usage Contract Agreements)
 - [signer-service/](../../../security/credential-management/signing/signer-service/README.md) — Signer Service (signs the Usage Contract VC)
 - [wallet/](../../../security/credential-management/wallet/wallet/README.md) — Wallet (stores signed Usage Contract VCs on both Consumer and Provider sides)

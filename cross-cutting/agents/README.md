@@ -52,7 +52,7 @@ A consumer node is what an end-user organisation deploys to **discover, contract
 | Catalogue Client Application (UI + backend) | [integration/resource-discovery/search-engine/catalogue-client-application/](../../integration/resource-discovery/search-engine/catalogue-client-application/README.md) |
 | Schema Sync | [data/semantics-and-vocabulary/schema-management/schema-sync-service/](../../data/semantics-and-vocabulary/schema-management/schema-sync-service/README.md) |
 | EDC + EDC Connector Adapter | [integration/resource-sharing/resource-sharing-runtime/connector/](../../integration/resource-sharing/resource-sharing-runtime/connector/README.md), [edc-connector-adapter/](../../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md) |
-| Contract Manager (Orchestrator + Backend) | [governance/contract-management/contract-establishment/contract-manager/](../../governance/contract-management/contract-establishment/contract-manager/README.md) |
+| Contract Manager (Orchestrator + Backend) | [governance/contract-management/contract-lifecycle-management/contract-manager/](../../governance/contract-management/contract-lifecycle-management/contract-manager/README.md) |
 | Validation Backend | [integration/resource-discovery/search-engine/validation-backend/](../../integration/resource-discovery/search-engine/validation-backend/README.md) |
 
 ### Provider Agent

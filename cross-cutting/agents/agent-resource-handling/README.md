@@ -25,7 +25,7 @@ Same shape as [`agent-iaa/`](../agent-iaa/README.md) and [`agent-contract-billin
 
 | Sub-service in chart | Catalogue location |
 |---|---|
-| `contract-consumption-be` | [governance/contract-management/contract-establishment/](../../../governance/contract-management/contract-establishment/README.md) |
+| `contract-consumption-be` | [governance/contract-management/contract-lifecycle-management/](../../../governance/contract-management/contract-lifecycle-management/README.md) |
 | `edc-connector-adapter` | [integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/](../../../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter/README.md) |
 | `schema-sync-adapter` | [data/semantics-and-vocabulary/schema-management/](../../../data/semantics-and-vocabulary/schema-management/README.md) |
 | `sd-creation-wizard` (validation) | [governance/resource-management/metadata-description/validation-backend/](../../../governance/resource-management/metadata-description/validation-backend/README.md) |

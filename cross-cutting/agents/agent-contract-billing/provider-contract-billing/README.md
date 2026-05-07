@@ -19,7 +19,7 @@ The contract instance is deployed under `nameOverride: contract-dataprovider` to
 
 ## Bundled services
 
-- `simpl-contract` → [Contract Manager](../../../../governance/contract-management/contract-establishment/contract-manager/README.md)
+- `simpl-contract` → [Contract Manager](../../../../governance/contract-management/contract-lifecycle-management/contract-manager/README.md)
 - `simpl-signing-service` → [Signer Service](../../../../security/credential-management/signing/signer-service/README.md)
 - `simpl-vc-issuer-service` → [VC Issuer](../../../../security/credential-management/vc-issuance-verification/vc-issuer/README.md)
 - `simpl-stubs` → [contract-billing-stubs](../../../samples/contract-billing-stubs/README.md)
