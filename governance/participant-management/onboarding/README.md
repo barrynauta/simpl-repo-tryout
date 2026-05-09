@@ -14,8 +14,3 @@
 
 Manages the end-to-end participant onboarding process — application submission, verification by the Governance Authority, identity attribute assignment, and Tier 2 credential provisioning.
 
-## Solutions
-
-- [fe-onboarding](fe-onboarding/README.md) — Angular frontend for the Onboarding business service. The backend lives upstream at `iaa/onboarding` and is not yet represented as a dedicated catalogue folder.
-- [Document Validation Service](document-validation/README.md) — validates documents attached to onboarding requests against schema and content rules. _(Stub — see MAPPING row 61.)_
-
