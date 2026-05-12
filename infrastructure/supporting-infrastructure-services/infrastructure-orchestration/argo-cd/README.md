@@ -13,6 +13,6 @@
 
 # Argo CD
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 23. FTA reference: §6.1.2, §6.3.2, §8.7 ContinuousDeployment, §8.7.6 Argo CD.
+> Stub README. FTA reference: §6.1.2, §6.3.2, §8.7 ContinuousDeployment, §8.7.6 Argo CD.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent [Infrastructure orchestration](../README.md) page for the surrounding architecture context.

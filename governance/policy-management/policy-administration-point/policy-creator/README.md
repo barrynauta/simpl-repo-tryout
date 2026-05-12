@@ -13,6 +13,6 @@
 
 # Policy Creator
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 38. FTA references: §4.3.1 ACV Static - Resource Offering Service, §6.4.3 Policies.
+> Stub README. FTA references: §4.3.1 ACV Static - Resource Offering Service, §6.4.3 Policies.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent service / capability README for the surrounding architecture context.

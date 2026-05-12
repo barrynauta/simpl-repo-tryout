@@ -16,8 +16,5 @@ Evaluates policies against requests and emits permit/deny decisions. Roadmap; ca
 
 ## Solutions
 
-- [Rule Manager (Digital Enabler)](rule-manager/README.md) — see stub for FTA reference and MAPPING row.
-
+- [Rule Manager (Digital Enabler)](rule-manager/README.md) — see stub for FTA reference.
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 103. FTA references vary per solution and are recorded inside each solution's stub README.

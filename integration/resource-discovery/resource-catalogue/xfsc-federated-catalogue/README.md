@@ -13,6 +13,6 @@
 
 # XFSC Federated Catalogue
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 1. FTA references: §4.3.1 ACV Static - Catalogue Service, §6.1.2 TCV Static - Catalogue Service, §6.3.2, §6.5 Federated Catalogue.
+> Stub README. FTA references: §4.3.1 ACV Static - Catalogue Service, §6.1.2 TCV Static - Catalogue Service, §6.3.2, §6.5 Federated Catalogue.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent service / capability README for the surrounding architecture context.

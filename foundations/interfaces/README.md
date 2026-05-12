@@ -11,13 +11,13 @@
 
 # Interfaces
 
-Cross-cutting interface technologies — frameworks and specifications used across Simpl-Open solutions for API definition, micro-frontend composition, and resilience patterns. Each child folder anchors a specific technology to its source-section reference in [MAPPING.md](../../MAPPING.md).
+Cross-cutting interface technologies — frameworks and specifications used across Simpl-Open solutions for API definition, micro-frontend composition, and resilience patterns. Each child folder anchors a specific technology to its FTA source-section reference.
 
 ## Children
 
-- [spring-cloud-circuit-breaker/](spring-cloud-circuit-breaker/README.md) — circuit-breaker pattern for resilient inter-service calls (FTA §6.3.1, MAPPING row 56).
-- [swagger-openapi/](swagger-openapi/README.md) — API specification format used by every Simpl-Open service (FTA §4.5.1, §6.3.1, MAPPING row 109).
-- [webpack-module-federation/](webpack-module-federation/README.md) — micro-frontend composition framework (FTA §6.3.1, MAPPING row 108).
+- [spring-cloud-circuit-breaker/](spring-cloud-circuit-breaker/README.md) — circuit-breaker pattern for resilient inter-service calls (FTA §6.3.1).
+- [swagger-openapi/](swagger-openapi/README.md) — API specification format used by every Simpl-Open service (FTA §4.5.1, §6.3.1).
+- [webpack-module-federation/](webpack-module-federation/README.md) — micro-frontend composition framework (FTA §6.3.1).
 
 ## Related
 

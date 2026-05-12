@@ -12,6 +12,6 @@
 
 # Spring Cloud Circuit Breaker
 
-> Stub README created to anchor the [Solution → Service mapping](../../../MAPPING.md) (row 56). FTA reference: §6.3.1 Technology Roadmap.
+> Stub README. FTA reference: §6.3.1 Technology Roadmap.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent [Interfaces](../README.md) page for the surrounding architecture context.

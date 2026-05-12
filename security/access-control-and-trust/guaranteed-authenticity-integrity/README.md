@@ -16,7 +16,4 @@ Mutual TLS for agent-to-agent communication: every cross-participant call is mTL
 
 ## Solutions
 
-
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 59. FTA references vary per solution and are recorded inside each solution's stub README.

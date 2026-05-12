@@ -16,13 +16,11 @@ Automates declarative deployment and day-2 operations of infrastructure resource
 
 ## Solutions
 
-- [Argo CD](argo-cd/README.md) — see stub for FTA reference and MAPPING row.
-- [Argo Workflows](argo-workflows/README.md) — see stub for FTA reference and MAPPING row.
-- [Argo Events](argo-events/README.md) — see stub for FTA reference and MAPPING row.
-- [Kubernetes](kubernetes/README.md) — see stub for FTA reference and MAPPING row.
-- [OKD / OpenShift](okd/README.md) — see stub for FTA reference and MAPPING row.
+- [Argo CD](argo-cd/README.md) — see stub for FTA reference.
+- [Argo Workflows](argo-workflows/README.md) — see stub for FTA reference.
+- [Argo Events](argo-events/README.md) — see stub for FTA reference.
+- [Kubernetes](kubernetes/README.md) — see stub for FTA reference.
+- [OKD / OpenShift](okd/README.md) — see stub for FTA reference.
 - [Application Deployer](application-deployer/README.md) — Simpl-Open application deployer for application/service workloads.
 
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 23, 28, 29, 30, 83. FTA references vary per solution and are recorded inside each solution's stub README.

@@ -16,7 +16,4 @@ Hosts interactive applications and engines for domain-specific processing. Roadm
 
 ## Solutions
 
-
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 85, 87. FTA references vary per solution and are recorded inside each solution's stub README.

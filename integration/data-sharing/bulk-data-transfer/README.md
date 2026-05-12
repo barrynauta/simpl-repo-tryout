@@ -16,7 +16,4 @@ Moves large datasets reliably between participants with checkpointing, integrity
 
 ## Solutions
 
-
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 10, 74. FTA references vary per solution and are recorded inside each solution's stub README.

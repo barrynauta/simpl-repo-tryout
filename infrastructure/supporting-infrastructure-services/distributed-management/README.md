@@ -16,7 +16,4 @@ Manages multi-site topologies, synchronisation, and drift remediation. Roadmap.
 
 ## Solutions
 
-
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 118. FTA references vary per solution and are recorded inside each solution's stub README.

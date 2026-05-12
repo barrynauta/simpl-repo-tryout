@@ -16,7 +16,4 @@ Serves trained models with versioning, inference endpoints, and monitoring. Road
 
 ## Solutions
 
-
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 99. FTA references vary per solution and are recorded inside each solution's stub README.

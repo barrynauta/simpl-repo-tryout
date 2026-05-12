@@ -13,6 +13,6 @@
 
 # Kubernetes
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 30. FTA reference: §6.2 Technology Deployment View, §6.3.1.
+> Stub README. FTA reference: §6.2 Technology Deployment View, §6.3.1.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent [Infrastructure orchestration](../README.md) page for the surrounding architecture context.

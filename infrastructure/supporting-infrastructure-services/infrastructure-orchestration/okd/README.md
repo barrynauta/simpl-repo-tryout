@@ -13,6 +13,6 @@
 
 # OKD / OpenShift
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 83. FTA reference: §6.3.1 Technology Roadmap.
+> Stub README. FTA reference: §6.3.1 Technology Roadmap.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent [Infrastructure orchestration](../README.md) page for the surrounding architecture context.

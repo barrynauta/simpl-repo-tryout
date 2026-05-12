@@ -16,8 +16,5 @@ Captures, stores, and enforces data subjects' consent preferences. Roadmap; desi
 
 ## Solutions
 
-- [Consent Management](consent-management/README.md) — see stub for FTA reference and MAPPING row.
-
+- [Consent Management](consent-management/README.md) — see stub for FTA reference.
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 104. FTA references vary per solution and are recorded inside each solution's stub README.

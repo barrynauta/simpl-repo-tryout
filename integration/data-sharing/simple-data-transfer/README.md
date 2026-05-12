@@ -16,7 +16,4 @@ Lightweight pull or push exchanges for small files and APIs. Roadmap item; desig
 
 ## Solutions
 
-
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 88. FTA references vary per solution and are recorded inside each solution's stub README.

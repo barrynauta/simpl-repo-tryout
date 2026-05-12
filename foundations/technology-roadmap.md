@@ -11,7 +11,7 @@
 
 # Technology roadmap
 
-The forward-looking technology roadmap for Simpl-Open: candidate components considered for future releases, why each is a candidate, and the relationship between roadmap items and the current Release 3.0 scope. The technologies named here are mapped to their solution folders via [MAPPING.md](../MAPPING.md) (look for "Technology Roadmap" in the source-section column) and many already have stub README files under their target dimension.
+The forward-looking technology roadmap for Simpl-Open: candidate components considered for future releases, why each is a candidate, and the relationship between roadmap items and the current Release 3.0 scope. Many of the technologies named here already have stub README files under their target dimension.
 
 ## Source
 

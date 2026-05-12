@@ -20,5 +20,3 @@ Cryptographic key and secret management underpinning every secure store and Tier
 - [openbao](openbao/README.md) — Helm chart for OpenBao, the OSS-licensed Vault fork (functionally interchangeable). Includes a companion `openbao-init` chart that seeds per-component KV paths.
 
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 58. FTA references vary per solution and are recorded inside each solution's stub README.

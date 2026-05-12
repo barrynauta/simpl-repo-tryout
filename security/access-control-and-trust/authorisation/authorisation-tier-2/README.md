@@ -13,6 +13,6 @@
 
 # Authorisation Tier 2 (ABAC)
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 54. FTA references: §4.2.1, §6.1.1, §6.4.1.
+> Stub README. FTA references: §4.2.1, §6.1.1, §6.4.1.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent service / capability README for the surrounding architecture context.

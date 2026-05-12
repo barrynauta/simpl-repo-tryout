@@ -12,6 +12,6 @@
 
 # Swagger / OpenAPI
 
-> Stub README created to anchor the [Solution → Service mapping](../../../MAPPING.md) (row 109). FTA reference: §4.5.1 APIs, §6.3.1.
+> Stub README. FTA reference: §4.5.1 APIs, §6.3.1.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent [Interfaces](../README.md) page for the surrounding architecture context.

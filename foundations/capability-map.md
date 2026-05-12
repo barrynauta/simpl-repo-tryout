@@ -240,5 +240,3 @@ The current version of the architecture specification covers the architecture of
 ## How this maps to the repository tree
 
 Every solution folder in this documentation catalogue sits under a `dimension/capability/business-service/solution/` path that matches the hierarchy above. The complete set of generated solutions is indexed in the top-level [README.md](../README.md).
-
-For the component → service home mapping (including OSS products and roadmap items), see [MAPPING.md](../MAPPING.md).

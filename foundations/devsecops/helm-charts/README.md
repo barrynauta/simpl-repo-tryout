@@ -12,6 +12,6 @@
 
 # Helm Charts
 
-> Stub README created to anchor the [Solution → Service mapping](../../../MAPPING.md) (row 31). FTA reference: §8.7.5 Helm Charts, §6.3.1.
+> Stub README. FTA reference: §8.7.5 Helm Charts, §6.3.1.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent [DevSecOps](../README.md) page for the surrounding architecture context.

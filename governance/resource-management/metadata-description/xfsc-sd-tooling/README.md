@@ -13,6 +13,6 @@
 
 # XFSC SD Tooling
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 36. FTA references: §4.3.1 ACV Static - Resource Offering Service, §6.1.2, §6.3.2.
+> Stub README. FTA references: §4.3.1 ACV Static - Resource Offering Service, §6.1.2, §6.3.2.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent service / capability README for the surrounding architecture context.

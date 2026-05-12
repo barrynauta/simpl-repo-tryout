@@ -16,8 +16,5 @@ Settlement, invoicing, and clearing for usage-based contracts. Roadmap.
 
 ## Solutions
 
-- [Partitum (Clearing House)](partitum/README.md) — see stub for FTA reference and MAPPING row.
-
+- [Partitum (Clearing House)](partitum/README.md) — see stub for FTA reference.
 ## Source
-
-Routed from [MAPPING.md](../../../MAPPING.md) rows 90, 93. FTA references vary per solution and are recorded inside each solution's stub README.

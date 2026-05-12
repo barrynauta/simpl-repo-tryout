@@ -13,6 +13,6 @@
 
 # Keycloak Authenticator Plugin (custom SPI)
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 47. FTA references: §6.1.1 TCV Static - Tier 1 Authentication Service.
+> Stub README. FTA references: §6.1.1 TCV Static - Tier 1 Authentication Service.
 >
 > Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent service / capability README for the surrounding architecture context.
