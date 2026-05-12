@@ -1,95 +1,98 @@
 # Mapping: Code-Europa-EU → New Repo Structure
 
-All repos from code.europa.eu/simpl/simpl-open/development, sorted by team then solution. Status: `placed` = mapped to a path in the new repo; `pending` = not yet placed.
+All repos from code.europa.eu/simpl/simpl-open/development, sorted by team then solution.
 
-> Note: `sdtooling-validation-api-be` (data1) maps to two separate slots in the new repo (two rows).  
-> Note: `agent-iaa/provider-iaa` (IAA) similarly maps to two slots (two rows).  
-> Note: items in *italics* in the CE Solution column indicate the exact name as listed in the GitLab group; small spelling differences from the canonical URL are preserved.
+**Status values:**
+- `placed` — mapped to a path in the new repo
+- `archived` — repo exists upstream but explicitly not migrated (archive-candidate)
+- `deprecated` — abandoned PoC, kept for reference only
+- `pending` — defunct/uncertain, decision deferred
+- `placeholder` — capability-map service with no implementation yet
 
+**Sources (priority order):**
+1. Capability map (`foundations/capability-map.md`)
+2. PSO review (`Simpl-Open repository restructure Review.docx`)
+3. Dev-source READMEs (`~/tmp/gitlab/development/`)
+4. PSO spreadsheet (`Repository_reorganisation_-_mapping_as-is_and_to-be_BN.xlsx`)
 
-Notes:
-* A lot of canonical names are candidate for change, shouldn't contain product names, and should be explanatory (example: data1/simpl-files. What does it do? or data1/common-tier2, this doesn't say at all that this is actaully a client
-* cross-cutting/agents/common-components - this is config only? To check
-* cross-cutting/agents/agent-contract-billing - seems ❌
-* CE has Agents/common-components and top-level Common-components - seems ❌
-* A lot of smell on integration/resource-sharing/resource-sharing-runtime ❌ fuzzy names
-* data1/consumer-data1 - helm charts? So under agents?
-* contract client part of search? (data1/contract-consumption-be -> `integration/resource-discovery/search-engine/contract-consumption-adapter`)
-* data1/sdtooling-validation-api-be is mapped twice ❌
-* Is the following path ok (twice data-processing): data/data-processing/anonymisation-and-pseudonymisation/data-processing
-* data-services/semaphoreui-deployer-service - shouldn't this be under orchestration?
-* Gaia-X-EDC / authority-gaia-x-edc - under agents?
-* We need to scan for empty and/or obsolete repositories
-* ⚠️ We need naming convenstions fe- or ui- or -ui, sometimes different projects, sometimes subdirectories. Idem for be (backend), sometimes a -service extension
-* Are the identity-provider and the identity-provider-service one and the same?
+**Canonical source:** The authoritative form of this mapping is the xlsx file at `/Users/barrynauta/tmp/repo/New-mapping-BN.xlsx`. This `.md` file is regenerated from it.
 
-| CE Team | CE Solution | New Path | Status | Check BN Caconical |
+**Notes on the 2026-05 reconciliation (PSO findings F01–F08):**
+- F01: `data1/sdtooling-validation-api-be` placed under `governance/resource-management/metadata-description/validation-backend` (canonical home for SD validation)
+- F02: `IAA/agent-iaa/provider-iaa` kept canonical at `cross-cutting/agents/...`; the security/auth-provider duplicate was removed
+- F03: signing-service collision split — `contract-billing/signing-service` → `contract-signing-service`; `Gaia-X-EDC/simpl-signer` → `xfsc-tsa-signer-wrapper`
+- F04: `Gaia-X-EDC/PoC-gaia-edc` moved to `cross-cutting/samples/poc-gaia-edc` (deprecated)
+- F05: `IAA/security-attributes-provider` solution renamed to plural form (matches CE repo)
+- F06: `IAA/simpl-fe` reclassified as archive-candidate (visible but archived upstream)
+- F08: `data1/charts`, `Gaia-X-EDC/EDC MinIO s3` archived; `simpl-contract-negotiation-mockup` moved to samples; `iaa/cli` kept archived per upstream README
+- 37 capability-map services with no implementation added as `placeholder` rows for transparency
+
+| CE Team | CE Solution | New Path | Status | Notes |
 |---|---|---|---|---|
 | Agents | [application-provider](https://code.europa.eu/simpl/simpl-open/development/agents/application-provider) | [`cross-cutting/agents/application-provider-agent`](../cross-cutting/agents/application-provider-agent) | placed | ✅ |
-| Agents | [common_components](https://code.europa.eu/simpl/simpl-open/development/agents/common_components) | [`cross-cutting/agents/common-components`](../cross-cutting/agents/common-components) | placed |  ✅ |
+| Agents | [common_components](https://code.europa.eu/simpl/simpl-open/development/agents/common_components) | [`cross-cutting/agents/common-components`](../cross-cutting/agents/common-components) | placed | ✅ |
 | Agents | [consumer](https://code.europa.eu/simpl/simpl-open/development/agents/consumer) | [`cross-cutting/agents/consumer-agent`](../cross-cutting/agents/consumer-agent) | placed | ✅ |
-| Agents | [data-provider](https://code.europa.eu/simpl/simpl-open/development/agents/data-provider) | [`cross-cutting/agents/data-provider-agent`](../cross-cutting/agents/data-provider-agent) | placed | ✅ | 
+| Agents | [data-provider](https://code.europa.eu/simpl/simpl-open/development/agents/data-provider) | [`cross-cutting/agents/data-provider-agent`](../cross-cutting/agents/data-provider-agent) | placed | ✅ |
 | Agents | [governance-authority](https://code.europa.eu/simpl/simpl-open/development/agents/governance-authority) | [`cross-cutting/agents/governance-authority-agent`](../cross-cutting/agents/governance-authority-agent) | placed | ✅ |
 | Agents | [infrastructure-provider](https://code.europa.eu/simpl/simpl-open/development/agents/infrastructure-provider) | [`cross-cutting/agents/infrastructure-provider-agent`](../cross-cutting/agents/infrastructure-provider-agent) | placed | ✅ |
 | Common-components | [kafka](https://code.europa.eu/simpl/simpl-open/development/common-components/kafka) | [`administration/notification-and-messaging/messaging/kafka`](../administration/notification-and-messaging/messaging/kafka) | placed | ✅ |
 | Common-components | [openbao](https://code.europa.eu/simpl/simpl-open/development/common-components/openbao) | [`security/access-control-and-trust/encryption/openbao`](../security/access-control-and-trust/encryption/openbao) | placed | ✅ |
-| Common-components | [open-bao-init](https://code.europa.eu/simpl/simpl-open/development/common-components/openbao-init) | [`security/access-control-and-trust/encryption/openbao/openbao-init`](../security/access-control-and-trust/encryption/openbao/openbao-init) | placed | ✅ |
+| Common-components | [openbao-init](https://code.europa.eu/simpl/simpl-open/development/common-components/openbao-init) | [`security/access-control-and-trust/encryption/openbao/openbao-init`](../security/access-control-and-trust/encryption/openbao/openbao-init) | placed | ✅ |
 | Common-components | [postgres-cluster](https://code.europa.eu/simpl/simpl-open/development/common-components/postgres-cluster) | [`data/supporting-data-services/common/postgres-cluster`](../data/supporting-data-services/common/postgres-cluster) | placed | ✅ |
-| Common-components | shared-specs | — | pending | 🚧 Seems defunct |
+| Common-components | [shared-specs](https://code.europa.eu/simpl/simpl-open/development/common-components/shared-specs) | — | pending | 🚧 Seems defunct |
 | Common-components | [vault](https://code.europa.eu/simpl/simpl-open/development/common-components/vault) | [`security/access-control-and-trust/encryption/vault`](../security/access-control-and-trust/encryption/vault) | placed | ✅ |
-| Contract-billing | actors | — | pending | 🚧 One year ago an initial commit - seems defunct |
-| Contract-billing | billing | — | pending | 🚧 One year ago an initial commit - seems defunct |
-| Contract-billing | billing-common | — | pending | 🚧 One year ago an initial commit - seems defunct |
+| Contract-billing | [actors](https://code.europa.eu/simpl/simpl-open/development/contract-billing/actors) | — | pending | 🚧 One year ago an initial commit - seems defunct |
+| Contract-billing | [billing](https://code.europa.eu/simpl/simpl-open/development/contract-billing/billing) | — | pending | 🚧 One year ago an initial commit - seems defunct |
+| Contract-billing | [billing-common](https://code.europa.eu/simpl/simpl-open/development/contract-billing/billing-common) | — | pending | 🚧 One year ago an initial commit - seems defunct |
 | Contract-billing | [common](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common) | [`governance/contract-management/common/contract-billing-common`](../governance/contract-management/common/contract-billing-common) | placed | ⚠️ Aggregates 5 cross-cutting concerns (exceptions, security, HTTP, error DTOs, utils) — candidate for upstream modularisation, see solution README |
 | Contract-billing | [common_logging](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common_logging) | [`administration/observability/logging/common-logging-java`](../administration/observability/logging/common-logging-java) | placed | ✅ |
 | Contract-billing | [common_logging_python](https://code.europa.eu/simpl/simpl-open/development/contract-billing/common_logging_python) | [`administration/observability/logging/common-logging-python`](../administration/observability/logging/common-logging-python) | placed | ✅ |
 | Contract-billing | [consumer-contract-billing](https://code.europa.eu/simpl/simpl-open/development/contract-billing/consumer-contract-billing) | [`cross-cutting/agents/agent-contract-billing/consumer-contract-billing`](../cross-cutting/agents/agent-contract-billing/consumer-contract-billing) | placed | ✅ |
 | Contract-billing | [contract](https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract) | [`governance/contract-management/contract-lifecycle-management/contract-manager`](../governance/contract-management/contract-lifecycle-management/contract-manager) | placed | ✅ |
 | Contract-billing | [contract-ui](https://code.europa.eu/simpl/simpl-open/development/contract-billing/contract-ui) | [`governance/contract-management/contract-lifecycle-management/contract-manager-ui`](../governance/contract-management/contract-lifecycle-management/contract-manager-ui) | placed | ✅ |
-| Contract-billing | invoicing | — | pending | 🚧 defunct |
+| Contract-billing | [invoicing](https://code.europa.eu/simpl/simpl-open/development/contract-billing/invoicing) | — | pending | 🚧 defunct |
 | Contract-billing | [notification-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/notification-service) | [`administration/notification-and-messaging/notification/notification-service`](../administration/notification-and-messaging/notification/notification-service) | placed | ✅ |
 | Contract-billing | [provider-contract-billing](https://code.europa.eu/simpl/simpl-open/development/contract-billing/provider-contract-billing) | [`cross-cutting/agents/agent-contract-billing/provider-contract-billing`](../cross-cutting/agents/agent-contract-billing/provider-contract-billing) | placed | ✅ |
-| Contract-billing | settlement | — | pending | 🚧 defunct |
-| Contract-billing | [signing-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/signing-service) | [`security/credential-management/signing/signer-service`](../security/credential-management/signing/signer-service) | placed | ✅ |
-| Contract-billing | simpl-issuance | — | pending | 🚧 defunct |
-| Contract-billing | simpl-storage | — | pending | 🚧 defunct |
+| Contract-billing | [settlement](https://code.europa.eu/simpl/simpl-open/development/contract-billing/settlement) | — | pending | 🚧 defunct |
+| Contract-billing | [signing-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/signing-service) | [`security/credential-management/signing/contract-signing-service`](../security/credential-management/signing/contract-signing-service) | placed | ✅ |
+| Contract-billing | [simpl-issuance](https://code.europa.eu/simpl/simpl-open/development/contract-billing/simpl-issuance) | — | pending | 🚧 defunct |
+| Contract-billing | [simpl-storage](https://code.europa.eu/simpl/simpl-open/development/contract-billing/simpl-storage) | — | pending | 🚧 defunct |
 | Contract-billing | [stubs](https://code.europa.eu/simpl/simpl-open/development/contract-billing/stubs) | [`cross-cutting/samples/contract-billing-stubs`](../cross-cutting/samples/contract-billing-stubs) | placed | ✅ |
 | Contract-billing | [vc-issuer-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/vc-issuer-service) | [`security/credential-management/vc-issuance-verification/vc-issuer`](../security/credential-management/vc-issuance-verification/vc-issuer) | placed | ✅ |
-| Contract-billing | wallet-service | — | pending | 🚧 defunct |
-| data1 | Charts | — | pending | ⚠️ 1 year old - are these used?|
+| Contract-billing | [wallet-service](https://code.europa.eu/simpl/simpl-open/development/contract-billing/wallet-service) | — | pending | 🚧 defunct |
+| data-services | [data-processing](https://code.europa.eu/simpl/simpl-open/development/data-services/data-processing) | [`data/data-processing/anonymisation-and-pseudonymisation/data-processing`](../data/data-processing/anonymisation-and-pseudonymisation/data-processing) | placed | ✅ |
+| data-services | [dataframe-level-anonymisation](https://code.europa.eu/simpl/simpl-open/development/data-services/dataframe-level-anonymisation) | [`data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation`](../data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation) | placed | ✅ |
+| data-services | [field-level-pseudo-anonymisation](https://code.europa.eu/simpl/simpl-open/development/data-services/field-level-pseudo-anonymisation) | [`data/data-processing/anonymisation-and-pseudonymisation/field-level-pseudo-anonymisation`](../data/data-processing/anonymisation-and-pseudonymisation/field-level-pseudo-anonymisation) | placed | ✅ |
+| data-services | [semaphoreui-deployer-service](https://code.europa.eu/simpl/simpl-open/development/data-services/semaphoreui-deployer-service) | [`data/data-processing/anonymisation-and-pseudonymisation/semaphoreui-deployer-service`](../data/data-processing/anonymisation-and-pseudonymisation/semaphoreui-deployer-service) | placed | ✅ |
+| data-services | [template-code-location](https://code.europa.eu/simpl/simpl-open/development/data-services/template-code-location) | [`data/data-processing/anonymisation-and-pseudonymisation/template-code-location`](../data/data-processing/anonymisation-and-pseudonymisation/template-code-location) | placed | ✅ |
+| data-services | [util-services](https://code.europa.eu/simpl/simpl-open/development/data-services/util-services) | [`data/data-processing/anonymisation-and-pseudonymisation/util-services`](../data/data-processing/anonymisation-and-pseudonymisation/util-services) | placed | ✅ |
+| data1 | [Charts](https://code.europa.eu/simpl/simpl-open/development/data1/Charts) | — | archived | ⛔ archive-candidate — not migrated |
 | data1 | [common](https://code.europa.eu/simpl/simpl-open/development/data1/common) | [`data/supporting-data-services/common/data-services-common`](../data/supporting-data-services/common/data-services-common) | placed | ⚠️ Aggregates 15 unrelated packages — candidate for upstream modularisation, see solution README |
 | data1 | [common-adapter](https://code.europa.eu/simpl/simpl-open/development/data1/common-adapter) | [`integration/resource-sharing/resource-sharing-runtime/common/connector-model-common`](../integration/resource-sharing/resource-sharing-runtime/common/connector-model-common) | placed | ✅ |
 | data1 | [common-tier2](https://code.europa.eu/simpl/simpl-open/development/data1/common-tier2) | [`security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client`](../security/access-control-and-trust/authentication-provider-federation/common/tier2-catalogue-client) | placed | ✅ |
 | data1 | [consumer-data1](https://code.europa.eu/simpl/simpl-open/development/data1/consumer-data1) | [`cross-cutting/agents/agent-resource-handling/consumer-resource-handling`](../cross-cutting/agents/agent-resource-handling/consumer-resource-handling) | placed | ✅ |
 | data1 | [contract-consumption-be](https://code.europa.eu/simpl/simpl-open/development/data1/contract-consumption-be) | [`integration/resource-discovery/search-engine/contract-consumption-adapter`](../integration/resource-discovery/search-engine/contract-consumption-adapter) | placed | ✅ |
-| data1 | [EDCConnectorAdapter](https://code.europa.eu/simpl/simpl-open/development/data1/edcconnectoradapter) | [`integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter`](../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter) | placed | ✅ |
+| data1 | [EDCConnectorAdapter](https://code.europa.eu/simpl/simpl-open/development/data1/EDCConnectorAdapter) | [`integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter`](../integration/resource-sharing/resource-sharing-runtime/edc-connector-adapter) | placed | ✅ |
 | data1 | [provider-data1](https://code.europa.eu/simpl/simpl-open/development/data1/provider-data1) | [`cross-cutting/agents/agent-resource-handling/provider-resource-handling`](../cross-cutting/agents/agent-resource-handling/provider-resource-handling) | placed | ✅ |
 | data1 | [schema-sync-adapter](https://code.europa.eu/simpl/simpl-open/development/data1/schema-sync-adapter) | [`data/semantics-and-vocabulary/schema-management/schema-sync-adapter`](../data/semantics-and-vocabulary/schema-management/schema-sync-adapter) | placed | ✅ |
 | data1 | [sd-schemas-util](https://code.europa.eu/simpl/simpl-open/development/data1/sd-schemas-util) | [`data/semantics-and-vocabulary/schema-management/sd-schema-util`](../data/semantics-and-vocabulary/schema-management/sd-schema-util) | placed | ✅ |
 | data1 | [sdtooling-api-be](https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-api-be) | [`data/semantics-and-vocabulary/schema-management/sd-tooling-api`](../data/semantics-and-vocabulary/schema-management/sd-tooling-api) | placed | ✅ |
 | data1 | [sdtooling-sd-schemas](https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-sd-schemas) | [`data/semantics-and-vocabulary/schema-management/sdtooling-sd-schemas`](../data/semantics-and-vocabulary/schema-management/sdtooling-sd-schemas) | placed | ✅ |
 | data1 | [sdtooling-validation-api-be](https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be) | [`governance/resource-management/metadata-description/validation-backend`](../governance/resource-management/metadata-description/validation-backend) | placed | ✅ |
-| data1 | [sdtooling-validation-api-be](https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be) | [`integration/resource-discovery/search-engine/validation-backend`](../integration/resource-discovery/search-engine/validation-backend) | placed | ✅ |
 | data1 | [simpl-files](https://code.europa.eu/simpl/simpl-open/development/data1/simpl-files) | [`governance/contract-management/contract-lifecycle-management/contract-template-datastore`](../governance/contract-management/contract-lifecycle-management/contract-template-datastore) | placed | ⚠️ Seems a temporary solution |
-| data1 | simpl-mock-services | — | pending | 🚧 defunct |
+| data1 | [simpl-mock-services](https://code.europa.eu/simpl/simpl-open/development/data1/simpl-mock-services) | — | pending | 🚧 defunct |
 | data1 | [simpl-vue-components](https://code.europa.eu/simpl/simpl-open/development/data1/simpl-vue-components) | [`cross-cutting/libs/simpl-vue-components`](../cross-cutting/libs/simpl-vue-components) | placed | ✅ Vue 3 design-system library used by every Simpl-Open frontend |
 | data1 | [xfsc-advsearch-be](https://code.europa.eu/simpl/simpl-open/development/data1/xfsc-advsearch-be) | [`integration/resource-discovery/search-engine/xfsc-advanced-search`](../integration/resource-discovery/search-engine/xfsc-advanced-search) | placed | ✅ |
-| data-services | [dataframe-level-anonymisation](https://code.europa.eu/simpl/simpl-open/development/data-services/dataframe-level-anonymisation) | [`data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation`](../data/data-processing/anonymisation-and-pseudonymisation/dataframe-level-anonymisation) | placed | ✅ |
-| data-services | [data-processing](https://code.europa.eu/simpl/simpl-open/development/data-services/data-processing) | [`data/data-processing/anonymisation-and-pseudonymisation/data-processing`](../data/data-processing/anonymisation-and-pseudonymisation/data-processing) | placed | ✅ |
-| data-services | [field-level-pseudonimysation](https://code.europa.eu/simpl/simpl-open/development/data-services/field-level-pseudo-anonymisation) | [`data/data-processing/anonymisation-and-pseudonymisation/field-level-pseudo-anonymisation`](../data/data-processing/anonymisation-and-pseudonymisation/field-level-pseudo-anonymisation) | placed | ✅ |
-| data-services | [semaphoreui-deployer-service](https://code.europa.eu/simpl/simpl-open/development/data-services/semaphoreui-deployer-service) | [`data/data-processing/anonymisation-and-pseudonymisation/semaphoreui-deployer-service`](../data/data-processing/anonymisation-and-pseudonymisation/semaphoreui-deployer-service) | placed | ✅ |
-| data-services | [template-code-location](https://code.europa.eu/simpl/simpl-open/development/data-services/template-code-location) | [`data/data-processing/anonymisation-and-pseudonymisation/template-code-location`](../data/data-processing/anonymisation-and-pseudonymisation/template-code-location) | placed | ✅ |
-| data-services | [util-services](https://code.europa.eu/simpl/simpl-open/development/data-services/util-services) | [`data/data-processing/anonymisation-and-pseudonymisation/util-services`](../data/data-processing/anonymisation-and-pseudonymisation/util-services) | placed | ✅ |
 | Gaia-X-EDC | [authority-gaia-x-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/authority-gaia-x-edc) | [`integration/resource-sharing/resource-sharing-runtime/authority-gaiax-edc`](../integration/resource-sharing/resource-sharing-runtime/authority-gaiax-edc) | placed | ✅ |
-| Gaia-X-EDC | [connector](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/Connector) | [`integration/resource-sharing/resource-sharing-runtime/gaia-x-connector`](../integration/resource-sharing/resource-sharing-runtime/gaia-x-connector) | placed | ✅ |
+| Gaia-X-EDC | [connector](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/connector) | [`integration/resource-sharing/resource-sharing-runtime/gaia-x-connector`](../integration/resource-sharing/resource-sharing-runtime/gaia-x-connector) | placed | ✅ |
 | Gaia-X-EDC | [consumer-gaia-x-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/consumer-gaia-x-edc) | [`integration/resource-sharing/resource-sharing-runtime/consumer-gaiax-edc`](../integration/resource-sharing/resource-sharing-runtime/consumer-gaiax-edc) | placed | ✅ |
+| Gaia-X-EDC | [EDC MinIO s3](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/EDC MinIO s3) | — | archived | ⛔ archive-candidate — not migrated |
 | Gaia-X-EDC | [edc-extensions](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/edc-extensions) | [`integration/resource-sharing/resource-sharing-runtime/edc-extensions`](../integration/resource-sharing/resource-sharing-runtime/edc-extensions) | placed | ✅ |
-| Gaia-X-EDC | EDC MinIO s3 | — | pending | ⚠️ - Quid garage? |
 | Gaia-X-EDC | [edelivery](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/edelivery) | [`cross-cutting/samples/edelivery`](../cross-cutting/samples/edelivery) | placed | ✅ |
-| Gaia-X-EDC | [PoC-gaia-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/poc-gaia-edc) | [`integration/resource-discovery/search-engine/query-mapper-adapter`](../integration/resource-discovery/search-engine/query-mapper-adapter) | placed | ✅ |
+| Gaia-X-EDC | [PoC-gaia-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/PoC-gaia-edc) | [`cross-cutting/samples/poc-gaia-edc`](../cross-cutting/samples/poc-gaia-edc) | deprecated | ⚠️ deprecated PoC — abandoned, kept for reference |
 | Gaia-X-EDC | [provider-gaia-x-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/provider-gaia-x-edc) | [`integration/resource-sharing/resource-sharing-runtime/provider-gaia-x-edc`](../integration/resource-sharing/resource-sharing-runtime/provider-gaia-x-edc) | placed | ✅ |
 | Gaia-X-EDC | [simpl-catalogue-client](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-catalogue-client) | [`integration/resource-discovery/search-engine/catalogue-client-application`](../integration/resource-discovery/search-engine/catalogue-client-application) | placed | ✅ |
-| Gaia-X-EDC | simpl-contract-negotiation-mockuop | — | pending | 🚧 Does have code, but untouched since a year. Defunct? |
+| Gaia-X-EDC | [simpl-contract-negotiation-mockup](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-contract-negotiation-mockup) | [`cross-cutting/samples/simpl-contract-negotiation-mockup`](../cross-cutting/samples/simpl-contract-negotiation-mockup) | placed | ⚠️ stale mockup (2024-12) — verify still relevant |
 | Gaia-X-EDC | [simpl-edc](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-edc) | [`integration/resource-sharing/resource-sharing-runtime/connector`](../integration/resource-sharing/resource-sharing-runtime/connector) | placed | ✅ |
 | Gaia-X-EDC | [simpl-fc-service](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-fc-service) | [`integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue`](../integration/resource-discovery/resource-catalogue/xfsc-federated-catalogue) | placed | ✅ |
 | Gaia-X-EDC | [simpl-files](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-files) | [`data/supporting-data-services/common/postgres-deployment-values`](../data/supporting-data-services/common/postgres-deployment-values) | placed | ⚠️ EDC consumer Postgres; (no files, no charts — just values) |
@@ -97,18 +100,16 @@ Notes:
 | Gaia-X-EDC | [simpl-schema-manager-ui](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-schema-manager-ui) | [`data/semantics-and-vocabulary/schema-management/simpl-schema-manager-ui`](../data/semantics-and-vocabulary/schema-management/simpl-schema-manager-ui) | placed | ✅ |
 | Gaia-X-EDC | [simpl-schema-versioning](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-schema-versioning) | [`data/semantics-and-vocabulary/schema-management/simpl-schema-versioning`](../data/semantics-and-vocabulary/schema-management/simpl-schema-versioning) | placed | ✅ |
 | Gaia-X-EDC | [simpl-sd-ui](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-sd-ui) | [`data/semantics-and-vocabulary/schema-management/simpl-sd-ui`](../data/semantics-and-vocabulary/schema-management/simpl-sd-ui) | placed | ✅ |
-| Gaia-X-EDC | [simpl-signer](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer) | [`security/credential-management/signing/signer-service`](../security/credential-management/signing/signer-service) | placed | ⚠️ Eclipse XFSC TSA Signer deployment wrapper. Folder also catalogues `contract-billing/signing-service` (line 53) — dual-upstream conflation, follow-up review needed |
-| IAA | Agent (sub-group) | see agent-iaa/* rows below | — | |
+| Gaia-X-EDC | [simpl-signer](https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer) | [`security/credential-management/signing/xfsc-tsa-signer-wrapper`](../security/credential-management/signing/xfsc-tsa-signer-wrapper) | placed | ✅ |
 | IAA | [agent-iaa/authority-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/authority-iaa) | [`cross-cutting/agents/agent-iaa/authority-iaa`](../cross-cutting/agents/agent-iaa/authority-iaa) | placed | ✅ |
 | IAA | [agent-iaa/consumer-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/consumer-iaa) | [`cross-cutting/agents/agent-iaa/consumer-iaa`](../cross-cutting/agents/agent-iaa/consumer-iaa) | placed | ✅ |
 | IAA | [agent-iaa/participant-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/participant-iaa) | [`cross-cutting/agents/agent-iaa/participant-iaa`](../cross-cutting/agents/agent-iaa/participant-iaa) | placed | ✅ |
 | IAA | [agent-iaa/provider-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/provider-iaa) | [`cross-cutting/agents/agent-iaa/provider-iaa`](../cross-cutting/agents/agent-iaa/provider-iaa) | placed | ✅ |
-| IAA | [agent-iaa/provider-iaa](https://code.europa.eu/simpl/simpl-open/development/iaa/agent-iaa/provider-iaa) | [`security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider`](../security/access-control-and-trust/authentication-provider-federation/tier-2-authentication-provider) | placed | ✅ |
-| IAA | [authentication-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/authentication-provider) | [`security/access-control-and-trust/authentication-provider-federation/authentication-provider`](../security/access-control-and-trust/authentication-provider-federation/authentication-provider) | placed | ✅  |
-| IAA | [charts](https://code.europa.eu/simpl/simpl-open/development/iaa/charts) | — | pending | 🚧 Archived upstream  |
-| IAA | [cli](https://code.europa.eu/simpl/simpl-open/development/iaa/cli) | — | pending | 🚧 Archived upstream — removed from catalogue (was at cross-cutting/utils/iaa-cli) |
+| IAA | [authentication-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/authentication-provider) | [`security/access-control-and-trust/authentication-provider-federation/authentication-provider`](../security/access-control-and-trust/authentication-provider-federation/authentication-provider) | placed | ✅ |
+| IAA | [charts](https://code.europa.eu/simpl/simpl-open/development/iaa/charts) | — | archived | ⛔ archived — not migrated |
+| IAA | [cli](https://code.europa.eu/simpl/simpl-open/development/iaa/cli) | — | archived | ⛔ archived — not migrated |
 | IAA | [common](https://code.europa.eu/simpl/simpl-open/development/iaa/common) | [`security/access-control-and-trust/common/iaa-common`](../security/access-control-and-trust/common/iaa-common) | placed | ✅ |
-| IAA | documentation | — | pending | 🚧 Archived upstream |
+| IAA | [documentation](https://code.europa.eu/simpl/simpl-open/development/iaa/documentation) | — | archived | ⛔ archived — not migrated |
 | IAA | [echo-backend](https://code.europa.eu/simpl/simpl-open/development/iaa/echo-backend) | [`cross-cutting/samples/echo-backend`](../cross-cutting/samples/echo-backend) | placed | ✅ |
 | IAA | [echo-frontend](https://code.europa.eu/simpl/simpl-open/development/iaa/echo-frontend) | [`cross-cutting/samples/echo-frontend`](../cross-cutting/samples/echo-frontend) | placed | ✅ |
 | IAA | [eidas-demo-keycloak-extension](https://code.europa.eu/simpl/simpl-open/development/iaa/eidas-demo-keycloak-extension) | [`cross-cutting/samples/eidas-demo-keycloak-extension`](../cross-cutting/samples/eidas-demo-keycloak-extension) | placed | ✅ |
@@ -120,9 +121,20 @@ Notes:
 | IAA | [fe-openapi-clients](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-openapi-clients) | [`cross-cutting/samples/fe-openapi-clients`](../cross-cutting/samples/fe-openapi-clients) | placed | ✅ |
 | IAA | [fe-security-attribute-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-security-attribute-provider) | [`security/access-control-and-trust/security-attribute-provider-federation/fe-security-attribute-provider`](../security/access-control-and-trust/security-attribute-provider-federation/fe-security-attribute-provider) | placed | ✅ |
 | IAA | [fe-users-and-roles](https://code.europa.eu/simpl/simpl-open/development/iaa/fe-users-and-roles) | [`governance/participant-management/user-roles/fe-users-roles`](../governance/participant-management/user-roles/fe-users-roles) | placed | ✅ |
-| IAA | [Identity provider](https://code.europa.eu/simpl/simpl-open/development/iaa/identity-provider) | [`security/access-control-and-trust/identity-provider-federation/identity-provider`](../security/access-control-and-trust/identity-provider-federation/identity-provider) | placed | ✅ |
-| IAA | [Keycloake authenticator](https://code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator) | [`security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider`](../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider) | placed | ✅ |
+| IAA | [Identity provider](https://code.europa.eu/simpl/simpl-open/development/iaa/Identity provider) | [`security/access-control-and-trust/identity-provider-federation/identity-provider`](../security/access-control-and-trust/identity-provider-federation/identity-provider) | placed | ✅ |
+| IAA | [keycloak-authenticator](https://code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator) | [`security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider`](../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication-provider) | placed | ✅ |
 | IAA | [microfrontend-framework](https://code.europa.eu/simpl/simpl-open/development/iaa/microfrontend-framework) | [`cross-cutting/samples/microfrontend-framework`](../cross-cutting/samples/microfrontend-framework) | placed | ✅ |
+| IAA | [onboarding](https://code.europa.eu/simpl/simpl-open/development/iaa/onboarding) | [`governance/participant-management/onboarding/onboarding`](../governance/participant-management/onboarding/onboarding) | placed | ✅ |
+| IAA | [security-attributes-provider](https://code.europa.eu/simpl/simpl-open/development/iaa/security-attributes-provider) | [`security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider`](../security/access-control-and-trust/security-attribute-provider-federation/security-attributes-provider) | placed | ✅ |
+| IAA | [simpl-fe](https://code.europa.eu/simpl/simpl-open/development/iaa/simpl-fe) | — | archived | ⛔ archive-candidate — not migrated |
+| IAA | [simpl-http-client](https://code.europa.eu/simpl/simpl-open/development/iaa/simpl-http-client) | [`cross-cutting/common/simpl-http-client`](../cross-cutting/common/simpl-http-client) | placed | ✅ |
+| IAA | [test-automation](https://code.europa.eu/simpl/simpl-open/development/iaa/test-automation) | [`security/access-control-and-trust/common/test-automation`](../security/access-control-and-trust/common/test-automation) | placed | ✅ |
+| IAA | [test-automation-ui](https://code.europa.eu/simpl/simpl-open/development/iaa/test-automation-ui) | [`security/access-control-and-trust/common/test-automation-ui`](../security/access-control-and-trust/common/test-automation-ui) | placed | ✅ |
+| IAA | [tier1-authentication](https://code.europa.eu/simpl/simpl-open/development/iaa/tier1-authentication) | [`security/access-control-and-trust/authentication-provider-federation/tier-1-authentication`](../security/access-control-and-trust/authentication-provider-federation/tier-1-authentication) | placed | ✅ |
+| IAA | [tier1-gateway](https://code.europa.eu/simpl/simpl-open/development/iaa/tier1-gateway) | [`security/access-control-and-trust/common/tier-1-gateway`](../security/access-control-and-trust/common/tier-1-gateway) | placed | ✅ |
+| IAA | [tier2-gateway](https://code.europa.eu/simpl/simpl-open/development/iaa/tier2-gateway) | [`security/access-control-and-trust/common/tier-2-gateway`](../security/access-control-and-trust/common/tier-2-gateway) | placed | ✅ |
+| IAA | [tier2-proxy](https://code.europa.eu/simpl/simpl-open/development/iaa/tier2-proxy) | [`security/access-control-and-trust/common/tier-2-proxy`](../security/access-control-and-trust/common/tier-2-proxy) | placed | ✅ |
+| IAA | [users-roles](https://code.europa.eu/simpl/simpl-open/development/iaa/users-roles) | [`governance/participant-management/user-roles/users-roles`](../governance/participant-management/user-roles/users-roles) | placed | ✅ |
 | Infrastructure | [infrastructure-application-deployer](https://code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-application-deployer) | [`infrastructure/supporting-infrastructure-services/infrastructure-orchestration/application-deployer`](../infrastructure/supporting-infrastructure-services/infrastructure-orchestration/application-deployer) | placed | ✅ |
 | Infrastructure | [infrastructure-be](https://code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-be) | [`infrastructure/provisioning/infrastructure-provisioning/infrastructure-be`](../infrastructure/provisioning/infrastructure-provisioning/infrastructure-be) | placed | ✅ |
 | Infrastructure | [infrastructure-crossplane](https://code.europa.eu/simpl/simpl-open/development/infrastructure/infrastructure-crossplane) | [`infrastructure/provisioning/infrastructure-provisioning/infrastructure-crossplane`](../infrastructure/provisioning/infrastructure-provisioning/infrastructure-crossplane) | placed | ✅ |
@@ -145,4 +157,40 @@ Notes:
 | orchestration-platform | [data-analytic-visualisation](https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/data-analytic-visualisation) | [`data/data-processing/data-visualisation/data-analytic-visualisation`](../data/data-processing/data-visualisation/data-analytic-visualisation) | placed | ✅ |
 | orchestration-platform | [gateway-oauth2-client](https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/gateway-oauth2-client) | [`data/supporting-data-services/data-orchestration/gateway-oauth2-client`](../data/supporting-data-services/data-orchestration/gateway-oauth2-client) | placed | ✅ |
 | orchestration-platform | [gitea](https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/gitea) | [`data/supporting-data-services/data-orchestration/gitea`](../data/supporting-data-services/data-orchestration/gitea) | placed | ✅ |
-| orchestration-platform | [provider-orchestration-platform](https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/provider-orchestration-platform) | [`data/supporting-data-services/data-orchestration/orchestration-platform`](../data/supporting-data-services/data-orchestration/orchestration-platform) | placed | ✅  |
+| orchestration-platform | [provider-orchestration-platform](https://code.europa.eu/simpl/simpl-open/development/orchestration-platform/provider-orchestration-platform) | [`data/supporting-data-services/data-orchestration/orchestration-platform`](../data/supporting-data-services/data-orchestration/orchestration-platform) | placed | ✅ |
+| (not yet implemented) | _(not yet implemented)_ | [`administration/observability/resource-usage`](../administration/observability/resource-usage) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`administration/observability/qos-metrics-and-alerts`](../administration/observability/qos-metrics-and-alerts) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`administration/observability/exporting`](../administration/observability/exporting) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`administration/observability/reporting`](../administration/observability/reporting) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`administration/observability/energy-metrics-and-alerts`](../administration/observability/energy-metrics-and-alerts) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`data/data-governance/data-lineage`](../data/data-governance/data-lineage) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`data/data-governance/data-profiling`](../data/data-governance/data-profiling) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`data/data-governance/data-quality-rules`](../data/data-governance/data-quality-rules) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`data/data-processing/data-analytics`](../data/data-processing/data-analytics) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`data/semantics-and-vocabulary/semantic-mapping`](../data/semantics-and-vocabulary/semantic-mapping) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`data/semantics-and-vocabulary/vocabulary-hub`](../data/semantics-and-vocabulary/vocabulary-hub) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`data/supporting-data-services/distributed-execution`](../data/supporting-data-services/distributed-execution) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`governance/audit/audit`](../governance/audit/audit) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`governance/consent-management/consent-management`](../governance/consent-management/consent-management) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`governance/contract-management/billing`](../governance/contract-management/billing) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`governance/contract-management/sla-management`](../governance/contract-management/sla-management) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`governance/participant-management/offboarding`](../governance/participant-management/offboarding) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`governance/policy-management/policy-administration-point`](../governance/policy-management/policy-administration-point) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`governance/policy-management/policy-decision-point`](../governance/policy-management/policy-decision-point) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`governance/policy-management/policy-information-point`](../governance/policy-management/policy-information-point) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`infrastructure/hpc/hpc`](../infrastructure/hpc/hpc) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`infrastructure/supporting-infrastructure-services/distributed-management`](../infrastructure/supporting-infrastructure-services/distributed-management) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/application-sharing/calculation-algorithm`](../integration/application-sharing/calculation-algorithm) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/application-sharing/machine-learning-model`](../integration/application-sharing/machine-learning-model) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/application-sharing/software-apps`](../integration/application-sharing/software-apps) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/contract-enforcement/contract-enforcement`](../integration/contract-enforcement/contract-enforcement) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/data-sharing/bulk-data-transfer`](../integration/data-sharing/bulk-data-transfer) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/data-sharing/data-streaming`](../integration/data-sharing/data-streaming) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/data-sharing/simple-data-transfer`](../integration/data-sharing/simple-data-transfer) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/federation/federation-orchestration`](../integration/federation/federation-orchestration) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/policy-enforcement/policy-enforcement-point`](../integration/policy-enforcement/policy-enforcement-point) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/resource-discovery/marketplace`](../integration/resource-discovery/marketplace) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`integration/supporting-integration-services/resource-address-management`](../integration/supporting-integration-services/resource-address-management) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`security/access-control-and-trust/authorisation`](../security/access-control-and-trust/authorisation) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`security/access-control-and-trust/guaranteed-authenticity-integrity`](../security/access-control-and-trust/guaranteed-authenticity-integrity) | placeholder | 📋 capability map — not yet implemented |
+| (not yet implemented) | _(not yet implemented)_ | [`security/credential-management/wallet`](../security/credential-management/wallet) | placeholder | 📋 capability map — not yet implemented |

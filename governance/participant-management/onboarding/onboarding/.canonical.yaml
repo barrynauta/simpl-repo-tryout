@@ -1,0 +1,7 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/onboarding
+status: prototype
+last_synced: 2026-05-12
+notes: |
+  IAA Onboarding microservice — manages onboarding operations of dataspace participants.
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/onboarding.
+  Renamed from `onboarding-service/` (was a roadmap stub) on 2026-05-12.

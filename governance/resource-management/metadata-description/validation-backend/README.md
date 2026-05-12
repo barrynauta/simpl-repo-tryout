@@ -1,18 +1,56 @@
 <div style="background-color:#f8f8f8;border:1px solid #d1d5da;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
-<p>⚠️ <strong>Stub — content not yet authored</strong></p>
+<p>⚠️ <strong>Work in progress — yet to be validated</strong></p>
 <hr/>
 <p>
 📍 <strong>You are here</strong><br/>
 <a href="../../../../README.md">🏠 Home</a><br/>
     <a href="../../../README.md">Dimension: Governance</a><br/>
-        <a href="../../README.md">Capability: Resource management</a><br/>
-            <a href="../README.md">Service: Metadata description</a><br/>
-                <strong>Validation Backend (SD syntax + address)</strong><br/>
+        <a href="../../README.md">Capability: Resource Management</a><br/>
+            <a href="../README.md">Service: Metadata Description</a><br/>
+                <strong>Solution: Validation Backend</strong><br/>
 </p>
 </div>
 
-# Validation Backend (SD syntax + address)
+# Validation Backend
 
-> Stub README created to anchor [MAPPING.md](../../../../MAPPING.md) row 41. FTA references: §4.3.1, §6.1.2.
->
-> Future work: lift the relevant FTA paragraphs and any code.europa.eu source-repo notes into this file. Until then, see the parent service / capability README for the surrounding architecture context.
+API service that performs **syntactic and structural validation** of self-descriptions against their schemas before publication to the federated catalogue, and validates the resource-address parameters that identify the source (Provider Agent) and destination (Consumer Agent) sides of a data exchange.
+
+Capability-map placement: `governance / resource-management / metadata-description / validation-backend`. Sits beside the [Catalogue Client Application](../catalogue-client-application/README.md) and the [Contract Consumption Adapter](../contract-consumption-adapter/README.md) within the same business service.
+
+Provenance: built by Simpl. Java 21 / Maven 3.9+. Source repository: `code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be`. Licence: EUPL 1.2.
+
+## Key features
+
+- API endpoints for **syntactic validation** of self-descriptions against the configured schemas.
+- Validation of **internal parameters** in the self-description, including the Resource Address fields that identify the shared resource on both source and destination sides.
+- **Structured error reporting** with detailed validation outcomes for troubleshooting and audit.
+- Modular validation logic: extensible for future schema evolutions or domain-specific rules.
+
+## Deployment topology
+
+Deployed on **both the Provider Agent and the Consumer Agent**.
+- **Provider Agent**: invoked by SD-Tooling to validate a self-description before catalogue registration and publication.
+- **Consumer Agent**: validates the **Destination Address** in the self-description — the endpoint where a transferred asset will be delivered.
+
+## Participates in
+
+- [BP05B Provider manages resource descriptions](../../../../foundations/business-processes/BP05B-provider-manages-resource-descriptions/README.md)
+- [BP09A Consumer consumes a data resource](../../../../foundations/business-processes/BP09A-consume-data-resource/README.md)
+
+
+## API
+
+[`api/`](api/README.md) — 1 OpenAPI/AsyncAPI spec imported from the source repository (last imported 2026-04-28).
+
+
+## Documentation (imported from source)
+
+[`documents/`](doc/) — user-facing documentation imported verbatim from the source repository: `deployment-guide/` (1 file), `installation-guide/` (1 file), `upgrade-guide/` (1 file).
+
+## Source code
+
+- Simpl repo: <https://code.europa.eu/simpl/simpl-open/development/data1/sdtooling-validation-api-be>
+
+## Roadmap
+
+Roadmap items live in the Simpl Notion "Roadmap items overview" page. Not duplicated here.

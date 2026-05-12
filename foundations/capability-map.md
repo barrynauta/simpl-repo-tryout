@@ -60,7 +60,7 @@ In the **Integration dimension** the **Data sharing** capability allows particip
 
 In the **Infrastructure dimension**, the **Provisioning** capability handles allocation, lifecycle, and orchestration of infrastructure resources required by participants and data services. The **Supporting infrastructure services** capability provides underlying infrastructure-level services such as distribution and the management of distributed resources. The **HPC** capability enables the execution of high-performance computing workloads where demanding analytical or AI-driven computations are needed, leveraging shared or external infrastructure resources.
 
-In the **Governance dimension**, the **Consent management** capability ensures that data subjects' consent preferences are properly captured, managed, and respected throughout data processing activities. The **Contract management** capability governs the lifecycle of contractual agreements between participants, ensuring that terms and obligations are traceable and enforceable. The **Policy management** capability enables the lifecycle, the definition and distribution of access and usage policies across the Data Space. The **Audit** capability provides transparency and verifiable evidence of compliance, supporting accountability and continuous assurance. The **Participant management** capability handles onboarding, identity validation, and lifecycle management including offboarding of all participants in the ecosystem.
+In the **Governance dimension**, the **Consent management** capability ensures that data subjects' consent preferences are properly captured, managed, and respected throughout data processing activities. The **Contract management** capability governs the lifecycle of contractual agreements between participants, ensuring that terms and obligations are traceable and enforceable. The **Policy management** capability enables the lifecycle, the definition and distribution of access and usage policies across the Data Space. The **Audit** capability provides transparency and verifiable evidence of compliance, supporting accountability and continuous assurance. The **Resource management** capability oversees the definition and lifecycle of resource descriptors — DCAT-AP compliant metadata used to describe datasets, applications, and infrastructure resources — enabling consistent governance-defined descriptions across the data space. The **Participant management** capability handles onboarding, identity validation, and lifecycle management including offboarding of all participants in the ecosystem.
 
 In the **Security dimension**, the **Credential management** capability covers the implementation of digital signatures to guarantee data confidentiality, integrity, and authenticity, along with the storage of these credentials and signatures in the digital wallet. The **Access control and trust** capability enables secure and trusted collaboration between participants within the Data Space. It ensures that only authenticated and authorised entities can access shared data, services, and applications, while maintaining interoperability across different trust domains.
 
@@ -96,13 +96,13 @@ The **Data governance** capability has the following services: Data lineage, Dat
 - The **Data profiling** service: analyses datasets for structure, distributions, and anomalies to inform governance decisions.
 - The **Data quality rules** service: defines and evaluates quality checks with reporting and remediation workflows.
 
-The **Data processing** capability has the following services: Data analytics, Data visualisation, Anonymisation.
+The **Data processing** capability has the following services: Data analytics, Data visualisation, Anonymisation and pseudonymisation.
 
 - The **Data analytics** service: provides batch and interactive analytics for descriptive, diagnostic, and predictive insights.
 - The **Data visualisation** service: delivers charts and exploratory views to communicate insights and monitor KPIs.
 - The **Anonymisation and pseudonymisation** service: applies masking, pseudonymisation, and differential privacy patterns to protect personal data.
 
-The **Supporting data services** capability has the following services: Data orchestration, Distributed execution, Semantic mapping.
+The **Supporting data services** capability has the following services: Data orchestration, Distributed execution.
 
 - The **Data orchestration** service: coordinates multi-step pipelines with dependencies, retries, and policy-aware scheduling.
 - The **Distributed execution** service: runs data jobs elastically across clusters with placement, scaling, and fault tolerance.
@@ -202,9 +202,9 @@ The **Participant management** capability has the following services: Onboarding
 
 ### Security Dimension
 
-The **Access control and trust** capability has the following services: Identity provider, Authentication provider federation, Authorisation, Security attribute provider federation, Encryption, Guaranteed Authenticity / Integrity.
+The **Access control and trust** capability has the following services: Identity provider federation, Authentication provider federation, Authorisation, Security attribute provider federation, Encryption, Guaranteed Authenticity / Integrity.
 
-- The **Identity provider** service: issues and manages identities with lifecycle hooks for onboarding and offboarding.
+- The **Identity provider federation** service: issues and manages federated identities across domains, with lifecycle hooks for onboarding and offboarding.
 - The **Authentication provider federation** service: federates external IdPs to enable single sign-on across domains.
 - The **Authorisation** service: enforces fine-grained, policy-based access decisions for data, services, and apps.
 - The **Security attribute provider federation** service: aggregates and validates assurance attributes to support trust decisions.

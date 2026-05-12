@@ -2,6 +2,6 @@
 
 The production code for this solution lives at:
 
-<https://code.europa.eu/simpl/simpl-open/development/contract-billing/signing-service>
+<https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer>
 
 This folder in the catalogue is a structural prototype. The code is illustrative, not authoritative.

@@ -1,0 +1,7 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer
+status: prototype
+last_synced: 2026-05-12
+notes: |
+  Eclipse XFSC TSA Signer deployment wrapper.
+  Source — code.europa.eu/simpl/simpl-open/development/gaia-x-edc/simpl-signer.
+  Split from former signer-service/ folder on 2026-05-12 per PSO F03.

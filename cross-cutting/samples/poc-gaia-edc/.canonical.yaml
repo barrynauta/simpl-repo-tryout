@@ -1,0 +1,7 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/gaia-x-edc/poc-gaia-edc
+status: deprecated
+last_synced: 2026-05-12
+notes: |
+  Abandoned PoC — kept under samples/ for reference only.
+  Source — code.europa.eu/simpl/simpl-open/development/gaia-x-edc/poc-gaia-edc.
+  Moved from integration/resource-discovery/search-engine/query-mapper-adapter/ on 2026-05-12 per PSO F04.

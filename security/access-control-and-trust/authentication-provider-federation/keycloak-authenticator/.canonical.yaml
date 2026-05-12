@@ -1,0 +1,7 @@
+canonical_url: https://code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator
+status: prototype
+last_synced: 2026-05-12
+notes: |
+  Keycloak extension/plugin — custom authenticator and integration layer for Simpl services.
+  Source — code.europa.eu/simpl/simpl-open/development/iaa/keycloak-authenticator.
+  Renamed from `tier-1-authentication-provider/` on 2026-05-12 (folder name now matches the actual CE repo).
