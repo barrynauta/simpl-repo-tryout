@@ -24,7 +24,7 @@ A solution folder is considered **documentation-complete** when all of the follo
 ## Cross-reference quality
 
 - [ ] All relative links in `doc/architecture.md` resolve to existing files.
-- [ ] All external URLs are also listed in the top-level `references.md`.
+- [ ] All external URLs are also listed in `foundations/references.md`.
 
 ## Stubs
 

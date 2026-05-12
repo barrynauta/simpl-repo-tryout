@@ -47,6 +47,13 @@ All external links from Simpl-Open documentation, grouped by topic. Internal rel
 ## Semantic web and linked data
 
 - Schema.org — http://schema.org
+- RDF 1.1 Concepts and Abstract Syntax (W3C Recommendation) — https://www.w3.org/TR/rdf11-concepts/
+- RDF (W3C portal) — https://www.w3.org/RDF/
+- DCAT-AP — SEMIC specification site — https://semiceu.github.io/DCAT-AP/
+- DCAT-AP 3.0.0 release — https://semiceu.github.io/DCAT-AP/releases/3.0.0/
+- DCAT-AP — EU Vocabularies (Publications Office) — https://op.europa.eu/en/web/eu-vocabularies/dcat-ap
+- ODRL Information Model 2.2 (W3C Recommendation) — https://www.w3.org/TR/odrl-model/
+- ODRL Vocabulary & Expression 2.2 (W3C Recommendation) — https://www.w3.org/TR/odrl-vocab/
 - Base58 specification — https://digitalbazaar.github.io/base58-spec/
 - Apache Jena Fuseki documentation — https://jena.apache.org/documentation/fuseki2/
 - Apache Jena Fuseki server setup — https://jena.apache.org/documentation/fuseki2/fuseki-server.html
