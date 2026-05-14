@@ -50,7 +50,7 @@ Each of these six dimensions is further detailed below — first as a Level 1 ma
 
 ## Level 1 — capabilities per dimension
 
-![Level 1 capability map of Simpl-Open (six dimensions)](./media/image16.png)
+![Level 1 capability map of Simpl-Open (six dimensions)](./media/capability-map-l1.png)
 
 In the **Administration dimension**, the **Observability** capability monitors system health, usage, and performance across the data space, providing insights and dashboards for operational oversight. The **Notification and messaging** capability provides asynchronous, event-driven communication to users and admins for key platform workflows and operations.
 
@@ -68,7 +68,7 @@ In the **Security dimension**, the **Credential management** capability covers t
 
 ## Level 2 — business services per capability
 
-![Level 2 services map (capabilities + business services)](./media/image17.png)
+![Level 2 services map (capabilities + business services)](./media/capability-map-l2.png)
 
 ### Administration Dimension
 

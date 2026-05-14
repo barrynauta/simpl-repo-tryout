@@ -326,7 +326,7 @@ See [foundations/non-functional-requirements/README.md](./foundations/non-functi
 
 Simpl-Open organises its functionality into six dimensions: Administration, Data, Governance, Infrastructure, Integration, and Security. Each dimension contains one or more capabilities, each capability contains one or more business services, and each business service is realised by one or more solutions. This four-level hierarchy — dimension → capability → business service → solution — is the organising principle of the entire repository tree. The map was defined in the Simpl-Open functional and technical architecture specification and governs how documentation folders are named, nested, and cross-referenced. Every solution folder in this catalogue sits at a path of the form `dimension/capability/business-service/solution/` that corresponds directly to a node in the map.
 
-<img src="./foundations/media/image16.png" usemap="#capmap-l1" alt="L1 Capability Map" width="801" height="621" />
+<img src="./foundations/media/capability-map-l1.png" usemap="#capmap-l1" alt="L1 Capability Map" width="801" height="621" />
 
 <map name="capmap-l1">
   <!-- Dimension headers -->
